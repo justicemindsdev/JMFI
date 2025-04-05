@@ -13,14 +13,12 @@
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading text-white;
-    font-family: Georgia, 'SF Pro Display', 'Times New Roman', Times, serif;
   }
 }
 
 @layer components {
   .article-content {
-    font-family: 'SF Pro Display', 'Merrifield', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-    line-height: 1.6;
+    @apply font-sans leading-relaxed;
   }
   
   .article-content h2 {

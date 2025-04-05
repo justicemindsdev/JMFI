@@ -5,6 +5,11 @@ export default {
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        heading: ["Georgia", "SF Pro Display", "Times New Roman", "Times", "serif"],
+        sans: ["SF Pro Display", "Merrifield", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Arial", "sans-serif"],
+        serif: ["Georgia", "Times New Roman", "Times", "serif"],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
