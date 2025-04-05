@@ -172,17 +172,27 @@ export default function Home() {
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 my-8">
               <EndorsementCard
-                title="Parliamentary Questions"
+                title="HOUSE OF COMMONS"
+                logo="⚜️"
+                logoColor="#8bfe86"
+                authorName="PARLIAMENTARY RECOGNITION"
                 stat="77,255"
                 statDescription="Written questions submitted in a typical session"
-                content="Of all written parliamentary questions in a typical long session, only 4,710 received an oral answer in the House (approx. 6.1%). Ben's success falls within an even more selective group."
+                content="Of all written parliamentary questions in a typical long session, only 4,710 received an oral answer in the House (approx. 6.1%)."
+                detailsTitle="Extraordinary Statistical Outcome"
+                details="Ben's success falls within an even more selective group, representing approximately 0.1% of cases. This outcome is particularly rare when considering the sheer volume of constituent correspondence handled by MPs, estimated at over 286,000 pieces in 2022 alone."
               />
               
               <EndorsementCard
-                title="Petition Success Rate"
+                title="UK Parliament"
+                logo="🏛️"
+                logoColor="#9d6eff"
+                authorName="LEGISLATIVE ENGAGEMENT"
                 stat="1.2%"
                 statDescription="Of petitions that receive formal debate"
-                content="Of over 30,000 petitions created since the e-petition system launched, only 350 have been debated by MPs. This illustrates the extraordinary threshold required for formal consideration."
+                content="Of over 30,000 petitions created since the e-petition system launched, only 350 have been debated by MPs."
+                detailsTitle="Petition Success Analysis"
+                details="This illustrates the extraordinary threshold required for formal consideration. The vast majority of petitions (98.8%) never receive parliamentary debate time, making Ben's ability to secure formal attention a statistical anomaly in the parliamentary system."
               />
             </div>
             
@@ -262,24 +272,39 @@ export default function Home() {
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 my-8">
               <EndorsementCard
-                title="MP Correspondence"
+                title="Liverpool City Council"
+                logo="🦤"
+                logoColor="#9d6eff"
+                authorName="OFFICIAL AUTHORITY"
                 stat="440"
                 statDescription="Average annual cases per MP"
-                content="Each of the 650 MPs handles approximately 440 pieces of constituent correspondence annually, creating fierce competition for attention to individual cases."
+                content="Each of the 650 MPs handles approximately 440 pieces of constituent correspondence annually."
+                detailsTitle="Competition for MP Attention"
+                details="This creates fierce competition for attention to individual cases. Ben's case received extraordinary attention despite overwhelming MP workloads. The typical MP must prioritize issues affecting multiple constituents over individual concerns."
               />
               
               <EndorsementCard
-                title="Limited Parliamentary Time"
+                title="HOUSE OF COMMONS"
+                logo="⚜️"
+                logoColor="#8bfe86"
+                authorName="PARLIAMENTARY PROCEDURES"
                 stat="35"
                 statDescription="Days per session for backbench business"
-                content="Parliament has allocated only 35 days per session for backbench business debates, severely constraining opportunities for individual case advocacy."
+                content="Parliament has allocated only 35 days per session for backbench business debates."
+                detailsTitle="Constrained Resources"
+                details="This severely constrains opportunities for individual case advocacy, with extremely limited time for matters not included in the Government's legislative program. Most constituent matters never advance to formal debate."
               />
               
               <EndorsementCard
-                title="Urgent Questions"
+                title="UK Parliament"
+                logo="🏛️"
+                logoColor="#9d6eff"
+                authorName="LEGISLATIVE MECHANISMS"
                 stat="73"
-                statDescription="Successful applications in two years"
-                content="'Urgent questions' require special permission from the Speaker, with only 73 successful applications in a recent two-year parliamentary session."
+                statDescription="Successful urgent questions in two years"
+                content="'Urgent questions' require special permission from the Speaker, with rigorous criteria for acceptance."
+                detailsTitle="Procedural Barriers"
+                details="Only 73 urgent question applications succeeded in a recent two-year session. This demonstrates the extraordinary nature of Ben's achievement in securing formal parliamentary attention for his individual case."
               />
             </div>
             
