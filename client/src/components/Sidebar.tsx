@@ -42,26 +42,26 @@ export function Sidebar() {
     <aside className="md:w-1/3 md:pl-12 mt-12 md:mt-0">
       <div className="sticky top-24">
         {/* About Justice Minds */}
-        <div className="bg-accent bg-opacity-20 p-6 rounded-lg mb-8">
-          <h4 className="text-lg font-heading font-semibold mb-4">About Justice Minds</h4>
-          <p className="text-sm mb-4">
+        <div className="bg-gray-900 p-6 rounded-lg mb-8 border border-gray-800">
+          <h4 className="text-lg font-heading font-semibold mb-4 text-white">About Justice Minds</h4>
+          <p className="text-sm mb-4 text-gray-300">
             Justice Minds is dedicated to promoting transparency and understanding of legal and parliamentary 
             processes through data-driven analysis and informed reporting.
           </p>
-          <Link href="/about" className="text-secondary hover:underline text-sm font-medium">
+          <Link href="/about" className="text-primary hover:underline text-sm font-medium">
             Learn more about our mission
           </Link>
         </div>
         
         {/* Related Articles */}
-        <div className="mb-8">
-          <h4 className="text-lg font-heading font-semibold mb-4">Related Articles</h4>
+        <div className="mb-8 bg-gray-900 p-6 rounded-lg border border-gray-800">
+          <h4 className="text-lg font-heading font-semibold mb-4 text-white">Related Articles</h4>
           <ul className="space-y-4">
             {relatedArticles.map((article, index) => (
-              <li key={index} className="border-b border-accent pb-4">
-                <Link href={article.url} className="hover:text-secondary">
-                  <h5 className="font-medium mb-1">{article.title}</h5>
-                  <p className="text-sm text-gray-600">{article.description}</p>
+              <li key={index} className="border-b border-gray-800 pb-4">
+                <Link href={article.url} className="hover:text-primary">
+                  <h5 className="font-medium mb-1 text-gray-300">{article.title}</h5>
+                  <p className="text-sm text-gray-400">{article.description}</p>
                 </Link>
               </li>
             ))}
@@ -69,9 +69,9 @@ export function Sidebar() {
         </div>
         
         {/* Newsletter Signup */}
-        <div className="bg-primary text-white p-6 rounded-lg">
+        <div className="bg-blue-900 text-white p-6 rounded-lg border border-blue-800">
           <h4 className="text-lg font-heading font-semibold mb-3">Stay Informed</h4>
-          <p className="text-sm mb-4">
+          <p className="text-sm mb-4 text-gray-200">
             Receive updates on justice system analyses and parliamentary advocacy insights.
           </p>
           <form className="space-y-3" onSubmit={handleSubscribe}>
@@ -82,12 +82,12 @@ export function Sidebar() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-2 rounded text-text focus:outline-none focus:ring-2 focus:ring-secondary"
+                className="w-full px-4 py-2 rounded text-gray-800 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
             <Button 
               type="submit" 
-              className="w-full bg-secondary hover:bg-opacity-90 transition-colors text-white font-medium py-2 px-4 rounded"
+              className="w-full bg-primary hover:bg-opacity-90 transition-colors text-white font-medium py-2 px-4 rounded"
             >
               Subscribe
             </Button>

@@ -1,4 +1,14 @@
 import { ArticleLayout, ArticleHero, ArticleContent, PullQuote } from "@/components/ArticleLayout";
+import { 
+  ParliamentaryQuestionGraph, 
+  PetitionSuccessGraph, 
+  ConstituentCorrespondenceGraph 
+} from "@/components/StatisticsGraph";
+
+// Import user uploaded images using the @assets alias from vite.config.ts
+import parliamentImage from "@assets/IMG_6450.png";
+import courtDocumentImage from "@assets/IMG_6447.jpeg";
+import justiceSystemImage from "@assets/IMG_6449.jpeg";
 
 // Article sources
 const sources = [
@@ -54,11 +64,11 @@ export default function Home() {
           <>
             <div className="mb-8">
               <img 
-                src="https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" 
+                src={parliamentImage} 
                 alt="UK Parliament Building" 
-                className="w-full h-auto rounded-lg shadow-md" 
+                className="w-full h-auto rounded-lg shadow-md border border-gray-800" 
               />
-              <p className="text-sm text-gray-500 mt-2 italic">
+              <p className="text-sm text-gray-400 mt-2 italic">
                 The Houses of Parliament, where Ben Mak's case received extraordinary attention.
               </p>
             </div>
@@ -116,12 +126,23 @@ export default function Home() {
             
             <div className="my-12">
               <img 
-                src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" 
+                src={courtDocumentImage} 
                 alt="Legal documents with gavel" 
-                className="w-full h-auto rounded-lg shadow-md" 
+                className="w-full h-auto rounded-lg shadow-md border border-gray-800" 
               />
-              <p className="text-sm text-gray-500 mt-2 italic">
+              <p className="text-sm text-gray-400 mt-2 italic">
                 Parliamentary advocacy involves navigation of complex legal and procedural frameworks.
+              </p>
+            </div>
+            
+            {/* Parliamentary Question Statistics Graph */}
+            <div className="my-12 bg-gray-900 p-6 rounded-lg border border-gray-800">
+              <h4 className="text-lg font-semibold mb-4 text-white">Parliamentary Question Success Rates</h4>
+              <div className="h-80">
+                <ParliamentaryQuestionGraph />
+              </div>
+              <p className="text-xs text-gray-400 mt-2 italic text-center">
+                Visualization of parliamentary question outcomes showing the rarity of successful advocacy.
               </p>
             </div>
             
@@ -188,12 +209,23 @@ export default function Home() {
             
             <div className="my-12">
               <img 
-                src="https://images.unsplash.com/photo-1575505586569-646b2ca898fc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" 
+                src={justiceSystemImage} 
                 alt="Inside view of courthouse" 
-                className="w-full h-auto rounded-lg shadow-md" 
+                className="w-full h-auto rounded-lg shadow-md border border-gray-800" 
               />
-              <p className="text-sm text-gray-500 mt-2 italic">
+              <p className="text-sm text-gray-400 mt-2 italic">
                 The formal institutions of government where advocacy must navigate complex bureaucratic processes.
+              </p>
+            </div>
+            
+            {/* Constituent Correspondence Graph */}
+            <div className="my-12 bg-gray-900 p-6 rounded-lg border border-gray-800">
+              <h4 className="text-lg font-semibold mb-4 text-white">MP Correspondence Volume by Year</h4>
+              <div className="h-80">
+                <ConstituentCorrespondenceGraph />
+              </div>
+              <p className="text-xs text-gray-400 mt-2 italic text-center">
+                Annual volume of constituent correspondence received by MPs, highlighting system capacity constraints.
               </p>
             </div>
             
@@ -249,6 +281,17 @@ export default function Home() {
                 fewer than 1 in 1,000 cases of citizen advocacy."
               </p>
             </PullQuote>
+            
+            {/* Petition Success Graph */}
+            <div className="my-12 bg-gray-900 p-6 rounded-lg border border-gray-800">
+              <h4 className="text-lg font-semibold mb-4 text-white">Parliamentary Petition Success Rates</h4>
+              <div className="h-80">
+                <PetitionSuccessGraph />
+              </div>
+              <p className="text-xs text-gray-400 mt-2 italic text-center">
+                Success rates of petitions in the parliamentary system, highlighting the extraordinary nature of Ben's case.
+              </p>
+            </div>
             
             <h2 className="text-2xl md:text-3xl font-heading font-semibold mt-10 mb-6">
               Conclusion: A Statistical Anomaly

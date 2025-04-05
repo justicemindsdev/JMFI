@@ -46,14 +46,14 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
   }, [url, toast]);
   
   return (
-    <div className="border-t border-b border-accent py-6 my-10">
-      <h4 className="text-lg font-semibold mb-4">Share this article</h4>
+    <div className="border-t border-b border-gray-800 py-6 my-10 bg-gray-900 bg-opacity-50 rounded-lg p-6">
+      <h4 className="text-lg font-semibold mb-4 text-white">Share this article</h4>
       <div className="flex space-x-4">
         <a 
           href={socialLinks.twitter}
           target="_blank"
           rel="noopener noreferrer"
-          className="social-share-button bg-[#1DA1F2] text-white p-3 rounded-full hover:-translate-y-1 transition-transform"
+          className="social-share-button bg-[#1DA1F2] text-white p-3 rounded-full hover:-translate-y-1 transition-transform hover:shadow-lg hover:shadow-[#1DA1F2]/20"
           aria-label="Share on Twitter"
         >
           <FaTwitter />
@@ -62,7 +62,7 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
           href={socialLinks.facebook}
           target="_blank"
           rel="noopener noreferrer"
-          className="social-share-button bg-[#4267B2] text-white p-3 rounded-full hover:-translate-y-1 transition-transform"
+          className="social-share-button bg-[#4267B2] text-white p-3 rounded-full hover:-translate-y-1 transition-transform hover:shadow-lg hover:shadow-[#4267B2]/20"
           aria-label="Share on Facebook"
         >
           <FaFacebookF />
@@ -71,21 +71,21 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
           href={socialLinks.linkedin}
           target="_blank"
           rel="noopener noreferrer" 
-          className="social-share-button bg-[#0077B5] text-white p-3 rounded-full hover:-translate-y-1 transition-transform"
+          className="social-share-button bg-[#0077B5] text-white p-3 rounded-full hover:-translate-y-1 transition-transform hover:shadow-lg hover:shadow-[#0077B5]/20"
           aria-label="Share on LinkedIn"
         >
           <FaLinkedinIn />
         </a>
         <a 
           href={socialLinks.email}
-          className="social-share-button bg-accent text-text p-3 rounded-full hover:-translate-y-1 transition-transform"
+          className="social-share-button bg-gray-700 text-white p-3 rounded-full hover:-translate-y-1 transition-transform hover:shadow-lg hover:shadow-gray-700/20"
           aria-label="Share via Email"
         >
           <FaEnvelope />
         </a>
         <button 
           onClick={copyToClipboard}
-          className="social-share-button bg-accent text-text p-3 rounded-full hover:-translate-y-1 transition-transform"
+          className="social-share-button bg-primary text-white p-3 rounded-full hover:-translate-y-1 transition-transform hover:shadow-lg hover:shadow-primary/20"
           aria-label="Copy link"
         >
           <FaLink />

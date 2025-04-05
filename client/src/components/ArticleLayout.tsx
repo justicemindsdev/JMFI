@@ -5,7 +5,7 @@ import { Sidebar } from "./Sidebar";
 
 export function ArticleLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gray-950 text-gray-200">
       <Header />
       {children}
       <Footer />
@@ -21,20 +21,20 @@ interface ArticleHeroProps {
 
 export function ArticleHero({ title, authorName, publishDate }: ArticleHeroProps) {
   return (
-    <section className="bg-primary text-white py-16 md:py-24">
+    <section className="bg-blue-600 bg-opacity-90 text-white py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="text-accent mb-4 uppercase tracking-wider text-sm font-semibold">Press Release</div>
+          <div className="text-gray-200 mb-4 uppercase tracking-wider text-sm font-semibold">Press Release</div>
           <h1 className="text-3xl md:text-5xl font-heading font-bold mb-6 leading-tight">{title}</h1>
           <div className="flex items-center space-x-4 mb-8">
-            <div className="h-10 w-10 rounded-full bg-accent overflow-hidden">
-              <div className="h-full w-full flex items-center justify-center text-primary font-bold">
+            <div className="h-10 w-10 rounded-full bg-white overflow-hidden">
+              <div className="h-full w-full flex items-center justify-center text-blue-600 font-bold">
                 {authorName.charAt(0)}
               </div>
             </div>
             <div>
               <div className="font-medium">{authorName}</div>
-              <div className="text-accent text-sm">Published: {publishDate}</div>
+              <div className="text-gray-200 text-sm">Published: {publishDate}</div>
             </div>
           </div>
         </div>
@@ -58,7 +58,7 @@ export function ArticleContent({ content, sources }: ArticleContentProps) {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row max-w-6xl mx-auto">
           {/* Left column - Article content */}
-          <article className="article-content md:w-2/3 max-w-prose mx-auto">
+          <article className="article-content md:w-2/3 mx-auto">
             {content}
             
             {/* Social sharing */}
@@ -68,12 +68,12 @@ export function ArticleContent({ content, sources }: ArticleContentProps) {
             />
             
             {/* Sources section */}
-            <div className="mt-12 mb-8">
-              <h3 className="text-xl font-heading font-semibold mb-4">Sources & Citations</h3>
-              <ol className="list-decimal pl-8 space-y-2 text-[0.9rem] leading-[1.4] text-gray-600">
+            <div className="mt-12 mb-8 bg-gray-900 p-6 rounded-lg border border-gray-800">
+              <h3 className="text-xl font-heading font-semibold mb-4 text-white">Sources & Citations</h3>
+              <ol className="list-decimal pl-8 space-y-2 text-[0.9rem] leading-[1.4] text-gray-400">
                 {sources.map((source) => (
                   <li key={source.id} className="mb-2">
-                    [{source.id}] <a href={source.url} className="text-secondary hover:underline">{source.text}</a>
+                    [{source.id}] <a href={source.url} className="text-primary hover:underline">{source.text}</a>
                   </li>
                 ))}
               </ol>
@@ -94,7 +94,7 @@ interface PullQuoteProps {
 
 export function PullQuote({ children }: PullQuoteProps) {
   return (
-    <div className="relative pl-6 my-8 italic text-lg border-l-4 border-secondary py-2">
+    <div className="relative pl-6 my-8 italic text-lg border-l-4 border-primary py-4 bg-gray-900 bg-opacity-50 rounded-r-lg pr-6">
       {children}
     </div>
   );
