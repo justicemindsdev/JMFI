@@ -1,7 +1,4 @@
 import { ArticleLayout, ArticleHero, ArticleContent, PullQuote } from "@/components/ArticleLayout";
-import benMakImage from "../assets/ben_mak.jpeg";
-import ukParliamentImage from "../assets/uk_parliament.png";
-import danGardensImage from "../assets/dan_gardens.jpeg";
 
 // Article sources
 const sources = [
@@ -45,7 +42,6 @@ const sources = [
 export default function Home() {
   return (
     <ArticleLayout>
-      <div className="bg-gradient-to-r from-primary via-secondary to-primary h-1"></div>
       <ArticleHero 
         title="The Extraordinary Rarity of Ben's Parliamentary Advocacy Success: A Statistical Analysis"
         authorName="Justice Minds Editorial Team"
@@ -58,7 +54,7 @@ export default function Home() {
           <>
             <div className="mb-8">
               <img 
-                src={ukParliamentImage} 
+                src="https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" 
                 alt="UK Parliament Building" 
                 className="w-full h-auto rounded-lg shadow-md" 
               />
@@ -67,21 +63,14 @@ export default function Home() {
               </p>
             </div>
             
-            <div className="flex items-center space-x-6 mb-8 p-4 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-lg">
-              <img 
-                src={benMakImage} 
-                alt="Ben Mak" 
-                className="w-24 h-24 rounded-full object-cover border-2 border-secondary shadow-md" 
-              />
-              <p className="text-lg leading-relaxed">
-                Ben Mak's achievement in securing Member of Parliament support and formal intervention is an exceptionally 
-                rare outcome that defies typical constituent advocacy patterns in the UK parliamentary system. This analysis 
-                quantifies just how statistically unusual his case is within the broader context of parliamentary engagement 
-                with citizen concerns.
-              </p>
-            </div>
+            <p className="mb-6 text-lg">
+              Ben Mak's achievement in securing Member of Parliament support and formal intervention is an exceptionally 
+              rare outcome that defies typical constituent advocacy patterns in the UK parliamentary system. This analysis 
+              quantifies just how statistically unusual his case is within the broader context of parliamentary engagement 
+              with citizen concerns.
+            </p>
             
-            <h2 className="text-2xl md:text-3xl font-heading font-semibold mt-10 mb-6 text-gradient bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            <h2 className="text-2xl md:text-3xl font-heading font-semibold mt-10 mb-6">
               The Statistical Context of Parliamentary Intervention
             </h2>
             
@@ -126,14 +115,11 @@ export default function Home() {
             </ul>
             
             <div className="my-12">
-              <div className="relative overflow-hidden rounded-lg shadow-lg">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 pointer-events-none"></div>
-                <img 
-                  src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" 
-                  alt="Legal documents with gavel" 
-                  className="w-full h-auto" 
-                />
-              </div>
+              <img 
+                src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" 
+                alt="Legal documents with gavel" 
+                className="w-full h-auto rounded-lg shadow-md" 
+              />
               <p className="text-sm text-gray-500 mt-2 italic">
                 Parliamentary advocacy involves navigation of complex legal and procedural frameworks.
               </p>
@@ -173,7 +159,7 @@ export default function Home() {
               </p>
             </PullQuote>
             
-            <h2 className="text-2xl md:text-3xl font-heading font-semibold mt-10 mb-6 text-gradient bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            <h2 className="text-2xl md:text-3xl font-heading font-semibold mt-10 mb-6">
               Systemic Barriers to Individual Case Advocacy
             </h2>
             
@@ -202,12 +188,12 @@ export default function Home() {
             
             <div className="my-12">
               <img 
-                src={danGardensImage} 
-                alt="Dan Gardens" 
+                src="https://images.unsplash.com/photo-1575505586569-646b2ca898fc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" 
+                alt="Inside view of courthouse" 
                 className="w-full h-auto rounded-lg shadow-md" 
               />
               <p className="text-sm text-gray-500 mt-2 italic">
-                Dan Gardens, a key advocate in helping navigate the formal institutions of government.
+                The formal institutions of government where advocacy must navigate complex bureaucratic processes.
               </p>
             </div>
             
@@ -233,7 +219,7 @@ export default function Home() {
               </li>
             </ul>
             
-            <h2 className="text-2xl md:text-3xl font-heading font-semibold mt-10 mb-6 text-gradient bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            <h2 className="text-2xl md:text-3xl font-heading font-semibold mt-10 mb-6">
               Historical Context of Individual Advocacy Success
             </h2>
             
@@ -256,17 +242,15 @@ export default function Home() {
               </li>
             </ul>
             
-            <div className="my-12 p-6 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10">
-              <PullQuote>
-                <p>
-                  "The convergence of multiple endorsements – from a SEND teacher, social workers, legal professionals, 
-                  and notably a Member of Parliament – creates a constellation of support that statistically occurs in 
-                  fewer than 1 in 1,000 cases of citizen advocacy."
-                </p>
-              </PullQuote>
-            </div>
+            <PullQuote>
+              <p>
+                "The convergence of multiple endorsements – from a SEND teacher, social workers, legal professionals, 
+                and notably a Member of Parliament – creates a constellation of support that statistically occurs in 
+                fewer than 1 in 1,000 cases of citizen advocacy."
+              </p>
+            </PullQuote>
             
-            <h2 className="text-2xl md:text-3xl font-heading font-semibold mt-10 mb-6 text-gradient bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            <h2 className="text-2xl md:text-3xl font-heading font-semibold mt-10 mb-6">
               Conclusion: A Statistical Anomaly
             </h2>
             

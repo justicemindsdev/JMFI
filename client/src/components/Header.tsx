@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import justiceMindLogo from "../assets/justice_minds_logo.jpeg";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,17 +12,10 @@ export function Header() {
 
   return (
     <header className="border-b border-accent sticky top-0 bg-white z-10 shadow-sm">
-      <div className="bg-gradient-to-r from-primary to-secondary h-1"></div>
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <Link href="/" className="flex items-center space-x-3">
-          <img 
-            src={justiceMindLogo} 
-            alt="Justice Minds Logo" 
-            className="h-10 w-auto rounded"
-          />
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <Link href="/" className="flex items-center space-x-2">
           <div className="text-primary font-bold text-xl">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Justice</span>
-            <span className="text-primary">Minds</span>
+            <span className="text-secondary">Justice</span>Minds
           </div>
         </Link>
         
@@ -31,7 +23,7 @@ export function Header() {
           <Link href="/about" className="text-text hover:text-secondary transition-colors py-2 md:py-0">
             About
           </Link>
-          <Link href="/press" className="text-text hover:text-secondary transition-colors py-2 md:py-0 font-medium">
+          <Link href="/press" className="text-text hover:text-secondary transition-colors py-2 md:py-0">
             Press
           </Link>
           <Link href="/resources" className="text-text hover:text-secondary transition-colors py-2 md:py-0">

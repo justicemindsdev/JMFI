@@ -21,26 +21,20 @@ interface ArticleHeroProps {
 
 export function ArticleHero({ title, authorName, publishDate }: ArticleHeroProps) {
   return (
-    <section className="bg-gradient-to-r from-primary via-primary/90 to-secondary py-16 md:py-24 relative overflow-hidden">
-      {/* Background pattern overlay */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute w-96 h-96 rounded-full bg-white/20 -top-20 -right-20 blur-3xl"></div>
-        <div className="absolute w-96 h-96 rounded-full bg-white/15 bottom-0 left-1/4 blur-3xl"></div>
-      </div>
-      
-      <div className="container mx-auto px-4 relative z-10">
+    <section className="bg-primary text-white py-16 md:py-24">
+      <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-secondary/80 text-white inline-block px-3 py-1 rounded mb-4 uppercase tracking-wider text-sm font-semibold">Press Release</div>
-          <h1 className="text-3xl md:text-5xl font-heading font-bold mb-6 leading-tight text-white">{title}</h1>
+          <div className="text-accent mb-4 uppercase tracking-wider text-sm font-semibold">Press Release</div>
+          <h1 className="text-3xl md:text-5xl font-heading font-bold mb-6 leading-tight">{title}</h1>
           <div className="flex items-center space-x-4 mb-8">
-            <div className="h-12 w-12 rounded-full bg-white/20 backdrop-blur-sm p-0.5 overflow-hidden shadow-lg">
-              <div className="h-full w-full rounded-full bg-gradient-to-br from-white to-secondary/50 flex items-center justify-center text-primary font-bold">
+            <div className="h-10 w-10 rounded-full bg-accent overflow-hidden">
+              <div className="h-full w-full flex items-center justify-center text-primary font-bold">
                 {authorName.charAt(0)}
               </div>
             </div>
             <div>
-              <div className="font-medium text-white">{authorName}</div>
-              <div className="text-white/70 text-sm">Published: {publishDate}</div>
+              <div className="font-medium">{authorName}</div>
+              <div className="text-accent text-sm">Published: {publishDate}</div>
             </div>
           </div>
         </div>
@@ -100,11 +94,8 @@ interface PullQuoteProps {
 
 export function PullQuote({ children }: PullQuoteProps) {
   return (
-    <div className="relative pl-6 my-8 italic text-lg py-2">
-      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-secondary rounded-full"></div>
-      <div className="relative z-10 text-gray-700">
-        {children}
-      </div>
+    <div className="relative pl-6 my-8 italic text-lg border-l-4 border-secondary py-2">
+      {children}
     </div>
   );
 }
