@@ -62,17 +62,6 @@ export default function Home() {
         sources={sources}
         content={
           <>
-            <div className="mb-8">
-              <img 
-                src={parliamentImage} 
-                alt="UK Parliament Building" 
-                className="w-full h-auto rounded-lg shadow-md border border-gray-800" 
-              />
-              <p className="text-sm text-gray-400 mt-2 italic">
-                The Houses of Parliament, where Ben Mak's case received extraordinary attention.
-              </p>
-            </div>
-            
             <p className="mb-6 text-lg">
               Ben Mak's achievement in securing Member of Parliament support and formal intervention is an exceptionally 
               rare outcome that defies typical constituent advocacy patterns in the UK parliamentary system. This analysis 
@@ -136,15 +125,7 @@ export default function Home() {
             </div>
             
             {/* Parliamentary Question Statistics Graph */}
-            <div className="my-12 bg-gray-900 p-6 rounded-lg border border-gray-800">
-              <h4 className="text-lg font-semibold mb-4 text-white">Parliamentary Question Success Rates</h4>
-              <div className="h-80">
-                <ParliamentaryQuestionGraph />
-              </div>
-              <p className="text-xs text-gray-400 mt-2 italic text-center">
-                Visualization of parliamentary question outcomes showing the rarity of successful advocacy.
-              </p>
-            </div>
+            <ParliamentaryQuestionGraph />
             
             <h3 className="text-xl md:text-2xl font-heading font-semibold mt-8 mb-4">
               Quantifying the Rarity
@@ -219,15 +200,7 @@ export default function Home() {
             </div>
             
             {/* Constituent Correspondence Graph */}
-            <div className="my-12 bg-gray-900 p-6 rounded-lg border border-gray-800">
-              <h4 className="text-lg font-semibold mb-4 text-white">MP Correspondence Volume by Year</h4>
-              <div className="h-80">
-                <ConstituentCorrespondenceGraph />
-              </div>
-              <p className="text-xs text-gray-400 mt-2 italic text-center">
-                Annual volume of constituent correspondence received by MPs, highlighting system capacity constraints.
-              </p>
-            </div>
+            <ConstituentCorrespondenceGraph />
             
             <h3 className="text-xl md:text-2xl font-heading font-semibold mt-8 mb-4">
               Competing for Limited Parliamentary Resources
@@ -283,15 +256,7 @@ export default function Home() {
             </PullQuote>
             
             {/* Petition Success Graph */}
-            <div className="my-12 bg-gray-900 p-6 rounded-lg border border-gray-800">
-              <h4 className="text-lg font-semibold mb-4 text-white">Parliamentary Petition Success Rates</h4>
-              <div className="h-80">
-                <PetitionSuccessGraph />
-              </div>
-              <p className="text-xs text-gray-400 mt-2 italic text-center">
-                Success rates of petitions in the parliamentary system, highlighting the extraordinary nature of Ben's case.
-              </p>
-            </div>
+            <PetitionSuccessGraph />
             
             <h2 className="text-2xl md:text-3xl font-heading font-semibold mt-10 mb-6">
               Conclusion: A Statistical Anomaly
