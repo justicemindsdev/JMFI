@@ -4,9 +4,9 @@ import {
   PetitionSuccessGraph, 
   ConstituentCorrespondenceGraph 
 } from "@/components/StatisticsGraph";
+import { EndorsementCard } from "@/components/EndorsementCard";
 
 // Import user uploaded images using the @assets alias from vite.config.ts
-import parliamentImage from "@assets/IMG_6450.png";
 import courtDocumentImage from "@assets/IMG_6447.jpeg";
 import justiceSystemImage from "@assets/IMG_6449.jpeg";
 
@@ -57,6 +57,40 @@ export default function Home() {
         authorName="Justice Minds Editorial Team"
         publishDate="November 30, 2024"
       />
+      
+      {/* Main Gradient Hero Section - styled like the main site */}
+      <div className="w-full my-8 p-10 bg-gradient-to-r from-blue-950 via-blue-800 to-blue-700 rounded-xl shadow-xl overflow-hidden relative">
+        {/* Subtle background glow elements */}
+        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500/30 blur-3xl rounded-full"></div>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-blue-600/20 blur-3xl rounded-full"></div>
+        
+        <div className="relative z-10">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-4">
+            Statistical Assessment
+          </h2>
+          <p className="text-xl text-blue-100 mb-6 max-w-3xl">
+            Ben Mak's achievement in securing Member of Parliament support and formal intervention represents an 
+            extraordinarily rare outcome that defies typical constituent advocacy patterns in the UK parliamentary system.
+          </p>
+          
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-blue-900/50 backdrop-blur-sm p-6 rounded-lg border border-blue-700">
+              <div className="text-4xl font-bold text-white mb-1">0.1%</div>
+              <div className="text-sm text-blue-200">Probability of achieving formal parliamentary intervention</div>
+            </div>
+            
+            <div className="bg-blue-900/50 backdrop-blur-sm p-6 rounded-lg border border-blue-700">
+              <div className="text-4xl font-bold text-white mb-1">1 in 1,000</div>
+              <div className="text-sm text-blue-200">Odds of achieving similar MP support for individual case</div>
+            </div>
+            
+            <div className="bg-blue-900/50 backdrop-blur-sm p-6 rounded-lg border border-blue-700">
+              <div className="text-4xl font-bold text-white mb-1">650</div>
+              <div className="text-sm text-blue-200">MPs competing for limited parliamentary time</div>
+            </div>
+          </div>
+        </div>
+      </div>
       
       <ArticleContent
         sources={sources}
@@ -136,6 +170,22 @@ export default function Home() {
               formal parliamentary consideration represents an extremely rare outcome:
             </p>
             
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 my-8">
+              <EndorsementCard
+                title="Parliamentary Questions"
+                stat="77,255"
+                statDescription="Written questions submitted in a typical session"
+                content="Of all written parliamentary questions in a typical long session, only 4,710 received an oral answer in the House (approx. 6.1%). Ben's success falls within an even more selective group."
+              />
+              
+              <EndorsementCard
+                title="Petition Success Rate"
+                stat="1.2%"
+                statDescription="Of petitions that receive formal debate"
+                content="Of over 30,000 petitions created since the e-petition system launched, only 350 have been debated by MPs. This illustrates the extraordinary threshold required for formal consideration."
+              />
+            </div>
+            
             <ul className="list-disc pl-8 mb-6 space-y-2">
               <li>
                 <strong>Written questions to oral debate conversion</strong>: Of all written parliamentary questions 
@@ -209,6 +259,29 @@ export default function Home() {
             <p className="mb-6">
               When constituent concerns reach MPs:
             </p>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 my-8">
+              <EndorsementCard
+                title="MP Correspondence"
+                stat="440"
+                statDescription="Average annual cases per MP"
+                content="Each of the 650 MPs handles approximately 440 pieces of constituent correspondence annually, creating fierce competition for attention to individual cases."
+              />
+              
+              <EndorsementCard
+                title="Limited Parliamentary Time"
+                stat="35"
+                statDescription="Days per session for backbench business"
+                content="Parliament has allocated only 35 days per session for backbench business debates, severely constraining opportunities for individual case advocacy."
+              />
+              
+              <EndorsementCard
+                title="Urgent Questions"
+                stat="73"
+                statDescription="Successful applications in two years"
+                content="'Urgent questions' require special permission from the Speaker, with only 73 successful applications in a recent two-year parliamentary session."
+              />
+            </div>
             
             <ul className="list-disc pl-8 mb-6 space-y-2">
               <li>
