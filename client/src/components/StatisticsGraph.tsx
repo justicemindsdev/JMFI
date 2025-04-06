@@ -32,13 +32,22 @@ export function ParliamentaryQuestionGraph() {
   ];
 
   return (
-    <div className="my-12 bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-lg shadow-xl border border-gray-800 relative overflow-hidden">
+    <div className="mt-24 mb-12 pt-8 bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-lg shadow-xl border border-gray-800 relative overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute inset-0 bg-blue-900/10 blur-xl"></div>
       <div className="absolute -inset-1/2 bg-gradient-to-r from-transparent via-blue-900/10 to-transparent opacity-20 blur-3xl transform rotate-12"></div>
       
+      {/* Logo image positioned above the graph */}
+      <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-32 h-32 flex items-center justify-center">
+        <img 
+          src="/logos/house-of-commons.png" 
+          alt="House of Commons logo"
+          className="w-full h-full object-contain"
+        />
+      </div>
+      
       <div className="relative z-10">
-        <h4 className="text-xl font-semibold mb-6 text-white">Parliamentary Question Success Rate</h4>
+        <h4 className="text-xl font-semibold mb-6 text-white text-center pt-4">Parliamentary Question Success Rate</h4>
         <ResponsiveContainer width="100%" height={340}>
           <BarChart
             data={data}
@@ -92,13 +101,22 @@ export function PetitionSuccessGraph() {
   const COLORS = ['#0d6efd', '#1e293b'];
   
   return (
-    <div className="my-12 bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-lg shadow-xl border border-gray-800 relative overflow-hidden">
+    <div className="mt-24 mb-12 pt-8 bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-lg shadow-xl border border-gray-800 relative overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute inset-0 bg-blue-900/10 blur-xl"></div>
       <div className="absolute -inset-1/2 bg-gradient-to-r from-transparent via-blue-900/10 to-transparent opacity-20 blur-3xl transform -rotate-12"></div>
       
+      {/* Logo image positioned above the graph */}
+      <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-32 h-32 flex items-center justify-center">
+        <img 
+          src="/logos/uk-parliament.png" 
+          alt="UK Parliament logo"
+          className="w-full h-full object-contain"
+        />
+      </div>
+      
       <div className="relative z-10">
-        <h4 className="text-xl font-semibold mb-6 text-white">Parliamentary Petition Success Rate</h4>
+        <h4 className="text-xl font-semibold mb-6 text-white text-center pt-4">Parliamentary Petition Success Rate</h4>
         <ResponsiveContainer width="100%" height={340}>
           <PieChart>
             <defs>
@@ -164,13 +182,22 @@ export function ConstituentCorrespondenceGraph() {
   ];
 
   return (
-    <div className="my-12 bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-lg shadow-xl border border-gray-800 relative overflow-hidden">
+    <div className="mt-24 mb-12 pt-8 bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-lg shadow-xl border border-gray-800 relative overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute inset-0 bg-blue-900/10 blur-xl"></div>
       <div className="absolute -inset-1/2 bg-gradient-to-r from-transparent via-blue-900/10 to-transparent opacity-20 blur-3xl transform rotate-12"></div>
       
+      {/* Logo image positioned above the graph */}
+      <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-32 h-32 flex items-center justify-center">
+        <img 
+          src="/logos/liverpool-city-council.png" 
+          alt="Liverpool City Council logo"
+          className="w-full h-full object-contain"
+        />
+      </div>
+      
       <div className="relative z-10">
-        <h4 className="text-xl font-semibold mb-6 text-white">Annual MP & Peer Correspondence Volume</h4>
+        <h4 className="text-xl font-semibold mb-6 text-white text-center pt-4">Annual MP & Peer Correspondence Volume</h4>
         <ResponsiveContainer width="100%" height={340}>
           <BarChart
             data={data}
