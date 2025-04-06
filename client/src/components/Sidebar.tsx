@@ -40,7 +40,7 @@ export function Sidebar() {
   
   return (
     <aside className="md:w-1/3 md:pl-12 mt-12 md:mt-0">
-      <div className="sticky top-24">
+      <div className="sticky sticky-sidebar top-16 pt-4">
         {/* About Justice Minds */}
         <div className="bg-gray-900 p-6 rounded-lg mb-8 border border-gray-800">
           <h4 className="text-lg font-heading font-semibold mb-4 text-white">About Justice Minds</h4>
