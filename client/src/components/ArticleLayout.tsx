@@ -24,7 +24,7 @@ export function ArticleHero({ title, authorName, publishDate }: ArticleHeroProps
     <section className="relative bg-gradient-to-br from-blue-800 to-blue-950 text-white py-20 md:py-32 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 bg-blue-900/20 mix-blend-overlay"></div>
-      <div className="absolute top-0 left-0 w-full h-full bg-[url('@assets/image_1744373336541.png')] bg-cover opacity-20 mix-blend-overlay"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-[url('/attached_assets/image_1744373336541.png')] bg-cover opacity-20 mix-blend-overlay"></div>
       <div className="absolute -inset-1/2 bg-gradient-to-r from-transparent via-blue-600/10 to-transparent opacity-30 blur-3xl transform rotate-12"></div>
       
       {/* Content */}
@@ -32,7 +32,7 @@ export function ArticleHero({ title, authorName, publishDate }: ArticleHeroProps
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-center mb-8">
             <img 
-              src="@assets/LOGO TRANS_1744373361051.png" 
+              src="/attached_assets/LOGO TRANS_1744373361051.png" 
               alt="Justice Minds Logo" 
               className="h-24 w-auto mb-5"
             />

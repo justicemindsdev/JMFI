@@ -1,14 +1,34 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isInvestigationsOpen, setIsInvestigationsOpen] = useState(false);
+  const investigationsRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const toggleInvestigations = () => {
+    setIsInvestigationsOpen(!isInvestigationsOpen);
+  };
+
+  // Close investigations dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (investigationsRef.current && !investigationsRef.current.contains(event.target as Node)) {
+        setIsInvestigationsOpen(false);
+      }
+    }
+    
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [investigationsRef]);
 
   return (
     <header className="border-b border-gray-800 sticky top-0 bg-gray-950 z-10 shadow-md">
@@ -16,7 +36,7 @@ export function Header() {
         <Link href="/" className="flex items-center space-x-3">
           <div className="h-12 w-12 relative hidden md:block">
             <img 
-              src="@assets/LOGO TRANS_1744373361051.png" 
+              src="/attached_assets/LOGO TRANS_1744373361051.png" 
               alt="Justice Minds Logo" 
               className="h-12 w-auto" 
             />
@@ -37,9 +57,29 @@ export function Header() {
           <Link href="/press" className="text-gray-300 hover:text-primary transition-colors py-2 md:py-0">
             Press
           </Link>
-          <Link href="/resources" className="text-gray-300 hover:text-primary transition-colors py-2 md:py-0">
-            Resources
-          </Link>
+          
+          {/* Investigations Dropdown */}
+          <div ref={investigationsRef} className="relative py-2 md:py-0">
+            <button 
+              onClick={toggleInvestigations}
+              className="flex items-center text-gray-300 hover:text-primary transition-colors focus:outline-none"
+            >
+              <span>Investigations</span>
+              <ChevronDown className="h-4 w-4 ml-1" />
+            </button>
+            
+            {isInvestigationsOpen && (
+              <div className="absolute top-full left-0 mt-1 bg-gray-900 shadow-lg rounded-md border border-gray-800 py-2 w-48 z-30">
+                <Link 
+                  href="/investigations/newlyn-plc" 
+                  className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-primary"
+                >
+                  NEWLYN PLC
+                </Link>
+              </div>
+            )}
+          </div>
+          
           <Link href="/contact" className="text-gray-300 hover:text-primary transition-colors py-2 md:py-0">
             Contact
           </Link>

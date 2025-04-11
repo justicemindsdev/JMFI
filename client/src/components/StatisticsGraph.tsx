@@ -211,7 +211,7 @@ export function ConstituentCorrespondenceGraph() {
       <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-32 h-32 flex items-center justify-center z-20">
         <div className="bg-blue-950 p-2 rounded-full shadow-lg border border-blue-800">
           <img 
-            src="@assets/LOGO TRANS_1744373361051.png" 
+            src="/attached_assets/LOGO TRANS_1744373361051.png" 
             alt="Justice Minds logo"
             className="w-24 h-24 object-contain"
           />
