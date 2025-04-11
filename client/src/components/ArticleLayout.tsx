@@ -21,20 +21,37 @@ interface ArticleHeroProps {
 
 export function ArticleHero({ title, authorName, publishDate }: ArticleHeroProps) {
   return (
-    <section className="bg-blue-600 bg-opacity-90 text-white py-16 md:py-24">
-      <div className="container mx-auto px-4">
+    <section className="relative bg-gradient-to-br from-blue-800 to-blue-950 text-white py-20 md:py-32 overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 bg-blue-900/20 mix-blend-overlay"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-[url('@assets/image_1744373336541.png')] bg-cover opacity-20 mix-blend-overlay"></div>
+      <div className="absolute -inset-1/2 bg-gradient-to-r from-transparent via-blue-600/10 to-transparent opacity-30 blur-3xl transform rotate-12"></div>
+      
+      {/* Content */}
+      <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <div className="text-gray-200 mb-4 uppercase tracking-wider text-sm font-semibold">Press Release</div>
-          <h1 className="text-3xl md:text-5xl font-heading font-bold mb-6 leading-tight">{title}</h1>
-          <div className="flex items-center space-x-4 mb-8">
-            <div className="h-10 w-10 rounded-full bg-white overflow-hidden">
-              <div className="h-full w-full flex items-center justify-center text-blue-600 font-bold">
-                {authorName.charAt(0)}
+          <div className="flex items-center justify-center mb-8">
+            <img 
+              src="@assets/LOGO TRANS_1744373361051.png" 
+              alt="Justice Minds Logo" 
+              className="h-24 w-auto mb-5"
+            />
+          </div>
+          
+          <div className="text-center">
+            <div className="text-blue-100 mb-4 uppercase tracking-wider text-sm font-semibold px-3 py-1 bg-blue-800/40 rounded-full inline-block border border-blue-400/20">Press Release</div>
+            <h1 className="text-3xl md:text-5xl font-heading font-bold mb-8 leading-tight">{title}</h1>
+            
+            <div className="flex items-center justify-center space-x-4 mb-8">
+              <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 overflow-hidden p-0.5">
+                <div className="h-full w-full rounded-full bg-blue-900 flex items-center justify-center text-white font-bold">
+                  {authorName.charAt(0)}
+                </div>
               </div>
-            </div>
-            <div>
-              <div className="font-medium">{authorName}</div>
-              <div className="text-gray-200 text-sm">Published: {publishDate}</div>
+              <div className="text-left">
+                <div className="font-medium text-lg">{authorName}</div>
+                <div className="text-blue-100 text-sm">Published: {publishDate}</div>
+              </div>
             </div>
           </div>
         </div>

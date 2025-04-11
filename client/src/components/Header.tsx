@@ -3,10 +3,6 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
-// Use House of Commons logo (using relative path since SVG is custom created)
-// Import custom SVG directly from assets folder in client
-const commonsLogo = "/house_of_commons_logo.svg";
-
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -16,15 +12,17 @@ export function Header() {
 
   return (
     <header className="border-b border-gray-800 sticky top-0 bg-gray-950 z-10 shadow-md">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div className="container mx-auto px-4 py-2 flex justify-between items-center">
         <Link href="/" className="flex items-center space-x-3">
-          <img 
-            src={commonsLogo} 
-            alt="House of Commons Logo" 
-            className="h-8 w-auto hidden md:block" 
-          />
+          <div className="h-12 w-12 relative hidden md:block">
+            <img 
+              src="@assets/LOGO TRANS_1744373361051.png" 
+              alt="Justice Minds Logo" 
+              className="h-12 w-auto" 
+            />
+          </div>
           <div className="text-white font-bold text-xl">
-            <span className="text-primary">Justice</span>Minds
+            <span className="text-blue-400">Justice</span>Minds
           </div>
         </Link>
         

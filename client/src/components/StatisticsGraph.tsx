@@ -32,35 +32,42 @@ export function ParliamentaryQuestionGraph() {
   ];
 
   return (
-    <div className="mt-24 mb-12 pt-8 bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-lg shadow-xl border border-gray-800 relative overflow-hidden">
-      {/* Subtle background glow */}
-      <div className="absolute inset-0 bg-blue-900/10 blur-xl"></div>
-      <div className="absolute -inset-1/2 bg-gradient-to-r from-transparent via-blue-900/10 to-transparent opacity-20 blur-3xl transform rotate-12"></div>
+    <div className="mt-32 mb-20 pt-12 bg-gradient-to-br from-gray-900 to-blue-950/40 p-10 rounded-xl shadow-2xl border border-blue-900/30 relative overflow-hidden">
+      {/* Enhanced background glow */}
+      <div className="absolute inset-0 bg-blue-900/15 blur-xl"></div>
+      <div className="absolute -inset-1/2 bg-gradient-to-r from-transparent via-blue-900/15 to-transparent opacity-30 blur-3xl transform rotate-12"></div>
       
-      {/* Logo image positioned above the graph */}
-      <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-32 h-32 flex items-center justify-center">
-        <img 
-          src="/logos/house-of-commons.png" 
-          alt="House of Commons logo"
-          className="w-full h-full object-contain"
-        />
+      {/* Parliament logo with proper positioning */}
+      <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-32 h-32 flex items-center justify-center z-20">
+        <div className="bg-blue-950 p-2 rounded-full shadow-lg border border-blue-800">
+          <img 
+            src="/logos/house-of-commons.png" 
+            alt="House of Commons logo"
+            className="w-24 h-24 object-contain"
+          />
+        </div>
       </div>
       
       <div className="relative z-10">
-        <h4 className="text-xl font-semibold mb-6 text-white text-center pt-4">Parliamentary Question Success Rate</h4>
-        <ResponsiveContainer width="100%" height={340}>
+        <div className="flex justify-center items-center mb-8">
+          <h4 className="text-xl font-semibold text-white text-center pt-4 border-b-2 border-blue-500 pb-2 inline-block">
+            Parliamentary Question Success Rate
+          </h4>
+        </div>
+        
+        <ResponsiveContainer width="100%" height={360}>
           <BarChart
             data={data}
             margin={{
-              top: 10,
+              top: 20,
               right: 30,
-              left: 20,
-              bottom: 15,
+              left: 30,
+              bottom: 20,
             }}
           >
             <defs>
               <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#1e40af" stopOpacity={0.9}/>
+                <stop offset="0%" stopColor="#2563eb" stopOpacity={1}/>
                 <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.8}/>
               </linearGradient>
             </defs>
@@ -79,14 +86,17 @@ export function ParliamentaryQuestionGraph() {
               labelStyle={{ color: '#f9fafb', fontWeight: '600' }}
             />
             <Legend wrapperStyle={{ color: '#f9fafb' }} />
-            <Bar dataKey="value" fill="url(#barGradient)" name="Number of Cases" />
+            <Bar dataKey="value" fill="url(#barGradient)" name="Number of Cases" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
-        <p className="text-sm text-gray-300 mt-6">
-          Of approximately 77,255 written parliamentary questions in a typical long session, 
-          only 4,710 received an oral answer in the House (6.1%). Ben's success falls within the 
-          estimated 0.1% of cases that achieve individual advocacy success.
-        </p>
+        
+        <div className="mt-8 p-4 bg-blue-950/40 rounded-lg border border-blue-900/40">
+          <p className="text-sm text-gray-300">
+            Of approximately 77,255 written parliamentary questions in a typical long session, 
+            only 4,710 received an oral answer in the House (6.1%). Ben's success falls within the 
+            estimated 0.1% of cases that achieve individual advocacy success.
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -98,31 +108,38 @@ export function PetitionSuccessGraph() {
     { name: 'Not Debated', value: 29650 },
   ];
   
-  const COLORS = ['#0d6efd', '#1e293b'];
+  const COLORS = ['#2563eb', '#1e293b'];
   
   return (
-    <div className="mt-24 mb-12 pt-8 bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-lg shadow-xl border border-gray-800 relative overflow-hidden">
-      {/* Subtle background glow */}
-      <div className="absolute inset-0 bg-blue-900/10 blur-xl"></div>
-      <div className="absolute -inset-1/2 bg-gradient-to-r from-transparent via-blue-900/10 to-transparent opacity-20 blur-3xl transform -rotate-12"></div>
+    <div className="mt-32 mb-20 pt-12 bg-gradient-to-br from-gray-900 to-blue-950/40 p-10 rounded-xl shadow-2xl border border-blue-900/30 relative overflow-hidden">
+      {/* Enhanced background glow */}
+      <div className="absolute inset-0 bg-blue-900/15 blur-xl"></div>
+      <div className="absolute -inset-1/2 bg-gradient-to-r from-transparent via-blue-900/15 to-transparent opacity-30 blur-3xl transform -rotate-12"></div>
       
-      {/* Logo image positioned above the graph */}
-      <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-32 h-32 flex items-center justify-center">
-        <img 
-          src="/logos/uk-parliament.png" 
-          alt="UK Parliament logo"
-          className="w-full h-full object-contain"
-        />
+      {/* Parliament logo with proper positioning */}
+      <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-32 h-32 flex items-center justify-center z-20">
+        <div className="bg-blue-950 p-2 rounded-full shadow-lg border border-blue-800">
+          <img 
+            src="/logos/uk-parliament.png" 
+            alt="UK Parliament logo"
+            className="w-24 h-24 object-contain"
+          />
+        </div>
       </div>
       
       <div className="relative z-10">
-        <h4 className="text-xl font-semibold mb-6 text-white text-center pt-4">Parliamentary Petition Success Rate</h4>
-        <ResponsiveContainer width="100%" height={340}>
+        <div className="flex justify-center items-center mb-8">
+          <h4 className="text-xl font-semibold text-white text-center pt-4 border-b-2 border-blue-500 pb-2 inline-block">
+            Parliamentary Petition Success Rate
+          </h4>
+        </div>
+        
+        <ResponsiveContainer width="100%" height={360}>
           <PieChart>
             <defs>
               <linearGradient id="pieGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#1e40af" stopOpacity={0.9}/>
-                <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.8}/>
+                <stop offset="0%" stopColor="#2563eb" stopOpacity={1}/>
+                <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.9}/>
               </linearGradient>
               <linearGradient id="pieGradient2" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#1f2937" stopOpacity={0.9}/>
@@ -135,14 +152,14 @@ export function PetitionSuccessGraph() {
               cy="50%"
               labelLine={false}
               label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(1)}%`}
-              outerRadius={130}
-              innerRadius={60}
+              outerRadius={140}
+              innerRadius={70}
               fill="#8884d8"
               dataKey="value"
-              paddingAngle={2}
+              paddingAngle={3}
             >
-              <Cell fill="url(#pieGradient)" stroke="#1f2937" strokeWidth={1} />
-              <Cell fill="url(#pieGradient2)" stroke="#1f2937" strokeWidth={1} />
+              <Cell fill="url(#pieGradient)" stroke="#1f2937" strokeWidth={2} />
+              <Cell fill="url(#pieGradient2)" stroke="#1f2937" strokeWidth={2} />
             </Pie>
             <Tooltip 
               contentStyle={{ 
@@ -157,11 +174,14 @@ export function PetitionSuccessGraph() {
             />
           </PieChart>
         </ResponsiveContainer>
-        <p className="text-sm text-gray-300 mt-6">
-          Of over 30,000 petitions created since the e-petition system launched, 
-          only 350 (1.2%) have been debated by MPs. This illustrates the extraordinary 
-          threshold of public and parliamentary interest required for formal consideration.
-        </p>
+        
+        <div className="mt-8 p-4 bg-blue-950/40 rounded-lg border border-blue-900/40">
+          <p className="text-sm text-gray-300">
+            Of over 30,000 petitions created since the e-petition system launched, 
+            only 350 (1.2%) have been debated by MPs. This illustrates the extraordinary 
+            threshold of public and parliamentary interest required for formal consideration.
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -182,39 +202,46 @@ export function ConstituentCorrespondenceGraph() {
   ];
 
   return (
-    <div className="mt-24 mb-12 pt-8 bg-gradient-to-br from-gray-900 to-gray-950 p-8 rounded-lg shadow-xl border border-gray-800 relative overflow-hidden">
-      {/* Subtle background glow */}
-      <div className="absolute inset-0 bg-blue-900/10 blur-xl"></div>
-      <div className="absolute -inset-1/2 bg-gradient-to-r from-transparent via-blue-900/10 to-transparent opacity-20 blur-3xl transform rotate-12"></div>
+    <div className="mt-32 mb-20 pt-12 bg-gradient-to-br from-gray-900 to-blue-950/40 p-10 rounded-xl shadow-2xl border border-blue-900/30 relative overflow-hidden">
+      {/* Enhanced background glow */}
+      <div className="absolute inset-0 bg-blue-900/15 blur-xl"></div>
+      <div className="absolute -inset-1/2 bg-gradient-to-r from-transparent via-blue-900/15 to-transparent opacity-30 blur-3xl transform rotate-12"></div>
       
-      {/* Logo image positioned above the graph */}
-      <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-32 h-32 flex items-center justify-center">
-        <img 
-          src="/logos/liverpool-city-council.png" 
-          alt="Liverpool City Council logo"
-          className="w-full h-full object-contain"
-        />
+      {/* Justice Minds logo with proper positioning */}
+      <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-32 h-32 flex items-center justify-center z-20">
+        <div className="bg-blue-950 p-2 rounded-full shadow-lg border border-blue-800">
+          <img 
+            src="@assets/LOGO TRANS_1744373361051.png" 
+            alt="Justice Minds logo"
+            className="w-24 h-24 object-contain"
+          />
+        </div>
       </div>
       
       <div className="relative z-10">
-        <h4 className="text-xl font-semibold mb-6 text-white text-center pt-4">Annual MP & Peer Correspondence Volume</h4>
-        <ResponsiveContainer width="100%" height={340}>
+        <div className="flex justify-center items-center mb-8">
+          <h4 className="text-xl font-semibold text-white text-center pt-4 border-b-2 border-blue-500 pb-2 inline-block">
+            Annual MP & Peer Correspondence Volume
+          </h4>
+        </div>
+        
+        <ResponsiveContainer width="100%" height={360}>
           <BarChart
             data={data}
             margin={{
-              top: 10,
+              top: 20,
               right: 30,
-              left: 20,
-              bottom: 15,
+              left: 30,
+              bottom: 20,
             }}
           >
             <defs>
               <linearGradient id="totalGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#1e40af" stopOpacity={0.9}/>
+                <stop offset="0%" stopColor="#2563eb" stopOpacity={1}/>
                 <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.8}/>
               </linearGradient>
               <linearGradient id="respondedGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#0e7490" stopOpacity={0.9}/>
+                <stop offset="0%" stopColor="#0e7490" stopOpacity={1}/>
                 <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0.8}/>
               </linearGradient>
             </defs>
@@ -243,11 +270,14 @@ export function ConstituentCorrespondenceGraph() {
             <Bar dataKey="responded" name="Timely Responses" fill="url(#respondedGradient)" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
-        <p className="text-sm text-gray-300 mt-6">
-          UK government departments received over 200,000 pieces of correspondence from MPs and Peers 
-          annually, representing constituent concerns. Ben's case was among the minuscule fraction that 
-          progressed to formal parliamentary action.
-        </p>
+        
+        <div className="mt-8 p-4 bg-blue-950/40 rounded-lg border border-blue-900/40">
+          <p className="text-sm text-gray-300">
+            UK government departments received over 200,000 pieces of correspondence from MPs and Peers 
+            annually, representing constituent concerns. Ben's case was among the minuscule fraction that 
+            progressed to formal parliamentary action.
+          </p>
+        </div>
       </div>
     </div>
   );
