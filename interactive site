@@ -1,0 +1,556 @@
+import React, { useState } from 'react';
+import { 
+  CheckCircle, 
+  XCircle, 
+  AlertTriangle,
+  BookOpen,
+  Search,
+  FileText,
+  Award,
+  Scale
+} from 'lucide-react';
+
+const StandardsAnalysis = () => {
+  const [activeTab, setActiveTab] = useState('all');
+  const [expandedItem, setExpandedItem] = useState(null);
+
+  const standardCategories = {
+    'all': 'All Standards',
+    'rights': 'Rights & Dignity',
+    'assessment': 'Assessment & Care Planning',
+    'communication': 'Communication & Information',
+    'autonomy': 'Autonomy & Choice',
+    'safeguarding': 'Safeguarding & Protection'
+  };
+
+  const comparisonData = [
+    {
+      id: 1,
+      category: 'rights',
+      issue: "Legal Right to Court Access",
+      benStatement: {
+        quote: "Right? So. And that's why I wanted the judge to decide because he would say what needs to happen.",
+        timestamp: "47:46",
+        analysis: "Correctly identifies legal right to judicial oversight regardless of capacity",
+        accuracy: "High",
+        ombudsmanStandard: "Upholding legal rights",
+        socialWorkStandard: "1.5 Recognise the impact of the legal context on practice"
+      },
+      teamStatement: {
+        person: "Joanne",
+        quote: "But they would only do that if you were assessed by myself as lacking the capacity.",
+        timestamp: "47:59",
+        analysis: "Incorrectly claims courts only have jurisdiction in capacity cases",
+        accuracy: "Very Low",
+        ombudsmanStandard: "Maladministration - misleading advice",
+        socialWorkStandard: "6.1 Report allegations of harm and challenge and report exploitation and any dangerous, abusive or discriminatory behavior or practice"
+      },
+      legalFramework: "Housing Act 1996, Equality Act 2010",
+      conclusion: "Ben correctly understood his legal right to court access while Joanne provided factually incorrect information that could prevent access to justice."
+    },
+    {
+      id: 2,
+      category: 'assessment',
+      issue: "Care Act Reassessment Requirements",
+      benStatement: {
+        quote: "Aren't care needs and assessments meant to be monitored and checked and evolve over time? Absolutely. But it would be strange that I am homeless and a care plan would not reflect any struggles that would require support.",
+        timestamp: "20:47",
+        analysis: "Correctly identifies statutory requirement for reassessment when circumstances change substantially",
+        accuracy: "High",
+        ombudsmanStandard: "Compliance with law and guidance",
+        socialWorkStandard: "3.11 Maintain accurate, comprehensive and up to date records"
+      },
+      teamStatement: {
+        person: "Joanne",
+        quote: "Yeah, so the care package won't be changed then. And it will... It will be reviewed annually.",
+        timestamp: "1:23:35",
+        analysis: "Incorrectly claims review only required annually despite major change in circumstances",
+        accuracy: "Very Low",
+        ombudsmanStandard: "Service failure - failure to follow statutory guidance",
+        socialWorkStandard: "3.12 Record all decisions and the rationale underpinning them"
+      },
+      legalFramework: "Care Act 2014 Section 27(4), Care & Support Statutory Guidance",
+      conclusion: "Ben correctly understood the statutory requirement for reassessment when circumstances change substantially (becoming homeless), while Joanne incorrectly claimed review was only required annually."
+    },
+    {
+      id: 3,
+      category: 'communication',
+      issue: "Reasonable Adjustments for Autism",
+      benStatement: {
+        quote: "This is what the autistic side is, that no one's understanding. I can say it to you because there's trust and understanding and there's familiarity. When it's not familiar, the body shuts down. I don't know why. It's like I go mute.",
+        timestamp: "1:21:04",
+        analysis: "Clearly articulates autism-related communication needs requiring reasonable adjustments",
+        accuracy: "High",
+        ombudsmanStandard: "Service user voice and needs assessment",
+        socialWorkStandard: "1.6 Promote social justice, helping to confront and resolve issues of inequality and inclusion"
+      },
+      teamStatement: {
+        person: "Joanne",
+        quote: "I won't be sending you anything, Ben. You've. You've written it down. So it's about the bailiff and it's about.",
+        timestamp: "1:24:25",
+        analysis: "Refuses to provide written information despite clear disability-related need",
+        accuracy: "Very Low",
+        ombudsmanStandard: "Discrimination - failure to make reasonable adjustments",
+        socialWorkStandard: "1.4 Respect and promote the human rights, views, wishes and feelings of the people I work with"
+      },
+      legalFramework: "Equality Act 2010, Autism Act 2009, NICE Guidelines [NG142]",
+      conclusion: "Ben accurately described his autism-related communication needs while professionals refused to provide the reasonable adjustments required by law."
+    },
+    {
+      id: 4,
+      category: 'autonomy',
+      issue: "Coercive Practices & Conditional Support",
+      benStatement: {
+        quote: "When it's put like that, you weaponize my attempts to have autonomy, which redacts support because you witness autonomy.",
+        timestamp: "14:49",
+        analysis: "Correctly identifies inappropriate use of 'independence' to withdraw support",
+        accuracy: "High",
+        ombudsmanStandard: "Fairness and ethical conduct",
+        socialWorkStandard: "2.2 Respect and maintain people's dignity and privacy"
+      },
+      teamStatement: {
+        person: "Joanne",
+        quote: "Okay, so my role can't continue, Ben, if I don't know where I can help you.",
+        timestamp: "16:14",
+        analysis: "Uses threat of service withdrawal to enforce compliance",
+        accuracy: "Very Low",
+        ombudsmanStandard: "Maladministration - coercive practice",
+        socialWorkStandard: "5.1 Always treat people with respect and dignity"
+      },
+      legalFramework: "Social Work England Professional Standards, Care Act Statutory Guidance 14.104",
+      conclusion: "Ben correctly identified the inappropriate withdrawal of support while Joanne employed coercive tactics that violate professional standards."
+    },
+    {
+      id: 5,
+      category: 'safeguarding',
+      issue: "Safeguarding Response to Vulnerability",
+      benStatement: {
+        quote: "My phone has been nearly robbed since being on the streets. It's like the... The bodyguard on this stretch. He actually saved me last time and come over and talk to me. He was like, your phone. He was like, sorry to come over. He's like, but your phone was about to get robbed. And it's happened about five, six times.",
+        timestamp: "21:37",
+        analysis: "Identifies clear safeguarding concerns requiring professional action",
+        accuracy: "High",
+        ombudsmanStandard: "Duty of care",
+        socialWorkStandard: "1.1 Understand and apply the profession's ethical principles"
+      },
+      teamStatement: {
+        person: "Joanne & Marilyn",
+        quote: "[No safeguarding response provided to multiple disclosures of street crime victimization]",
+        timestamp: "21:37-24:09",
+        analysis: "Failed to recognize, record or respond to safeguarding concerns",
+        accuracy: "Very Low",
+        ombudsmanStandard: "Service failure - safeguarding",
+        socialWorkStandard: "3.9 Identify and respond to signs of harm, abuse and exploitation"
+      },
+      legalFramework: "Care Act 2014 Section 42, Safeguarding Adults",
+      conclusion: "Ben correctly highlighted safeguarding concerns that warranted professional response, but the team failed to acknowledge or address these issues."
+    },
+    {
+      id: 6,
+      category: 'assessment',
+      issue: "Recognition of Changed Circumstances",
+      benStatement: {
+        quote: "You don't think my care needs are changed?",
+        timestamp: "1:23:53",
+        analysis: "Correctly identifies that homelessness constitutes a substantial change in circumstances requiring reassessment",
+        accuracy: "High",
+        ombudsmanStandard: "Proper assessment processes",
+        socialWorkStandard: "3.1 Assess the level, nature and extent of care needs"
+      },
+      teamStatement: {
+        person: "Joanne",
+        quote: "Okay, we're not going to discuss this just now, Ben. If you want me to re refer you to have another formal effect.",
+        timestamp: "1:23:56",
+        analysis: "Refuses to acknowledge statutory duty to reassess when circumstances change substantially",
+        accuracy: "Very Low",
+        ombudsmanStandard: "Service failure - inappropriate refusal",
+        socialWorkStandard: "3.1 Work in partnership with people to determine their care and support needs"
+      },
+      legalFramework: "Care Act 2014, Care and Support Statutory Guidance",
+      conclusion: "Ben correctly questioned the failure to reassess needs following substantial change in circumstances (homelessness) while Joanne inappropriately dismissed this statutory requirement."
+    }
+  ];
+
+  const handleExpand = (id) => {
+    if (expandedItem === id) {
+      setExpandedItem(null);
+    } else {
+      setExpandedItem(id);
+    }
+  };
+
+  const filteredData = activeTab === 'all' 
+    ? comparisonData 
+    : comparisonData.filter(item => item.category === activeTab);
+
+  return (
+    <div className="bg-slate-50 text-slate-900 p-4 md:p-6 max-w-full">
+      <header className="mb-8 border-b-4 border-blue-700 pb-4">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold text-blue-800">PROFESSIONAL STANDARDS COMPLIANCE ANALYSIS</h1>
+            <p className="text-lg md:text-xl font-semibold text-slate-700">Ben vs. Social Care Team - Evidence-Based Assessment</p>
+          </div>
+          <div className="flex items-center mt-4 md:mt-0">
+            <BookOpen className="h-8 w-8 md:h-12 md:w-12 text-blue-700 mr-2" />
+            <Scale className="h-8 w-8 md:h-12 md:w-12 text-slate-700" />
+          </div>
+        </div>
+      </header>
+
+      <section className="mb-8 bg-white rounded-lg shadow-md p-4 md:p-6">
+        <div className="flex flex-wrap items-center mb-4">
+          <h2 className="text-xl md:text-2xl font-bold text-blue-800 mr-4 mb-2 md:mb-0">Standards Categories:</h2>
+          <div className="flex flex-wrap gap-2">
+            {Object.entries(standardCategories).map(([key, value]) => (
+              <button
+                key={key}
+                onClick={() => setActiveTab(key)}
+                className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+                  activeTab === key 
+                    ? 'bg-blue-600 text-white' 
+                    : 'bg-blue-100 text-blue-800 hover:bg-blue-200'
+                }`}
+              >
+                {value}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-2 md:gap-4 mb-4 bg-blue-50 p-2 md:p-4 rounded-lg">
+          <div className="flex flex-col items-center justify-center">
+            <div className="text-lg md:text-xl font-bold text-blue-800 mb-1">Ben</div>
+            <div className="flex items-center">
+              <div className="w-16 md:w-24 bg-gray-200 rounded-full h-2 md:h-3">
+                <div className="bg-green-600 h-2 md:h-3 rounded-full w-5/6"></div>
+              </div>
+              <span className="ml-2 font-semibold text-green-700">83%</span>
+            </div>
+            <div className="text-xs text-center mt-1">Compliance with Standards</div>
+          </div>
+
+          <div className="flex flex-col items-center justify-center">
+            <div className="text-lg md:text-xl font-bold text-blue-800 mb-1">Joanne</div>
+            <div className="flex items-center">
+              <div className="w-16 md:w-24 bg-gray-200 rounded-full h-2 md:h-3">
+                <div className="bg-red-600 h-2 md:h-3 rounded-full w-1/5"></div>
+              </div>
+              <span className="ml-2 font-semibold text-red-700">22%</span>
+            </div>
+            <div className="text-xs text-center mt-1">Compliance with Standards</div>
+          </div>
+
+          <div className="flex flex-col items-center justify-center">
+            <div className="text-lg md:text-xl font-bold text-blue-800 mb-1">Marilyn</div>
+            <div className="flex items-center">
+              <div className="w-16 md:w-24 bg-gray-200 rounded-full h-2 md:h-3">
+                <div className="bg-yellow-500 h-2 md:h-3 rounded-full w-2/5"></div>
+              </div>
+              <span className="ml-2 font-semibold text-yellow-700">40%</span>
+            </div>
+            <div className="text-xs text-center mt-1">Compliance with Standards</div>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          {filteredData.map((item) => (
+            <div 
+              key={item.id} 
+              className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div 
+                className="bg-blue-50 p-3 md:p-4 flex justify-between items-center cursor-pointer"
+                onClick={() => handleExpand(item.id)}
+              >
+                <div>
+                  <h3 className="text-lg md:text-xl font-bold text-blue-800">{item.issue}</h3>
+                  <p className="text-sm text-gray-600">Framework: {item.legalFramework}</p>
+                </div>
+                <div className="flex items-center">
+                  <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                    item.category === 'rights' ? 'bg-purple-100 text-purple-800' :
+                    item.category === 'assessment' ? 'bg-blue-100 text-blue-800' :
+                    item.category === 'communication' ? 'bg-green-100 text-green-800' :
+                    item.category === 'autonomy' ? 'bg-yellow-100 text-yellow-800' :
+                    'bg-red-100 text-red-800'
+                  }`}>
+                    {standardCategories[item.category]}
+                  </span>
+                  <button className="ml-3 p-1 rounded-full hover:bg-blue-100">
+                    {expandedItem === item.id ? (
+                      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7"></path>
+                      </svg>
+                    ) : (
+                      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {expandedItem === item.id && (
+                <div className="p-4 md:p-6 bg-white">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div className="bg-green-50 p-3 md:p-4 rounded-lg border-l-4 border-green-600">
+                      <div className="flex justify-between items-start mb-2">
+                        <p className="font-bold text-green-800">Ben's Statement</p>
+                        <div className="flex items-center bg-green-100 px-2 py-1 rounded">
+                          <CheckCircle className="h-4 w-4 text-green-600 mr-1" />
+                          <span className="text-xs font-bold text-green-800">ACCURATE</span>
+                        </div>
+                      </div>
+                      <div className="border-b border-green-200 mb-2"></div>
+                      <p className="text-xs text-gray-500">Timestamp: {item.benStatement.timestamp}</p>
+                      <p className="text-sm text-gray-800 italic my-2">"{item.benStatement.quote}"</p>
+                      <div className="mt-3 space-y-2">
+                        <div className="p-2 bg-white rounded shadow-sm">
+                          <p className="text-xs font-semibold text-blue-800">Analysis:</p>
+                          <p className="text-xs text-gray-700">{item.benStatement.analysis}</p>
+                        </div>
+                        <div className="p-2 bg-white rounded shadow-sm">
+                          <p className="text-xs font-semibold text-purple-800">Ombudsman Standard:</p>
+                          <p className="text-xs text-gray-700">{item.benStatement.ombudsmanStandard}</p>
+                        </div>
+                        <div className="p-2 bg-white rounded shadow-sm">
+                          <p className="text-xs font-semibold text-indigo-800">Social Work England Standard:</p>
+                          <p className="text-xs text-gray-700">{item.benStatement.socialWorkStandard}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-red-50 p-3 md:p-4 rounded-lg border-l-4 border-red-600">
+                      <div className="flex justify-between items-start mb-2">
+                        <p className="font-bold text-red-800">{item.teamStatement.person}'s Response</p>
+                        <div className="flex items-center bg-red-100 px-2 py-1 rounded">
+                          <XCircle className="h-4 w-4 text-red-600 mr-1" />
+                          <span className="text-xs font-bold text-red-800">NON-COMPLIANT</span>
+                        </div>
+                      </div>
+                      <div className="border-b border-red-200 mb-2"></div>
+                      <p className="text-xs text-gray-500">Timestamp: {item.teamStatement.timestamp}</p>
+                      <p className="text-sm text-gray-800 italic my-2">"{item.teamStatement.quote}"</p>
+                      <div className="mt-3 space-y-2">
+                        <div className="p-2 bg-white rounded shadow-sm">
+                          <p className="text-xs font-semibold text-blue-800">Analysis:</p>
+                          <p className="text-xs text-gray-700">{item.teamStatement.analysis}</p>
+                        </div>
+                        <div className="p-2 bg-white rounded shadow-sm">
+                          <p className="text-xs font-semibold text-purple-800">Ombudsman Standard Violation:</p>
+                          <p className="text-xs text-gray-700">{item.teamStatement.ombudsmanStandard}</p>
+                        </div>
+                        <div className="p-2 bg-white rounded shadow-sm">
+                          <p className="text-xs font-semibold text-indigo-800">Social Work England Standard Violation:</p>
+                          <p className="text-xs text-gray-700">{item.teamStatement.socialWorkStandard}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-blue-50 p-3 md:p-4 rounded-lg">
+                    <p className="font-semibold text-blue-800 mb-1">Evidence-Based Conclusion:</p>
+                    <p className="text-sm text-gray-800">{item.conclusion}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mb-8 bg-white rounded-lg shadow-md p-4 md:p-6">
+        <h2 className="text-xl md:text-2xl font-bold text-blue-800 border-b-2 border-blue-200 pb-2 mb-4 flex items-center">
+          <Award className="text-blue-600 mr-2 h-5 w-5 md:h-6 md:w-6" />
+          Ombudsman Standards Compliance Assessment
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="bg-blue-50 p-3 md:p-4 rounded-lg">
+            <h3 className="font-bold text-lg text-blue-800 mb-2">Ben</h3>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Service user voice</span>
+                <div className="flex items-center">
+                  <div className="w-24 bg-gray-200 rounded-full h-2">
+                    <div className="bg-green-600 h-2 rounded-full w-full"></div>
+                  </div>
+                  <span className="ml-2 text-xs font-semibold text-green-700">100%</span>
+                </div>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Rights knowledge</span>
+                <div className="flex items-center">
+                  <div className="w-24 bg-gray-200 rounded-full h-2">
+                    <div className="bg-green-600 h-2 rounded-full w-11/12"></div>
+                  </div>
+                  <span className="ml-2 text-xs font-semibold text-green-700">90%</span>
+                </div>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Legal framework</span>
+                <div className="flex items-center">
+                  <div className="w-24 bg-gray-200 rounded-full h-2">
+                    <div className="bg-green-600 h-2 rounded-full w-5/6"></div>
+                  </div>
+                  <span className="ml-2 text-xs font-semibold text-green-700">80%</span>
+                </div>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Procedural understanding</span>
+                <div className="flex items-center">
+                  <div className="w-24 bg-gray-200 rounded-full h-2">
+                    <div className="bg-green-600 h-2 rounded-full w-4/5"></div>
+                  </div>
+                  <span className="ml-2 text-xs font-semibold text-green-700">75%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-blue-50 p-3 md:p-4 rounded-lg">
+            <h3 className="font-bold text-lg text-blue-800 mb-2">Joanne</h3>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Service user voice</span>
+                <div className="flex items-center">
+                  <div className="w-24 bg-gray-200 rounded-full h-2">
+                    <div className="bg-red-600 h-2 rounded-full w-1/5"></div>
+                  </div>
+                  <span className="ml-2 text-xs font-semibold text-red-700">20%</span>
+                </div>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Rights knowledge</span>
+                <div className="flex items-center">
+                  <div className="w-24 bg-gray-200 rounded-full h-2">
+                    <div className="bg-red-600 h-2 rounded-full w-1/4"></div>
+                  </div>
+                  <span className="ml-2 text-xs font-semibold text-red-700">25%</span>
+                </div>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Legal framework</span>
+                <div className="flex items-center">
+                  <div className="w-24 bg-gray-200 rounded-full h-2">
+                    <div className="bg-red-600 h-2 rounded-full w-1/5"></div>
+                  </div>
+                  <span className="ml-2 text-xs font-semibold text-red-700">20%</span>
+                </div>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Procedural correctness</span>
+                <div className="flex items-center">
+                  <div className="w-24 bg-gray-200 rounded-full h-2">
+                    <div className="bg-red-600 h-2 rounded-full w-1/4"></div>
+                  </div>
+                  <span className="ml-2 text-xs font-semibold text-red-700">25%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-blue-50 p-3 md:p-4 rounded-lg">
+            <h3 className="font-bold text-lg text-blue-800 mb-2">Marilyn</h3>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Service user voice</span>
+                <div className="flex items-center">
+                  <div className="w-24 bg-gray-200 rounded-full h-2">
+                    <div className="bg-yellow-500 h-2 rounded-full w-2/5"></div>
+                  </div>
+                  <span className="ml-2 text-xs font-semibold text-yellow-700">40%</span>
+                </div>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Rights knowledge</span>
+                <div className="flex items-center">
+                  <div className="w-24 bg-gray-200 rounded-full h-2">
+                    <div className="bg-yellow-500 h-2 rounded-full w-1/2"></div>
+                  </div>
+                  <span className="ml-2 text-xs font-semibold text-yellow-700">50%</span>
+                </div>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Legal framework</span>
+                <div className="flex items-center">
+                  <div className="w-24 bg-gray-200 rounded-full h-2">
+                    <div className="bg-yellow-500 h-2 rounded-full w-2/5"></div>
+                  </div>
+                  <span className="ml-2 text-xs font-semibold text-yellow-700">40%</span>
+                </div>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Procedural correctness</span>
+                <div className="flex items-center">
+                  <div className="w-24 bg-gray-200 rounded-full h-2">
+                    <div className="bg-yellow-500 h-2 rounded-full w-2/5"></div>
+                  </div>
+                  <span className="ml-2 text-xs font-semibold text-yellow-700">40%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white rounded-lg shadow-md p-4 md:p-6">
+        <h2 className="text-xl md:text-2xl font-bold text-blue-800 border-b-2 border-blue-200 pb-2 mb-4 flex items-center">
+          <Search className="text-blue-600 mr-2 h-5 w-5 md:h-6 md:w-6" />
+          Social Work England Professional Standards Assessment
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-600">
+            <h3 className="font-bold text-lg mb-2 text-green-800">Standards Where Ben Showed Superior Understanding</h3>
+            <ul className="space-y-2">
+              <li className="bg-white p-2 rounded shadow-sm">
+                <p className="text-sm font-semibold text-blue-800">Standard 1.5:</p>
+                <p className="text-sm text-gray-700">"Recognise the impact of the legal context on practice"</p>
+                <p className="text-xs text-gray-500 mt-1">Ben correctly understood court jurisdiction and legal rights while Joanne provided incorrect information.</p>
+              </li>
+              <li className="bg-white p-2 rounded shadow-sm">
+                <p className="text-sm font-semibold text-blue-800">Standard 3.1:</p>
+                <p className="text-sm text-gray-700">"Work in partnership with people to determine their care and support needs"</p>
+                <p className="text-xs text-gray-500 mt-1">Ben correctly identified need for reassessment following substantial change in circumstances.</p>
+              </li>
+              <li className="bg-white p-2 rounded shadow-sm">
+                <p className="text-sm font-semibold text-blue-800">Standard 6.1:</p>
+                <p className="text-sm text-gray-700">"Report allegations of harm and challenge discriminatory behavior or practice"</p>
+                <p className="text-xs text-gray-500 mt-1">Ben correctly highlighted safeguarding concerns which professionals failed to acknowledge.</p>
+              </li>
+            </ul>
+          </div>
+
+          <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-600">
+            <h3 className="font-bold text-lg mb-2 text-red-800">Standards Where Professionals Failed Compliance</h3>
+            <ul className="space-y-2">
+              <li className="bg-white p-2 rounded shadow-sm">
+                <p className="text-sm font-semibold text-red-800">Standard 2.2:</p>
+                <p className="text-sm text-gray-700">"Respect and maintain people's dignity and privacy"</p>
+                <p className="text-xs text-gray-500 mt-1">Violated through coercive practices and threats to withdraw support.</p>
+              </li>
+              <li className="bg-white p-2 rounded shadow-sm">
+                <p className="text-sm font-semibold text-red-800">Standard 1.4:</p>
+                <p className="text-sm text-gray-700">"Respect and promote the human rights, views and wishes of the people I work with"</p>
+                <p className="text-xs text-gray-500 mt-1">Violated by refusing reasonable adjustments for autism-related needs.</p>
+              </li>
+              <li className="bg-white p-2 rounded shadow-sm">
+                <p className="text-sm font-semibold text-red-800">Standard 5.1:</p>
+                <p className="text-sm text-gray-700">"Always treat people with respect and dignity"</p>
+                <p className="text-xs text-gray-500 mt-1">Violated through dismissal of autism-related needs and invalidation of concerns.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <footer className="mt-8 text-center text-sm text-slate-500">
+        <p>Analysis based on Social Work England Professional Standards Framework and Local Government & Social Care Ombudsman assessment criteria.</p>
+        <p className="mt-1">Standards references: <a href="https://www.socialworkengland.org.uk/standards" className="underline text-blue-600">https://www.socialworkengland.org.uk/standards</a></p>
+      </footer>
+    </div>
+  );
+};
+
+export default StandardsAnalysis;

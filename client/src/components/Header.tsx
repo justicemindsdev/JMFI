@@ -76,6 +76,12 @@ export function Header() {
                 >
                   NEWLYN PLC
                 </Link>
+                <Link 
+                  href="/investigations/social-worker-engagement" 
+                  className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-primary"
+                >
+                  Social Worker Engagement
+                </Link>
               </div>
             )}
           </div>
