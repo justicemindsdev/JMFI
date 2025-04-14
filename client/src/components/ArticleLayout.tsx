@@ -21,42 +21,62 @@ interface ArticleHeroProps {
 
 export function ArticleHero({ title, authorName, publishDate }: ArticleHeroProps) {
   return (
-    <section className="relative bg-gradient-to-br from-blue-800 to-blue-950 text-white py-20 md:py-32 overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-blue-900/20 mix-blend-overlay"></div>
-      <div className="absolute top-0 left-0 w-full h-full bg-[url('/attached_assets/image_1744373336541.png')] bg-cover opacity-20 mix-blend-overlay"></div>
-      <div className="absolute -inset-1/2 bg-gradient-to-r from-transparent via-blue-600/10 to-transparent opacity-30 blur-3xl transform rotate-12"></div>
+    <div className="relative">
+      {/* Modern navy blue header with JusticeMind branding */}
+      <div className="bg-gray-950 border-b border-blue-900/30 py-2 px-4 flex items-center">
+        <div className="text-blue-400 font-semibold text-lg">JusticeMind<span className="text-white">s</span></div>
+      </div>
       
-      {/* Content */}
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center justify-center mb-8">
-            <img 
-              src="/attached_assets/LOGO TRANS_1744373361051.png" 
-              alt="Justice Minds Logo" 
-              className="h-24 w-auto mb-5"
-            />
+      {/* Modern hero bar with two-tone design - darker top and royal blue bottom */}
+      <section className="relative overflow-hidden">
+        {/* Top darker section */}
+        <div className="bg-gray-950 pt-10 pb-12 relative overflow-hidden">
+          {/* Moving light backdrop effect */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -inset-1/4 w-[150%] h-[150%] bg-gradient-to-r from-transparent via-blue-500/5 to-transparent animate-light-move"></div>
+            <div className="absolute -inset-1/4 w-[150%] h-[150%] bg-gradient-to-r from-transparent via-blue-400/5 to-transparent animate-light-move-slow transform rotate-12"></div>
           </div>
           
-          <div className="text-center">
-            <div className="text-blue-100 mb-4 uppercase tracking-wider text-sm font-semibold px-3 py-1 bg-blue-800/40 rounded-full inline-block border border-blue-400/20">Press Release</div>
-            <h1 className="text-3xl md:text-5xl font-heading font-bold mb-8 leading-tight">{title}</h1>
-            
-            <div className="flex items-center justify-center space-x-4 mb-8">
-              <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 overflow-hidden p-0.5">
-                <div className="h-full w-full rounded-full bg-blue-900 flex items-center justify-center text-white font-bold">
-                  {authorName.charAt(0)}
+          <div className="container mx-auto px-4 z-10 relative">
+            <div className="max-w-5xl mx-auto text-center">
+              <h1 className="font-heading text-4xl md:text-6xl text-white font-bold leading-tight tracking-tight">
+                The Extraordinary Rarity <br className="hidden md:block" />
+                of Ben's Parliamentary <br className="hidden md:block" />
+                Advocacy Success
+              </h1>
+            </div>
+          </div>
+        </div>
+        
+        {/* Bottom royal blue section */}
+        <div className="bg-blue-800 py-10 relative">
+          {/* Moving light backdrop effect */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -inset-1/4 w-[150%] h-[150%] bg-gradient-to-r from-transparent via-blue-400/10 to-transparent animate-light-move-reverse"></div>
+          </div>
+          
+          <div className="container mx-auto px-4 z-10 relative">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center">
+                <div className="text-blue-100 mb-4 uppercase tracking-wider text-sm font-semibold px-3 py-1 bg-blue-700/40 rounded-full inline-block border border-blue-400/20">A Statistical Analysis</div>
+                
+                <div className="flex items-center justify-center space-x-4 mt-8">
+                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 overflow-hidden p-0.5">
+                    <div className="h-full w-full rounded-full bg-blue-900 flex items-center justify-center text-white font-bold">
+                      {authorName.charAt(0)}
+                    </div>
+                  </div>
+                  <div className="text-left">
+                    <div className="font-medium text-lg text-white">{authorName}</div>
+                    <div className="text-blue-100 text-sm">Published: {publishDate}</div>
+                  </div>
                 </div>
-              </div>
-              <div className="text-left">
-                <div className="font-medium text-lg">{authorName}</div>
-                <div className="text-blue-100 text-sm">Published: {publishDate}</div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 

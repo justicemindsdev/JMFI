@@ -44,6 +44,45 @@
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+@keyframes light-move {
+  0% {
+    transform: translateX(-100%) translateY(0);
+  }
+  100% {
+    transform: translateX(100%) translateY(-10%);
+  }
+}
+
+@keyframes light-move-slow {
+  0% {
+    transform: translateX(-100%) translateY(0) rotate(12deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(-20%) rotate(12deg);
+  }
+}
+
+@keyframes light-move-reverse {
+  0% {
+    transform: translateX(100%) translateY(0);
+  }
+  100% {
+    transform: translateX(-100%) translateY(-10%);
+  }
+}
+
+.animate-light-move {
+  animation: light-move 20s linear infinite;
+}
+
+.animate-light-move-slow {
+  animation: light-move-slow 28s linear infinite;
+}
+
+.animate-light-move-reverse {
+  animation: light-move-reverse 24s linear infinite;
+}
+
 @layer components {
   /* Sidebar smooth scroll */
   .sticky-sidebar {
