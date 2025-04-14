@@ -37,13 +37,15 @@ export function ParliamentaryQuestionGraph() {
       <div className="absolute inset-0 bg-blue-900/15 blur-xl"></div>
       <div className="absolute -inset-1/2 bg-gradient-to-r from-transparent via-blue-900/15 to-transparent opacity-30 blur-3xl transform rotate-12"></div>
       
-      {/* Parliament logo with proper positioning */}
-      <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-32 h-32 flex items-center justify-center z-20">
-        <div className="bg-blue-950 p-2 rounded-full shadow-lg border border-blue-800">
+      {/* House of Commons logo with green glow at top */}
+      <div className="absolute top-0 right-0 m-4 flex items-center justify-center z-20">
+        <div className="relative">
+          <div className="absolute -inset-2 bg-emerald-500/30 blur-lg rounded-full animate-pulse"></div>
+          <div className="absolute -inset-1 bg-green-400/20 blur-md rounded-full"></div>
           <img 
-            src="/logos/house-of-commons.png" 
+            src="/attached_assets/image_1744666386253.png" 
             alt="House of Commons logo"
-            className="w-24 h-24 object-contain"
+            className="w-36 h-auto relative z-10"
           />
         </div>
       </div>
