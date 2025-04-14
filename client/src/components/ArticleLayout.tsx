@@ -22,22 +22,16 @@ interface ArticleHeroProps {
 export function ArticleHero({ title, authorName, publishDate }: ArticleHeroProps) {
   return (
     <div className="relative">
-      {/* Modern navy blue header with JusticeMind branding */}
-      <div className="bg-gray-950 border-b border-blue-900/30 py-2 px-4 flex items-center">
-        <div className="text-blue-400 font-semibold text-lg">JusticeMind<span className="text-white">s</span></div>
+      {/* Hard-edged top navy bar with JusticeMind branding */}
+      <div className="bg-black border-b-2 border-blue-600 py-2 px-4 flex items-center">
+        <div className="text-blue-400 font-semibold text-lg">Justice<span className="text-white">Minds</span></div>
       </div>
       
-      {/* Modern hero bar with two-tone design - darker top and royal blue bottom */}
-      <section className="relative overflow-hidden">
-        {/* Top darker section */}
-        <div className="bg-gray-950 pt-10 pb-12 relative overflow-hidden">
-          {/* Moving light backdrop effect */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -inset-1/4 w-[150%] h-[150%] bg-gradient-to-r from-transparent via-blue-500/5 to-transparent animate-light-move"></div>
-            <div className="absolute -inset-1/4 w-[150%] h-[150%] bg-gradient-to-r from-transparent via-blue-400/5 to-transparent animate-light-move-slow transform rotate-12"></div>
-          </div>
-          
-          <div className="container mx-auto px-4 z-10 relative">
+      {/* Hard-edged hero structure with distinct sections */}
+      <section>
+        {/* Top black section with hero title */}
+        <div className="bg-black py-8 border-b-4 border-blue-800">
+          <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto text-center">
               <h1 className="font-heading text-4xl md:text-6xl text-white font-bold leading-tight tracking-tight">
                 The Extraordinary Rarity <br className="hidden md:block" />
@@ -48,28 +42,32 @@ export function ArticleHero({ title, authorName, publishDate }: ArticleHeroProps
           </div>
         </div>
         
-        {/* Bottom royal blue section */}
-        <div className="bg-blue-800 py-10 relative">
-          {/* Moving light backdrop effect */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -inset-1/4 w-[150%] h-[150%] bg-gradient-to-r from-transparent via-blue-400/10 to-transparent animate-light-move-reverse"></div>
-          </div>
-          
-          <div className="container mx-auto px-4 z-10 relative">
+        {/* Middle royal blue section with subtitle */}
+        <div className="bg-blue-800 py-6 border-b-4 border-black">
+          <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <div className="text-center">
-                <div className="text-blue-100 mb-4 uppercase tracking-wider text-sm font-semibold px-3 py-1 bg-blue-700/40 rounded-full inline-block border border-blue-400/20">A Statistical Analysis</div>
-                
-                <div className="flex items-center justify-center space-x-4 mt-8">
-                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 overflow-hidden p-0.5">
-                    <div className="h-full w-full rounded-full bg-blue-900 flex items-center justify-center text-white font-bold">
-                      {authorName.charAt(0)}
-                    </div>
+                <div className="text-white uppercase tracking-wider text-lg font-semibold">
+                  A Statistical Analysis
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Bottom section with author info */}
+        <div className="bg-blue-900 py-6">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="flex items-center justify-center space-x-4">
+                <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 overflow-hidden p-0.5">
+                  <div className="h-full w-full rounded-full bg-blue-950 flex items-center justify-center text-white font-bold">
+                    {authorName.charAt(0)}
                   </div>
-                  <div className="text-left">
-                    <div className="font-medium text-lg text-white">{authorName}</div>
-                    <div className="text-blue-100 text-sm">Published: {publishDate}</div>
-                  </div>
+                </div>
+                <div className="text-left">
+                  <div className="font-medium text-lg text-white">{authorName}</div>
+                  <div className="text-blue-100 text-sm">Published: {publishDate}</div>
                 </div>
               </div>
             </div>
