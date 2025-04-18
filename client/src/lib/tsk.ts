@@ -11,8 +11,17 @@ declare global {
  * This will create a new tab with the code contents
  */
 export function processTskCode(code: string): void {
-  if (typeof window !== 'undefined' && window.processTskCode) {
-    window.processTskCode(code);
+  console.log('Processing TSK code:', code.substring(0, 50) + '...');
+  if (typeof window !== 'undefined') {
+    if (window.processTskCode) {
+      console.log('Using window.processTskCode');
+      window.processTskCode(code);
+    } else if (window.createTskTab) {
+      console.log('Using window.createTskTab directly');
+      window.createTskTab(code);
+    } else {
+      console.error('Neither processTskCode nor createTskTab functions are available on window');
+    }
   }
 }
 

@@ -27,17 +27,25 @@ function App() {
   
   // Function to directly create tabs from code with //tskddd prefix
   const processTskCode = (code: string) => {
+    console.log("App: processTskCode called with code", code.substring(0, 30) + "...");
+    
     // @ts-ignore - This function is defined in TskParser and exposed globally
     if (window.createTskTab && typeof window.createTskTab === 'function') {
+      console.log("App: Calling window.createTskTab");
       window.createTskTab(code);
+    } else {
+      console.error("App: window.createTskTab is not available");
     }
   };
   
   // Make the function globally available
   useEffect(() => {
+    console.log("App: Setting up global processTskCode function");
     // @ts-ignore
     window.processTskCode = processTskCode;
+    
     return () => {
+      console.log("App: Cleaning up global processTskCode function");
       // @ts-ignore
       delete window.processTskCode;
     };
