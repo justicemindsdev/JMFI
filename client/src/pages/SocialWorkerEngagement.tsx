@@ -42,7 +42,7 @@ export default function SocialWorkerEngagement() {
         
         {/* Right vertical red line */}
         <div className="absolute right-0 top-0 bottom-0 w-4 bg-red-600 hidden md:block"></div>
-        
+      
         <main className="flex-grow container mx-auto px-4 py-12">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
