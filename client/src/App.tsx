@@ -6,6 +6,9 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import NewlynPlc from "@/pages/NewlynPlc";
 import SocialWorkerEngagement from "@/pages/SocialWorkerEngagement";
+import { TskParser } from "@/components/TskParser";
+import useTskParser from "@/hooks/use-tsk-parser";
+import { useEffect } from 'react';
 
 function Router() {
   return (
@@ -19,9 +22,31 @@ function Router() {
 }
 
 function App() {
+  // Initialize the TSK parser to detect and process //tskddd code blocks
+  useTskParser();
+  
+  // Function to directly create tabs from code with //tskddd prefix
+  const processTskCode = (code: string) => {
+    // @ts-ignore - This function is defined in TskParser and exposed globally
+    if (window.createTskTab && typeof window.createTskTab === 'function') {
+      window.createTskTab(code);
+    }
+  };
+  
+  // Make the function globally available
+  useEffect(() => {
+    // @ts-ignore
+    window.processTskCode = processTskCode;
+    return () => {
+      // @ts-ignore
+      delete window.processTskCode;
+    };
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Router />
+      <TskParser />
       <Toaster />
     </QueryClientProvider>
   );

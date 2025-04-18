@@ -6,6 +6,8 @@ import {
 } from "@/components/StatisticsGraph";
 import { EndorsementCard } from "@/components/EndorsementCard";
 import { StatisticalAssessment } from "@/components/StatisticalAssessment";
+import { Button } from "@/components/ui/button";
+import { parseTsk } from "@/lib/tsk";
 
 // Import user uploaded images using the @assets alias from vite.config.ts
 import courtDocumentImage from "@assets/IMG_6447.jpeg";
@@ -62,6 +64,53 @@ export default function Home() {
       {/* Modern Statistical Assessment with moving light backdrop */}
       <StatisticalAssessment />
       
+      {/* TSK Parser Demo Button - Copy text with //tskddd prefix to test */}
+      <div className="container mx-auto px-4 mb-6">
+        <div className="flex justify-center">
+          <Button 
+            variant="outline" 
+            className="bg-blue-900/50 text-white hover:bg-blue-800 transition-colors"
+            onClick={() => {
+              // This loads the SocialWorkerStandards component as a new tab
+              const socialWorkerCode = `//tskddd
+import React from 'react';
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { 
+  ArrowRight, 
+  FileText, 
+  Clock, 
+  Calendar, 
+  MessageSquare,
+  CheckCircle,
+  XCircle,
+  AlertTriangle,
+  BarChart
+} from "lucide-react";
+
+export function DemoComponent() {
+  return (
+    <div className="p-6 bg-blue-900/20 rounded-lg">
+      <h2 className="text-2xl font-bold text-white mb-4">TSK Demo Component</h2>
+      <p className="text-gray-300 mb-4">
+        This component was created automatically from code with the //tskddd prefix!
+      </p>
+      <Button className="bg-blue-600 hover:bg-blue-700">
+        Interactive Button
+      </Button>
+    </div>
+  );
+}`;
+              parseTsk(socialWorkerCode);
+            }}
+          >
+            Load Demo TSK Component
+          </Button>
+        </div>
+      </div>
+
       <ArticleContent
         sources={sources}
         content={
