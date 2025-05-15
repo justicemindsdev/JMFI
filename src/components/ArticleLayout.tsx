@@ -21,60 +21,27 @@ interface ArticleHeroProps {
 
 export function ArticleHero({ title, authorName, publishDate }: ArticleHeroProps) {
   return (
-    <div className="relative">
-      {/* Hard-edged top navy bar with JusticeMind branding */}
-      <div className="bg-black border-b-2 border-blue-600 py-2 px-4 flex items-center">
-        <div className="text-blue-400 font-semibold text-lg">Justice<span className="text-white">Minds</span></div>
+    // <div className="relative">
+      <section className="bg-blue-600 text-white px-6 py-12 min-h-[500px] flex items-center">
+      <div className="max-w-4xl mx-auto">
+        <p className="uppercase text-sm font-semibold tracking-wide mb-4">
+          Press Release
+        </p>
+        <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-6">
+          The Extraordinary Rarity of Ben's Parliamentary Advocacy Success: A Statistical Analysis
+        </h1>
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-white text-blue-600 flex items-center justify-center font-bold text-lg">
+            J
+          </div>
+          <div className="text-sm">
+            <p className="font-medium">Justice Minds Editorial Team</p>
+            <p className="text-white/70">Published: November 30, 2024</p>
+          </div>
+        </div>
       </div>
-      
-      {/* Hard-edged hero structure with distinct sections */}
-      <section>
-        {/* Top black section with hero title */}
-        <div className="bg-black py-8 border-b-4 border-blue-800">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto text-center">
-              <h1 className="font-heading text-4xl md:text-6xl text-white font-bold leading-tight tracking-tight">
-                The Extraordinary Rarity <br className="hidden md:block" />
-                of Ben's Parliamentary <br className="hidden md:block" />
-                Advocacy Success
-              </h1>
-            </div>
-          </div>
-        </div>
-        
-        {/* Middle royal blue section with subtitle */}
-        <div className="bg-blue-800 py-6 border-b-4 border-black">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center">
-                <div className="text-white uppercase tracking-wider text-lg font-semibold">
-                  A Statistical Analysis
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Bottom section with author info */}
-        <div className="bg-blue-900 py-6">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="flex items-center justify-center space-x-4">
-                <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 overflow-hidden p-0.5">
-                  <div className="h-full w-full rounded-full bg-blue-950 flex items-center justify-center text-white font-bold">
-                    {authorName.charAt(0)}
-                  </div>
-                </div>
-                <div className="text-left">
-                  <div className="font-medium text-lg text-white">{authorName}</div>
-                  <div className="text-blue-100 text-sm">Published: {publishDate}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+    </section>
+    // </div>
   );
 }
 
@@ -108,7 +75,7 @@ export function ArticleContent({ content, sources }: ArticleContentProps) {
               <ol className="list-decimal pl-8 space-y-2 text-[0.9rem] leading-[1.4] text-gray-400">
                 {sources.map((source) => (
                   <li key={source.id} className="mb-2">
-                    [{source.id}] <a href={source.url} className="text-primary hover:underline">{source.text}</a>
+                    [{source.id}] <a href={source.url} className="text-blue-500 hover:underline hover:text-blue-600">{source.text}</a>
                   </li>
                 ))}
               </ol>
