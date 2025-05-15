@@ -10,10 +10,10 @@ import { Button } from "../components/ui/button";
 import { parseTsk } from "../lib/tsk";
 
 // Import user uploaded images using the @assets alias from vite.config.ts
-import courtDocumentImage from "../assets/IMG_6447.jpeg";
+// import courtDocumentImage from "../assets/IMG_6447.jpeg";
 // import courtDocumentImage from "../assets/IMG_6447.jpeg";
 
-import justiceSystemImage from "../assets/IMG_6449.jpeg";
+// import justiceSystemImage from "../assets/IMG_6449.jpeg";
 
 // Article sources
 const sources = [
@@ -124,7 +124,7 @@ export default function Home() {
             
             <div className="my-12">
               <img 
-                src={courtDocumentImage} 
+                src={'/attached_assets/IMG_6447.jpeg'} 
                 alt="Legal documents with gavel" 
                 className="w-full h-auto rounded-lg shadow-md border border-gray-800" 
               />
@@ -225,7 +225,7 @@ export default function Home() {
             
             <div className="my-12">
               <img 
-                src={justiceSystemImage} 
+                src={'/attached_assets/IMG_6449.jpeg'} 
                 alt="Inside view of courthouse" 
                 className="w-full h-auto rounded-lg shadow-md border border-gray-800" 
               />

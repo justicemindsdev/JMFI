@@ -9,11 +9,19 @@ import SocialWorkerEngagement from "./pages/SocialWorkerEngagement";
 // import { TskParser } from "./components/TskParser";
 import useTskParser from "./hooks/use-tsk-parser";
 import { useEffect } from 'react';
-
+import Press from "./pages/Press";
+import Portfolio from "./pages/Portfolio";
+import Tcctv from "./pages/Tcctc";
+import Substantiation from "./pages/Substantiation";
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/home" component={Home} />
+      <Route path="/press" component={Press} />
+      <Route path="/portfolio" component={Portfolio} />
+      <Route path="/tcctv" component={Tcctv} />
+      <Route path="/substantiation-fixed" component={Substantiation} />
       <Route path="/investigations/newlyn-plc" component={NewlynPlc} />
       <Route path="/investigations/social-worker-engagement" component={SocialWorkerEngagement} />
       <Route component={NotFound} />

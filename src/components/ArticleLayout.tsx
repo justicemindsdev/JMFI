@@ -2,13 +2,26 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { ShareButtons } from "./ShareButtons";
 import { Sidebar } from "./Sidebar";
+import { useEffect, useRef } from "react";
 
 export function ArticleLayout({ children }: { children: React.ReactNode }) {
+  const footerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScrollToFooter = () => {
+      footerRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    window.addEventListener("scrollToFooter", handleScrollToFooter);
+    return () => window.removeEventListener("scrollToFooter", handleScrollToFooter);
+  }, []);
   return (
     <div className="min-h-screen flex flex-col bg-gray-950 text-gray-200">
       <Header />
       {children}
-      <Footer />
+      <div ref={footerRef}>
+      <Footer  />
+      </div>
     </div>
   );
 }
