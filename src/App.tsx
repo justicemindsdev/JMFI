@@ -13,6 +13,7 @@ import Press from "./pages/Press";
 import Portfolio from "./pages/Portfolio";
 import Tcctv from "./pages/Tcctc";
 import Substantiation from "./pages/Substantiation";
+import AppPage from "./pages/AppPage";
 function Router() {
   return (
     <Switch>
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/press" component={Press} />
       <Route path="/portfolio" component={Portfolio} />
       <Route path="/tcctv" component={Tcctv} />
+      <Route path="/app" component={AppPage} />
       <Route path="/substantiation-fixed" component={Substantiation} />
       <Route path="/investigations/newlyn-plc" component={NewlynPlc} />
       <Route path="/investigations/social-worker-engagement" component={SocialWorkerEngagement} />
