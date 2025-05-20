@@ -3,7 +3,7 @@ import { Footer } from "./Footer";
 import { ShareButtons } from "./ShareButtons";
 import { Sidebar } from "./Sidebar";
 import { useEffect, useRef } from "react";
-// import {logo} from "../assets/image.svg"
+import logo from "../assets/image.svg";
 export function ArticleLayout({ children }: { children: React.ReactNode }) {
   const footerRef = useRef<HTMLDivElement>(null);
 
@@ -49,7 +49,7 @@ export function ArticleHero({ title, authorName, publishDate }: ArticleHeroProps
         {/* Logo Section */}
         <div className="flex-shrink-0 w-48 md:w-72 ml-8 md:ml-14">
           <img
-            src={'/attached_assets/Adobe_Express_file_converted.webp'}
+            src={logo}
             alt="Justice Minds Emblem"
             className="w-full h-auto"
           />
