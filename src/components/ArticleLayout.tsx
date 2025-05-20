@@ -49,7 +49,7 @@ export function ArticleHero({ title, authorName, publishDate }: ArticleHeroProps
         {/* Logo Section */}
         <div className="flex-shrink-0 w-48 md:w-72 ml-8 md:ml-14">
           <img
-            src="/public/attached_assets/image.svg"
+            src="/src/assets/image.svg"
             alt="Justice Minds Emblem"
             className="w-full h-auto"
           />
