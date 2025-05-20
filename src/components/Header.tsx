@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "../components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
+import logo from "../assets/image.svg";
 // import logo from ";
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,7 +44,7 @@ export function Header() {
         <Link href="/" className="flex items-center space-x-3">
           <div className="h-12 w-12 relative hidden md:block">
             <img
-              src={"/public/attached_assets/image.svg"}
+              src={logo}
               alt="Justice Minds Logo"
               className="h-12 w-auto"
             />
