@@ -34,29 +34,45 @@ interface ArticleHeroProps {
 
 export function ArticleHero({ title, authorName, publishDate }: ArticleHeroProps) {
   return (
-    // <div className="relative">
-      <section className="bg-blue-600 text-white px-6 py-12 min-h-[500px] flex items-center">
-      <div className="max-w-4xl mx-auto">
-        <p className="uppercase text-sm font-semibold tracking-wide mb-4">
-          Press Release
-        </p>
-        <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-6">
-          The Extraordinary Rarity of Ben's Parliamentary Advocacy Success: A Statistical Analysis
-        </h1>
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-white text-blue-600 flex items-center justify-center font-bold text-lg">
-            J
-          </div>
-          <div className="text-sm">
-            <p className="font-medium">Justice Minds Editorial Team</p>
-            <p className="text-white/70">Published: November 30, 2024</p>
-          </div>
+    <div className="relative w-full bg-black text-white overflow-hidden">
+      {/* Gradient Background Behind Logo */}
+      <div
+        className="absolute top-0 left-0 h-full w-[250px] z-0"
+        style={{
+          background:
+            'linear-gradient(to bottom, black 0%, #0A112A 20%, #1A3499 50%, #0A112A 80%, black 100%)',
+        }}
+      />
+
+      {/* Main Content */}
+      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 px-6 md:px-12 py-10 md:py-16 min-h-[400px] md:min-h-[500px]">
+        {/* Logo Section */}
+        <div className="flex-shrink-0 w-48 md:w-72 ml-8 md:ml-14">
+          <img
+            src="/public/attached_assets/image.svg"
+            alt="Justice Minds Emblem"
+            className="w-full h-auto"
+          />
+        </div>
+
+        {/* Text Section */}
+        <div className="text-center md:text-left w-full">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            The Extraordinary Rarity of Ben's
+          </h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            <span className="text-green-400">Parliamentary Advocacy</span> Success:
+          </h1>
+          <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold mt-6">
+            A Statistical Analysis
+          </h2>
         </div>
       </div>
-    </section>
-    // </div>
+    </div>
   );
 }
+
+
 
 interface ArticleContentProps {
   content: React.ReactNode;
@@ -84,15 +100,18 @@ export function ArticleContent({ content, sources }: ArticleContentProps) {
             
             {/* Sources section */}
             <div className="mt-12 mb-8 bg-gray-900 p-6 rounded-lg border border-gray-800">
-              <h3 className="text-xl font-heading font-semibold mb-4 text-white">Sources & Citations</h3>
-              <ol className="list-decimal pl-8 space-y-2 text-[0.9rem] leading-[1.4] text-gray-400">
-                {sources.map((source) => (
-                  <li key={source.id} className="mb-2">
-                    [{source.id}] <a href={source.url} className="text-blue-500 hover:underline hover:text-blue-600">{source.text}</a>
-                  </li>
-                ))}
-              </ol>
-            </div>
+  <h3 className="text-xl font-heading font-semibold mb-4 text-white">Sources & Citations</h3>
+  <div className="space-y-2 text-[0.9rem] leading-[1.4] text-gray-400 pl-6">
+    {sources.map((source, index) => (
+      <div key={source.id} className="mb-2 flex items-start">
+        <a href={source.url} className="text-blue-500 hover:underline hover:text-blue-600">
+          {source.text}
+        </a>
+      </div>
+    ))}
+  </div>
+</div>
+
           </article>
           
           {/* Right column - Sidebar */}

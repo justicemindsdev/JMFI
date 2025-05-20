@@ -43,7 +43,7 @@ export function Header() {
         <Link href="/" className="flex items-center space-x-3">
           <div className="h-12 w-12 relative hidden md:block">
             <img
-              src={"/public/attached_assets/LOGO TRANS_1744373361051.png"}
+              src={"/public/attached_assets/image.svg"}
               alt="Justice Minds Logo"
               className="h-12 w-auto"
             />
@@ -218,11 +218,11 @@ export function Header() {
               )}
             </div>
             <button
-              onClick={handleContactClick}
-              className="text-gray-300 hover:text-primary transition-colors py-2"
-            >
-              Contact
-            </button>
+  onClick={handleContactClick}
+  className="w-full text-left text-gray-300 hover:text-primary transition-colors py-2"
+>
+  Contact
+</button>
             <Link
               href="/tcctv"
               className="text-gray-300 hover:text-primary transition-colors py-2"
