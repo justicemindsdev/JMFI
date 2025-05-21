@@ -27,6 +27,10 @@ export default {
       maxWidth: {
         "1/2": "50%",
       },
+      width: {
+        "250": "250px",            // ✅ For sm:w-250
+        "full-screen": "100vw",     // ✅ Optional for w-full-screen
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -102,5 +106,8 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+  ],
 } satisfies Config;
