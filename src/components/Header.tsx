@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import { Button } from "../components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "../assets/image.svg";
-// import logo from ";
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isInvestigationsOpen, setIsInvestigationsOpen] = useState(false);
@@ -51,7 +50,7 @@ export function Header() {
           </div>
           <div className="text-white font-bold text-xl">
             <span className="text-blue-400">Justice</span>Minds Forensic
-            Intelligence
+            Intelligence-test
           </div>
         </Link>
 
