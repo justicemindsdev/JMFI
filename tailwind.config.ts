@@ -7,7 +7,16 @@ export default {
     extend: {
       fontFamily: {
         heading: ["Georgia", "SF Pro Display", "Times New Roman", "Times", "serif"],
-        sans: ["SF Pro Display", "Merrifield", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Arial", "sans-serif"],
+        sans: [
+          "SF Pro Display",
+          "Merrifield",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Arial",
+          "sans-serif",
+        ],
         serif: ["Georgia", "Times New Roman", "Times", "serif"],
       },
       borderRadius: {
@@ -15,9 +24,9 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-       maxWidth: {
-        '1/2': '50%', 
-         },
+      maxWidth: {
+        "1/2": "50%",
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -62,30 +71,29 @@ export default {
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
+
           primary: "hsl(var(--sidebar-primary))",
           "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          "primary-hover": "hsl(var(--sidebar-primary-hover))",
+          "primary-active": "hsl(var(--sidebar-primary-active))",
+
           accent: "hsl(var(--sidebar-accent))",
           "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          "accent-hover": "hsl(var(--sidebar-accent-hover))",
+          "accent-active": "hsl(var(--sidebar-accent-active))",
+
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
