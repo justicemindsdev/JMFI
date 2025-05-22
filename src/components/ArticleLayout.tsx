@@ -37,7 +37,7 @@ export function ArticleHero({ title, authorName, publishDate }: ArticleHeroProps
     <div className="relative w-full bg-black text-white overflow-hidden">
       {/* Gradient Background Behind Logo */}
      <div
-  className="absolute top-0 left-1/2 transform -translate-x-1/2 h-full w-full sm:w-250 z-0"
+  className="absolute top-0 left-1/2 transform -translate-x-1/2 h-full w-full sm:w-224 z-0"
   style={{
     background: 'linear-gradient(to bottom, black 0%, #0A112A 20%, #1A3499 50%, #0A112A 80%, black 100%)',
   }}
