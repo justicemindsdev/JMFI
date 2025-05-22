@@ -36,13 +36,12 @@ export function ArticleHero({ title, authorName, publishDate }: ArticleHeroProps
   return (
     <div className="relative w-full bg-black text-white overflow-hidden">
       {/* Gradient Background Behind Logo */}
-      <div
-        className="absolute top-0 left-0 h-full w-[250px] z-0"
-        style={{
-          background:
-            'linear-gradient(to bottom, black 0%, #0A112A 20%, #1A3499 50%, #0A112A 80%, black 100%)',
-        }}
-      />
+     <div
+  className="absolute top-0 left-1/2 transform -translate-x-1/2 h-full w-full sm:w-250 z-0"
+  style={{
+    background: 'linear-gradient(to bottom, black 0%, #0A112A 20%, #1A3499 50%, #0A112A 80%, black 100%)',
+  }}
+/>
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 px-6 md:px-12 py-10 md:py-16 min-h-[400px] md:min-h-[500px]">
