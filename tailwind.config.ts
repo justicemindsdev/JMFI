@@ -28,7 +28,7 @@ export default {
         "1/2": "50%",
       },
       width: {
-        "250": "250px",            // ✅ For sm:w-250
+        "250": "224px",            // ✅ For sm:w-250
         "full-screen": "100vw",     // ✅ Optional for w-full-screen
       },
       colors: {
