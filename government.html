@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D5CDE',
+                    }
+                }
+            },
+            darkMode: 'class'
+        }
+    </script>
+    <style>
+        .loader {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid #5D5CDE;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .dark .loader {
+            border: 3px solid rgba(30, 30, 30, 0.3);
+            border-top: 3px solid #5D5CDE;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-md py-4 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-gray-800 dark:text-white">Document Viewer</h1>
+            <div class="flex items-center gap-4">
+                <button id="fullscreenBtn" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 1v4m0 0h-4m4 0l-5-5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col p-4 md:p-6">
+        <div class="max-w-7xl mx-auto w-full flex-grow flex flex-col">
+            <!-- Document Container -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg flex-grow flex flex-col overflow-hidden">
+                <!-- Document Info -->
+                <div class="border-b border-gray-200 dark:border-gray-700 p-4">
+                    <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Government Acknowledgement</h2>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">PDF Document</p>
+                </div>
+                
+                <!-- PDF Viewer -->
+                <div class="relative flex-grow flex flex-col">
+                    <div id="loadingOverlay" class="absolute inset-0 bg-white dark:bg-gray-800 flex items-center justify-center z-10">
+                        <div class="flex flex-col items-center">
+                            <div class="loader mb-4"></div>
+                            <p class="text-gray-600 dark:text-gray-300">Loading document...</p>
+                        </div>
+                    </div>
+                    <iframe 
+                        id="pdfViewer"
+                        src="https://drive.google.com/file/d/1ka0CfaDCBqP1-24IL7jZYaQ79ZyAz0CK/preview" 
+                        class="w-full flex-grow"
+                        allowfullscreen
+                        onload="hideLoader()"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Check for dark mode preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        
+        // Listen for changes in dark mode preference
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+        
+        // Hide loader when PDF is loaded
+        function hideLoader() {
+            const loader = document.getElementById('loadingOverlay');
+            if (loader) {
+                loader.style.opacity = '0';
+                loader.style.transition = 'opacity 0.5s';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }
+        }
+        
+        // Fullscreen functionality
+        document.getElementById('fullscreenBtn').addEventListener('click', () => {
+            const viewer = document.getElementById('pdfViewer');
+            if (!document.fullscreenElement) {
+                if (viewer.requestFullscreen) {
+                    viewer.requestFullscreen();
+                } else if (viewer.webkitRequestFullscreen) {
+                    viewer.webkitRequestFullscreen();
+                } else if (viewer.msRequestFullscreen) {
+                    viewer.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
