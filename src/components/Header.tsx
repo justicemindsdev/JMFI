@@ -49,8 +49,8 @@ export function Header() {
             />
           </div>
           <div className="text-white font-bold text-xl">
-            <span className="text-blue-400">Justice</span>Minds Forensic
-            Intelligence-test
+            <span className="text-blue-400">Justice </span>Minds Forensic
+            Intelligence
           </div>
         </Link>
 
@@ -95,8 +95,14 @@ export function Header() {
           >
             Portfolio
           </Link>
+            <Link
+            href="/portfolio"
+            className="text-gray-300 hover:text-primary transition-colors py-2"
+          >
+            Investigations
+          </Link>
 
-          {/* Investigations Dropdown */}
+          {/* Investigations Dropdown
           <div ref={investigationsRef} className="relative py-2">
             <button
               onClick={toggleInvestigations}
@@ -116,13 +122,25 @@ export function Header() {
                 </Link>
               </div>
             )}
-          </div>
-          <button
-            onClick={handleContactClick}
+          </div> */}
+          <Link
+            href="/contact"
             className="text-gray-300 hover:text-primary transition-colors py-2"
           >
             Contact
-          </button>
+          </Link>
+          <Link
+            href="/case"
+            className="text-gray-300 hover:text-primary transition-colors py-2"
+          >
+            Case
+          </Link>
+          <Link
+            href="/news"
+            className="text-gray-300 hover:text-primary transition-colors py-2"
+          >
+            News
+          </Link>
 
           {/* More menu */}
           <div ref={moreMenuRef} className="relative py-2">
@@ -146,14 +164,21 @@ export function Header() {
                   href="/substantiation-fixed"
                   className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-primary"
                 >
-                  Substantiation Fixed
+                  Substantiation
                 </Link>
                 <Link
                   href="/app"
                   className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-primary"
                 >
-                  App
+                  UK Supreme Court
                 </Link>
+                 <Link
+              href="/judge-errors-in-law"
+              className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-primary"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              JUDGE Errors in Law
+            </Link>
               </div>
             )}
           </div>
@@ -190,9 +215,16 @@ export function Header() {
             >
               Portfolio
             </Link>
+            <Link
+              href="/portfolio"
+              className="text-gray-300 hover:text-primary transition-colors py-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Investigations
+            </Link>
 
             {/* Investigations mobile dropdown */}
-            <div ref={investigationsRef} className="relative">
+            {/* <div ref={investigationsRef} className="relative">
               <button
                 onClick={toggleInvestigations}
                 className="flex items-center w-full justify-between text-gray-300 hover:text-primary transition-colors py-2 focus:outline-none"
@@ -216,13 +248,14 @@ export function Header() {
                   </Link>
                 </div>
               )}
-            </div>
-            <button
-  onClick={handleContactClick}
-  className="w-full text-left text-gray-300 hover:text-primary transition-colors py-2"
->
-  Contact
-</button>
+            </div> */}
+           <Link
+              href="/contact"
+              className="text-gray-300 hover:text-primary transition-colors py-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Contact
+            </Link>
             <Link
               href="/tcctv"
               className="text-gray-300 hover:text-primary transition-colors py-2"
@@ -235,14 +268,21 @@ export function Header() {
               className="text-gray-300 hover:text-primary transition-colors py-2"
               onClick={() => setIsMenuOpen(false)}
             >
-              Substantiation Fixed
+              Substantiation
             </Link>
             <Link
               href="/app"
               className="text-gray-300 hover:text-primary transition-colors py-2"
               onClick={() => setIsMenuOpen(false)}
             >
-              App
+              UK Supreme Court
+            </Link>
+             <Link
+              href="/judge-errors-in-law"
+              className="text-gray-300 hover:text-primary transition-colors py-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              JUDGE Errors in Law
             </Link>
           </nav>
         )}

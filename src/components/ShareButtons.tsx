@@ -58,7 +58,7 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
         >
           <FaTwitter />
         </a>
-        <a 
+        {/* <a 
           href={socialLinks.facebook}
           target="_blank"
           rel="noopener noreferrer"
@@ -66,7 +66,7 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
           aria-label="Share on Facebook"
         >
           <FaFacebookF />
-        </a>
+        </a> */}
         <a 
           href={socialLinks.linkedin}
           target="_blank"
@@ -83,13 +83,13 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
         >
           <FaEnvelope />
         </a>
-        <button 
+        {/* <button 
           onClick={copyToClipboard}
           className="social-share-button bg-primary text-white p-3 rounded-full hover:-translate-y-1 transition-transform hover:shadow-lg hover:shadow-primary/20"
           aria-label="Copy link"
         >
           <FaLink />
-        </button>
+        </button> */}
       </div>
     </div>
   );

@@ -14,6 +14,8 @@ import Portfolio from "./pages/Portfolio";
 import Tcctv from "./pages/Tcctc";
 import Substantiation from "./pages/Substantiation";
 import AppPage from "./pages/AppPage";
+import JudgeErrorsInLaw from "./pages/Judge_ErrorsInLaw";
+import ContactPage from "./pages/Contact";
 function Router() {
   return (
     <Switch>
@@ -26,6 +28,8 @@ function Router() {
       <Route path="/substantiation-fixed" component={Substantiation} />
       <Route path="/investigations/newlyn-plc" component={NewlynPlc} />
       <Route path="/investigations/social-worker-engagement" component={SocialWorkerEngagement} />
+      <Route path="/judge-errors-in-law" component={JudgeErrorsInLaw} />
+      <Route path="/contact" component={ContactPage} />
       <Route component={NotFound} />
     </Switch>
   );

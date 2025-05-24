@@ -1,17 +1,17 @@
-import FileList from "../components/FileList";
+import ComprehensiveJudicialViolationsMatrix from "../components/Comprehensive-judicial-violations-matrix";
 import { Header } from "../components/Header";
 
-export default function Tcctv() {
+export default function Press() {
     return (
         <div className="flex flex-col h-screen">
             <Header />
             <div className="flex-grow">
                 {/* <iframe
-                    src="/files/tcctv.html"
+                    src="https://officalofficer.vercel.app/judicial-violations-matrix.html"
                     className="w-full h-full border-0"
                     allowFullScreen
                 ></iframe> */}
-                <FileList />
+                <ComprehensiveJudicialViolationsMatrix />
             </div>
         </div>
     );

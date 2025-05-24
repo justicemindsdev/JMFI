@@ -10,7 +10,7 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <h4 className="text-xl font-heading font-bold mb-4">
-                <span className="text-primary">Justice</span>Minds
+                <span className="text-primary">Justice </span>Minds Forensic Intelligence
               </h4>
               <p className="text-gray-400 mb-6">
                 Illuminating the pathways of justice through data-driven analysis and informed reporting.
@@ -19,9 +19,9 @@ export function Footer() {
                 <a href="https://twitter.com" className="text-gray-400 hover:text-primary transition-colors" aria-label="Twitter">
                   <FaTwitter className="h-5 w-5" />
                 </a>
-                <a href="https://facebook.com" className="text-gray-400 hover:text-primary transition-colors" aria-label="Facebook">
+                {/* <a href="https://facebook.com" className="text-gray-400 hover:text-primary transition-colors" aria-label="Facebook">
                   <FaFacebookF className="h-5 w-5" />
-                </a>
+                </a> */}
                 <a href="https://linkedin.com" className="text-gray-400 hover:text-primary transition-colors" aria-label="LinkedIn">
                   <FaLinkedinIn className="h-5 w-5" />
                 </a>
@@ -79,7 +79,7 @@ export function Footer() {
           </div>
           
           <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-            <p>© {new Date().getFullYear()} Justice Minds Ltd. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Justice Minds Forensic Intelligence Ltd. All rights reserved.</p>
           </div>
         </div>
       </div>
