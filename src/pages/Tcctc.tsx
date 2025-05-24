@@ -1,4 +1,3 @@
-import FileList from "../components/FileList";
 import { Header } from "../components/Header";
 
 export default function Tcctv() {
@@ -6,12 +5,11 @@ export default function Tcctv() {
         <div className="flex flex-col h-screen">
             <Header />
             <div className="flex-grow">
-                {/* <iframe
+                <iframe
                     src="/files/tcctv.html"
                     className="w-full h-full border-0"
                     allowFullScreen
-                ></iframe> */}
-                <FileList />
+                ></iframe>
             </div>
         </div>
     );
