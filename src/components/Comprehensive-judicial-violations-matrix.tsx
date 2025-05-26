@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-
+import audioImage from '/attached_assets/audio.jpg'
 type JudicialViolation = {
   id: number;
   category: string;
@@ -1048,7 +1048,7 @@ const ComprehensiveJudicialViolationsMatrix = () => {
                 />
                 <div className="flex justify-center items-center h-[300px]">
                   <img
-                    src="/public/attached_assets/audio.jpg"
+                    src={audioImage}
                     alt="Audio playing"
                     className="w-auto h-48 object-contain"
                   />
@@ -1077,7 +1077,7 @@ const ComprehensiveJudicialViolationsMatrix = () => {
                   ></iframe>
                   <div className="flex justify-center items-center h-[300px]">
                     <img
-                      src="/public/attached_assets/audio.jpg"
+                      src={audioImage}
                       alt="Audio playing"
                       className="w-auto h-48 object-contain"
                     />
