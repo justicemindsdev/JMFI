@@ -12,44 +12,55 @@ const Dashboard: React.FC = () => {
 
   const BUCKET_NAME = "user-uploads";
 
-  useEffect(() => {
-    const init = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+ useEffect(() => {
+  const init = async () => {
+    // Handle the URL hash if present (OAuth callback)
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
 
-      if (!user) {
-        // Not logged in → Trigger login once
-        await supabase.auth.signInWithOAuth({
-          provider: "github",
-          options: {
-            redirectTo: window.location.href, // Redirect back here after login
-          },
-        });
-        return; // Important: Exit to avoid further execution
-      }
+    if (sessionError) {
+      console.error("Error getting session:", sessionError.message);
+    }
 
-      setUser(user);
+    if (!session || !session.user) {
+      console.warn("No active session, redirecting to GitHub login...");
+      await supabase.auth.signInWithOAuth({
+        provider: "github",
+        options: {
+          redirectTo: window.location.href, // or your actual route
+        },
+      });
+      return;
+    }
 
-      // Fetch file list
-      const { data, error } = await supabase.storage
-        .from(BUCKET_NAME)
-        .list("", { limit: 100 });
+    setUser(session.user);
 
-      if (error) {
-        console.error("Error listing files:", error.message);
-      } else {
-        const files = data
-          .filter((file) => file.name.endsWith(".csv"))
-          .map((file) => file.name);
-        setCsvFiles(files);
-      }
+    // Clean up the URL hash after login
+    if (window.location.hash) {
+      history.replaceState(null, "", window.location.pathname);
+    }
 
-      setIsLoading(false);
-    };
+    // Fetch file list
+    const { data, error } = await supabase.storage
+      .from(BUCKET_NAME)
+      .list("", { limit: 100 });
 
-    init();
-  }, []);
+    if (error) {
+      console.error("Storage list error:", error.message);
+    } else {
+      const files = data
+        .filter((file) => file.name.toLowerCase().endsWith(".csv"))
+        .map((file) => file.name);
+      setCsvFiles(files);
+    }
+
+    setIsLoading(false);
+  };
+
+  init();
+}, []);
 
   const fetchCsvData = async (file: string) => {
     const { data, error } = await supabase.storage
