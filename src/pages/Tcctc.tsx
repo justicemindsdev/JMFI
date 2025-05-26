@@ -11,7 +11,7 @@ const Dashboard: React.FC = () => {
   const [user, setUser] = useState<any>(null);
 
   const BUCKET_NAME = "user-uploads";
-
+  const redirect_url = import.meta.env.VITE_TCCTV_REDIRECT_URL || 'http://localhost:5173/tcctv';
  useEffect(() => {
   const init = async () => {
     // Handle the URL hash if present (OAuth callback)
@@ -29,7 +29,7 @@ const Dashboard: React.FC = () => {
       await supabase.auth.signInWithOAuth({
         provider: "github",
         options: {
-          redirectTo: window.location.href, // or your actual route
+          redirectTo: redirect_url  , // or your actual route
         },
       });
       return;
