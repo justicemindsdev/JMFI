@@ -544,11 +544,11 @@ function timeStringToSeconds(timeStr: string): number {
   return milliseconds;
 }
   return (
-    <div className="flex flex-col bg-gray-50 p-6 rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold text-center mb-2">
+    <div className="flex flex-col p-6 rounded-lg shadow-md bg-white">
+      <h1 className="text-2xl font-bold text-center mb-2 text-black">
         Comprehensive Judicial Legal Violation Analysis
       </h1>
-      <p className="text-center text-sm text-gray-600 mb-6">
+      <p className="text-center text-sm mb-6 text-black">
         Systematic evaluation of 20 documented instances of judicial legal
         misapplication
       </p>
@@ -557,7 +557,7 @@ function timeStringToSeconds(timeStr: string): number {
         <div className="flex">
           <button
             className={`px-4 py-2 rounded-l-md ${
-              activeView === "table" ? "bg-blue-600 text-white" : "bg-gray-200"
+              activeView === "table" ? "bg-blue-600 text-white" : "bg-gray-200 text-black"
             }`}
             onClick={() => setActiveView("table")}
           >
@@ -567,7 +567,7 @@ function timeStringToSeconds(timeStr: string): number {
             className={`px-4 py-2 rounded-r-md ${
               activeView === "detailed"
                 ? "bg-blue-600 text-white"
-                : "bg-gray-200"
+                : "bg-gray-200 text-black"
             }`}
             onClick={() => setActiveView("detailed")}
           >
@@ -599,9 +599,9 @@ function timeStringToSeconds(timeStr: string): number {
 
       {activeView === "table" && (
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-300 shadow-sm text-sm">
+          <table className="min-w-full border border-gray-300 shadow-sm text-sm text-black">
             <thead>
-              <tr className="bg-gray-100">
+              <tr className="">
                 <th
                   className="py-3 px-3 text-left border-b font-medium cursor-pointer"
                   onClick={() => requestSort("id")}
@@ -636,7 +636,7 @@ function timeStringToSeconds(timeStr: string): number {
             </thead>
             <tbody>
               {filteredViolations.map((violation) => (
-                <tr key={violation.id} className="hover:bg-blue-50">
+                <tr key={violation.id} className="hover:bg-blue-50 hover:text-black">
                   <td className="py-3 px-3 border-b">{violation.id}</td>
                   <td className="py-3 px-3 border-b font-medium">
                     {violation.category}

@@ -1,7 +1,20 @@
 // supabaseClient.js
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = 'https://iraynmibzknhmwjuoqfu.supabase.co'
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlyYXlubWliemtuaG13anVvcWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxMDk3ODEsImV4cCI6MjA2MzY4NTc4MX0.Pau9DZFsKsBGUthGWlo63wTR_gAmPd9BVLhTiXW5Kg4'
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error('Supabase URL and Key must be provided in environment variables');
+}
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+
+export const supabase = createClient(supabaseUrl, supabaseKey,{
+    auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true,
+  },
+})
+console.log('supabase client created');
+
+
