@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 
 type JudicialViolation = {
   id: number;
@@ -16,9 +16,12 @@ type JudicialViolation = {
 };
 
 const ComprehensiveJudicialViolationsMatrix = () => {
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
   // State management for visualization options
   const [activeView, setActiveView] = useState("table");
-  const [filteredViolations, setFilteredViolations] = useState<JudicialViolation[]>([]);
+  const [filteredViolations, setFilteredViolations] = useState<
+    JudicialViolation[]
+  >([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState({
     key: "id",
@@ -27,16 +30,21 @@ const ComprehensiveJudicialViolationsMatrix = () => {
   const [activeVideo, setActiveVideo] = useState<{
     videoId: string;
     timestamp: string;
+    stopAt?: string;
   } | null>(null);
-
+  const [showIframe, setShowIframe] = useState(true);
   // Function to play a specific segment of a video
-  const playVideoSegment = (videoId, timestamp) => {
+  const playVideoSegment = (
+    videoId: string,
+    startTime: string,
+    stopTime?: string
+  ) => {
     setActiveVideo({
       videoId,
-      timestamp,
+      timestamp: startTime,
+      stopAt: stopTime, // ✅ include this
     });
 
-    // Open a modal or dialog to display the video
     const modal = document.getElementById("videoModal");
     if (modal) {
       modal.style.display = "flex";
@@ -479,11 +487,31 @@ const ComprehensiveJudicialViolationsMatrix = () => {
       welfareImpact: "Procedural discrimination worsened injustice",
     },
   ];
-
-  // Initialize filtered violations with all violations
   useEffect(() => {
     setFilteredViolations(judicialViolations);
   }, []);
+  useEffect(() => {
+    if (activeVideo?.videoId && activeVideo.timestamp && activeVideo.stopAt) {
+      const start = timeStringToSeconds(activeVideo.timestamp);
+      const stop = timeStringToSeconds(activeVideo.stopAt);
+      const duration = (stop - start) * 1000;
+
+      const timeout = setTimeout(() => {
+        closeVideoModal(); // close modal and remove iframe
+      }, duration);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [activeVideo]);
+
+  function timeStringToSeconds(timeStr: string): number {
+    const parts = timeStr.split(":").map(Number).reverse();
+    let seconds = 0;
+    if (parts[0]) seconds += parts[0]; // seconds
+    if (parts[1]) seconds += parts[1] * 60; // minutes
+    if (parts[2]) seconds += parts[2] * 60 * 60; // hours
+    return seconds;
+  }
 
   // Search and filter function
   const handleSearch = useCallback((event) => {
@@ -533,16 +561,16 @@ const ComprehensiveJudicialViolationsMatrix = () => {
     if (sortConfig.key !== key) return null;
     return sortConfig.direction === "ascending" ? "↑" : "↓";
   };
-function timeStringToSeconds(timeStr: string): number {
-  const parts = timeStr.split(":").map(Number).reverse();
-  let milliseconds = 0;
+  function timeStringToMilliSeconds(timeStr: string): number {
+    const parts = timeStr.split(":").map(Number).reverse();
+    let milliseconds = 0;
 
-  if (parts[0]) milliseconds += parts[0] * 1000;        // seconds
-  if (parts[1]) milliseconds += parts[1] * 60 * 1000;   // minutes
-  if (parts[2]) milliseconds += parts[2] * 60 * 60 * 1000; // hours
+    if (parts[0]) milliseconds += parts[0] * 1000; // seconds
+    if (parts[1]) milliseconds += parts[1] * 60 * 1000; // minutes
+    if (parts[2]) milliseconds += parts[2] * 60 * 60 * 1000; // hours
 
-  return milliseconds;
-}
+    return milliseconds;
+  }
   return (
     <div className="flex flex-col p-6 rounded-lg shadow-md bg-white">
       <h1 className="text-2xl font-bold text-center mb-2 text-black">
@@ -557,7 +585,9 @@ function timeStringToSeconds(timeStr: string): number {
         <div className="flex">
           <button
             className={`px-4 py-2 rounded-l-md ${
-              activeView === "table" ? "bg-blue-600 text-white" : "bg-gray-200 text-black"
+              activeView === "table"
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-black"
             }`}
             onClick={() => setActiveView("table")}
           >
@@ -636,7 +666,10 @@ function timeStringToSeconds(timeStr: string): number {
             </thead>
             <tbody>
               {filteredViolations.map((violation) => (
-                <tr key={violation.id} className="hover:bg-blue-50 hover:text-black">
+                <tr
+                  key={violation.id}
+                  className="hover:bg-blue-50 hover:text-black"
+                >
                   <td className="py-3 px-3 border-b">{violation.id}</td>
                   <td className="py-3 px-3 border-b font-medium">
                     {violation.category}
@@ -658,8 +691,9 @@ function timeStringToSeconds(timeStr: string): number {
                             className="ml-2 flex-shrink-0 bg-red-100 text-red-800 p-1 rounded hover:bg-red-200"
                             onClick={() =>
                               playVideoSegment(
-                                violation.judgeVideo?.id,
-                                violation.judgeVideo?.timestamp
+                                violation.judgeVideo?.id || "",
+                                violation.judgeVideo?.timestamp || "",
+                                "01:38:00" // Adjusted to match the video segment duration
                               )
                             }
                             title={`Play video at ${violation.judgeVideo.timestamp}`}
@@ -700,8 +734,9 @@ function timeStringToSeconds(timeStr: string): number {
                             className="ml-2 flex-shrink-0 bg-green-100 text-green-800 p-1 rounded hover:bg-green-200"
                             onClick={() =>
                               playVideoSegment(
-                                violation.benVideo?.id,
-                                violation.benVideo?.timestamp
+                                violation.benVideo?.id || "",
+                                violation.benVideo?.timestamp || "",
+                                "01:21:00"
                               )
                             }
                             title={`Play video at ${violation.benVideo.timestamp}`}
@@ -779,8 +814,9 @@ function timeStringToSeconds(timeStr: string): number {
                         className="bg-red-100 text-red-800 p-1 rounded hover:bg-red-200 flex items-center"
                         onClick={() =>
                           playVideoSegment(
-                            violation.judgeVideo?.id,
-                            violation.judgeVideo?.timestamp
+                            violation.judgeVideo?.id || "",
+                            violation.judgeVideo?.timestamp || "",
+                            "00:04:00"
                           )
                         }
                         title={`Play video at ${violation.judgeVideo.timestamp}`}
@@ -827,8 +863,9 @@ function timeStringToSeconds(timeStr: string): number {
                         className="bg-green-100 text-green-800 p-1 rounded hover:bg-green-200 flex items-center"
                         onClick={() =>
                           playVideoSegment(
-                            violation.benVideo?.id,
-                            violation.benVideo?.timestamp
+                            violation.benVideo?.id || "",
+                            violation.benVideo?.timestamp || "",
+                            "00:03:00"
                           )
                         }
                         title={`Play video at ${violation.benVideo.timestamp}`}
@@ -989,29 +1026,63 @@ function timeStringToSeconds(timeStr: string): number {
             </button>
           </div>
           <div className="flex-1 overflow-auto">
-            {activeVideo &&
-              activeVideo.videoId ===
-                "014520f5-60e4-42a6-9ca7-f241f18ee7db" && (
+            {activeVideo?.videoId ===
+              "014520f5-60e4-42a6-9ca7-f241f18ee7db" && (
+              <>
                 <iframe
-                  src={`https://grain.com/_/embed/recording/014520f5-60e4-42a6-9ca7-f241f18ee7db/oMmrNTp5zhCtrRsJJi5w1t1t4Q9A2qeMjp5NvoZd?autoplay=true&t=${timeStringToSeconds("00:02:50")}`}
-                  height="500"
-                  width="100%"
-                  allow="fullscreen"
-                  allowFullScreen={true}
+                  ref={iframeRef}
+                  src={`https://grain.com/_/embed/recording/014520f5-60e4-42a6-9ca7-f241f18ee7db/oMmrNTp5zhCtrRsJJi5w1t1t4Q9A2qeMjp5NvoZd?autoplay=true&t=${timeStringToMilliSeconds(
+                    activeVideo.timestamp
+                  )}`}
+                  style={{
+                    width: 0,
+                    height: 0,
+                    opacity: 0,
+                    position: "absolute",
+                    pointerEvents: "none",
+                  }}
+                  // style={{ display: 'none' }}
+                  allow="autoplay"
+                  // allowFullScreen
                   frameBorder="0"
-                ></iframe>
-              )}
+                />
+                <div className="flex justify-center items-center h-[300px]">
+                  <img
+                    src="/public/attached_assets/audio.jpg"
+                    alt="Audio playing"
+                    className="w-auto h-48 object-contain"
+                  />
+                </div>
+              </>
+            )}
             {activeVideo &&
               activeVideo.videoId ===
                 "08fd9b71-4dae-4974-a7c3-479e5691d741" && (
-                <iframe
-                  src={`https://grain.com/_/embed/recording/08fd9b71-4dae-4974-a7c3-479e5691d741/CpHsw859tGtL4LXUqdGHAl7qXY8OxJ2RqLHP9BxH?autoplay=true&start=${activeVideo.timestamp}`}
-                  height="500"
-                  width="100%"
-                  allow="fullscreen"
-                  allowFullScreen={true}
-                  frameBorder="0"
-                ></iframe>
+                <>
+                  <iframe
+                    ref={iframeRef}
+                    src={`https://grain.com/_/embed/recording/08fd9b71-4dae-4974-a7c3-479e5691d741/CpHsw859tGtL4LXUqdGHAl7qXY8OxJ2RqLHP9BxH?autoplay=true&t=${timeStringToMilliSeconds(
+                      activeVideo.timestamp
+                    )}`}
+                    style={{
+                      width: 0,
+                      height: 0,
+                      opacity: 0,
+                      position: "absolute",
+                      pointerEvents: "none",
+                    }}
+                    allow="fullscreen"
+                    allowFullScreen={true}
+                    frameBorder="0"
+                  ></iframe>
+                  <div className="flex justify-center items-center h-[300px]">
+                    <img
+                      src="/public/attached_assets/audio.jpg"
+                      alt="Audio playing"
+                      className="w-auto h-48 object-contain"
+                    />
+                  </div>
+                </>
               )}
           </div>
         </div>
