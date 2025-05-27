@@ -18,6 +18,11 @@ import { parseTsk } from "../lib/tsk";
 // Article sources
 const sources = [
   {
+    id: "1",
+    text: "Departmental Performance in Session 2022–23 - UK Parliament",
+    url: "https://publications.parliament.uk/pa/cm5804/cmselect/cmproced/676/report.html"
+  },
+  {
     id: "2",
     text: "Parliamentary Questions - UK Parliament",
     url: "https://www.parliament.uk/globalassets/documents/commons-information-office/Brief-Guides/Parliamentary-Questions.pdf"
@@ -28,24 +33,44 @@ const sources = [
     url: "https://www.gov.uk/government/publications/data-on-responses-to-correspondence-from-mps-and-peers-2023/data-on-responses-to-correspondence-from-mps-and-peers-in-2023-html"
   },
   {
+    id: "4",
+    text: "Data on responses to correspondence from MPs and Peers in 2022",
+    url: "https://assets.publishing.service.gov.uk/media/642150885155a2000c6ad737/Data-on-responses-to-correspondence-from-MPs-and-Peers-in-2022.docx.pdf"
+  },
+  {
+    id: "5",
+    text: "House of Commons Trends: E-petitions",
+    url: "https://commonslibrary.parliament.uk/house-of-commons-trends-e-petitions/"
+  },
+  {
+    id: "6",
+    text: "Backbench Business Committee",
+    url: "https://en.wikipedia.org/wiki/Backbench_Business_Committee"
+  },
+  {
+    id: "7",
+    text: "House of Commons Trends: Urgent Questions",
+    url: "https://commonslibrary.parliament.uk/house-of-commons-trends-urgent-questions/"
+  },
+  {
+    id: "8",
+    text: "Adjournment debates - UK Parliament",
+    url: "https://www.parliament.uk/about/how/business/debates/adjournment/"
+  },
+  {
     id: "9",
-    text: "Petitions and personal grievances: the petition of Elizey Price",
-    url: "https://committees.parliament.uk/committee/326/petitions-committee/news/99349/petitions-and-personal-grievances-the-petition-of-elizey-price/"
+    text: "What happens to Parliamentary Petitions?",
+    url: "https://committees.parliament.uk/committee/326/petitions-committee/news/196636/what-happens-to-parliamentary-petitions/"
   },
   {
     id: "10",
-    text: "Data on responses to correspondence from MPs and Peers in 2021",
-    url: "https://www.gov.uk/government/publications/data-on-responses-to-correspondence-from-mps-and-peers-2021/data-on-responses-to-correspondence-from-mps-and-peers-in-2021"
+    text: "Procedure Committee Report on Parliamentary Questions",
+    url: "https://publications.parliament.uk/pa/cm5803/cmselect/cmproced/385/report.html"
   },
   {
-    id: "12",
-    text: "What happens to Parliamentary Petitions? - UK Parliament",
-    url: "https://www.parliament.uk/business/commons/committee-corridor-podcast/committee-corridor-season-4-episode-5/"
-  },
-  {
-    id: "15",
-    text: "Data on responses to correspondence from MPs and Peers in 2022",
-    url: "https://assets.publishing.service.gov.uk/media/642150885155a2000c6ad737/Data-on-responses-to-correspondence-from-MPs-and-Peers-in-2022.docx.pdf"
+    id: "11",
+    text: "Parliamentary Questions Guide - UK Parliament",
+    url: "https://www.parliament.uk/globalassets/documents/commons-information-office/p01.pdf"
   },
   {
     id: "20",
@@ -96,7 +121,10 @@ export default function Home() {
                 representing constituent concerns<sup className="text-xs">[3]</sup>
               </li>
               <li>
-                The previous year (2022) saw an even higher volume of 286,660 cases<sup className="text-xs">[15]</sup>
+                The previous year (2022) saw an even higher volume of 286,660 cases<sup className="text-xs">[4]</sup>
+              </li>
+              <li>
+                Of these, only 79% received responses within the target timeframe in 2023, and just 53% in 2022<sup className="text-xs">[3][4]</sup>
               </li>
               <li>
                 Only a tiny fraction of these written inquiries progress to formal parliamentary action
@@ -113,8 +141,12 @@ export default function Home() {
                 or introduce Private Members' Bills<sup className="text-xs">[20]</sup>
               </li>
               <li>
-                Parliamentary time is severely constrained, with Question Time limited to the first hour of business each day
-                <sup className="text-xs">[20]</sup>
+                The 2022-23 parliamentary session witnessed a record high in the number of written parliamentary questions 
+                tabled per sitting day, representing a 4% increase over the previous session<sup className="text-xs">[1]</sup>
+              </li>
+              <li>
+                Parliamentary time is severely constrained, with Question Time limited to the first hour of business on 
+                sitting days Monday through Thursday<sup className="text-xs">[2][11]</sup>
               </li>
               <li>
                 For a 60-minute question period, only a select number of questions can be addressed, determined through a 
@@ -175,16 +207,21 @@ export default function Home() {
               <li>
                 <strong>Written questions to oral debate conversion</strong>: Of all written parliamentary questions 
                 (approximately 77,255 in a typical long session), only 4,710 received an oral answer in the House 
-                (approximately 6.1%)<sup className="text-xs">[2]</sup>
+                (approximately 6.1%)<sup className="text-xs">[2][11]</sup>
+              </li>
+              <li>
+                <strong>Urgent questions rarity</strong>: Recent parliamentary sessions have seen only 73 urgent questions 
+                granted over a two-year period, with less than one urgent question per day of parliamentary business
+                <sup className="text-xs">[7]</sup>
               </li>
               <li>
                 <strong>Adjournment debate probability</strong>: The half-hour adjournment debate slots are highly 
                 competitive, requiring MPs to either win a ballot or be specially selected by the Speaker
-                <sup className="text-xs">[20]</sup>
+                <sup className="text-xs">[8]</sup>
               </li>
               <li>
                 <strong>Petition success rate</strong>: Of over 30,000 petitions created since the e-petition system 
-                launched, only 350 (1.2%) have been debated by MPs<sup className="text-xs">[12]</sup>
+                launched, only 350 (1.2%) have been debated by MPs<sup className="text-xs">[9]</sup>
               </li>
             </ul>
             
@@ -215,11 +252,15 @@ export default function Home() {
                 Each of the 650 MPs handles approximately 440 pieces of constituent correspondence annually
               </li>
               <li>
-                Parliament has allocated only 35 days per session for backbench business debates
-                <sup className="text-xs">[20]</sup>
+                Parliament has allocated only 35 days per session for backbench business debates, with at least 27 days 
+                allocated to the main chamber floor rather than Westminster Hall<sup className="text-xs">[6]</sup>
               </li>
               <li>
                 MPs must prioritize issues affecting multiple constituents over individual cases
+              </li>
+              <li>
+                The probability of securing meaningful MP engagement with an individual case is estimated at less than 
+                1 in 1,000 based on the ratio of MP correspondence to formal interventions<sup className="text-xs">[3][4]</sup>
               </li>
             </ul>
             
@@ -286,14 +327,19 @@ export default function Home() {
             <ul className="list-disc pl-8 mb-6 space-y-2">
               <li>
                 Government departments have target response times of 7-20 days for MP correspondence, but actual 
-                performance varies significantly by department<sup className="text-xs">[3][10]</sup>
+                performance varies significantly by department<sup className="text-xs">[3][4]</sup>
               </li>
               <li>
-                The Cabinet Office achieved only 62% on-time responses in 2021<sup className="text-xs">[10]</sup>
+                In 2023, the Cabinet Office managed 84% on-time responses for 1,536 cases, indicating that approximately 
+                one in six cases still fails to receive timely response<sup className="text-xs">[3]</sup>
               </li>
               <li>
                 "Urgent questions" require special permission from the Speaker, with only 73 successful applications 
-                in a recent two-year session<sup className="text-xs">[2]</sup>
+                in a recent two-year session<sup className="text-xs">[7]</sup>
+              </li>
+              <li>
+                To be judged as 'urgent', a question must relate to "a very recent or imminent event or development, 
+                on which a minister may reasonably be expected to provide an answer that day"<sup className="text-xs">[7]</sup>
               </li>
             </ul>
             
@@ -308,7 +354,7 @@ export default function Home() {
             
             <ul className="list-disc pl-8 mb-6 space-y-2">
               <li>
-                Price was described as "a poor, illiterate women who had signed her petition with an 'x'"
+                Price was described as "a poor, illiterate woman who had signed her petition with an 'x'"
                 <sup className="text-xs">[9]</sup>
               </li>
               <li>
@@ -317,6 +363,10 @@ export default function Home() {
               <li>
                 Such individual petition successes were rare enough to be historically notable
                 <sup className="text-xs">[9]</sup>
+              </li>
+              <li>
+                Modern parliamentary systems have evolved to handle vastly larger volumes of citizen engagement while 
+                maintaining similar constraints on parliamentary time and resources
               </li>
             </ul>
             
@@ -353,11 +403,37 @@ export default function Home() {
               affecting broader constituent groups rather than individual grievances.
             </p>
             
-            <p className="mb-10">
+            <p className="mb-6">
               Ben's case demonstrates both exceptional persistence and the rare intersection of compelling circumstances 
               that can occasionally enable a private citizen to navigate the labyrinthine parliamentary system and secure 
               formal intervention at the highest levels of government.
             </p>
+            
+            <div className="mb-10">
+              <button 
+                className="w-full py-3 px-4 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-lg shadow transition-colors duration-200 flex justify-between items-center"
+                onClick={() => document.getElementById('citations-dropdown')?.classList.toggle('hidden')}
+              >
+                <span>View All Citations</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </button>
+              
+              <div id="citations-dropdown" className="hidden mt-4 p-4 bg-gray-900 rounded-lg border border-gray-800">
+                <h3 className="text-lg font-semibold mb-3 text-white">Citations</h3>
+                <ol className="list-decimal pl-5 space-y-2">
+                  {sources.map(source => (
+                    <li key={source.id} className="text-sm text-gray-300">
+                      <span id={`citation-${source.id}`}>[{source.id}] </span>
+                      <a href={source.url} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
+                        {source.text}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
           </>
         }
       />
