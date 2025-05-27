@@ -6,9 +6,9 @@ type JudicialViolation = {
   date: string;
   timestamp: string;
   judgeStatement: string;
-  judgeVideo?: { id: string; timestamp: string };
+  judgeVideo?: { id: string; timestamp: string; stopAt?: string };
   benResponse: string;
-  benVideo?: { id: string; timestamp: string };
+  benVideo?: { id: string; timestamp: string; stopAt?: string };
   legalPrinciple: string;
   caselaw: string;
   legislation: string;
@@ -16,7 +16,7 @@ type JudicialViolation = {
 };
 
 const ComprehensiveJudicialViolationsMatrix = () => {
-  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  // const iframeRef = useRef<HTMLIFrameElement | null>(null);
   // State management for visualization options
   const [activeView, setActiveView] = useState("table");
   const [filteredViolations, setFilteredViolations] = useState<
@@ -70,13 +70,15 @@ const ComprehensiveJudicialViolationsMatrix = () => {
         "You cannot be considered as having parental status as it was not legally established through a formal court order or parental responsibility agreement.",
       judgeVideo: {
         id: "014520f5-60e4-42a6-9ca7-f241f18ee7db",
-        timestamp: "1:37:25", // Approximate timestamp based on transcript
+        timestamp: "1:37:25",
+        stopAt: "01:39:00", 
       },
       benResponse:
         "I actually checked the legal definition. De facto parent means psychological parent, which is recognized in law. It's when it's not the actual biological parents, but it's recognized that they're helping just as much and have formed a significant attachment relationship with the child.",
       benVideo: {
         id: "014520f5-60e4-42a6-9ca7-f241f18ee7db",
-        timestamp: "1:19:40", // Approximate timestamp based on transcript
+        timestamp: "1:19:40",
+        stopAt: "01:21:00", 
       },
       legalPrinciple:
         "De facto parent status is legally recognized even without formal documentation",
@@ -94,13 +96,15 @@ const ComprehensiveJudicialViolationsMatrix = () => {
         "The 'nothing else will do' principle is limited to adoption cases or permanent separation and doesn't apply in this interim care situation because we're not considering permanent removal.",
       judgeVideo: {
         id: "014520f5-60e4-42a6-9ca7-f241f18ee7db",
-        timestamp: "1:28:11", // Timestamp from transcript
+        timestamp: "1:28:11",
+        stopAt: "01:30:00", 
       },
       benResponse:
         "The test of 'nothing else will do' has been established by the Supreme Court as applying to all cases where family separation is contemplated, not just adoption. This principle stands with moral and ethical considerations underlying all family separation decisions.",
       benVideo: {
         id: "014520f5-60e4-42a6-9ca7-f241f18ee7db",
-        timestamp: "1:28:14", // Timestamp from transcript
+        timestamp: "1:28:14",
+        stopAt: "01:30:00",
       },
       legalPrinciple:
         "The principle applies to all significant family separation decisions",
@@ -119,13 +123,15 @@ const ComprehensiveJudicialViolationsMatrix = () => {
         "Your involvement in decisions regarding Abel would be part of future care planning, not a legal right you can assert at this stage of proceedings.",
       judgeVideo: {
         id: "08fd9b71-4dae-4974-a7c3-479e5691d741",
-        timestamp: "25:00", // Timestamp from transcript
+        timestamp: "25:00", 
+        stopAt: "25:30", 
       },
       benResponse:
         "May I ask, where does it stand with Abel's best interest in having a relationship with his uncle, who he has formed a significant attachment with over three years? The law recognizes my right to be involved in decisions affecting his welfare based on our established relationship.",
       benVideo: {
         id: "08fd9b71-4dae-4974-a7c3-479e5691d741",
-        timestamp: "24:52", // Timestamp from transcript
+        timestamp: "24:52",
+        stopAt: "25:30",
       },
       legalPrinciple:
         "Those with established relationships should be involved in significant decisions",
@@ -144,13 +150,15 @@ const ComprehensiveJudicialViolationsMatrix = () => {
         "Your professional qualifications in child welfare and safeguarding are not relevant to these proceedings as you are not instructed as an expert witness.",
       judgeVideo: {
         id: "014520f5-60e4-42a6-9ca7-f241f18ee7db",
-        timestamp: "1:10:46", // Approximate timestamp based on transcript
+        timestamp: "1:10:46", 
+        stopAt: "01:11:30", 
       },
       benResponse:
         "I'm an expert in this field with recognized qualifications in safeguarding and child welfare. These qualifications are directly relevant to assessing my capability to care for Abel, not just as expert testimony. The court is obligated to consider all relevant skills and qualifications of potential carers.",
       benVideo: {
         id: "014520f5-60e4-42a6-9ca7-f241f18ee7db",
-        timestamp: "1:10:55", // Approximate timestamp based on transcript
+        timestamp: "1:10:55", 
+        stopAt: "01:11:30",
       },
       legalPrinciple:
         "Relevant expertise must be considered in welfare determinations",
@@ -168,7 +176,8 @@ const ComprehensiveJudicialViolationsMatrix = () => {
         "While there may have been some procedural steps missed, these are not material to the outcome and do not impact the validity of these proceedings or necessitate any remedial action.",
       judgeVideo: {
         id: "08fd9b71-4dae-4974-a7c3-479e5691d741",
-        timestamp: "5:05", // Approximate timestamp based on transcript
+        timestamp: "5:05",
+        stopAt: "5:49", 
       },
       benResponse:
         "Procedural steps being missed were acknowledged by the court itself, but then completely overlooked. No weight or anything was given to these procedural failures whatsoever, which is concerning because procedural fairness is fundamental to justice, especially in child welfare cases.",
@@ -693,7 +702,7 @@ const ComprehensiveJudicialViolationsMatrix = () => {
                               playVideoSegment(
                                 violation.judgeVideo?.id || "",
                                 violation.judgeVideo?.timestamp || "",
-                                "01:38:00" // Adjusted to match the video segment duration
+                                violation.judgeVideo?.stopAt || ""
                               )
                             }
                             title={`Play video at ${violation.judgeVideo.timestamp}`}
@@ -736,7 +745,7 @@ const ComprehensiveJudicialViolationsMatrix = () => {
                               playVideoSegment(
                                 violation.benVideo?.id || "",
                                 violation.benVideo?.timestamp || "",
-                                "01:21:00"
+                                violation.benVideo?.stopAt || ""
                               )
                             }
                             title={`Play video at ${violation.benVideo.timestamp}`}
@@ -813,11 +822,13 @@ const ComprehensiveJudicialViolationsMatrix = () => {
                       <button
                         className="bg-red-100 text-red-800 p-1 rounded hover:bg-red-200 flex items-center"
                         onClick={() =>
+                         { 
+                          console.log('Play video segment:', violation.judgeVideo); 
                           playVideoSegment(
                             violation.judgeVideo?.id || "",
                             violation.judgeVideo?.timestamp || "",
-                            "00:04:00"
-                          )
+                            violation.judgeVideo?.stopAt || ""
+                          )}
                         }
                         title={`Play video at ${violation.judgeVideo.timestamp}`}
                       >
@@ -865,7 +876,7 @@ const ComprehensiveJudicialViolationsMatrix = () => {
                           playVideoSegment(
                             violation.benVideo?.id || "",
                             violation.benVideo?.timestamp || "",
-                            "00:03:00"
+                            violation.benVideo?.stopAt || ""
                           )
                         }
                         title={`Play video at ${violation.benVideo.timestamp}`}
@@ -1030,29 +1041,30 @@ const ComprehensiveJudicialViolationsMatrix = () => {
               "014520f5-60e4-42a6-9ca7-f241f18ee7db" && (
               <>
                 <iframe
-                  ref={iframeRef}
+                  // ref={iframeRef}
+                  key={`${activeVideo?.videoId}-${activeVideo?.timestamp}`}
                   src={`https://grain.com/_/embed/recording/014520f5-60e4-42a6-9ca7-f241f18ee7db/oMmrNTp5zhCtrRsJJi5w1t1t4Q9A2qeMjp5NvoZd?autoplay=true&t=${timeStringToMilliSeconds(
                     activeVideo.timestamp
                   )}`}
-                  style={{
-                    width: 0,
-                    height: 0,
-                    opacity: 0,
-                    position: "absolute",
-                    pointerEvents: "none",
-                  }}
+                  // style={{
+                  //   width: 0,
+                  //   height: 0,
+                  //   opacity: 0,
+                  //   position: "absolute",
+                  //   pointerEvents: "none",
+                  // }}
                   // style={{ display: 'none' }}
                   allow="autoplay"
                   // allowFullScreen
                   frameBorder="0"
                 />
-                <div className="flex justify-center items-center h-[300px]">
+                {/* <div className="flex justify-center items-center h-[300px]">
                   <img
                     src={audioImage}
                     alt="Audio playing"
                     className="w-auto h-48 object-contain"
                   />
-                </div>
+                </div> */}
               </>
             )}
             {activeVideo &&
@@ -1060,28 +1072,29 @@ const ComprehensiveJudicialViolationsMatrix = () => {
                 "08fd9b71-4dae-4974-a7c3-479e5691d741" && (
                 <>
                   <iframe
-                    ref={iframeRef}
+                    // ref={iframeRef}
+                    key={`${activeVideo?.videoId}-${activeVideo?.timestamp}`}
                     src={`https://grain.com/_/embed/recording/08fd9b71-4dae-4974-a7c3-479e5691d741/CpHsw859tGtL4LXUqdGHAl7qXY8OxJ2RqLHP9BxH?autoplay=true&t=${timeStringToMilliSeconds(
                       activeVideo.timestamp
                     )}`}
-                    style={{
-                      width: 0,
-                      height: 0,
-                      opacity: 0,
-                      position: "absolute",
-                      pointerEvents: "none",
-                    }}
+                    // style={{
+                    //   width: 0,
+                    //   height: 0,
+                    //   opacity: 0,
+                    //   position: "absolute",
+                    //   pointerEvents: "none",
+                    // }}
                     allow="fullscreen"
                     allowFullScreen={true}
                     frameBorder="0"
                   ></iframe>
-                  <div className="flex justify-center items-center h-[300px]">
+                  {/* <div className="flex justify-center items-center h-[300px]">
                     <img
                       src={audioImage}
                       alt="Audio playing"
                       className="w-auto h-48 object-contain"
                     />
-                  </div>
+                  </div> */}
                 </>
               )}
           </div>
