@@ -1046,25 +1046,25 @@ const ComprehensiveJudicialViolationsMatrix = () => {
                   src={`https://grain.com/_/embed/recording/014520f5-60e4-42a6-9ca7-f241f18ee7db/oMmrNTp5zhCtrRsJJi5w1t1t4Q9A2qeMjp5NvoZd?autoplay=true&t=${timeStringToMilliSeconds(
                     activeVideo.timestamp
                   )}`}
-                  // style={{
-                  //   width: 0,
-                  //   height: 0,
-                  //   opacity: 0,
-                  //   position: "absolute",
-                  //   pointerEvents: "none",
-                  // }}
+                  style={{
+                    width: 0,
+                    height: 0,
+                    opacity: 0,
+                    position: "absolute",
+                    pointerEvents: "none",
+                  }}
                   // style={{ display: 'none' }}
                   allow="autoplay"
                   // allowFullScreen
                   frameBorder="0"
                 />
-                {/* <div className="flex justify-center items-center h-[300px]">
+                <div className="flex justify-center items-center h-[300px]">
                   <img
                     src={audioImage}
                     alt="Audio playing"
                     className="w-auto h-48 object-contain"
                   />
-                </div> */}
+                </div>
               </>
             )}
             {activeVideo &&
@@ -1077,24 +1077,24 @@ const ComprehensiveJudicialViolationsMatrix = () => {
                     src={`https://grain.com/_/embed/recording/08fd9b71-4dae-4974-a7c3-479e5691d741/CpHsw859tGtL4LXUqdGHAl7qXY8OxJ2RqLHP9BxH?autoplay=true&t=${timeStringToMilliSeconds(
                       activeVideo.timestamp
                     )}`}
-                    // style={{
-                    //   width: 0,
-                    //   height: 0,
-                    //   opacity: 0,
-                    //   position: "absolute",
-                    //   pointerEvents: "none",
-                    // }}
+                    style={{
+                      width: 0,
+                      height: 0,
+                      opacity: 0,
+                      position: "absolute",
+                      pointerEvents: "none",
+                    }}
                     allow="fullscreen"
                     allowFullScreen={true}
                     frameBorder="0"
                   ></iframe>
-                  {/* <div className="flex justify-center items-center h-[300px]">
+                  <div className="flex justify-center items-center h-[300px]">
                     <img
                       src={audioImage}
                       alt="Audio playing"
                       className="w-auto h-48 object-contain"
                     />
-                  </div> */}
+                  </div>
                 </>
               )}
           </div>
