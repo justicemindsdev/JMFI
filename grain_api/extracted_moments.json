@@ -1,0 +1,72 @@
+[
+  {
+    "id": "moment-1685232000000-0",
+    "title": "Breakthrough Insight on User Experience Design",
+    "timestamp": "05:23",
+    "stopAt": "06:15",
+    "transcript": "I think we've been approaching this all wrong. Instead of focusing on adding more features, we should be simplifying the interface. Users don't want more options, they want clarity. When I tested the prototype with my mom, she immediately understood what to do without any explanation. That's when I realized we had finally gotten it right.",
+    "analysis": "This moment represents a significant shift in thinking about product design. The speaker has an 'aha moment' when they realize that simplification, not feature addition, is the key to better user experience. The personal anecdote about testing with their mother provides powerful validation for this insight and demonstrates the value of user testing with diverse participants.",
+    "tags": ["user experience", "product design", "simplification", "testing", "insight"],
+    "category": "work",
+    "recordingId": "19bcc522-cf00-41b4-9131-7f89f329ce60",
+    "position": 323,
+    "lastPrompt": "Find the most insightful and important moments",
+    "thumbnailUrl": "https://grain.com/thumbnails/19bcc522-cf00-41b4-9131-7f89f329ce60/05-23.jpg"
+  },
+  {
+    "id": "moment-1685232000000-1",
+    "title": "Emotional Impact of Remote Work on Team Dynamics",
+    "timestamp": "12:45",
+    "stopAt": "13:38",
+    "transcript": "The most surprising thing I've learned managing a remote team is how much the informal interactions matter. We implemented these virtual coffee chats where there's no agenda, just people connecting. At first, I thought it would be a waste of time, but I've seen team members who barely spoke in meetings open up and share incredible ideas. One of these casual conversations actually led to our most successful feature launch this quarter.",
+    "analysis": "This moment highlights a profound realization about remote work culture. The speaker discovers that structured informality - creating space for unstructured interactions - is crucial for team cohesion and innovation. The contrast between their initial skepticism and the eventual positive outcome demonstrates a genuine learning moment that challenges conventional thinking about productivity and workplace relationships.",
+    "tags": ["remote work", "team building", "informal communication", "innovation", "leadership"],
+    "category": "social",
+    "recordingId": "19bcc522-cf00-41b4-9131-7f89f329ce60",
+    "position": 765,
+    "lastPrompt": "Find the most insightful and important moments",
+    "thumbnailUrl": "https://grain.com/thumbnails/19bcc522-cf00-41b4-9131-7f89f329ce60/12-45.jpg"
+  },
+  {
+    "id": "moment-1685232000000-2",
+    "title": "Critical Insight on Data Privacy Implementation",
+    "timestamp": "25:12",
+    "stopAt": "26:30",
+    "transcript": "I realized we've been thinking about data privacy all wrong. It's not just about compliance or checking boxes. When we shifted our approach to think about privacy as a core user value rather than a legal requirement, everything changed. Our team started designing with privacy in mind from the beginning, rather than trying to bolt it on at the end. This completely transformed our architecture and actually simplified many of our systems.",
+    "analysis": "This moment represents a fundamental paradigm shift in approaching data privacy. The speaker articulates how reframing privacy from a compliance burden to a core value led to better design decisions and architectural improvements. This insight demonstrates how changing perspective on a seemingly restrictive requirement can lead to innovation and simplification. The moment is particularly significant given increasing global concerns about data privacy and security.",
+    "tags": ["data privacy", "design thinking", "compliance", "architecture", "values"],
+    "category": "work",
+    "recordingId": "19bcc522-cf00-41b4-9131-7f89f329ce60",
+    "position": 1512,
+    "lastPrompt": "Find the most insightful and important moments",
+    "thumbnailUrl": "https://grain.com/thumbnails/19bcc522-cf00-41b4-9131-7f89f329ce60/25-12.jpg"
+  },
+  {
+    "id": "moment-1685232000000-3",
+    "title": "Personal Growth Through Failure Acceptance",
+    "timestamp": "37:45",
+    "stopAt": "38:55",
+    "transcript": "The biggest lesson I've learned this year is embracing failure. I used to be paralyzed by the fear of making mistakes, especially in front of the team. But when our major launch failed so publicly, and I had to stand up and take responsibility, something unexpected happened. The team didn't lose faith in me - they respected the transparency. We analyzed what went wrong together, and our next attempt was so much stronger because we weren't afraid to examine our mistakes honestly.",
+    "analysis": "This moment captures a profound personal growth experience centered around failure and vulnerability. The speaker shares how a public failure transformed their leadership approach and team dynamics. The counterintuitive outcome - that transparent acknowledgment of failure built rather than diminished trust - represents a powerful insight about authentic leadership. This moment resonates because it touches on universal fears of failure and judgment while offering a path to growth through embracing vulnerability.",
+    "tags": ["failure", "leadership", "vulnerability", "personal growth", "transparency"],
+    "category": "personal",
+    "recordingId": "19bcc522-cf00-41b4-9131-7f89f329ce60",
+    "position": 2265,
+    "lastPrompt": "Find the most insightful and important moments",
+    "thumbnailUrl": "https://grain.com/thumbnails/19bcc522-cf00-41b4-9131-7f89f329ce60/37-45.jpg"
+  },
+  {
+    "id": "moment-1685232000000-4",
+    "title": "Breakthrough on Customer Feedback Integration",
+    "timestamp": "42:18",
+    "stopAt": "43:25",
+    "transcript": "We completely transformed how we handle customer feedback. Instead of having it filter through customer support to product managers to engineers, we created these cross-functional pods where everyone hears the feedback directly. Engineers are actually talking to customers now! The first time we tried this, one of our most technical engineers had this moment where he said, 'Oh, THAT'S what they've been asking for?' and solved in two days a problem we'd been debating for months.",
+    "analysis": "This moment illustrates a structural innovation in how organizations can process and respond to customer feedback. The speaker describes breaking down traditional departmental silos to create direct connections between technical teams and customers. The anecdote about the engineer's revelation powerfully demonstrates how removing communication layers can lead to faster problem-solving and better solutions. This insight has implications for organizational design, communication flows, and the value of direct customer interaction for all team members.",
+    "tags": ["customer feedback", "organizational structure", "communication", "problem solving", "cross-functional teams"],
+    "category": "work",
+    "recordingId": "19bcc522-cf00-41b4-9131-7f89f329ce60",
+    "position": 2538,
+    "lastPrompt": "Find the most insightful and important moments",
+    "thumbnailUrl": "https://grain.com/thumbnails/19bcc522-cf00-41b4-9131-7f89f329ce60/42-18.jpg"
+  }
+]

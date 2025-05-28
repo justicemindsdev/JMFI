@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grain Time Range Player Demo</title>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #212529;
+            --text-secondary: #495057;
+            --accent-color: #3a86ff;
+            --border-color: #dee2e6;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--bg-secondary);
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+        
+        h1, h2, h3 {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+        
+        .player-container {
+            margin-bottom: 40px;
+            background-color: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        #grain-player-container {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        button:hover {
+            background-color: #2563eb;
+        }
+        
+        .time-input {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .time-input label {
+            font-weight: 600;
+            min-width: 100px;
+        }
+        
+        .time-input input {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            width: 100px;
+        }
+        
+        .code-block {
+            background-color: var(--bg-tertiary);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Grain Time Range Player Demo</h1>
+            <p>Control both start and end times for Grain video embeds</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="player-container">
+            <h2>Video Player</h2>
+            
+            <div class="time-input">
+                <label for="start-time">Start Time (s):</label>
+                <input type="number" id="start-time" value="170" min="0">
+                
+                <label for="end-time">End Time (s):</label>
+                <input type="number" id="end-time" value="185" min="0">
+                
+                <button id="apply-button">Apply Time Range</button>
+            </div>
+            
+            <div id="grain-player-container"></div>
+            
+            <div class="note">
+                <strong>Note:</strong> This player uses the 't' parameter to set the start time and JavaScript to monitor and enforce the end time.
+            </div>
+        </section>
+        
+        <section>
+            <h2>How It Works</h2>
+            
+            <p>The Grain Time Range Player uses a combination of URL parameters and JavaScript to control video playback:</p>
+            
+            <ol>
+                <li>The <code>t</code> parameter in the URL sets the initial start time</li>
+                <li>JavaScript monitors the current playback time via the postMessage API</li>
+                <li>When the current time exceeds the specified end time, the player either pauses or resets to the start time</li>
+            </ol>
+            
+            <h3>Implementation Example</h3>
+            
+            <div class="code-block">
+<pre>// Create a new player instance
+const player = new GrainTimeRangePlayer({
+    containerId: 'grain-player-container',
+    videoId: '01452015-60e4-42a6-9ca7-f241f18ee7db',
+    startTime: 170,
+    endTime: 185,
+    autoplay: true
+});</pre>
+            </div>
+            
+            <p>You can customize the player by adjusting the parameters:</p>
+            
+            <ul>
+                <li><code>videoId</code>: The ID of the Grain recording</li>
+                <li><code>startTime</code>: The time in seconds where playback should start</li>
+                <li><code>endTime</code>: The time in seconds where playback should end</li>
+                <li><code>autoplay</code>: Whether the video should start playing automatically</li>
+                <li><code>height</code> and <code>width</code>: Dimensions of the player</li>
+            </ul>
+        </section>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Grain API Integration | Time Range Player Demo</p>
+        </div>
+    </footer>
+    
+    <!-- Include the Grain Time Range Player script -->
+    <script src="grain_time_range_player.js"></script>
+    
+    <script>
+        // Current player instance
+        let player = null;
+        
+        // Initialize the player with default values
+        function initPlayer(startTime, endTime) {
+            // Destroy existing player if it exists
+            if (player) {
+                player.destroy();
+            }
+            
+            // Create a new player instance
+            player = new GrainTimeRangePlayer({
+                containerId: 'grain-player-container',
+                videoId: '01452015-60e4-42a6-9ca7-f241f18ee7db',
+                startTime: startTime,
+                endTime: endTime,
+                autoplay: true
+            });
+        }
+        
+        // Set up event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            const startTimeInput = document.getElementById('start-time');
+            const endTimeInput = document.getElementById('end-time');
+            const applyButton = document.getElementById('apply-button');
+            
+            // Initialize with default values
+            initPlayer(
+                parseInt(startTimeInput.value, 10),
+                parseInt(endTimeInput.value, 10)
+            );
+            
+            // Apply button click handler
+            applyButton.addEventListener('click', () => {
+                const startTime = parseInt(startTimeInput.value, 10);
+                const endTime = parseInt(endTimeInput.value, 10);
+                
+                if (startTime >= endTime) {
+                    alert('End time must be greater than start time');
+                    return;
+                }
+                
+                initPlayer(startTime, endTime);
+            });
+        });
+    </script>
+</body>
+</html>

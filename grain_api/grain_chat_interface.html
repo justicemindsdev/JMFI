@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grain AI Moment Explorer</title>
+  <style>
+    :root {
+      --primary-color: #bb86fc;
+      --primary-variant: #3700b3;
+      --secondary-color: #03dac6;
+      --background: #121212;
+      --surface: #1e1e1e;
+      --error: #cf6679;
+      --text-primary: #ffffff;
+      --text-secondary: #b0b0b0;
+      --border-radius: 8px;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--text-primary);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    
+    .logo h1 {
+      font-size: 24px;
+      margin: 0;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .search-bar {
+      display: flex;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+    
+    .search-bar input {
+      flex: 1;
+      padding: 12px 16px;
+      border: none;
+      background-color: var(--surface);
+      color: var(--text-primary);
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      font-size: 16px;
+    }
+    
+    .search-bar button {
+      padding: 12px 20px;
+      background-color: var(--primary-color);
+      color: #000;
+      border: none;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .search-bar button:hover {
+      background-color: var(--primary-variant);
+      color: #fff;
+    }
+    
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+      gap: 30px;
+    }
+    
+    .video-card {
+      background-color: var(--surface);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .video-title {
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .video-title span {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    
+    .video-timestamp {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: normal;
+    }
+    
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    }
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .video-info {
+      padding: 15px;
+    }
+    
+    .video-transcript {
+      margin-bottom: 15px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+    
+    .video-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+    
+    .video-tag {
+      background-color: rgba(187, 134, 252, 0.2);
+      color: var(--primary-color);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+    
+    .video-category {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      z-index: 10;
+    }
+    
+    .category-work {
+      background-color: rgba(3, 218, 198, 0.2);
+      color: var(--secondary-color);
+    }
+    
+    .category-personal {
+      background-color: rgba(187, 134, 252, 0.2);
+      color: var(--primary-color);
+    }
+    
+    .category-social {
+      background-color: rgba(255, 193, 7, 0.2);
+      color: #ffc107;
+    }
+    
+    .category-general {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: var(--text-primary);
+    }
+    
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      padding: 20px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .search-bar {
+        flex-direction: column;
+      }
+      
+      .search-bar input {
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+      }
+      
+      .search-bar button {
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <img src="https://grain.com/favicon.ico" alt="Grain Logo">
+        <h1>AI Moment Explorer</h1>
+      </div>
+    </header>
+    
+    <div class="search-bar">
+      <input type="text" id="promptInput" placeholder="Type a prompt to find any type of moment (work, personal, etc.)...">
+      <button onclick="handlePromptSubmit()">Find Moments</button>
+    </div>
+    
+    <div id="videoGrid" class="video-grid">
+      <!-- Videos will be dynamically inserted here -->
+    </div>
+    
+    <footer>
+      <p>Powered by Grain API and OpenRouter AI | &copy; 2025</p>
+    </footer>
+  </div>
+  
+  <script>
+    // Sample data - will be replaced by AI-extracted moments
+    const videos = [
+      {
+        id: "sample-1",
+        title: "Key Insight on Project Timeline",
+        timestamp: "05:30",
+        stopAt: "06:15",
+        transcript: "We need to consider the impact of the new regulations on our timeline. I think we should allocate an additional two weeks for compliance review.",
+        recordingId: "19bcc522-cf00-41b4-9131-7f89f329ce60",
+        category: "work",
+        tags: ["timeline", "compliance", "planning"]
+      },
+      {
+        id: "sample-2",
+        title: "Team Building Suggestion",
+        timestamp: "12:45",
+        stopAt: "13:20",
+        transcript: "I've found that regular virtual coffee chats have really helped my team stay connected while working remotely. It's been great for morale.",
+        recordingId: "19bcc522-cf00-41b4-9131-7f89f329ce60",
+        category: "social",
+        tags: ["team building", "remote work", "morale"]
+      }
+    ];
+    
+    // Render videos when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      renderVideos();
+    });
+    
+    // Function to render videos
+    function renderVideos() {
+      const videoGrid = document.getElementById('videoGrid');
+      videoGrid.innerHTML = '';
+      
+      videos.forEach(video => {
+        const videoElement = document.createElement('div');
+        videoElement.className = 'video-card';
+        
+        videoElement.innerHTML = `
+          <div class="video-category category-${video.category}">${video.category}</div>
+          <div class="video-title">
+            <span>${video.title}</span>
+            <span class="video-timestamp">${video.timestamp} - ${video.stopAt}</span>
+          </div>
+          <div class="video-container">
+            <iframe 
+              src="https://grain.com/_/embed/recording/${video.recordingId}/IyQ1igZOqfAI9ngBciC2E2Ruu7djaRHmjY7JvMnZ?autoplay=false&origin=user_iframe&start=${video.timestamp}&end=${video.stopAt}" 
+              height="324" 
+              width="576" 
+              allow="fullscreen" 
+              allowfullscreen="true" 
+              frameborder="0">
+            </iframe>
+          </div>
+          <div class="video-info">
+            <div class="video-transcript">${video.transcript}</div>
+            <div class="video-tags">
+              ${video.tags.map(tag => `<span class="video-tag">${tag}</span>`).join('')}
+            </div>
+          </div>
+        `;
+        videoGrid.appendChild(videoElement);
+      });
+    }
+    
+    // Handle prompt submission
+    function handlePromptSubmit() {
+      const promptInput = document.getElementById('promptInput');
+      const prompt = promptInput.value.trim();
+      
+      if (prompt) {
+        // In a real app, this would call an API to get AI-extracted moments
+        // For demo purposes, we'll just show an alert and clear the input
+        alert(`Finding moments matching: "${prompt}"\nThis would trigger the AI extraction process in a real implementation.`);
+        promptInput.value = '';
+      }
+    }
+  </script>
+</body>
+</html>

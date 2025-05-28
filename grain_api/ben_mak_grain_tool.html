@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ben Mak Grain Claim Substantiation Tool</title>
+  <style>
+    :root {
+      --primary-color: #bb86fc;
+      --primary-variant: #3700b3;
+      --secondary-color: #03dac6;
+      --background: #121212;
+      --surface: #1e1e1e;
+      --error: #cf6679;
+      --text-primary: #ffffff;
+      --text-secondary: #b0b0b0;
+      --border-radius: 8px;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--text-primary);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    
+    .logo h1 {
+      font-size: 24px;
+      margin: 0;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .search-bar {
+      display: flex;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+    
+    .search-bar input {
+      flex: 1;
+      padding: 12px 16px;
+      border: none;
+      background-color: var(--surface);
+      color: var(--text-primary);
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      font-size: 16px;
+    }
+    
+    .search-bar button {
+      padding: 12px 20px;
+      background-color: var(--primary-color);
+      color: #000;
+      border: none;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .search-bar button:hover {
+      background-color: var(--primary-variant);
+      color: #fff;
+    }
+    
+    .recording-info {
+      background-color: var(--surface);
+      padding: 20px;
+      border-radius: var(--border-radius);
+      margin-bottom: 30px;
+    }
+    
+    .recording-info h2 {
+      margin-top: 0;
+      color: var(--primary-color);
+    }
+    
+    .recording-embed {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      margin-top: 20px;
+    }
+    
+    .recording-embed iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .claims-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+      gap: 30px;
+    }
+    
+    .claim-card {
+      background-color: var(--surface);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+    
+    .claim-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .claim-header {
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .claim-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0;
+    }
+    
+    .claim-timestamp {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: normal;
+    }
+    
+    .claim-video {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    }
+    
+    .claim-video iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .claim-content {
+      padding: 15px;
+    }
+    
+    .claim-transcript {
+      margin-bottom: 15px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-primary);
+      background-color: rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      border-radius: 4px;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    
+    .claim-analysis {
+      margin-bottom: 15px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+    
+    .claim-score {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .score-label {
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    
+    .score-bar {
+      flex: 1;
+      height: 8px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .score-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+    
+    .score-value {
+      margin-left: 10px;
+      font-weight: bold;
+    }
+    
+    .claim-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+    
+    .claim-tag {
+      background-color: rgba(187, 134, 252, 0.2);
+      color: var(--primary-color);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+    
+    .claim-category {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      z-index: 10;
+    }
+    
+    .category-factual {
+      background-color: rgba(3, 218, 198, 0.2);
+      color: var(--secondary-color);
+    }
+    
+    .category-opinion {
+      background-color: rgba(187, 134, 252, 0.2);
+      color: var(--primary-color);
+    }
+    
+    .category-statistical {
+      background-color: rgba(255, 193, 7, 0.2);
+      color: #ffc107;
+    }
+    
+    .category-anecdotal {
+      background-color: rgba(255, 87, 34, 0.2);
+      color: #ff5722;
+    }
+    
+    .category-mixed {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: var(--text-primary);
+    }
+    
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      padding: 20px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .claims-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .search-bar {
+        flex-direction: column;
+      }
+      
+      .search-bar input {
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+      }
+      
+      .search-bar button {
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <img src="https://grain.com/favicon.ico" alt="Grain Logo">
+        <h1>Ben Mak Grain Claim Substantiation Tool</h1>
+      </div>
+    </header>
+    
+    <div class="search-bar">
+      <input type="text" id="promptInput" placeholder="Enter a prompt to find and substantiate claims...">
+      <button onclick="handlePromptSubmit()">Substantiate Claims</button>
+    </div>
+    
+    <div class="recording-info">
+      <h2>Grain Recording</h2>
+      <p>A recorded conversation with claims to substantiate.</p>
+      <p><strong>Date:</strong> Invalid Date</p>
+      <p><strong>Duration:</strong> NaN minutes</p>
+      
+      <div class="recording-embed">
+        <iframe 
+          src="https://grain.com/_/embed/recording/undefined/Rf2ziLzcvN1bJHDYbIf9xLiyfrdAp2Dvt2dCelYI?autoplay=false&origin=user_iframe" 
+          allow="fullscreen" 
+          allowfullscreen="true" 
+          frameborder="0">
+        </iframe>
+      </div>
+    </div>
+    
+    <h2>Substantiated Claims</h2>
+    
+    <div class="claims-grid">
+      
+        <div class="claim-card">
+          <div class="claim-category category-opinion">opinion</div>
+          <div class="claim-header">
+            <h3 class="claim-title">Pride in API Integration Achievement</h3>
+            <span class="claim-timestamp">00:05 - 00:13</span>
+          </div>
+          <div class="claim-video">
+            <iframe 
+              src="https://grain.com/_/embed/recording/undefined/Rf2ziLzcvN1bJHDYbIf9xLiyfrdAp2Dvt2dCelYI?autoplay=false&origin=user_iframe&start=00:05&end=00:13" 
+              allow="fullscreen" 
+              allowfullscreen="true" 
+              frameborder="0">
+            </iframe>
+          </div>
+          <div class="claim-content">
+            <h4>Transcript</h4>
+            <div class="claim-transcript">Ben: I'm really proud of what we've accomplished with the Grain API integration.</div>
+            
+            <h4>Analysis</h4>
+            <div class="claim-analysis">This is a clear expression of Ben's pride, though it lacks specific details about what aspects of the integration made him proud. The claim is somewhat vague as it doesn't specify what was accomplished or why it deserves pride. No metrics or specific achievements are mentioned in this statement alone, though later parts of the conversation provide more context. For better substantiation, Ben could have immediately mentioned specific achievements like performance improvements or user engagement increases.</div>
+            
+            <div class="claim-score">
+              <span class="score-label">Substantiation:</span>
+              <div class="score-bar">
+                <div class="score-fill" style="width: 30%; background-color: #cf6679;"></div>
+              </div>
+              <span class="score-value">3/10</span>
+            </div>
+            
+            <div class="claim-tags">
+              <span class="claim-tag">pride</span><span class="claim-tag">accomplishment</span><span class="claim-tag">API integration</span><span class="claim-tag">professional achievement</span>
+            </div>
+          </div>
+        </div>
+      
+        <div class="claim-card">
+          <div class="claim-category category-anecdotal">anecdotal</div>
+          <div class="claim-header">
+            <h3 class="claim-title">Pride in Quarterly Review Presentation</h3>
+            <span class="claim-timestamp">00:35 - 00:43</span>
+          </div>
+          <div class="claim-video">
+            <iframe 
+              src="https://grain.com/_/embed/recording/undefined/Rf2ziLzcvN1bJHDYbIf9xLiyfrdAp2Dvt2dCelYI?autoplay=false&origin=user_iframe&start=00:35&end=00:43" 
+              allow="fullscreen" 
+              allowfullscreen="true" 
+              frameborder="0">
+            </iframe>
+          </div>
+          <div class="claim-content">
+            <h4>Transcript</h4>
+            <div class="claim-transcript">Ben: I felt especially proud when we presented the dashboard at the quarterly review.</div>
+            
+            <h4>Analysis</h4>
+            <div class="claim-analysis">Ben expresses a specific moment of pride related to a dashboard presentation. While the claim clearly identifies a lightbulb/proud moment, it lacks details about why the presentation was successful or what aspects made him proud. The statement stands alone as an expression of feeling without substantiating evidence. Kajha's follow-up comment adds some context that the executive team was impressed, but Ben's initial claim doesn't include these details. To strengthen this claim, Ben could have mentioned specific feedback received or unique aspects of the dashboard that garnered praise.</div>
+            
+            <div class="claim-score">
+              <span class="score-label">Substantiation:</span>
+              <div class="score-bar">
+                <div class="score-fill" style="width: 40%; background-color: #bb86fc;"></div>
+              </div>
+              <span class="score-value">4/10</span>
+            </div>
+            
+            <div class="claim-tags">
+              <span class="claim-tag">pride</span><span class="claim-tag">presentation success</span><span class="claim-tag">dashboard</span><span class="claim-tag">quarterly review</span><span class="claim-tag">professional achievement</span>
+            </div>
+          </div>
+        </div>
+      
+        <div class="claim-card">
+          <div class="claim-category category-anecdotal">anecdotal</div>
+          <div class="claim-header">
+            <h3 class="claim-title">Pride in Solving Caching Issue</h3>
+            <span class="claim-timestamp">01:20 - 01:31</span>
+          </div>
+          <div class="claim-video">
+            <iframe 
+              src="https://grain.com/_/embed/recording/undefined/Rf2ziLzcvN1bJHDYbIf9xLiyfrdAp2Dvt2dCelYI?autoplay=false&origin=user_iframe&start=01:20&end=01:31" 
+              allow="fullscreen" 
+              allowfullscreen="true" 
+              frameborder="0">
+            </iframe>
+          </div>
+          <div class="claim-content">
+            <h4>Transcript</h4>
+            <div class="claim-transcript">Ben: I'm particularly proud of how we solved that persistent caching issue that was affecting performance.</div>
+            
+            <h4>Analysis</h4>
+            <div class="claim-analysis">This claim identifies a specific technical achievement that Ben is proud of, making it more substantiated than his earlier general statements of pride. However, it still lacks details about how they solved the issue or quantifiable metrics about the performance improvement. Kajha's response adds that the solution was 'elegant and effective,' but doesn't provide measurable outcomes. For better substantiation, Ben could have mentioned specific approaches used to solve the issue or quantified the performance improvements achieved.</div>
+            
+            <div class="claim-score">
+              <span class="score-label">Substantiation:</span>
+              <div class="score-bar">
+                <div class="score-fill" style="width: 50%; background-color: #ffc107;"></div>
+              </div>
+              <span class="score-value">5/10</span>
+            </div>
+            
+            <div class="claim-tags">
+              <span class="claim-tag">pride</span><span class="claim-tag">technical achievement</span><span class="claim-tag">problem-solving</span><span class="claim-tag">performance improvement</span><span class="claim-tag">caching</span>
+            </div>
+          </div>
+        </div>
+      
+        <div class="claim-card">
+          <div class="claim-category category-anecdotal">anecdotal</div>
+          <div class="claim-header">
+            <h3 class="claim-title">Lightbulb Moment in Team Collaboration</h3>
+            <span class="claim-timestamp">01:38 - 01:46</span>
+          </div>
+          <div class="claim-video">
+            <iframe 
+              src="https://grain.com/_/embed/recording/undefined/Rf2ziLzcvN1bJHDYbIf9xLiyfrdAp2Dvt2dCelYI?autoplay=false&origin=user_iframe&start=01:38&end=01:46" 
+              allow="fullscreen" 
+              allowfullscreen="true" 
+              frameborder="0">
+            </iframe>
+          </div>
+          <div class="claim-content">
+            <h4>Transcript</h4>
+            <div class="claim-transcript">Ben: The team really came together on that one. It was one of those lightbulb moments.</div>
+            
+            <h4>Analysis</h4>
+            <div class="claim-analysis">This claim directly addresses the 'lightbulb moments' part of the query. Ben describes a moment of collaborative breakthrough, though he doesn't elaborate on what specifically constituted the lightbulb moment or what insight was gained. The claim is vague about what the realization was or how it manifested. Without specific details about the nature of the breakthrough or its impact, this remains a weakly substantiated claim. To improve substantiation, Ben could have described the specific insight that represented the lightbulb moment.</div>
+            
+            <div class="claim-score">
+              <span class="score-label">Substantiation:</span>
+              <div class="score-bar">
+                <div class="score-fill" style="width: 30%; background-color: #cf6679;"></div>
+              </div>
+              <span class="score-value">3/10</span>
+            </div>
+            
+            <div class="claim-tags">
+              <span class="claim-tag">lightbulb moment</span><span class="claim-tag">team collaboration</span><span class="claim-tag">breakthrough</span><span class="claim-tag">realization</span><span class="claim-tag">problem-solving</span>
+            </div>
+          </div>
+        </div>
+      
+        <div class="claim-card">
+          <div class="claim-category category-opinion">opinion</div>
+          <div class="claim-header">
+            <h3 class="claim-title">Pride in Prioritizing User Experience</h3>
+            <span class="claim-timestamp">02:10 - 02:19</span>
+          </div>
+          <div class="claim-video">
+            <iframe 
+              src="https://grain.com/_/embed/recording/undefined/Rf2ziLzcvN1bJHDYbIf9xLiyfrdAp2Dvt2dCelYI?autoplay=false&origin=user_iframe&start=02:10&end=02:19" 
+              allow="fullscreen" 
+              allowfullscreen="true" 
+              frameborder="0">
+            </iframe>
+          </div>
+          <div class="claim-content">
+            <h4>Transcript</h4>
+            <div class="claim-transcript">Ben: I'm proud of how we prioritized user experience throughout the development process.</div>
+            
+            <h4>Analysis</h4>
+            <div class="claim-analysis">Ben expresses pride in a methodological approach rather than a specific moment, making this more about an ongoing commitment than a single achievement. While the claim identifies a source of pride, it lacks specifics about how user experience was prioritized or what methods were employed. Kajha's response provides some substantiation with a metric about increased session duration, but Ben's initial claim doesn't include these supporting details. To strengthen this claim, Ben could have mentioned specific UX innovations or design principles that were implemented.</div>
+            
+            <div class="claim-score">
+              <span class="score-label">Substantiation:</span>
+              <div class="score-bar">
+                <div class="score-fill" style="width: 40%; background-color: #bb86fc;"></div>
+              </div>
+              <span class="score-value">4/10</span>
+            </div>
+            
+            <div class="claim-tags">
+              <span class="claim-tag">pride</span><span class="claim-tag">user experience</span><span class="claim-tag">development methodology</span><span class="claim-tag">product design</span><span class="claim-tag">prioritization</span>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+    
+    <footer>
+      <p>Ben Mak Grain Claim Substantiation Tool | Powered by Grain API and OpenRouter AI | &copy; 2025</p>
+    </footer>
+  </div>
+  
+  <script>
+    // Handle prompt submission
+    function handlePromptSubmit() {
+      const promptInput = document.getElementById('promptInput');
+      const prompt = promptInput.value.trim();
+      
+      if (prompt) {
+        // Save the prompt to localStorage
+        localStorage.setItem('lastPrompt', prompt);
+        
+        // Redirect to the run script with the prompt as a query parameter
+        window.location.href = 'run_ben_mak_grain_tool.sh?prompt=' + encodeURIComponent(prompt);
+      }
+    }
+    
+    // Check if there's a lastPrompt in localStorage and set it as the input value
+    document.addEventListener('DOMContentLoaded', function() {
+      const lastPrompt = localStorage.getItem('lastPrompt');
+      if (lastPrompt) {
+        document.getElementById('promptInput').value = lastPrompt;
+      }
+    });
+  </script>
+</body>
+</html>

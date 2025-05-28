@@ -1,0 +1,86 @@
+[
+  {
+    "id": "claim-1748395012286-0",
+    "title": "Pride in API Integration Achievement",
+    "timestamp": "00:05",
+    "stopAt": "00:13",
+    "transcript": "Ben: I'm really proud of what we've accomplished with the Grain API integration.",
+    "analysis": "This is a clear expression of Ben's pride, though it lacks specific details about what aspects of the integration made him proud. The claim is somewhat vague as it doesn't specify what was accomplished or why it deserves pride. No metrics or specific achievements are mentioned in this statement alone, though later parts of the conversation provide more context. For better substantiation, Ben could have immediately mentioned specific achievements like performance improvements or user engagement increases.",
+    "substantiationScore": 3,
+    "tags": [
+      "pride",
+      "accomplishment",
+      "API integration",
+      "professional achievement"
+    ],
+    "category": "opinion"
+  },
+  {
+    "id": "claim-1748395012286-1",
+    "title": "Pride in Quarterly Review Presentation",
+    "timestamp": "00:35",
+    "stopAt": "00:43",
+    "transcript": "Ben: I felt especially proud when we presented the dashboard at the quarterly review.",
+    "analysis": "Ben expresses a specific moment of pride related to a dashboard presentation. While the claim clearly identifies a lightbulb/proud moment, it lacks details about why the presentation was successful or what aspects made him proud. The statement stands alone as an expression of feeling without substantiating evidence. Kajha's follow-up comment adds some context that the executive team was impressed, but Ben's initial claim doesn't include these details. To strengthen this claim, Ben could have mentioned specific feedback received or unique aspects of the dashboard that garnered praise.",
+    "substantiationScore": 4,
+    "tags": [
+      "pride",
+      "presentation success",
+      "dashboard",
+      "quarterly review",
+      "professional achievement"
+    ],
+    "category": "anecdotal"
+  },
+  {
+    "id": "claim-1748395012286-2",
+    "title": "Pride in Solving Caching Issue",
+    "timestamp": "01:20",
+    "stopAt": "01:31",
+    "transcript": "Ben: I'm particularly proud of how we solved that persistent caching issue that was affecting performance.",
+    "analysis": "This claim identifies a specific technical achievement that Ben is proud of, making it more substantiated than his earlier general statements of pride. However, it still lacks details about how they solved the issue or quantifiable metrics about the performance improvement. Kajha's response adds that the solution was 'elegant and effective,' but doesn't provide measurable outcomes. For better substantiation, Ben could have mentioned specific approaches used to solve the issue or quantified the performance improvements achieved.",
+    "substantiationScore": 5,
+    "tags": [
+      "pride",
+      "technical achievement",
+      "problem-solving",
+      "performance improvement",
+      "caching"
+    ],
+    "category": "anecdotal"
+  },
+  {
+    "id": "claim-1748395012286-3",
+    "title": "Lightbulb Moment in Team Collaboration",
+    "timestamp": "01:38",
+    "stopAt": "01:46",
+    "transcript": "Ben: The team really came together on that one. It was one of those lightbulb moments.",
+    "analysis": "This claim directly addresses the 'lightbulb moments' part of the query. Ben describes a moment of collaborative breakthrough, though he doesn't elaborate on what specifically constituted the lightbulb moment or what insight was gained. The claim is vague about what the realization was or how it manifested. Without specific details about the nature of the breakthrough or its impact, this remains a weakly substantiated claim. To improve substantiation, Ben could have described the specific insight that represented the lightbulb moment.",
+    "substantiationScore": 3,
+    "tags": [
+      "lightbulb moment",
+      "team collaboration",
+      "breakthrough",
+      "realization",
+      "problem-solving"
+    ],
+    "category": "anecdotal"
+  },
+  {
+    "id": "claim-1748395012286-4",
+    "title": "Pride in Prioritizing User Experience",
+    "timestamp": "02:10",
+    "stopAt": "02:19",
+    "transcript": "Ben: I'm proud of how we prioritized user experience throughout the development process.",
+    "analysis": "Ben expresses pride in a methodological approach rather than a specific moment, making this more about an ongoing commitment than a single achievement. While the claim identifies a source of pride, it lacks specifics about how user experience was prioritized or what methods were employed. Kajha's response provides some substantiation with a metric about increased session duration, but Ben's initial claim doesn't include these supporting details. To strengthen this claim, Ben could have mentioned specific UX innovations or design principles that were implemented.",
+    "substantiationScore": 4,
+    "tags": [
+      "pride",
+      "user experience",
+      "development methodology",
+      "product design",
+      "prioritization"
+    ],
+    "category": "opinion"
+  }
+]

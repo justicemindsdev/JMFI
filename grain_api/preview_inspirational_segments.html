@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspirational Segments Preview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .intro {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        .segment {
+            margin-bottom: 30px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #2c3e50;
+        }
+        .timestamp {
+            font-family: monospace;
+            color: #6c757d;
+            margin-right: 10px;
+        }
+        .quote {
+            font-style: italic;
+            color: #2c3e50;
+            margin: 15px 0;
+            padding-left: 15px;
+            border-left: 3px solid #6c757d;
+        }
+        .description {
+            margin-top: 10px;
+        }
+        .iframe-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            margin: 30px 0;
+        }
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .button {
+            display: inline-block;
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #1a252f;
+        }
+        .video-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+            z-index: 10;
+        }
+        .loading-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #6c757d;
+            font-size: 14px;
+            text-align: center;
+        }
+        .custom-player-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 14px;
+            z-index: 20;
+        }
+        .segment-overlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 20;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .note {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 5px solid #3498db;
+        }
+        .api-note {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 5px solid #ffc107;
+        }
+        .warning {
+            background-color: #f8d7da;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 5px solid #dc3545;
+        }
+        .solution {
+            background-color: #d4edda;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 5px solid #28a745;
+        }
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>BREAKING BARRIERS: A Journey to Authentic Self-Discovery</h1>
+    
+    <div class="intro">
+        <h2>EXCLUSIVE: Mentor Reveals Transformative Insights on Personal Growth</h2>
+        <p>In a rare and candid conversation, renowned mentor Ben Mak guides Kajha Nainamohamed through a profound journey of self-discovery, challenging deeply held beliefs and unveiling hidden potential.</p>
+        
+        <p>This exclusive series of moments captures the essence of personal transformation, offering viewers a step-by-step pathway from recognizing limiting beliefs to embracing authentic self-expression. Each segment builds upon the previous, creating a powerful narrative of growth and self-realization.</p>
+    </div>
+    
+    
+    <h2>Powerful Moments</h2>
+    
+    <div class="segment">
+        <h3>1. On Manifesting Abundance</h3>
+        <p class="timestamp">00:03:44 - 00:04:20</p>
+        <div class="quote">"That's your problem. As soon as you start wearing gold, you're gonna change."</div>
+        <p class="description">Ben challenges Kajha's mindset about wealth and abundance, suggesting that his resistance to wearing gold jewelry might be connected to his resistance to abundance in general.</p>
+        <div class="iframe-container">
+            <!-- Using the standard embed format - requires Highlight API implementation for proper segment extraction -->
+            <iframe 
+                src="https://grain.com/_/embed/recording/026973da-9ff2-493a-ab85-44a54170f43a/Z8SRIuntWUonOWywCn5d5rtHyVQ7nlCl0hnMzuSl?start=224&end=260&t=224&show_engagement=true&autoplay=false&origin=user_iframe" 
+                allow="fullscreen" 
+                allowfullscreen="true" 
+                frameborder="0">
+            </iframe>
+        </div>
+    </div>
+    
+    <div class="segment">
+        <h3>2. On Taking Initiative</h3>
+        <p class="timestamp">00:27:54 - 00:29:07</p>
+        <div class="quote">"If you thought it made you money, you'd do it. But because you don't think it makes you money, you're not doing it."</div>
+        <p class="description">Ben explains why Kajha isn't taking initiative and how it relates to his perception of value. He points out that Kajha doesn't see the value in his own work, which is why he's not motivated to do it.</p>
+        <div class="iframe-container">
+            <!-- Using the standard embed format - requires Highlight API implementation for proper segment extraction -->
+            <iframe 
+                src="https://grain.com/_/embed/recording/026973da-9ff2-493a-ab85-44a54170f43a/Z8SRIuntWUonOWywCn5d5rtHyVQ7nlCl0hnMzuSl?start=1674&end=1747&t=1674&show_engagement=true&autoplay=false&origin=user_iframe" 
+                allow="fullscreen" 
+                allowfullscreen="true" 
+                frameborder="0">
+            </iframe>
+        </div>
+    </div>
+    
+    <div class="segment">
+        <h3>3. On Breaking Free from Cultural Conditioning</h3>
+        <p class="timestamp">00:30:31 - 00:32:41</p>
+        <div class="quote">"You've been lying to yourself... You are so prone to punishment. You're happy when you get shouted at because it's what you're used to."</div>
+        <p class="description">Ben discusses how young people, especially from Asian families, often lose their autonomy and decision-making abilities due to cultural conditioning. He explains how this conditioning has affected Kajha's ability to take initiative.</p>
+        <div class="iframe-container">
+            <div class="segment-overlay">SEGMENT ONLY: 2:10</div>
+            <div class="loading-message">Loading segment (00:30:31 - 00:32:41)...</div>
+            <!-- Using the standard embed format - requires Highlight API implementation for proper segment extraction -->
+            <iframe 
+                src="https://grain.com/_/embed/recording/026973da-9ff2-493a-ab85-44a54170f43a/Z8SRIuntWUonOWywCn5d5rtHyVQ7nlCl0hnMzuSl?start=1831&end=1961&t=1831&show_engagement=true&autoplay=false&origin=user_iframe" 
+                allow="fullscreen" 
+                allowfullscreen="true" 
+                frameborder="0">
+            </iframe>
+            <div class="custom-player-controls">Segment: 0:00 / 2:10</div>
+        </div>
+    </div>
+    
+    <div class="segment">
+        <h3>4. On Recognizing Your Value</h3>
+        <p class="timestamp">00:36:16 - 00:37:33</p>
+        <div class="quote">"You are valuable. I can't tell you enough. You are sitting on a credential that can change policy. You are the person you are looking for."</div>
+        <p class="description">Ben emphasizes that Kajha has unique value that he doesn't recognize. He encourages Kajha to see his own worth and potential impact.</p>
+        <div class="iframe-container">
+            <div class="segment-overlay">SEGMENT ONLY: 1:17</div>
+            <div class="loading-message">Loading segment (00:36:16 - 00:37:33)...</div>
+            <!-- Using the standard embed format - requires Highlight API implementation for proper segment extraction -->
+            <iframe 
+                src="https://grain.com/_/embed/recording/026973da-9ff2-493a-ab85-44a54170f43a/Z8SRIuntWUonOWywCn5d5rtHyVQ7nlCl0hnMzuSl?start=2176&end=2253&t=2176&show_engagement=true&autoplay=false&origin=user_iframe" 
+                allow="fullscreen" 
+                allowfullscreen="true" 
+                frameborder="0">
+            </iframe>
+            <div class="custom-player-controls">Segment: 0:00 / 1:17</div>
+        </div>
+    </div>
+    
+    <div class="segment">
+        <h3>5. On Creative Potential</h3>
+        <p class="timestamp">01:14:08 - 01:15:30</p>
+        <div class="quote">"Why would you want to fill your time with your nearest and dearest by reciting a to do list?"</div>
+        <p class="description">Discussion about Kajha's hidden creative talents and how they've been suppressed. Ben encourages Kajha to share his growth and creative pursuits with his family instead of just discussing mundane daily activities.</p>
+        <div class="iframe-container">
+            <div class="segment-overlay">SEGMENT ONLY: 1:22</div>
+            <div class="loading-message">Loading segment (01:14:08 - 01:15:30)...</div>
+            <!-- Using the standard embed format - requires Highlight API implementation for proper segment extraction -->
+            <iframe 
+                src="https://grain.com/_/embed/recording/026973da-9ff2-493a-ab85-44a54170f43a/Z8SRIuntWUonOWywCn5d5rtHyVQ7nlCl0hnMzuSl?start=4448&end=4530&t=4448&show_engagement=true&autoplay=false&origin=user_iframe" 
+                allow="fullscreen" 
+                allowfullscreen="true" 
+                frameborder="0">
+            </iframe>
+            <div class="custom-player-controls">Segment: 0:00 / 1:22</div>
+        </div>
+    </div>
+    
+    <div class="segment">
+        <h3>6. On Authentic Self-Expression</h3>
+        <p class="timestamp">02:19:07 - 02:19:57</p>
+        <div class="quote">"We're packaging up what's in the room not being used and presenting it to where you can get a return for you being you."</div>
+        <p class="description">Ben encourages Kajha to use his MBA and skills to make a real impact. He emphasizes the importance of being authentic and leveraging one's true talents rather than conforming to expectations.</p>
+        <div class="iframe-container">
+            <div class="segment-overlay">SEGMENT ONLY: 0:50</div>
+            <div class="loading-message">Loading segment (02:19:07 - 02:19:57)...</div>
+            <!-- Using the standard embed format - requires Highlight API implementation for proper segment extraction -->
+            <iframe 
+                src="https://grain.com/_/embed/recording/026973da-9ff2-493a-ab85-44a54170f43a/Z8SRIuntWUonOWywCn5d5rtHyVQ7nlCl0hnMzuSl?start=8347&end=8397&t=8347&show_engagement=true&autoplay=false&origin=user_iframe" 
+                allow="fullscreen" 
+                allowfullscreen="true" 
+                frameborder="0">
+            </iframe>
+            <div class="custom-player-controls">Segment: 0:00 / 0:50</div>
+        </div>
+    </div>
+    
+    <div class="segment" style="background-color: #e8f4f8; border-left-color: #3498db;">
+        <h3>Key Takeaways: The Path to Authentic Self-Expression</h3>
+        <p class="description">
+            These powerful moments reveal a transformative journey that anyone can apply to their own life:
+        </p>
+        <ol style="padding-left: 20px;">
+            <li><strong>Recognize Your Resistance to Abundance</strong> - Often, our resistance to external symbols of success reflects deeper limiting beliefs about our own worthiness.</li>
+            <li><strong>Take Initiative Without Guaranteed Rewards</strong> - True growth comes from acting on your values, not just when there's an obvious payoff.</li>
+            <li><strong>Break Free from Cultural Conditioning</strong> - Identifying patterns of behavior that were instilled in you allows you to make conscious choices instead of automatic reactions.</li>
+            <li><strong>Acknowledge Your Unique Value</strong> - Your experiences and perspective are credentials that can create meaningful change in the world.</li>
+            <li><strong>Embrace Your Creative Potential</strong> - Share your authentic growth and creative pursuits rather than focusing on mundane accomplishments.</li>
+            <li><strong>Express Your Authentic Self</strong> - Package your unique talents in a way that allows you to be rewarded for being genuinely you.</li>
+        </ol>
+        <p class="description">
+            This journey demonstrates how personal transformation isn't about becoming someone else, but rather about removing the barriers that prevent you from expressing who you truly are.
+        </p>
+    </div>
+    
+    <div class="solution">
+        <h3>Next Steps for Implementation</h3>
+        <p>To properly implement the segment extraction functionality:</p>
+        <ol>
+            <li>Use the Grain API to create highlights for each segment</li>
+            <li>Replace the current iframe URLs with the highlight-specific URLs</li>
+            <li>Remove the custom player controls and segment overlays as they will be handled by the Grain highlight player</li>
+        </ol>
+        <p>This will ensure that each video plays only the specific segment you want to showcase, without requiring any client-side JavaScript to control the playback.</p>
+    </div>
+    
+    <a href="#" class="button">Share Link/Page</a>
+
+    <script>
+        /**
+         * Enhanced Grain Video Time Control Script
+         * This script uses multiple approaches to ensure videos play only within specified time boundaries
+         */
+        
+        // Function to format time in MM:SS format
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+        }
+
+        // Function to parse timestamp in format HH:MM:SS or MM:SS to seconds
+        function parseTimestamp(timestamp) {
+            const parts = timestamp.split(':').map(Number);
+            if (parts.length === 3) {
+                // Format: HH:MM:SS
+                return parts[0] * 3600 + parts[1] * 60 + parts[2];
+            } else if (parts.length === 2) {
+                // Format: MM:SS
+                return parts[0] * 60 + parts[1];
+            }
+            return 0;
+        }
+
+        // Function to add status indicator to iframe container
+        function addStatusIndicator(container, status = 'pending') {
+            let indicator = container.querySelector('.time-control-status');
+            
+            if (!indicator) {
+                indicator = document.createElement('div');
+                indicator.className = 'time-control-status';
+                indicator.style.position = 'absolute';
+                indicator.style.top = '10px';
+                indicator.style.right = '10px';
+                indicator.style.padding = '5px 10px';
+                indicator.style.borderRadius = '3px';
+                indicator.style.fontSize = '12px';
+                indicator.style.fontWeight = 'bold';
+                indicator.style.zIndex = '30';
+                container.appendChild(indicator);
+            }
+            
+            if (status === 'pending') {
+                indicator.textContent = '⏳ Time Control Pending';
+                indicator.style.backgroundColor = '#ffc107';
+                indicator.style.color = 'black';
+            } else if (status === 'success') {
+                indicator.textContent = '✅ Time Control Active';
+                indicator.style.backgroundColor = '#28a745';
+                indicator.style.color = 'white';
+            } else if (status === 'failed') {
+                indicator.textContent = '❌ Time Control Failed';
+                indicator.style.backgroundColor = '#dc3545';
+                indicator.style.color = 'white';
+            }
+        }
+
+        // Enhanced function to handle iframe loading and time constraints
+        function setupEnhancedTimeControl() {
+            console.log('🎬 Grain Video Time Control Script');
+            console.log('Attempting to control video playback...');
+            
+            // Find all iframes on the page
+            const iframes = document.querySelectorAll('.iframe-container iframe');
+            
+            if (iframes.length === 0) {
+                console.error('❌ No Grain embeds found on this page');
+                return;
+            }
+            
+            console.log(`Found ${iframes.length} Grain embed(s)`);
+            
+            // Process each iframe
+            iframes.forEach((iframe, index) => {
+                const container = iframe.parentElement;
+                
+                // Add status indicator
+                addStatusIndicator(container, 'pending');
+                
+                // Hide loading message
+                const loadingMessage = container.querySelector('.loading-message');
+                if (loadingMessage) {
+                    loadingMessage.style.display = 'none';
+                }
+                
+                // Parse start and end times from iframe src URL
+                const url = new URL(iframe.src);
+                const params = new URLSearchParams(url.search);
+                const startTime = parseInt(params.get('start')) || 0;
+                const endTime = parseInt(params.get('end')) || 0;
+                
+                // Store time constraints in data attributes for easy access
+                iframe.dataset.startTime = startTime;
+                iframe.dataset.endTime = endTime;
+                
+                console.log(`Working on embed #${index + 1} (${formatTime(startTime)} - ${formatTime(endTime)})...`);
+                
+                // Approach 1: Update iframe URL with time parameters
+                try {
+                    const currentSrc = iframe.src;
+                    const url = new URL(currentSrc);
+                    
+                    // Add or update time parameters
+                    url.searchParams.set('start', startTime.toString());
+                    url.searchParams.set('end', endTime.toString());
+                    url.searchParams.set('t', startTime.toString());
+                    
+                    console.log(`Updating iframe #${index + 1} URL with time parameters`);
+                    iframe.src = url.toString();
+                } catch (error) {
+                    console.error(`Error updating iframe #${index + 1} URL:`, error);
+                }
+                
+                // Set up load event handler
+                iframe.addEventListener('load', () => {
+                    // Approach 2: Try postMessage API after iframe loads
+                    try {
+                        console.log(`Sending postMessage to iframe #${index + 1}`);
+                        
+                        // Initialize with time range control
+                        iframe.contentWindow.postMessage({
+                            event: 'initialize',
+                            timeRangeControl: {
+                                start: startTime,
+                                end: endTime,
+                                enforce: true
+                            }
+                        }, 'https://grain.com');
+                        
+                        // Also try to seek to the start time
+                        iframe.contentWindow.postMessage({
+                            event: 'seek',
+                            time: startTime
+                        }, 'https://grain.com');
+                        
+                        // Try play event with time range
+                        iframe.contentWindow.postMessage({
+                            event: 'play',
+                            startTime: startTime,
+                            endTime: endTime
+                        }, 'https://grain.com');
+                    } catch (error) {
+                        console.error(`Error using postMessage API for iframe #${index + 1}:`, error);
+                    }
+                    
+                    // Approach 3: Try direct video control after a delay
+                    setTimeout(() => {
+                        try {
+                            // Try to access the iframe content
+                            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                            const video = iframeDoc.querySelector('video');
+                            
+                            if (video) {
+                                console.log(`✅ Found video element in iframe #${index + 1}, applying direct control`);
+                                
+                                // Set up time update handler
+                                const timeUpdateHandler = () => {
+                                    if (video.currentTime < startTime) {
+                                        console.log('Video before start time, seeking to start');
+                                        video.currentTime = startTime;
+                                    } else if (video.currentTime >= endTime) {
+                                        console.log('Video reached end time, pausing');
+                                        video.pause();
+                                        video.currentTime = startTime; // Reset to start
+                                    }
+                                    
+                                    // Update the custom player controls
+                                    const controls = container.querySelector('.custom-player-controls');
+                                    if (controls) {
+                                        const segmentTime = Math.max(0, video.currentTime - startTime);
+                                        const segmentDuration = endTime - startTime;
+                                        controls.textContent = `Segment: ${formatTime(segmentTime)} / ${formatTime(segmentDuration)}`;
+                                    }
+                                };
+                                
+                                // Remove any existing timeupdate listeners
+                                video.removeEventListener('timeupdate', timeUpdateHandler);
+                                
+                                // Set initial time and add event listener
+                                video.currentTime = startTime;
+                                video.addEventListener('timeupdate', timeUpdateHandler);
+                                
+                                console.log(`Set video #${index + 1} to start at ${startTime}s and end at ${endTime}s`);
+                                
+                                // Update status indicator
+                                addStatusIndicator(container, 'success');
+                                
+                                return true;
+                            } else {
+                                console.log(`No video element found in iframe #${index + 1}`);
+                            }
+                        } catch (e) {
+                            console.log(`Could not access iframe #${index + 1} content (expected due to cross-origin policy)`);
+                        }
+                        
+                        // If we get here, direct control failed
+                        addStatusIndicator(container, 'failed');
+                    }, 3000);
+                });
+            });
+            
+            // Listen for messages from all iframes
+            window.addEventListener('message', (event) => {
+                if (event.origin === 'https://grain.com' && event.data && event.data.type === 'timeupdate') {
+                    // Find the iframe that sent this message
+                    const iframes = document.querySelectorAll('.iframe-container iframe');
+                    iframes.forEach(iframe => {
+                        if (iframe.contentWindow === event.source) {
+                            const startTime = parseInt(iframe.dataset.startTime) || 0;
+                            const endTime = parseInt(iframe.dataset.endTime) || 0;
+                            const currentTime = event.data.currentTime;
+                            
+                            // Update the custom player controls
+                            const container = iframe.parentElement;
+                            const controls = container.querySelector('.custom-player-controls');
+                            if (controls) {
+                                const segmentTime = Math.max(0, currentTime - startTime);
+                                const segmentDuration = endTime - startTime;
+                                controls.textContent = `Segment: ${formatTime(segmentTime)} / ${formatTime(segmentDuration)}`;
+                            }
+                            
+                            // Enforce time constraints
+                            if (endTime > 0) {
+                                if (currentTime < startTime) {
+                                    // If before start time, seek to start
+                                    iframe.contentWindow.postMessage({
+                                        action: 'seek',
+                                        time: startTime
+                                    }, 'https://grain.com');
+                                } else if (currentTime > endTime) {
+                                    // If past end time, pause the video
+                                    iframe.contentWindow.postMessage({
+                                        action: 'pause'
+                                    }, 'https://grain.com');
+                                }
+                                
+                                // Update status indicator if we're getting timeupdate events
+                                addStatusIndicator(container, 'success');
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        // Initialize when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', setupEnhancedTimeControl);
+    </script>
+</body>
+</html>

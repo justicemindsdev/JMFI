@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Forensic Linguistic Analysis | Official Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a3a5f;
+            --secondary-color: #0f4d92;
+            --accent-color: #c19a5b;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            border-bottom: 5px solid var(--accent-color);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            margin-right: 15px;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background-color: var(--accent-color);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+        }
+        
+        .btn-danger {
+            background-color: var(--danger-color);
+        }
+        
+        .btn-info {
+            background-color: var(--info-color);
+        }
+        
+        main {
+            padding: 2rem 0;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .intro-section {
+            background-color: var(--light-bg);
+            border-left: 5px solid var(--primary-color);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .recording-container {
+            margin-bottom: 3rem;
+        }
+        
+        .iframe-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .transcript-container {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cue {
+            padding: 1rem;
+            margin-bottom: 2px;
+            border-radius: 4px;
+            background-color: var(--light-bg);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .cue:hover {
+            background-color: #e9ecef;
+        }
+        
+        .cue.active {
+            background-color: rgba(193, 154, 91, 0.2);
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .cue.flagged {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-left: 4px solid var(--danger-color);
+        }
+        
+        .timestamp {
+            font-family: monospace;
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        
+        .timestamp:hover {
+            text-decoration: underline;
+        }
+        
+        .cue-text {
+            display: inline;
+        }
+        
+        .cue-actions {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .analysis-form {
+            display: none;
+            background-color: #e9ecef;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 0.5rem;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .tab:hover {
+            background-color: var(--light-bg);
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--accent-color);
+            color: var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .analysis-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .analysis-table th, .analysis-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .analysis-table th {
+            background-color: var(--primary-color);
+            color: white;
+            position: sticky;
+            top: 0;
+        }
+        
+        .analysis-table tr:nth-child(even) {
+            background-color: var(--light-bg);
+        }
+        
+        .violation {
+            font-weight: 600;
+            color: var(--danger-color);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: white;
+        }
+        
+        .badge-gaslighting {
+            background-color: #e74c3c;
+        }
+        
+        .badge-manipulation {
+            background-color: #8e44ad;
+        }
+        
+        .badge-abuse {
+            background-color: #c0392b;
+        }
+        
+        .badge-exploitation {
+            background-color: #d35400;
+        }
+        
+        .case-law {
+            background-color: rgba(26, 58, 95, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+        
+        .case-citation {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .ai-analysis-section {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .ai-model-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .ai-model-option {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-model-option:hover {
+            background-color: rgba(26, 58, 95, 0.1);
+        }
+        
+        .ai-model-option.selected {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .audio-snippet {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .audio-waveform {
+            width: 100px;
+            height: 50px;
+            background-color: var(--primary-color);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .audio-waveform::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to right,
+                transparent,
+                transparent 2px,
+                rgba(255, 255, 255, 0.3) 2px,
+                rgba(255, 255, 255, 0.3) 4px
+            );
+        }
+        
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .play-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .audio-info {
+            font-size: 0.9rem;
+        }
+        
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .popup-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 900px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .popup-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        
+        .popup-body {
+            padding: 1.5rem;
+        }
+        
+        .popup-footer {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .close-popup {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .transcript-highlight {
+            padding: 1rem;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            position: relative;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .transcript-text {
+            line-height: 1.8;
+        }
+        
+        .transcript-text span {
+            padding: 2px 0;
+            border-radius: 2px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .transcript-text span.highlight {
+            background-color: rgba(193, 154, 91, 0.3);
+        }
+        
+        .transcript-text span.violation {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: var(--danger-color);
+            font-weight: 600;
+        }
+        
+        .transcript-progress {
+            height: 4px;
+            background-color: var(--border-color);
+            position: relative;
+            margin-top: 1rem;
+        }
+        
+        .transcript-progress-bar {
+            height: 100%;
+            background-color: var(--accent-color);
+            width: 0;
+            transition: width 0.1s linear;
+        }
+        
+        .share-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: white;
+        }
+        
+        .share-btn-email {
+            background-color: #d44638;
+        }
+        
+        .share-btn-link {
+            background-color: #0078d7;
+        }
+        
+        .share-btn-pdf {
+            background-color: #ff5722;
+        }
+        
+        .share-btn-print {
+            background-color: #333;
+        }
+        
+        .official-stamp {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+        }
+        
+        .stamp-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .stamp-text {
+            font-size: 0.9rem;
+        }
+        
+        .stamp-text strong {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+        
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(26, 58, 95, 0.1);
+            border-left-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .logo {
+                justify-content: center;
+            }
+            
+            .header-actions {
+                justify-content: center;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-text">
+                        <h1>LEGAL FORENSIC LINGUISTIC ANALYSIS</h1>
+                        <p>Official Documentation & Evidence Repository</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="export-btn">
+                        <i class="fas fa-file-export"></i> Export Report
+                    </button>
+                    <button class="btn btn-secondary" id="share-btn">
+                        <i class="fas fa-share-alt"></i> Share Findings
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="intro-section">
+            <h2>Case Overview: Forensic Linguistic Analysis</h2>
+            <p>This document presents forensic linguistic analysis and psychological evidence of gaslighting, manipulation, abuse, and exploitation directed at Ben. Each identified instance includes the exact quote, timestamp, type of violation, and analysis of the linguistic and psychological patterns that constitute evidence, backed by relevant UK case law and jurisprudence.</p>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <span>AI-Powered Analysis Configuration</span>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="api-key">AI API Key</label>
+                    <input type="password" id="api-key" class="form-control" value="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">
+                </div>
+                
+                <div class="form-group">
+                    <label>Select AI Models for Analysis</label>
+                    <div class="ai-model-selector">
+                        <div class="ai-model-option selected" data-model="anthropic/claude-instant-1.1">Claude Instant 1.1</div>
+                        <div class="ai-model-option" data-model="anthropic/claude-3.7-sonnet">Claude 3.7 Sonnet</div>
+                        <div class="ai-model-option selected" data-model="openai/chatgpt-4o-latest">GPT-4o Latest</div>
+                        <div class="ai-model-option" data-model="openai/chatgpt-4ovision">GPT-4o Vision</div>
+                        <div class="ai-model-option" data-model="openai/chatgpt-4.1-latest">GPT-4.1 Latest</div>
+                        <div class="ai-model-option" data-model="openai/o1-preview-2024-09-12">O1 Preview</div>
+                        <div class="ai-model-option" data-model="openai/o1-mini">O1 Mini</div>
+                        <div class="ai-model-option" data-model="x-ai/grok-beta">Grok Beta</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Analysis Parameters</label>
+                    <div class="grid">
+                        <div>
+                            <div class="form-group">
+                                <label for="analysis-depth">Analysis Depth</label>
+                                <select id="analysis-depth" class="form-control">
+                                    <option value="standard">Standard</option>
+                                    <option value="deep" selected>Deep Analysis</option>
+                                    <option value="expert">Expert Witness Level</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <label for="case-law-jurisdiction">Case Law Jurisdiction</label>
+                                <select id="case-law-jurisdiction" class="form-control">
+                                    <option value="uk" selected>United Kingdom</option>
+                                    <option value="england-wales">England & Wales</option>
+                                    <option value="scotland">Scotland</option>
+                                    <option value="northern-ireland">Northern Ireland</option>
+                                    <option value="international">International</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <label for="legal-framework">Legal Framework</label>
+                                <select id="legal-framework" class="form-control">
+                                    <option value="family-law" selected>Family Law</option>
+                                    <option value="criminal-law">Criminal Law</option>
+                                    <option value="civil-law">Civil Law</option>
+                                    <option value="human-rights">Human Rights</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" id="initialize-ai">
+                    <i class="fas fa-robot"></i> Initialize AI Analysis
+                </button>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="recordings">Recordings & Transcripts</div>
+            <div class="tab" data-tab="analysis">Analysis Results</div>
+            <div class="tab" data-tab="legal">Legal Framework</div>
+            <div class="tab" data-tab="export">Export & Share</div>
+        </div>
+        
+        <div class="tab-content active" id="recordings-tab">
+            <div class="recording-container" id="recording-1">
+                <h2>Recording 1</h2>
+                <div class="iframe-container">
+                    <iframe src="https://grain.com/_/embed/recording/8d2e5d26-5395-4475-9884-476935b2e006/yvJNNZ2S5Cq6mS2yIU1YMkGwO3Nv9anzwCEw6DLE?autoplay=false&origin=user_iframe" allow="fullscreen" allowfullscreen="true"></iframe>
+                </div>
+                
+                <h3>Transcript with Analysis Tools</h3>
+                <p>Click "Analyze" on any segment to mark it as potential evidence and add your analysis.</p>
+                
+                <div class="transcript-container" id="transcript-container-1">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                    </div>
+                    <!-- Transcript cues will be loaded here -->
+                </div>
+            </div>
+            
+            <div class="recording-container" id="recording-2">
+                <h2>Recording 2</h2>
+                <div class="iframe-container">
+                    <iframe src="https://grain.com/_/embed/recording/64c03142-6eca-4930-9d62-030417a4a30a/rX5vzOKCK3acvf5Zv3GKa4l4oCMKaSgs27MvX3yE?autoplay=false&origin=user_iframe" allow="fullscreen" allowfullscreen="true"></iframe>
+                </div>
+                
+                <h3>Transcript with Analysis Tools</h3>
+                <p>Click "Analyze" on any segment to mark it as potential evidence and add your analysis.</p>
+                
+                <div class="transcript-container" id="transcript-container-2">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                    </div>
+                    <!-- Transcript cues will be loaded here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="analysis-tab">
+            <div class="card">
+                <div class="card-header">
+                    <span>Evidence Summary</span>
+                </div>
+                <div class="card-body">
+                    <div id="analysis-summary">
+                        <p>No analysis has been performed yet. Use the "Analyze" buttons on transcript segments to begin building your evidence.</p>
+                    </div>
+                    
+                    <div id="analysis-results" style="display: none;">
+                        <h3>Identified Violations</h3>
+                        <table class="analysis-table" id="violations-table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Recording</th>
+                                    <th>Quote</th>
+                                    <th>Violation Type</th>
+                                    <th>AI Analysis</th>
+                                    <th>Legal Implications</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Analysis results will be added here -->
+                            </tbody>
+                        </table>
+                        
+                        <div class="ai-analysis-section">
+                            <h3>AI-Generated Pattern Analysis</h3>
+                            <p>The AI has identified the following patterns of behavior based on the analyzed segments:</p>
+                            <div id="pattern-analysis">
+                                <!-- AI pattern analysis will be added here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <span>Audio Snippets Gallery</span>
+                </div>
+                <div class="card-body">
+                    <p>Click on any audio snippet to hear the exact segment and view the synchronized transcript.</p>
+                    <div id="snippets-gallery" class="grid">
+                        <!-- Audio snippets will be added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="legal-tab">
+            <div class="card">
+                <div class="card-header">
+                    <span>Legal Framework & Case Law</span>
+                </div>
+                <div class="card-body">
+                    <h3>Applicable UK Legal Framework</h3>
+                    <p>The following legal frameworks and precedents are relevant to the identified patterns of behavior:</p>
+                    
+                    <div class="case-law">
+                        <div class="case-citation">Family Law Act 1996</div>
+                        <p>Section 42A provides for a domestic abuse protection notice, which can be issued by a senior police officer and prohibits a person from being abusive towards a relevant person. This includes psychological and emotional abuse, which encompasses gaslighting and manipulation.</p>
+                    </div>
+                    
+                    <div class="case-law">
+                        <div class="case-citation">Serious Crime Act 2015</div>
+                        <p>Section 76 created a new offence of controlling or coercive behavior in intimate or family relationships. This specifically addresses patterns of behavior that may include psychological manipulation, gaslighting, and emotional abuse.</p>
+                    </div>
+                    
+                    <div class="case-law">
+                        <div class="case-citation">R v Challen [2019] EWCA Crim 916</div>
+                        <p>This landmark case recognized the impact of coercive control and psychological abuse in domestic relationships. The Court of Appeal acknowledged how patterns of controlling behavior can have profound psychological effects on victims.</p>
+                    </div>
+                    
+                    <div class="case-law">
+                        <div class="case-citation">Yemshaw v London Borough of Hounslow [2011] UKSC 3</div>
+                        <p>The Supreme Court held that "domestic violence" should be understood to include threatening behavior, and psychological abuse. This broadened the legal understanding of abuse beyond physical violence to include emotional and psychological harm.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="export-tab">
+            <div class="card">
+                <div class="card-header">
+                    <span>Export & Share Options</span>
+                </div>
+                <div class="card-body">
+                    <h3>Export Format Options</h3>
+                    <div class="form-group">
+                        <label for="export-format">Select Export Format</label>
+                        <select id="export-format" class="form-control">
+                            <option value="html">HTML Report (Complete with Audio)</option>
+                            <option value="pdf">PDF Document (Court Submission Ready)</option>
+                            <option value="word">Word Document (.docx)</option>
+                            <option value="json">JSON Data (For Technical Analysis)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="export-content">Content to Include</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="checkbox" id="include-recordings" checked>
+                                <label for="include-recordings">Recordings</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="checkbox" id="include-transcripts" checked>
+                                <label for="include-transcripts">Full Transcripts</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="checkbox" id="include-analysis" checked>
+                                <label for="include-analysis">AI Analysis</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="checkbox" id="include-legal" checked>
+                                <label for="include-legal">Legal Framework</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" id="generate-export">
+                        <i class="fas fa-file-export"></i> Generate Export
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <div class="popup-overlay" id="transcript-popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3>Synchronized Transcript</h3>
+                <button class="close-popup" id="close-popup">&times;</button>
+            </div>
+            <div class="popup-body">
+                <div class="audio-snippet">
+                    <div class="audio-waveform"></div>
+                    <div class="audio-controls">
+                        <button class="play-btn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <div class="audio-info">
+                            <strong>Recording 1</strong>
+                            <span>00:05:23 - 00:05:42</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="transcript-highlight">
+                    <div class="transcript-text">
+                        <span>I</span> <span>don't</span> <span>understand</span> <span>why</span> <span>you're</span> <span>so</span> <span>upset</span> <span>about</span> <span>this.</span> <span>You</span> <span class="highlight">always</span> <span class="highlight">overreact</span> <span class="highlight">to</span> <span class="highlight">everything.</span> <span>I</span> <span>never</span> <span>said</span> <span>that</span> <span>to</span> <span>you.</span> <span class="violation">You're</span> <span class="violation">imagining</span> <span class="violation">things</span> <span class="violation">again.</span>
+                    </div>
+                    <div class="transcript-progress">
+                        <div class="transcript-progress-bar" style="width: 60%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="popup-footer">
+                <button class="btn btn-secondary" id="add-to-evidence">Add to Evidence</button>
+                <button class="btn btn-primary" id="analyze-segment">Analyze with AI</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Legal Resources</h3>
+                    <ul>
+                        <li><a href="#">UK Family Law Resources</a></li>
+                        <li><a href="#">Domestic Abuse Support</a></li>
+                        <li><a href="#">Legal Aid Information</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Technical Support</h3>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Legal Forensic Linguistic Analysis System. All evidence collected is confidential and protected under data protection laws.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // API Configuration
+        const API_KEY = document.getElementById('api-key').value;
+        const GRAIN_API_TOKEN = 'grain_pat_UKc2Vv6c_4KUaUr4xdF2oojfDTkaXhoOEY65ewNT3Frum1mzi';
+        
+        // Recording IDs
+        const RECORDING_IDS = [
+            '8d2e5d26-5395-4475-9884-476935b2e006',
+            '64c03142-6eca-4930-9d62-030417a4a30a'
+        ];
+        
+        // Selected AI Models
+        let selectedModels = [];
+        
+        // Analysis Data Storage
+        const analysisData = {
+            recordings: {},
+            violations: [],
+            patterns: []
+        };
+        
+        // Initialize for each recording
+        RECORDING_IDS.forEach((id, index) => {
+            analysisData.recordings[id] = {
+                cues: [],
+                analyses: []
+            };
+        });
+        
+        // DOM Elements
+        const tabButtons = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const aiModelOptions = document.querySelectorAll('.ai-model-option');
+        const initializeAiButton = document.getElementById('initialize-ai');
+        const exportButton = document.getElementById('export-btn');
+        const shareButton = document.getElementById('share-btn');
+        const transcriptPopup = document.getElementById('transcript-popup');
+        const closePopupButton = document.getElementById('close-popup');
+        
+        // Tab Switching
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabName = button.getAttribute('data-tab');
+                
+                // Update active tab button
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Update active tab content
+                tabContents.forEach(content => content.classList.remove('active'));
+                document.getElementById(`${tabName}-tab`).classList.add('active');
+            });
+        });
+        
+        // AI Model Selection
+        aiModelOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                option.classList.toggle('selected');
+                
+                // Update selected models array
+                const modelName = option.getAttribute('data-model');
+                if (option.classList.contains('selected')) {
+                    if (!selectedModels.includes(modelName)) {
+                        selectedModels.push(modelName);
+                    }
+                } else {
+                    selectedModels = selectedModels.filter(model => model !== modelName);
+                }
+            });
+        });
+        
+        // Initialize selected models on page load
+        aiModelOptions.forEach(option => {
+            if (option.classList.contains('selected')) {
+                const modelName = option.getAttribute('data-model');
+                selectedModels.push(modelName);
+            }
+        });
+        
+        // Initialize AI Analysis
+        initializeAiButton.addEventListener('click', () => {
+            // Update API key from input
+            const apiKeyInput = document.getElementById('api-key');
+            const apiKey = apiKeyInput.value.trim();
+            
+            if (!apiKey) {
+                alert('Please enter a valid API key.');
+                return;
+            }
+            
+            if (selectedModels.length === 0) {
+                alert('Please select at least one AI model for analysis.');
+                return;
+            }
+            
+            // Show loading state
+            initializeAiButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Initializing...';
+            initializeAiButton.disabled = true;
+            
+            // Fetch transcripts and initialize analysis
+            Promise.all(RECORDING_IDS.map((id, index) => fetchTranscript(id, index)))
+                .then(() => {
+                    // Update UI with transcripts
+                    renderTranscripts();
+                    
+                    // Enable analysis features
+                    initializeAiButton.innerHTML = '<i class="fas fa-check"></i> AI Analysis Ready';
+                    setTimeout(() => {
+                        initializeAiButton.innerHTML = '<i class="fas fa-robot"></i> Re-Initialize AI Analysis';
+                        initializeAiButton.disabled = false;
+                    }, 2000);
+                })
+                .catch(error => {
+                    console.error('Error initializing AI analysis:', error);
+                    initializeAiButton.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Initialization Failed';
+                    setTimeout(() => {
+                        initializeAiButton.innerHTML = '<i class="fas fa-robot"></i> Initialize AI Analysis';
+                        initializeAiButton.disabled = false;
+                    }, 2000);
+                });
+        });
+        
+        // Fetch transcript for a recording
+        async function fetchTranscript(recordingId, index) {
+            // In a real implementation, this would use the Grain API to fetch the transcript
+            // For this demo, we'll simulate the API call and return mock data
+            
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    // Mock transcript data
+                    const mockCues = generateMockTranscript(recordingId, index);
+                    analysisData.recordings[recordingId].cues = mockCues;
+                    resolve(mockCues);
+                }, 1500);
+            });
+        }
+        
+        // Generate mock transcript data
+        function generateMockTranscript(recordingId, index) {
+            const cues = [];
+            const speakerA = index === 0 ? "John" : "Sarah";
+            const speakerB = "Ben";
+            
+            // Mock conversation with some gaslighting/manipulation examples
+            const conversations = [
+                {
+                    speaker: speakerA,
+                    text: "I don't understand why you're so upset about this. You always overreact to everything."
+                },
+                {
+                    speaker: speakerB,
+                    text: "I'm not overreacting. You promised you would be there, and you weren't."
+                },
+                {
+                    speaker: speakerA,
+                    text: "I never promised anything like that. You're imagining things again."
+                },
+                {
+                    speaker: speakerB,
+                    text: "We talked about it last week. You specifically said you would come."
+                },
+                {
+                    speaker: speakerA,
+                    text: "No, that's not what I said. You always twist my words and make up stories in your head."
+                },
+                {
+                    speaker: speakerB,
+                    text: "I'm not making anything up. I remember our conversation clearly."
+                },
+                {
+                    speaker: speakerA,
+                    text: "Well, your memory is obviously faulty. This is exactly why I can't rely on you for anything important."
+                }
+            ];
+            
+            // Create cues with timestamps
+            let startTime = 0;
+            conversations.forEach((conversation, i) => {
+                const duration = conversation.text.length * 50; // Rough estimate of speaking time
+                const endTime = startTime + duration;
+                
+                cues.push({
+                    index: i,
+                    startTime: formatTime(startTime),
+                    endTime: formatTime(endTime),
+                    speaker: conversation.speaker,
+                    text: conversation.text
+                });
+                
+                startTime = endTime + 500; // Add a small gap between speakers
+            });
+            
+            return cues;
+        }
+        
+        // Format milliseconds to timestamp format (MM:SS.mmm)
+        function formatTime(ms) {
+            const totalSeconds = Math.floor(ms / 1000);
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            const milliseconds = ms % 1000;
+            
+            return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}`;
+        }
+        
+        // Render transcripts in the UI
+        function renderTranscripts() {
+            RECORDING_IDS.forEach((recordingId, index) => {
+                const recordingNumber = index + 1;
+                const transcriptContainer = document.getElementById(`transcript-container-${recordingNumber}`);
+                const cues = analysisData.recordings[recordingId].cues;
+                
+                // Clear loading spinner
+                transcriptContainer.innerHTML = '';
+                
+                // Add each cue
+                cues.forEach(cue => {
+                    const cueElement = document.createElement('div');
+                    cueElement.className = 'cue';
+                    cueElement.id = `cue-${recordingId}-${cue.index}`;
+                    
+                    cueElement.innerHTML = `
+                        <span class="timestamp" data-start="${cue.startTime}" data-end="${cue.endTime}">${cue.startTime}</span>
+                        <strong>${cue.speaker}:</strong> <div class="cue-text">${cue.text}</div>
+                        <div class="cue-actions">
+                            <button class="action-btn analyze-btn" onclick="showAnalysisForm('${recordingId}', ${cue.index})">
+                                <i class="fas fa-search"></i> Analyze
+                            </button>
+                            <button class="action-btn play-btn" onclick="playSegment('${recordingId}', ${cue.index})">
+                                <i class="fas fa-play"></i> Play
+                            </button>
+                        </div>
+                        
+                        <div class="analysis-form" id="analysis-form-${recordingId}-${cue.index}">
+                            <div class="form-group">
+                                <label>Violation Type:</label>
+                                <div class="radio-group">
+                                    <div class="radio-option">
+                                        <input type="radio" name="violation-${recordingId}-${cue.index}" id="gaslighting-${recordingId}-${cue.index}" value="Gaslighting">
+                                        <label for="gaslighting-${recordingId}-${cue.index}">Gaslighting</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="violation-${recordingId}-${cue.index}" id="manipulation-${recordingId}-${cue.index}" value="Manipulation">
+                                        <label for="manipulation-${recordingId}-${cue.index}">Manipulation</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="violation-${recordingId}-${cue.index}" id="abuse-${recordingId}-${cue.index}" value="Psychological Abuse">
+                                        <label for="abuse-${recordingId}-${cue.index}">Psychological Abuse</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="violation-${recordingId}-${cue.index}" id="exploitation-${recordingId}-${cue.index}" value="Exploitation">
+                                        <label for="exploitation-${recordingId}-${cue.index}">Exploitation</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="ai-analysis-${recordingId}-${cue.index}">Request AI Analysis:</label>
+                                <button class="btn btn-secondary" onclick="requestAiAnalysis('${recordingId}', ${cue.index})">
+                                    <i class="fas fa-robot"></i> Generate AI Analysis
+                                </button>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="analysis-notes-${recordingId}-${cue.index}">Analysis Notes:</label>
+                                <textarea id="analysis-notes-${recordingId}-${cue.index}" class="form-control" rows="3" placeholder="Enter your analysis or notes about this segment..."></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <button class="btn btn-primary" onclick="saveAnalysis('${recordingId}', ${cue.index})">
+                                    <i class="fas fa-save"></i> Save Analysis
+                                </button>
+                                <button class="btn btn-secondary" onclick="cancelAnalysis('${recordingId}', ${cue.index})">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    transcriptContainer.appendChild(cueElement);
+                });
+            });
+            
+            // Create audio snippets gallery
+            createSnippetsGallery();
+        }
+        
+        // Create audio snippets gallery
+        function createSnippetsGallery() {
+            const snippetsGallery = document.getElementById('snippets-gallery');
+            snippetsGallery.innerHTML = '';
+            
+            // Add a few mock snippets
+            for (let i = 0; i < 3; i++) {
+                const snippet = document.createElement('div');
+                snippet.className = 'audio-snippet';
+                snippet.innerHTML = `
+                    <div class="audio-waveform"></div>
+                    <div class="audio-controls">
+                        <button class="play-btn" onclick="showTranscriptPopup()">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <div class="audio-info">
+                            <strong>Recording ${i % 2 + 1}</strong>
+                            <span>00:0${i+1}:23 - 00:0${i+1}:42</span>
+                        </div>
+                    </div>
+                `;
+                snippetsGallery.appendChild(snippet);
+            }
+        }
+        
+        // Global functions for UI interaction
+        window.showAnalysisForm = function(recordingId, cueIndex) {
+            const formId = `analysis-form-${recordingId}-${cueIndex}`;
+            const form = document.getElementById(formId);
+            form.style.display = 'block';
+        };
+        
+        window.cancelAnalysis = function(recordingId, cueIndex) {
+            const formId = `analysis-form-${recordingId}-${cueIndex}`;
+            const form = document.getElementById(formId);
+            form.style.display = 'none';
+        };
+        
+        window.playSegment = function(recordingId, cueIndex) {
+            showTranscriptPopup();
+        };
+        
+        window.showTranscriptPopup = function() {
+            transcriptPopup.classList.add('active');
+        };
+        
+        window.requestAiAnalysis = function(recordingId, cueIndex) {
+            const cue = analysisData.recordings[recordingId].cues[cueIndex];
+            const button = event.target.closest('button');
+            
+            // Show loading state
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+            button.disabled = true;
+            
+            // Simulate AI analysis
+            setTimeout(() => {
+                // Get analysis based on the text content
+                const analysis = analyzeTextWithAI(cue.text, cue.speaker);
+                
+                // Find the notes textarea and update it with the AI analysis
+                const notesTextarea = document.getElementById(`analysis-notes-${recordingId}-${cueIndex}`);
+                notesTextarea.value = analysis;
+                
+                // Auto-select violation type based on analysis
+                if (analysis.toLowerCase().includes('gaslight')) {
+                    document.getElementById(`gaslighting-${recordingId}-${cueIndex}`).checked = true;
+                } else if (analysis.toLowerCase().includes('manipulat')) {
+                    document.getElementById(`manipulation-${recordingId}-${cueIndex}`).checked = true;
+                } else if (analysis.toLowerCase().includes('abuse')) {
+                    document.getElementById(`abuse-${recordingId}-${cueIndex}`).checked = true;
+                } else if (analysis.toLowerCase().includes('exploit')) {
+                    document.getElementById(`exploitation-${recordingId}-${cueIndex}`).checked = true;
+                }
+                
+                // Reset button
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }, 2000);
+        };
+        
+        // Analyze text with AI (mock function)
+        function analyzeTextWithAI(text, speaker) {
+            if (speaker !== "Ben") {
+                // Check for common gaslighting patterns
+                if (text.includes("imagining things") || text.includes("overreact")) {
+                    return "This statement contains gaslighting language that attempts to make Ben question his own perception of reality. The phrase 'imagining things' directly invalidates Ben's experience and memories. This is a classic gaslighting technique that can constitute psychological abuse under Section 76 of the Serious Crime Act 2015.";
+                }
+                
+                if (text.includes("twist my words") || text.includes("make up stories")) {
+                    return "This statement contains manipulative language that attempts to shift blame onto Ben. By accusing Ben of 'twisting words' or 'making up stories,' the speaker is attempting to avoid accountability and make Ben doubt his own understanding of previous conversations. This pattern of behavior is consistent with coercive control as defined in UK case law.";
+                }
+                
+                if (text.includes("memory is obviously faulty") || text.includes("can't rely on you")) {
+                    return "This statement contains psychologically abusive language that undermines Ben's confidence and self-worth. By attacking Ben's memory and reliability, the speaker is engaging in a pattern of behavior that could constitute emotional abuse under the Family Law Act 1996. This type of language creates a power imbalance and can lead to psychological harm.";
+                }
+            }
+            
+            return "No clear violation patterns detected in this segment. Consider reviewing the context and surrounding conversation for additional insights.";
+        }
+        
+        window.saveAnalysis = function(recordingId, cueIndex) {
+            const cue = analysisData.recordings[recordingId].cues[cueIndex];
+            const cueElement = document.getElementById(`cue-${recordingId}-${cueIndex}`);
+            
+            // Get violation type
+            const violationInputs = document.getElementsByName(`violation-${recordingId}-${cueIndex}`);
+            let violationType = '';
+            for (const input of violationInputs) {
+                if (input.checked) {
+                    violationType = input.value;
+                    break;
+                }
+            }
+            
+            // Get analysis notes
+            const analysisNotes = document.getElementById(`analysis-notes-${recordingId}-${cueIndex}`).value;
+            
+            // Validate inputs
+            if (!violationType) {
+                alert('Please select a violation type.');
+                return;
+            }
+            
+            if (!analysisNotes.trim()) {
+                alert('Please enter analysis notes.');
+                return;
+            }
+            
+            // Create analysis object
+            const analysis = {
+                id: `${recordingId}-${cueIndex}`,
+                recordingId: recordingId,
+                cueIndex: cueIndex,
+                timestamp: cue.startTime,
+                speaker: cue.speaker,
+                quote: cue.text,
+                violationType: violationType,
+                analysis: analysisNotes,
+                legalImplications: generateLegalImplications(violationType)
+            };
+            
+            // Add to storage
+            const existingIndex = analysisData.recordings[recordingId].analyses.findIndex(a => a.id === analysis.id);
+            if (existingIndex >= 0) {
+                analysisData.recordings[recordingId].analyses[existingIndex] = analysis;
+            } else {
+                analysisData.recordings[recordingId].analyses.push(analysis);
+            }
+            
+            // Update UI
+            updateAnalysisResults();
+            
+            // Hide the form
+            cancelAnalysis(recordingId, cueIndex);
+            
+            // Highlight the analyzed cue
+            cueElement.classList.add('flagged');
+        };
+        
+        // Generate legal implications based on violation type
+        function generateLegalImplications(violationType) {
+            switch (violationType) {
+                case 'Gaslighting':
+                    return "This behavior may constitute psychological abuse under Section 76 of the Serious Crime Act 2015, which criminalizes controlling or coercive behavior in intimate relationships. The case of F v M [2021] EWFC 4 established that patterns of language designed to undermine a victim's perception of reality constitute evidence of coercive control.";
+                case 'Manipulation':
+                    return "This manipulative behavior may fall under the definition of controlling behavior in Section 76 of the Serious Crime Act 2015. In Re H-N and Others [2021] EWCA Civ 448, the Court of Appeal emphasized the importance of identifying patterns of manipulative behavior as evidence of domestic abuse.";
+                case 'Psychological Abuse':
+                    return "This behavior constitutes psychological abuse as recognized in Yemshaw v London Borough of Hounslow [2011] UKSC 3, where the Supreme Court held that 'domestic violence' includes psychological abuse. This may be actionable under both the Family Law Act 1996 and the Serious Crime Act 2015.";
+                case 'Exploitation':
+                    return "This exploitative behavior may constitute a form of controlling behavior under Section 76 of the Serious Crime Act 2015. The case of R v Challen [2019] EWCA Crim 916 recognized how patterns of controlling behavior can have profound psychological effects on victims.";
+                default:
+                    return "Legal implications pending further analysis.";
+            }
+        }
+        
+        // Update analysis results in the UI
+        function updateAnalysisResults() {
+            const analysisResults = document.getElementById('analysis-results');
+            const analysisTable = document.getElementById('violations-table').querySelector('tbody');
+            const analysisPattern = document.getElementById('pattern-analysis');
+            const analysisCount = countTotalAnalyses();
+            
+            if (analysisCount === 0) {
+                document.getElementById('analysis-summary').style.display = 'block';
+                analysisResults.style.display = 'none';
+                return;
+            }
+            
+            // Show results and hide summary
+            document.getElementById('analysis-summary').style.display = 'none';
+            analysisResults.style.display = 'block';
+            
+            // Clear existing table rows
+            analysisTable.innerHTML = '';
+            
+            // Add rows for each analysis
+            RECORDING_IDS.forEach((recordingId, recordingIndex) => {
+                const analyses = analysisData.recordings[recordingId].analyses;
+                
+                analyses.forEach(analysis => {
+                    const row = document.createElement('tr');
+                    
+                    // Create cells
+                    row.innerHTML = `
+                        <td>${analysis.timestamp}</td>
+                        <td>Recording ${recordingIndex + 1}</td>
+                        <td><span class="violation">${analysis.quote}</span></td>
+                        <td><span class="badge badge-${analysis.violationType.toLowerCase().replace(' ', '-')}">${analysis.violationType}</span></td>
+                        <td>${analysis.analysis}</td>
+                        <td>${analysis.legalImplications}</td>
+                        <td>
+                            <button class="btn btn-secondary btn-sm" onclick="playSegment('${recordingId}', ${analysis.cueIndex})">
+                                <i class="fas fa-play"></i> Play
+                            </button>
+                        </td>
+                    `;
+                    
+                    analysisTable.appendChild(row);
+                });
+            });
+            
+            // Generate pattern analysis
+            analysisPattern.innerHTML = generatePatternAnalysis();
+        }
+        
+        // Count total analyses
+        function countTotalAnalyses() {
+            let count = 0;
+            RECORDING_IDS.forEach(recordingId => {
+                count += analysisData.recordings[recordingId].analyses.length;
+            });
+            return count;
+        }
+        
+        // Generate pattern analysis
+        function generatePatternAnalysis() {
+            const violationTypes = {
+                'Gaslighting': 0,
+                'Manipulation': 0,
+                'Psychological Abuse': 0,
+                'Exploitation': 0
+            };
+            
+            // Count violation types
+            RECORDING_IDS.forEach(recordingId => {
+                analysisData.recordings[recordingId].analyses.forEach(analysis => {
+                    violationTypes[analysis.violationType]++;
+                });
+            });
+            
+            // Generate analysis text
+            let analysisHtml = '<div class="case-law">';
+            
+            if (violationTypes['Gaslighting'] > 0) {
+                analysisHtml += `
+                    <p><strong>Gaslighting Pattern (${violationTypes['Gaslighting']} instances):</strong> The evidence shows a consistent pattern of gaslighting behavior, where the subject attempts to make Ben question his own perception of reality. This includes denying previous statements, claiming Ben is "imagining things," and invalidating his memories and experiences.</p>
+                `;
+            }
+            
+            if (violationTypes['Manipulation'] > 0) {
+                analysisHtml += `
+                    <p><strong>Manipulation Pattern (${violationTypes['Manipulation']} instances):</strong> The evidence demonstrates manipulative behavior designed to control Ben's actions and emotions. This includes guilt-inducing language, false equivalencies, and conditional phrasing that creates a power imbalance in the relationship.</p>
+                `;
+            }
+            
+            if (violationTypes['Psychological Abuse'] > 0) {
+                analysisHtml += `
+                    <p><strong>Psychological Abuse Pattern (${violationTypes['Psychological Abuse']} instances):</strong> The evidence reveals a pattern of psychological abuse through derogatory language, humiliation, and controlling statements. This behavior is designed to undermine Ben's self-esteem and create emotional dependency.</p>
+                `;
+            }
+            
+            if (violationTypes['Exploitation'] > 0) {
+                analysisHtml += `
+                    <p><strong>Exploitation Pattern (${violationTypes['Exploitation']} instances):</strong> The evidence indicates exploitative behavior where the subject takes advantage of Ben's vulnerabilities, creates dependency, and leverages power imbalances for personal gain.</p>
+                `;
+            }
+            
+            analysisHtml += '</div>';
+            
+            return analysisHtml;
+        }
+        
+        // Close popup
+        closePopupButton.addEventListener('click', () => {
+            transcriptPopup.classList.remove('active');
+        });
+        
+        // Export button
+        exportButton.addEventListener('click', () => {
+            // Switch to export tab
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            document.querySelector('.tab[data-tab="export"]').classList.add('active');
+            document.getElementById('export-tab').classList.add('active');
+        });
+        
+        // Generate export
+        document.getElementById('generate-export').addEventListener('click', () => {
+            const exportFormat = document.getElementById('export-format').value;
+            alert(`Export in ${exportFormat} format is being generated. This feature would create a downloadable file with all the analysis data in a real implementation.`);
+        });
+    </script>

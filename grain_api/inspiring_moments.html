@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspiring Moments - Grain Time-Constrained Embeds</title>
+    <!-- Include the custom player script -->
+    <script src="grain_custom_player.js"></script>
+    <style>
+        :root {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --accent-color: #0d6efd;
+            --border-color: #dee2e6;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--bg-secondary);
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+        
+        .intro {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+        
+        .segment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 30px;
+        }
+        
+        .segment-card {
+            background-color: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .segment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .segment-content {
+            padding: 20px;
+        }
+        
+        .segment-title {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .segment-description {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+        
+        .segment-timestamp {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .segment-player-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+            border-radius: 4px;
+            background-color: #000;
+            position: relative;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        
+        .implementation-notes {
+            background-color: #f0f8ff;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+        
+        code {
+            background-color: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: monospace;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .segment-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Inspiring Moments</h1>
+            <p>A collection of time-constrained Grain video segments using multiple URL parameters</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="intro">
+            <p>This page demonstrates how to embed Grain videos with precise time constraints using multiple URL parameters for maximum compatibility. Each segment below uses a combination of <code>start</code>, <code>end</code>, <code>t</code>, <code>time</code>, and URL fragment <code>#t=</code> parameters to ensure the video plays only the specified portion.</p>
+        </div>
+        
+        <div class="implementation-notes">
+            <h3>Implementation Notes</h3>
+            <p>This page uses the custom Grain player wrapper to enforce time constraints:</p>
+            <pre>const player = new GrainPlayerController({
+    containerId: 'player-container-1',
+    recordingId: 'RECORDING_ID',
+    accessToken: 'ACCESS_TOKEN',
+    startTime: 120,
+    endTime: 165,
+    autoplay: false,
+    onReady: () => { console.log('Player is ready'); },
+    onTimeUpdate: (time) => { console.log('Current time:', time); },
+    onEnd: () => { console.log('Segment ended'); }
+});</pre>
+            <p>This approach provides more reliable control over video segments by using multiple techniques to enforce time constraints.</p>
+        </div>
+        
+        <div class="segment-grid">
+            <div class="segment-card">
+                <div class="segment-content">
+                    <h3 class="segment-title">On Setting Clear Goals</h3>
+                    <span class="segment-timestamp">2:00 - 2:45</span>
+                    <p class="segment-description">The key to success is setting clear, measurable goals that align with your values and vision for the future.</p>
+                    <div id="player-container-1" class="segment-player-container"></div>
+                </div>
+            </div>
+            
+            <div class="segment-card">
+                <div class="segment-content">
+                    <h3 class="segment-title">On Overcoming Challenges</h3>
+                    <span class="segment-timestamp">6:00 - 7:00</span>
+                    <p class="segment-description">Challenges are not obstacles, they are opportunities to grow and demonstrate your resilience.</p>
+                    <div id="player-container-2" class="segment-player-container"></div>
+                </div>
+            </div>
+            
+            <div class="segment-card">
+                <div class="segment-content">
+                    <h3 class="segment-title">On Building Strong Teams</h3>
+                    <span class="segment-timestamp">12:00 - 12:50</span>
+                    <p class="segment-description">The strength of your team is not determined by individual talent, but by how well you work together toward a common purpose.</p>
+                    <div id="player-container-3" class="segment-player-container"></div>
+                </div>
+            </div>
+            
+            <div class="segment-card">
+                <div class="segment-content">
+                    <h3 class="segment-title">On Effective Leadership</h3>
+                    <span class="segment-timestamp">18:00 - 19:05</span>
+                    <p class="segment-description">Leadership is not about being in charge. It's about taking care of those in your charge and empowering them to succeed.</p>
+                    <div id="player-container-4" class="segment-player-container"></div>
+                </div>
+            </div>
+            
+            <div class="segment-card">
+                <div class="segment-content">
+                    <h3 class="segment-title">On Innovation and Creativity</h3>
+                    <span class="segment-timestamp">24:00 - 24:55</span>
+                    <p class="segment-description">Innovation happens at the intersection of preparation and opportunity. Create space for creativity in your daily routine.</p>
+                    <div id="player-container-5" class="segment-player-container"></div>
+                </div>
+            </div>
+            
+            <div class="segment-card">
+                <div class="segment-content">
+                    <h3 class="segment-title">On Personal Growth</h3>
+                    <span class="segment-timestamp">30:00 - 31:10</span>
+                    <p class="segment-description">The most important investment you can make is in yourself. Continuous learning and self-improvement are the foundations of success.</p>
+                    <div id="player-container-6" class="segment-player-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Grain API Integration | Custom Player Wrapper Demo</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Configuration
+        const RECORDING_ID = '7458efd4-a56f-455d-b189-43073da8b118';
+        const ACCESS_TOKEN = 'N0RUBU3W9LO14XgmKxF2o7RqZjhmZoOjXsU3vWJo';
+        
+        // Segment data
+        const segments = [
+            {
+                containerId: 'player-container-1',
+                startTime: 120,
+                endTime: 165
+            },
+            {
+                containerId: 'player-container-2',
+                startTime: 360,
+                endTime: 420
+            },
+            {
+                containerId: 'player-container-3',
+                startTime: 720,
+                endTime: 770
+            },
+            {
+                containerId: 'player-container-4',
+                startTime: 1080,
+                endTime: 1145
+            },
+            {
+                containerId: 'player-container-5',
+                startTime: 1440,
+                endTime: 1495
+            },
+            {
+                containerId: 'player-container-6',
+                startTime: 1800,
+                endTime: 1870
+            }
+        ];
+        
+        // Initialize players when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create players for each segment
+            segments.forEach(segment => {
+                new GrainPlayerController({
+                    containerId: segment.containerId,
+                    recordingId: RECORDING_ID,
+                    accessToken: ACCESS_TOKEN,
+                    startTime: segment.startTime,
+                    endTime: segment.endTime,
+                    autoplay: false,
+                    onReady: () => {
+                        console.log(`Player ${segment.containerId} is ready`);
+                    },
+                    onTimeUpdate: (time) => {
+                        // Optional: Update a time display if needed
+                    },
+                    onEnd: () => {
+                        console.log(`Segment ${segment.containerId} ended`);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

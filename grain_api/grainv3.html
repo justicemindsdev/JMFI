@@ -1,0 +1,792 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grain AI Transcript Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D5CDE',
+                        secondary: '#4A4A4A',
+                        dark: {
+                            bg: '#181818',
+                            card: '#262626',
+                            text: '#F3F4F6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white dark:bg-dark-bg text-gray-800 dark:text-dark-text min-h-screen">
+    <!-- Check for dark mode -->
+    <script>
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    </script>
+
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <!-- Header -->
+        <header class="mb-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-primary">Grain AI Transcript Analyzer</h1>
+                    <p class="text-gray-600 dark:text-gray-400 mt-2">Use AI to find exactly what you're looking for in your meeting recordings</p>
+                </div>
+                <div id="user-info" class="mt-4 md:mt-0 hidden">
+                    <div class="flex items-center space-x-3">
+                        <span id="user-name" class="font-semibold"></span>
+                        <button id="logout-btn" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                            Log out
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- API Key Section -->
+        <div id="api-section" class="bg-white dark:bg-dark-card rounded-xl shadow-md p-8 mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Connect to Grain API</h2>
+            <p class="mb-6">Enter your Grain Personal Access Token to connect to your recordings.</p>
+            <form id="api-form" class="space-y-4">
+                <div>
+                    <label for="api-key" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Personal Access Token</label>
+                    <input type="password" id="api-key" placeholder="Enter your Grain Personal Access Token" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-base focus:ring-2 focus:ring-primary focus:border-primary dark:text-white" required="">
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Your token is stored only in your browser's memory and is never saved.</p>
+                </div>
+                <div>
+                    <button type="submit" class="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-lg transition w-full md:w-auto">
+                        Connect to Grain
+                    </button>
+                </div>
+            </form>
+            <div id="api-error" class="mt-4 text-red-600 hidden"></div>
+            <div class="mt-6 text-sm text-gray-600 dark:text-gray-400">
+                <p>Need a Personal Access Token? <a href="https://grain.com/app/settings/access-tokens" target="_blank" class="text-primary hover:underline">Get one from Grain Settings</a>.</p>
+            </div>
+        </div>
+
+        <!-- App Content (hidden until authenticated) -->
+        <div id="app-content" class="hidden">
+            <!-- AI Analysis Form -->
+            <div class="bg-white dark:bg-dark-card rounded-xl shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold mb-4">AI-Powered Transcript Analysis</h2>
+                <form id="analysis-form" class="space-y-4">
+                    <div>
+                        <label for="ai-prompt" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">What would you like to find?</label>
+                        <input type="text" id="ai-prompt" placeholder="E.g., 'moments of happiness', 'instances of disagreement', 'key decisions made'" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-base focus:ring-2 focus:ring-primary focus:border-primary dark:text-white" required="">
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="recording-select" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Select a recording</label>
+                            <select id="recording-select" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-base focus:ring-2 focus:ring-primary focus:border-primary dark:text-white" required="">
+                                <option value="">Select a recording</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="ai-model" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">AI Model</label>
+                            <select id="ai-model" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-base focus:ring-2 focus:ring-primary focus:border-primary dark:text-white">
+                                <option value="Claude-3.7-Sonnet" selected="">Claude-3.7-Sonnet (Recommended)</option>
+                                <option value="GPT-4o">GPT-4o</option>
+                                <option value="Claude-3-Opus">Claude-3-Opus (Most accurate)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="group-segments" class="h-4 w-4 text-primary focus:ring-primary rounded border-gray-300 dark:border-gray-600">
+                            <label for="group-segments" class="ml-2 text-sm text-gray-700 dark:text-gray-300">Group similar segments together</label>
+                        </div>
+                        <button type="submit" class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg transition">
+                            Analyze with AI
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Loading Indicator -->
+            <div id="loading" class="hidden">
+                <div class="bg-white dark:bg-dark-card rounded-xl shadow-md p-6 mb-8">
+                    <div class="flex flex-col items-center justify-center py-8">
+                        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mb-4"></div>
+                        <p id="loading-status" class="text-gray-600 dark:text-gray-400">Analyzing transcript with AI...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Analysis Results -->
+            <div id="results-container" class="hidden">
+                <div class="bg-white dark:bg-dark-card rounded-xl shadow-md p-6 mb-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-6">
+                        <h2 class="text-xl font-semibold">Analysis Results</h2>
+                        <div class="flex gap-2 mt-2 md:mt-0">
+                            <button id="export-results" class="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded text-sm hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                                Export Results
+                            </button>
+                            <button id="create-compilation" class="px-3 py-1 bg-primary/90 hover:bg-primary text-white rounded text-sm transition">
+                                Create Compilation
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="ai-summary" class="mb-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                        <h3 class="font-medium mb-2">AI Summary</h3>
+                        <p id="summary-text" class="text-gray-700 dark:text-gray-300"></p>
+                    </div>
+                    
+                    <div id="segment-groups" class="space-y-6"></div>
+                    <div id="segments-list" class="space-y-4"></div>
+                    
+                    <div id="no-results" class="hidden py-8 text-center">
+                        <p class="text-lg text-gray-600 dark:text-gray-400">No matching segments found. Try a different prompt or recording.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Extracted Clip Player -->
+            <div id="clip-player" class="fixed bottom-0 left-0 right-0 bg-white dark:bg-dark-card shadow-lg transform translate-y-full transition-transform duration-300 ease-in-out z-30">
+                <div class="container mx-auto px-4 py-4 max-w-5xl">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 id="clip-title" class="font-semibold truncate pr-4"></h3>
+                        <button id="close-player" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="clip-player-content" class="mb-2">
+                        <audio id="clip-audio" controls="" class="w-full"></audio>
+                    </div>
+                    <div id="clip-transcript" class="text-sm text-gray-700 dark:text-gray-300 max-h-32 overflow-y-auto border-t border-gray-200 dark:border-gray-700 pt-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Constants
+        const API_BASE_URL = 'https://api.grain.com';
+
+        // DOM Elements
+        const apiSection = document.getElementById('api-section');
+        const apiForm = document.getElementById('api-form');
+        const apiKeyInput = document.getElementById('api-key');
+        const apiError = document.getElementById('api-error');
+        const appContent = document.getElementById('app-content');
+        const userInfo = document.getElementById('user-info');
+        const userName = document.getElementById('user-name');
+        const logoutBtn = document.getElementById('logout-btn');
+        const analysisForm = document.getElementById('analysis-form');
+        const aiPrompt = document.getElementById('ai-prompt');
+        const recordingSelect = document.getElementById('recording-select');
+        const aiModelSelect = document.getElementById('ai-model');
+        const groupSegments = document.getElementById('group-segments');
+        const loading = document.getElementById('loading');
+        const loadingStatus = document.getElementById('loading-status');
+        const resultsContainer = document.getElementById('results-container');
+        const aiSummary = document.getElementById('ai-summary');
+        const summaryText = document.getElementById('summary-text');
+        const segmentGroups = document.getElementById('segment-groups');
+        const segmentsList = document.getElementById('segments-list');
+        const noResults = document.getElementById('no-results');
+        const exportResults = document.getElementById('export-results');
+        const createCompilation = document.getElementById('create-compilation');
+        const clipPlayer = document.getElementById('clip-player');
+        const clipTitle = document.getElementById('clip-title');
+        const clipAudio = document.getElementById('clip-audio');
+        const clipTranscript = document.getElementById('clip-transcript');
+        const closePlayer = document.getElementById('close-player');
+
+        // State
+        let accessToken = null;
+        let currentUser = null;
+        let recordings = [];
+        let currentRecording = null;
+        let currentTranscript = null;
+        let analysisResults = null;
+
+        // API Form Submit
+        apiForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const apiKey = apiKeyInput.value.trim();
+            if (!apiKey) {
+                showApiError('Please enter your Grain Personal Access Token');
+                return;
+            }
+            
+            accessToken = apiKey;
+            
+            try {
+                // Validate the token by trying to get user info
+                await validateToken();
+                
+                // Load recordings
+                await loadRecordings();
+                
+                // Show the app content
+                showAuthenticatedUI();
+            } catch (error) {
+                console.error('Authentication error:', error);
+                showApiError('Invalid API key or connection error: ' + error.message);
+                accessToken = null;
+            }
+        });
+
+        // Logout Button Click
+        logoutBtn.addEventListener('click', () => {
+            accessToken = null;
+            showUnauthenticatedUI();
+        });
+
+        // Analysis Form Submit
+        analysisForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const prompt = aiPrompt.value.trim();
+            const recordingId = recordingSelect.value;
+            const aiModel = aiModelSelect.value;
+            const shouldGroupSegments = groupSegments.checked;
+            
+            if (!prompt || !recordingId) return;
+            
+            // Get the selected recording
+            currentRecording = recordings.find(r => r.id === recordingId);
+            
+            showLoading('Loading transcript...');
+            
+            try {
+                // Get transcript for the selected recording
+                currentTranscript = await getRecordingTranscript(recordingId);
+                
+                if (!currentTranscript) {
+                    throw new Error('Failed to load transcript for the selected recording.');
+                }
+                
+                showLoading(`Analyzing with ${aiModel}...`);
+                
+                // Use Poe API to analyze the transcript with AI
+                await analyzeTranscriptWithAI(prompt, currentTranscript, aiModel, shouldGroupSegments);
+                
+            } catch (error) {
+                console.error('Analysis error:', error);
+                hideLoading();
+                showAnalysisError('Failed to analyze transcript: ' + error.message);
+            }
+        });
+
+        // Close Player Button Click
+        closePlayer.addEventListener('click', () => {
+            hideClipPlayer();
+        });
+
+        // Export Results Button Click
+        exportResults.addEventListener('click', () => {
+            if (!analysisResults) return;
+            
+            const exportData = {
+                recording: {
+                    title: currentRecording.title,
+                    id: currentRecording.id,
+                    date: currentRecording.start_datetime
+                },
+                query: aiPrompt.value,
+                summary: summaryText.textContent,
+                segments: analysisResults.segments
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `grain-analysis-${new Date().toISOString().slice(0,10)}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        });
+
+        // Create Compilation Button Click
+        createCompilation.addEventListener('click', async () => {
+            if (!analysisResults || !analysisResults.segments || analysisResults.segments.length === 0) return;
+            
+            try {
+                await createClipCompilation(analysisResults.segments);
+            } catch (error) {
+                console.error('Error creating compilation:', error);
+                alert('Failed to create compilation: ' + error.message);
+            }
+        });
+
+        // API Functions
+        async function validateToken() {
+            if (!accessToken) return false;
+            
+            // Validate token by calling the user info endpoint
+            try {
+                const response = await fetch(`${API_BASE_URL}/_/public-api/me`, {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Token validation failed: ${response.status} ${response.statusText}`);
+                }
+                
+                currentUser = await response.json();
+                return true;
+            } catch (error) {
+                console.error('Token validation error:', error);
+                throw error;
+            }
+        }
+
+        async function loadRecordings() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/_/public-api/recordings?include_highlights=false`, {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to load recordings: ${response.status} ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                recordings = data.recordings || [];
+                
+                // Populate the recording select dropdown
+                recordingSelect.innerHTML = '<option value="">Select a recording</option>';
+                recordings.forEach(recording => {
+                    const option = document.createElement('option');
+                    option.value = recording.id;
+                    option.textContent = recording.title || `Recording from ${new Date(recording.start_datetime).toLocaleDateString()}`;
+                    recordingSelect.appendChild(option);
+                });
+                
+                return recordings;
+            } catch (error) {
+                console.error('Error loading recordings:', error);
+                throw error;
+            }
+        }
+
+        async function getRecordingTranscript(recordingId) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/_/public-api/recordings/${recordingId}?transcript_format=json`, {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to load transcript: ${response.status} ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                return data.transcript_json || null;
+            } catch (error) {
+                console.error('Error getting transcript:', error);
+                throw error;
+            }
+        }
+
+        async function analyzeTranscriptWithAI(prompt, transcript, aiModel, groupSegments) {
+            // Prepare the transcript in a format that the AI can analyze
+            const formattedTranscript = transcript.map(segment => {
+                return {
+                    timestamp: segment.timestamp,
+                    duration: segment.duration || 5000,
+                    speaker: segment.speaker || 'Unknown',
+                    text: segment.text || ''
+                };
+            });
+            
+            // Build our AI prompt 
+            const aiSystemPrompt = `
+You are an expert at analyzing meeting transcripts. Your task is to analyze the transcript I'll provide and identify all segments that match the user's query: "${prompt}".
+
+The transcript will be provided as a JSON array of segments, each with:
+- timestamp: time in milliseconds from the start of the recording
+- duration: segment duration in milliseconds
+- speaker: name of the speaker
+- text: the transcribed text for this segment
+
+Please analyze the content semantically to find the most relevant segments. Don't just search for keywords, but understand the meaning, context, emotions, and interactions.
+
+Output format:
+1. Summary: A brief 2-3 sentence overview of what you found
+2. Segments: A JSON array of segments that match the query, with these fields:
+   - timestamp: original timestamp in milliseconds
+   - duration: original duration in milliseconds
+   - speaker: name of the speaker
+   - text: the transcribed text
+   - reason: a brief explanation of why this segment matches the query
+${groupSegments ? '3. Groups: Group similar segments together under common themes' : ''}
+
+Provide ONLY raw JSON in your response with no explanations, additional text, or code block formatting (no \`\`\`).
+`;
+
+            // Register handler for AI analysis responses
+            window.Poe.registerHandler("transcriptAnalysisHandler", (result, context) => {
+                const msg = result.responses[0];
+                
+                if (msg.status === "error") {
+                    hideLoading();
+                    showAnalysisError(`Error: ${msg.statusText || "Failed to analyze with AI"}`);
+                } else if (msg.status === "complete") {
+                    try {
+                        // Parse the AI response as JSON
+                        const responseJson = JSON.parse(msg.content);
+                        
+                        // Store the analysis results
+                        analysisResults = responseJson;
+                        
+                        // Display the results
+                        displayAnalysisResults(responseJson);
+                        hideLoading();
+                    } catch (error) {
+                        console.error('Error parsing AI response:', error);
+                        hideLoading();
+                        showAnalysisError('Failed to parse AI response. Please try again.');
+                    }
+                }
+            });
+            
+            // Send to AI for analysis using Poe API
+            try {
+                const aiPrompt = `${aiSystemPrompt}\n\nHere's the transcript:\n${JSON.stringify(formattedTranscript)}`;
+                
+                await window.Poe.sendUserMessage(`@${aiModel} ${aiPrompt}`, {
+                    handler: "transcriptAnalysisHandler",
+                    stream: false,
+                    openChat: false
+                });
+            } catch (err) {
+                console.error("Error sending to AI:", err);
+                hideLoading();
+                showAnalysisError(`Error communicating with ${aiModel}: ${err.message}`);
+            }
+        }
+
+        async function createClipCompilation(segments) {
+            if (!segments || segments.length === 0) return;
+            
+            // Register handler for compilation requests
+            window.Poe.registerHandler("compilationHandler", (result, context) => {
+                const msg = result.responses[0];
+                
+                if (msg.status === "error") {
+                    alert(`Error creating compilation: ${msg.statusText || "Unknown error"}`);
+                } else if (msg.status === "complete") {
+                    // In a full implementation, this would create a compilation in Grain
+                    alert("Compilation request sent successfully! This would create a compilation of all selected segments in a real implementation.");
+                }
+            });
+            
+            // Format the segments for the prompt
+            const segmentsForPrompt = segments.map(segment => {
+                return {
+                    timestamp: formatTimestamp(segment.timestamp),
+                    duration: formatDuration(segment.duration),
+                    speaker: segment.speaker,
+                    text: segment.text.substring(0, 100) + (segment.text.length > 100 ? '...' : '')
+                };
+            });
+            
+            // Create a prompt to simulate compilation creation
+            const compilationPrompt = `@Claude-3.7-Sonnet I want to create a compilation from a Grain recording titled "${currentRecording.title}" with the following segments:
+
+${JSON.stringify(segmentsForPrompt, null, 2)}
+
+Please simulate creating this compilation by acknowledging you would extract these ${segments.length} segments and combine them into a single clip. Only respond with a brief confirmation message.`;
+            
+            try {
+                await window.Poe.sendUserMessage(compilationPrompt, {
+                    handler: "compilationHandler",
+                    stream: false,
+                    openChat: false
+                });
+            } catch (err) {
+                console.error("Error creating compilation:", err);
+                alert("Error requesting compilation: " + err.message);
+            }
+        }
+
+        // UI Functions
+        function showAuthenticatedUI() {
+            apiSection.classList.add('hidden');
+            userInfo.classList.remove('hidden');
+            appContent.classList.remove('hidden');
+            
+            if (currentUser) {
+                userName.textContent = currentUser.name || 'User';
+            }
+        }
+
+        function showUnauthenticatedUI() {
+            apiSection.classList.remove('hidden');
+            userInfo.classList.add('hidden');
+            appContent.classList.add('hidden');
+            apiError.classList.add('hidden');
+            apiKeyInput.value = '';
+        }
+
+        function showApiError(message) {
+            apiError.textContent = message;
+            apiError.classList.remove('hidden');
+        }
+
+        function showLoading(message) {
+            loadingStatus.textContent = message || 'Processing...';
+            loading.classList.remove('hidden');
+            resultsContainer.classList.add('hidden');
+        }
+
+        function hideLoading() {
+            loading.classList.add('hidden');
+        }
+
+        function displayAnalysisResults(results) {
+            resultsContainer.classList.remove('hidden');
+            
+            // Display the summary
+            if (results.summary) {
+                summaryText.textContent = results.summary;
+                aiSummary.classList.remove('hidden');
+            } else {
+                aiSummary.classList.add('hidden');
+            }
+            
+            // Check if we have segments
+            if (!results.segments || results.segments.length === 0) {
+                segmentsList.innerHTML = '';
+                segmentGroups.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+            
+            noResults.classList.add('hidden');
+            
+            // Display groups if available
+            if (results.groups && results.groups.length > 0) {
+                segmentGroups.innerHTML = '';
+                
+                results.groups.forEach((group, index) => {
+                    const groupCard = createGroupCard(group, index);
+                    segmentGroups.appendChild(groupCard);
+                });
+                
+                segmentGroups.classList.remove('hidden');
+                segmentsList.classList.add('hidden');
+            } else {
+                // Otherwise display segments as a flat list
+                segmentsList.innerHTML = '';
+                
+                results.segments.forEach(segment => {
+                    const segmentCard = createSegmentCard(segment);
+                    segmentsList.appendChild(segmentCard);
+                });
+                
+                segmentGroups.classList.add('hidden');
+                segmentsList.classList.remove('hidden');
+            }
+        }
+
+        function createGroupCard(group, index) {
+            const card = document.createElement('div');
+            card.className = 'bg-gray-50 dark:bg-gray-800 rounded-lg p-4';
+            
+            // Create group header
+            const groupHeader = document.createElement('div');
+            groupHeader.className = 'flex items-center gap-2 mb-3 cursor-pointer';
+            groupHeader.innerHTML = `
+                <div class="font-medium text-lg flex-1">${group.theme}</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">${group.segments.length} segments</div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-toggle-icon transform transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            `;
+            
+            // Create segments container
+            const segmentsContainer = document.createElement('div');
+            segmentsContainer.className = 'group-segments space-y-3 mt-3';
+            segmentsContainer.id = `group-${index}-segments`;
+            
+            // Initially show the first group's segments
+            if (index !== 0) {
+                segmentsContainer.classList.add('hidden');
+                groupHeader.querySelector('.group-toggle-icon').classList.add('rotate-180');
+            }
+            
+            // Add segments to the group
+            group.segments.forEach(segment => {
+                const segmentCard = createSegmentCard(segment, true);
+                segmentsContainer.appendChild(segmentCard);
+            });
+            
+            // Add toggle functionality
+            groupHeader.addEventListener('click', () => {
+                const icon = groupHeader.querySelector('.group-toggle-icon');
+                icon.classList.toggle('rotate-180');
+                segmentsContainer.classList.toggle('hidden');
+            });
+            
+            card.appendChild(groupHeader);
+            card.appendChild(segmentsContainer);
+            
+            return card;
+        }
+
+        function createSegmentCard(segment, isInGroup = false) {
+            const card = document.createElement('div');
+            card.className = isInGroup 
+                ? 'bg-white dark:bg-dark-card rounded p-3 border border-gray-200 dark:border-gray-700' 
+                : 'bg-white dark:bg-dark-card rounded-lg p-4 shadow-sm';
+            
+            const timestamp = formatTimestamp(segment.timestamp);
+            const duration = formatDuration(segment.duration);
+            
+            card.innerHTML = `
+                <div class="flex flex-col md:flex-row justify-between items-start mb-2">
+                    <div class="flex items-center gap-2 mb-1 md:mb-0">
+                        <span class="font-medium">${segment.speaker || 'Unknown'}</span>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">${timestamp}</span>
+                    </div>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">${duration}</span>
+                </div>
+                <p class="text-gray-800 dark:text-gray-200 mb-3">${segment.text}</p>
+                ${segment.reason ? `<p class="text-sm text-gray-600 dark:text-gray-400 mb-3"><strong>Reason for match:</strong> ${segment.reason}</p>` : ''}
+                <div class="flex justify-end">
+                    <button class="play-segment-btn bg-primary hover:bg-primary/90 text-white px-3 py-1 rounded text-sm transition"
+                            data-recording-id="${currentRecording.id}"
+                            data-timestamp="${segment.timestamp}"
+                            data-duration="${segment.duration}"
+                            data-text="${segment.text.replace(/"/g, '&quot;')}"
+                            data-speaker="${segment.speaker || 'Unknown'}"
+                    >
+                        Play Segment
+                    </button>
+                </div>
+            `;
+            
+            // Add event listener to the play segment button
+            card.querySelector('.play-segment-btn').addEventListener('click', async function() {
+                const recordingId = this.dataset.recordingId;
+                const timestamp = parseInt(this.dataset.timestamp);
+                const duration = parseInt(this.dataset.duration);
+                const text = this.dataset.text;
+                const speaker = this.dataset.speaker;
+                
+                try {
+                    await playSegment(recordingId, timestamp, duration, text, speaker);
+                } catch (error) {
+                    console.error('Error playing segment:', error);
+                    alert('Failed to play segment: ' + error.message);
+                }
+            });
+            
+            return card;
+        }
+
+        async function playSegment(recordingId, timestamp, duration, text, speaker) {
+            // Show the clip player with a loading state
+            clipTitle.textContent = `Loading segment at ${formatTimestamp(timestamp)}...`;
+            clipAudio.src = '';
+            clipTranscript.innerHTML = `<p><strong>${speaker}:</strong> ${text}</p>`;
+            showClipPlayer();
+            
+            try {
+                // In a real app, we'd request the audio clip from Grain
+                // For now, simulate with AI
+                const prompt = `@Claude-3.7-Sonnet I need to extract a specific segment from a Grain meeting recording where ${speaker} says: "${text.slice(0, 100)}${text.length > 100 ? '...' : ''}". Please simulate retrieving this clip that starts at ${formatTimestamp(timestamp)} and is ${formatDuration(duration)} long. Only respond with a brief confirmation of what you would extract if this were real.`;
+                
+                // Update the player UI
+                clipTitle.textContent = `Segment at ${formatTimestamp(timestamp)} (${formatDuration(duration)})`;
+                
+                // Register handler for simulated clip extraction
+                window.Poe.registerHandler("segmentPlayHandler", (result, context) => {
+                    const msg = result.responses[0];
+                    
+                    if (msg.status === "error") {
+                        clipTranscript.innerHTML += `<p class="mt-2 text-sm text-red-500">Error: ${msg.statusText || "Failed to play segment"}</p>`;
+                    } else if (msg.status === "complete") {
+                        clipTranscript.innerHTML = `<p><strong>${speaker}:</strong> ${text}</p>
+                                                 <p class="mt-2 text-sm italic">In a full implementation, this would play the actual audio clip from Grain. Since we don't have direct API access in this demo, this is a simulation.</p>
+                                                 <p class="mt-1 text-sm text-green-600">✓ Segment identified and would be extracted</p>`;
+                    }
+                });
+                
+                // Simulate retrieving the clip
+                try {
+                    await window.Poe.sendUserMessage(prompt, {
+                        handler: "segmentPlayHandler",
+                        stream: false,
+                        openChat: false
+                    });
+                } catch (err) {
+                    console.error("Error simulating playback:", err);
+                    clipTranscript.innerHTML += `<p class="mt-2 text-sm text-red-500">Error: Could not communicate with AI</p>`;
+                }
+                
+            } catch (error) {
+                clipTranscript.textContent = `Error: ${error.message}`;
+            }
+        }
+
+        function showClipPlayer() {
+            clipPlayer.classList.remove('translate-y-full');
+        }
+
+        function hideClipPlayer() {
+            clipPlayer.classList.add('translate-y-full');
+        }
+
+        function showAnalysisError(message) {
+            hideLoading();
+            resultsContainer.classList.remove('hidden');
+            noResults.classList.remove('hidden');
+            noResults.innerHTML = `<p class="text-red-600">${message}</p>`;
+            segmentsList.innerHTML = '';
+            segmentGroups.innerHTML = '';
+        }
+
+        // Helper Functions
+        function formatTimestamp(milliseconds) {
+            const totalSeconds = Math.floor(milliseconds / 1000);
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function formatDuration(milliseconds) {
+            const totalSeconds = Math.floor(milliseconds / 1000);
+            if (totalSeconds < 60) {
+                return `${totalSeconds} sec`;
+            } else {
+                const minutes = Math.floor(totalSeconds / 60);
+                const seconds = totalSeconds % 60;
+                return `${minutes}m ${seconds}s`;
+            }
+        }
+    </script>
+
+
+</body></html>

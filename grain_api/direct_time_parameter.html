@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grain Direct Time Parameter Example</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        
+        h1, h2 {
+            color: #212529;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-container {
+            margin: 20px 0;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 4px;
+        }
+        
+        .code-example {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Grain Direct Time Parameter Example</h1>
+        
+        <p>This example demonstrates how to use the <code>t</code> parameter to set the start time for a Grain video embed.</p>
+        
+        <div class="note">
+            <strong>Note:</strong> The <code>t</code> parameter sets the start time in seconds. In this example, the video will start at 2 minutes and 50 seconds (170 seconds).
+        </div>
+        
+        <h2>Example Video (Starting at 2:50)</h2>
+        
+        <div class="video-container">
+            <iframe 
+                src="https://grain.com/_/embed/recording/01452015-60e4-42a6-9ca7-f241f18ee7db/oMarnTp5zhCtrRsJJ1Sw1t1t4Q9A2qcMjpSMvoz6?autoplay=true&t=170" 
+                allow="fullscreen" 
+                allowfullscreen="true" 
+                frameborder="0">
+            </iframe>
+        </div>
+        
+        <h2>HTML Code</h2>
+        
+        <div class="code-example">
+            <pre>&lt;iframe 
+    src="https://grain.com/_/embed/recording/01452015-60e4-42a6-9ca7-f241f18ee7db/oMarnTp5zhCtrRsJJ1Sw1t1t4Q9A2qcMjpSMvoz6?autoplay=true&t=170" 
+    allow="fullscreen" 
+    allowfullscreen="true" 
+    frameborder="0"&gt;
+&lt;/iframe&gt;</pre>
+        </div>
+        
+        <h2>Using with timeStringToSeconds</h2>
+        
+        <p>If you're using a template system or JavaScript to generate the iframe, you can convert time strings to seconds:</p>
+        
+        <div class="code-example">
+            <pre>// Convert time string to seconds
+function timeStringToSeconds(timeString) {
+    const parts = timeString.split(':');
+    let seconds = 0;
+    
+    if (parts.length === 3) {
+        // Hours:Minutes:Seconds format
+        seconds = parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]);
+    } else if (parts.length === 2) {
+        // Minutes:Seconds format
+        seconds = parseInt(parts[0]) * 60 + parseInt(parts[1]);
+    }
+    
+    return seconds;
+}
+
+// Example usage
+const startTimeString = "00:02:50";
+const startTimeSeconds = timeStringToSeconds(startTimeString);
+
+// Generate iframe with t parameter
+const iframe = `&lt;iframe 
+    src="https://grain.com/_/embed/recording/01452015-60e4-42a6-9ca7-f241f18ee7db/oMarnTp5zhCtrRsJJ1Sw1t1t4Q9A2qcMjpSMvoz6?autoplay=true&t=${startTimeSeconds}" 
+    allow="fullscreen" 
+    allowfullscreen="true" 
+    frameborder="0"&gt;
+&lt;/iframe&gt;`;</pre>
+        </div>
+        
+        <div class="note">
+            <strong>Important:</strong> While the <code>t</code> parameter works for setting the start time, controlling the end time requires JavaScript as shown in the Time Range Player example.
+        </div>
+    </div>
+</body>
+</html>

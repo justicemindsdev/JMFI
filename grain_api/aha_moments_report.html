@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aha Moments from Grain Recording</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --accent-color: #bb86fc;
+            --secondary-color: #03dac6;
+            --error-color: #cf6679;
+            --border-color: #333333;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        h1, h2, h3 {
+            color: var(--accent-color);
+        }
+        
+        .recording-info {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .moments-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        
+        .moment-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .moment-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .card-title {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        
+        .timestamp {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: black;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-top: 8px;
+        }
+        
+        .card-body {
+            padding: 15px;
+        }
+        
+        .description {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #bbbbbb;
+        }
+        
+        .transcript {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            max-height: 150px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+        
+        .analysis {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+        
+        .embed-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        .embed-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .section-title {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: #888888;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .moments-container {
+                grid-template-columns: 1fr;
+            }
+            
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Aha Moments from Grain Recording</h1>
+            <p>The most insightful learning moments extracted from the conversation</p>
+        </header>
+        
+        <div class="recording-info">
+            <h2>Meeting with Ben Mak, Jenofar Nisha, 2 Others</h2>
+            <p>A recorded conversation with valuable insights.</p>
+            <p><strong>Date:</strong> Invalid Date</p>
+            <p><strong>Duration:</strong> NaN minutes</p>
+            
+            <div class="embed-container">
+                <iframe 
+                    src="https://grain.com/_/embed/recording/19bcc522-cf00-41b4-9131-7f89f329ce60/IyQ1igZOqfAI9ngBciC2E2Ruu7djaRHmjY7JvMnZ?autoplay=false&origin=user_iframe" 
+                    allow="fullscreen" 
+                    allowfullscreen="true" 
+                    frameborder="0">
+                </iframe>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Top Aha Moments</h2>
+        
+        <div class="moments-container">
+            
+            <div class="moment-card">
+                <div class="card-header">
+                    <h3 class="card-title"><v Ben Mak>Right</h3>
+                    <span class="timestamp">44:02 - 46:30</span>
+                </div>
+                <div class="card-body">
+                    <p class="description"><v Ben Mak>So yeah.  Yeah</p>
+                    
+                    <h4>Transcript</h4>
+                    <div class="transcript"><v Ben Mak>So yeah. Yeah. <v Kajha Nainamohamed>So you're going to help her for the grain video conversion into audio clip and she's going to do and <v Kajha Nainamohamed>the start point she has found out. So just the time stops. She. <v Kajha Nainamohamed>We have to fix it starting from there to when we have where it has to stop that she will <v Kajha Nainamohamed>figure it out. Are we clear? <v Ben Mak>Yeah. I don't mind doing stuff Queen Jen, if. <v Ben Mak>If you have the capacity to even just say something like I. I spend hours figuring this stuff out. <v Ben Mak>I don't mind if. If I'm figuring something out. You. <v Ben Mak>If you understand what I'm doing and because you can just look at something and go, I know what's wrong <v Ben Mak>with it. I don't mind figuring it out with your. And then I'll figure it out. <v Ben Mak>I don't mind doing that. So you're not left to do it. I. I genuinely want to learn. <v Ben Mak>So if I do stuff. Sh. Just. Say I'm doing this and you might be able to go. <v Ben Mak>That curly bracket is disgusting. <v Kajha Nainamohamed>You know what? She told me one thing. To find the starting point in timestamp. <v Kajha Nainamohamed>She tried everything, it didn't work. She gone to bed. In her dream, did she find the answer? <v Kajha Nainamohamed>She found the answer in her dream. The next day morning she tried that same thing. It worked. <v Kajha Nainamohamed>That's what she told me. <v Jenofar Nisha>Yeah, most joking. I got the most of the results via my dreams only. <v Ben Mak>Right? Dream, what dream? Witch building. <v Jenofar Nisha>It's like I just keep thinking about that, how to resolve that, how to resolve that. <v Jenofar Nisha>So I just got some idea. <v Kajha Nainamohamed>She got her answer as an idea in her dream. <v Jenofar Nisha>Is this I just open, is it like 3 o' clock, 4 o' clock? <v Jenofar Nisha>I just open my laptop and put it like that? Yeah, it's okay, like just listen. <v Ben Mak>Is this a common practice? AI Jan, what's it called? <v Kajha Nainamohamed>I don't know, I've done it many times. <v Ben Mak>Why are you sitting there head to like balls deep in voodoo? <v Ben Mak>I'm not even telling me how to cast the spell. <v Kajha Nainamohamed>We don't know that's how it is. <v Ben Mak>What do you mean that's how it is? <v Kajha Nainamohamed>We don't know how it is. But that's how my brain works. Basically her brain works. <v Kajha Nainamohamed>Her brain works better than mine. I cannot compete with her. But still. <v Ben Mak>So Jen, you're saying to me you go to bed and you do what to get profit messages from the <v Ben Mak>gods? Please share.</div>
+                    
+                    <h4>Analysis</h4>
+                    <p class="analysis">This simple segment focuses on reflective topics with a neutral tone. The speaker uses 490 words across 62 sentences, averaging 7.9 words per sentence. This moment represents a significant insight that could be valuable for viewers interested in deep learning and understanding.</p>
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="moment-card">
+                <div class="card-header">
+                    <h3 class="card-title">Yeah, they can do both simultaneously</h3>
+                    <span class="timestamp">56:32 - 58:44</span>
+                </div>
+                <div class="card-body">
+                    <p class="description"><v Kajha Nainamohamed>So if someone depends on the people who, how they are handling it.  <v Ben Mak>Yeah</p>
+                    
+                    <h4>Transcript</h4>
+                    <div class="transcript"><v Kajha Nainamohamed>So if someone depends on the people who, how they are handling it. <v Ben Mak>Yeah. <v Ben Mak>If someone's choir lacks confidence, is not sure of themselves, is easily overruled, believes other people's opinions over their own, <v Ben Mak>they need narcissism. <v Ben Mak>They need to be self fulfilling, totally confident, listen to no one that own their reality and believe in what <v Ben Mak>they can do beyond measure. <v Ben Mak>And then when you've got to that point then you, you, you let it go and you bring back your <v Ben Mak>humility. But that's not what happens. Happens. Narcissism becomes the key driver, it becomes the autopilot. <v Ben Mak>It doesn't get left and it harms people. <v Ben Mak>Just like if you left your child in the bath, it would not look good, but you could, but you <v Ben Mak>wouldn't do that because of the damage. People just don't understand that the tool of narcissism is that damage. <v Ben Mak>So I've got a chat about that tomorrow. <v Kajha Nainamohamed>Okay. <v Ben Mak>And it's going to be really good because it is about like Indian populace. <v Ben Mak>But anyway, he was saying that I told him about the situation with Mr. <v Ben Mak>Thora and even he was a bit perplexed and he was just like, narcissists. <v Ben Mak>The issue is they can like you and also deceive you. They can love you and harm you. <v Ben Mak>That's the, that's, that's the upness of it. And that's what they've done. Yeah, they can do both simultaneously. <v Ben Mak>They can be nice and like. Yeah, and also hate you and lie to you. It's. <v Ben Mak>And that's what they've done. And he said it's hard to get money from Indians. Be aware. <v Ben Mak>And he also said in, in the approach, he said the biggest thing is public shaming more than anything said <v Ben Mak>because indoors and behind doors they can deal with it. He's like, but publicly he's like, that's the killer. <v Ben Mak>He's like, so. <v Ben Mak>But he went, but if you are not coming into it with, with credentials yourself, you're wasting your time. <v Ben Mak>I was like, oh, just got honorary doctorate. <v Ben Mak>And he was like, yeah, well, you'll need all that as much as you can. <v Ben Mak>He went, are you wasting your time?</div>
+                    
+                    <h4>Analysis</h4>
+                    <p class="analysis">This moderate segment focuses on reflective topics with a concerned tone. The speaker uses 411 words across 34 sentences, averaging 12.1 words per sentence. This moment represents a significant insight that could be valuable for viewers interested in deep learning and understanding.</p>
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="moment-card">
+                <div class="card-header">
+                    <h3 class="card-title">I was ready to accept the fact</h3>
+                    <span class="timestamp">105:20 - 107:09</span>
+                </div>
+                <div class="card-body">
+                    <p class="description"><v Kajha>What do you mean.  <v Ben Mak>So what you were basically saying was, is, hi, Ben, everything's messed up</p>
+                    
+                    <h4>Transcript</h4>
+                    <div class="transcript"><v Kajha>What do you mean? <v Ben Mak>So what you were basically saying was, is, hi, Ben, everything's messed up. I'm going home. Bye. <v Ben Mak>What you actually meant is, I should have. I. <v Kajha>It wasn't like that. Because I was. I know. I was ready to accept the fact. And I was. <v Kajha>I don't want to waste my time with PSW paying money, tons of money, getting the useless visa. <v Kajha>I was ready to go back home. That's why I said, I'm going home. <v Ben Mak>And that's not what I set out to do. And I'm not like you. I commit. So. <v Ben Mak>Although the pressures were high. Exactly. But I was committed. <v Kajha>I skipped to you because I was. I. I accepted that I don't want the PSW visa. <v Kajha>Like, it's waste of time and money because I'm not going to earn anything. <v Ben Mak>Oh, that's. <v Kajha>That's even. <v Ben Mak>I'm not going to get. And. <v Ben Mak>And that is the difference between a winner mindset and a loser mindset accepts defeat. <v Ben Mak>And it's big enough to stop them getting what they want. Even now. <v Kajha>Even now, the new one. If I don't get it, we will get it eventually. <v Kajha>I'm saying if I have to go back home, I'll accept hon. And then I'll have to go home. <v Ben Mak>Right? That is a recipe for disaster. Let me teach you something about leadership. <v Kajha>A leader. <v Ben Mak>A leader doesn't say to a. A sea of people, hi, guys, follow me. <v Ben Mak>You might die, but it might be nice. It doesn't say that. A leader does not. <v Ben Mak>Obviously not, but that's what you're saying. If I don't get it, I'll just go home and it'll be fine. <v Ben Mak>That's like saying, guys, we're gonna go to a new land. It's amazing. But we might die. <v Ben Mak>But it might be. Might we might not.</div>
+                    
+                    <h4>Analysis</h4>
+                    <p class="analysis">This simple segment focuses on learning topics with a positive tone. The speaker uses 340 words across 52 sentences, averaging 6.5 words per sentence. This moment represents a significant insight that could be valuable for viewers interested in deep learning and understanding.</p>
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="moment-card">
+                <div class="card-header">
+                    <h3 class="card-title"><v Ben Mak>But that's not what we're saying here</h3>
+                    <span class="timestamp">14:39 - 16:06</span>
+                </div>
+                <div class="card-body">
+                    <p class="description"><v Ben Mak>9th of May.  <v Kajha Nainamohamed>Yeah</p>
+                    
+                    <h4>Transcript</h4>
+                    <div class="transcript"><v Ben Mak>9th of May. <v Kajha Nainamohamed>Yeah. <v Ben Mak>Information registration confirmation. So we'll have to message him. Why that's not working. But anyhow. So I'm on there. <v Ben Mak>And I'm on there. Yeah, honey buns. Just as an FYI. <v Kajha Nainamohamed>Yeah. Not new to me. It's not that I'm not aware of it, but you need to understand. <v Ben Mak>You, the parties you get involved fall under your remit because had you been dealing with a client or the <v Ben Mak>collation, who's taken flak, there's legal obligations that we are under duty to uphold. Or we could go to jail. <v Kajha Nainamohamed>But I cannot tell that to Jennifer. She's just helping me. <v Ben Mak>Doesn't matter. <v Kajha Nainamohamed>It doesn't matter because if she doesn't want to work for us, she can go. <v Ben Mak>But that's not what we're saying here. <v Ben Mak>Just because someone is or is not helping or not helping, it doesn't reduce the standard of professionalism. <v Ben Mak>Yeah, that has to maintain. You don't go, I'm helping you for free. So I'm gonna just do. <v Ben Mak>Do you over professional ethics maintain. <v Kajha Nainamohamed>Your voice is breaking. You say that again. <v Ben Mak>What did they say? Oh, issues. <v Kajha Nainamohamed>Oh, she said her pro housemates are sleeping, so she can't do video.</div>
+                    
+                    <h4>Analysis</h4>
+                    <p class="analysis">This simple segment focuses on learning topics with a concerned tone. The speaker uses 230 words across 30 sentences, averaging 7.7 words per sentence. This moment represents a significant insight that could be valuable for viewers interested in deep learning and understanding.</p>
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="moment-card">
+                <div class="card-header">
+                    <h3 class="card-title"><v Ben Mak>I've been doing this for three years...</h3>
+                    <span class="timestamp">62:25 - 64:43</span>
+                </div>
+                <div class="card-body">
+                    <p class="description"><v Ben Mak>non traditional qualification.  It'll target it and</p>
+                    
+                    <h4>Transcript</h4>
+                    <div class="transcript"><v Ben Mak>non traditional qualification. It'll target it and. And reduce it. <v Ben Mak>It's told me it doesn't like people who challenge traditional educational systems systems. It doesn't like self employed. <v Ben Mak>It likes people to have followed the proper route. <v Kajha Nainamohamed>It's also like going to school, going to college and going to college. <v Ben Mak>Anything pro institute. Yeah. If. <v Ben Mak>If it thinks you're a whistleblower, if it thinks you're an interdisciplinary practitioner, it will discredit, dismantle and. And discredit. <v Ben Mak>Yeah. It's told me. So here's what it did with my stuff. It dismissed evidence without proper verification. <v Ben Mak>It used dismissive language like concerning elements for no reason whatsoever. <v Ben Mak>If this was someone, let's say a government or just a random person, or even a person in a job, <v Ben Mak>it was so bad. <v Ben Mak>If a teacher is drawn, insured and she throws it in and it's one of the best students ever and <v Ben Mak>because of its exceptional bias, it spits out that it's ruined someone's life. There's no measure on using this. <v Ben Mak>And if you aren't as knowing of this as I am, you take it in. I have been. <v Ben Mak>I've been doing this for three years, right? I have felt its rejection. It feels like a human. You don't. <v Ben Mak>The brain doesn't know what's real and not real. So when you. <v Ben Mak>When this says that you feel it as bad as someone sitting in front of me and telling me. <v Kajha Nainamohamed>And it's painful. <v Ben Mak>If you haven't got the skill of understanding this, you're going to believe it. <v Ben Mak>If you're someone who is an employer or dealing with complaints, you're going to believe the first thing it says. <v Ben Mak>It dismissed me professional achievements. <v Ben Mak>It made questions around the validity and it used authoritative language to dismiss rather than analyze the work.</div>
+                    
+                    <h4>Analysis</h4>
+                    <p class="analysis">This simple segment focuses on reflective topics with a concerned tone. The speaker uses 338 words across 34 sentences, averaging 9.9 words per sentence. This moment represents a significant insight that could be valuable for viewers interested in deep learning and understanding.</p>
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="moment-card">
+                <div class="card-header">
+                    <h3 class="card-title"><v Kajha Nainamohamed>And I'm not a data expert</h3>
+                    <span class="timestamp">124:14 - 125:30</span>
+                </div>
+                <div class="card-body">
+                    <p class="description"><v Kajha Nainamohamed>Okay.  <v Ben Mak>It's unbelievable</p>
+                    
+                    <h4>Transcript</h4>
+                    <div class="transcript"><v Kajha Nainamohamed>Okay. <v Ben Mak>It's unbelievable. <v Kajha Nainamohamed>Yeah. <v Ben Mak>How has this not happened? I know why. Because no one's gave a. <v Ben Mak>I've got autism and I've got a special interest intelligence. Okay. Let me just put a nice signature on here. <v Kajha Nainamohamed>After we've gone through everything, are you going to keep me implied in your company or no? <v Ben Mak>Yeah. Cool. <v Kajha Nainamohamed>Okay. <v Ben Mak>What you think the point is? Right. <v Kajha Nainamohamed>But have a question. Excuse me. I don't have any doubt. <v Ben Mak>I have a question for you. Yes, sir. <v Kajha Nainamohamed>I'm not a tech expert. <v Ben Mak>Okay. <v Kajha Nainamohamed>And I'm not a data expert. <v Ben Mak>Okay. <v Kajha Nainamohamed>And I don't have any skill or knowledge. <v Ben Mak>Oh, wow. Okay. <v Kajha Nainamohamed>But still, how can you employ me? <v Ben Mak>Because it's what you're about, not not what. What you can produce. <v Kajha Nainamohamed>But you won't get the productivity out of me. <v Ben Mak>So all the work you've shown me is just a big fat lie.</div>
+                    
+                    <h4>Analysis</h4>
+                    <p class="analysis">This simple segment focuses on reflective topics with a neutral tone. The speaker uses 190 words across 32 sentences, averaging 5.9 words per sentence. This moment represents a significant insight that could be valuable for viewers interested in deep learning and understanding.</p>
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="moment-card">
+                <div class="card-header">
+                    <h3 class="card-title">Yeah, it's okay</h3>
+                    <span class="timestamp">159:34 - 160:15</span>
+                </div>
+                <div class="card-body">
+                    <p class="description"><v Ben Mak>I'm sure we'll get a response in a couple of months time.  <v Kajha Nainamohamed>Ben, Mark, justice, mine</p>
+                    
+                    <h4>Transcript</h4>
+                    <div class="transcript"><v Ben Mak>I'm sure we'll get a response in a couple of months time. <v Kajha Nainamohamed>Ben, Mark, justice, mine. Oh, wow. I got a mail from Justice Minds Forensic Intelligence. Oh, am I good? <v Kajha Nainamohamed>Am I okay? Is everything okay? <v Ben Mak>Is it scary? <v Kajha Nainamohamed>Yeah. <v Ben Mak>Is it? <v Kajha Nainamohamed>Yeah. <v Ben Mak>Is it really? It is. Does it have old authority? I need to do your email as well. <v Ben Mak>You know, it's just basic. It's just basic email. <v Kajha Nainamohamed>What email? <v Ben Mak>Your email as in your own domain. It's just basically basic email. <v Kajha Nainamohamed>I have only my Gmail account. <v Ben Mak>I know. I'm going to do the Justice Minds one. Yeah, it's okay. There's nothing. It's not. <v Ben Mak>It's just basic email.</div>
+                    
+                    <h4>Analysis</h4>
+                    <p class="analysis">This simple segment focuses on learning topics with a neutral tone. The speaker uses 140 words across 27 sentences, averaging 5.2 words per sentence. This moment represents a significant insight that could be valuable for viewers interested in deep learning and understanding.</p>
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="moment-card">
+                <div class="card-header">
+                    <h3 class="card-title">Just record it</h3>
+                    <span class="timestamp">48:35 - 49:27</span>
+                </div>
+                <div class="card-body">
+                    <p class="description"><v Kajha Nainamohamed>That's what I told her.  <v Ben Mak>And I am saying that's also a good idea</p>
+                    
+                    <h4>Transcript</h4>
+                    <div class="transcript"><v Kajha Nainamohamed>That's what I told her. <v Ben Mak>And I am saying that's also a good idea. <v Kajha Nainamohamed>I told her you didn't have to do adding all the HTML site. You don't have to do that. <v Kajha Nainamohamed>Record it. Where is the file? Where is the component? Just record it. <v Kajha Nainamohamed>The next time when I want to upload the HTML file, I'll do it while buying. You're following your video. <v Kajha Nainamohamed>She said okay. <v Ben Mak>Actually that's a good idea. <v Kajha Nainamohamed>Yeah. <v Ben Mak>If you, if you know how to do it, do it once and then Kaja would love to learn with <v Ben Mak>me how to do it. But you might. We might have a bit of coding inertia. <v Ben Mak>Kaja codes are very, very like peculiar when it comes to working and being seen by a human. <v Ben Mak>The tentatively recluse into a cave and evaporate and just come back with a product complete. <v Kajha Nainamohamed>Yeah.</div>
+                    
+                    <h4>Analysis</h4>
+                    <p class="analysis">This simple segment focuses on learning topics with a neutral tone. The speaker uses 172 words across 19 sentences, averaging 9.1 words per sentence. This moment represents a significant insight that could be valuable for viewers interested in deep learning and understanding.</p>
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="moment-card">
+                <div class="card-header">
+                    <h3 class="card-title">Okay, my love, see you later</h3>
+                    <span class="timestamp">119:47 - 122:01</span>
+                </div>
+                <div class="card-body">
+                    <p class="description"><v Ben Mak>So, yeah, basically.  So whatever, like WhatsApp group chat you're in</p>
+                    
+                    <h4>Transcript</h4>
+                    <div class="transcript"><v Ben Mak>So, yeah, basically. So whatever, like WhatsApp group chat you're in. <v Ben Mak>We'll give you a form and it'll have the mission that needs to be rectified. Yeah. <v Ben Mak>And it'll have the equality that needs to be instilled and the unfairness that needs to stop. Yes. So official. <v Ben Mak>Dangi 75 official. So we've got authority and official. It says my last name is D. So that one. Okay. <v Ben Mak>I should not be writing this anyway. No, it's fine. I'll print here. Signs. <v Ben Mak>What else I was going to say is, yeah, we'll send you the form of what we're doing because also <v Ben Mak>think of this. When you have a brave. You don't get paid for your break, do you? Yeah. <v Ben Mak>So when it's a bank holiday, that should be an extra. All these little things that add up. <v Ben Mak>You lose leadership on bank holidays, public holidays, you don't get paid for your break. <v Ben Mak>So if you lose pay for having a free time, then you should gain a day of sponsor and, and <v Ben Mak>that sort of thing. So. But yeah, we're all getting together. <v Ben Mak>Everyone's going to say what they feel and we're going to come up with a collective goal that everyone wants <v Ben Mak>because one person, It's a grievance. 20 experts, masters and PhDs and MBAs is a collation, it's a board. <v Ben Mak>It's like you can't ignore them. Yes. I'm gonna message you as well and I'm. <v Ben Mak>We'll set up when we're gonna have the meeting, but just. Yeah, don't worry, we're on it. Yeah. <v Ben Mak>If you're gonna come here later. So I'll be here five days. Yeah, I email before I leave here. <v Ben Mak>Yes, okay. Yeah, perfect. Okay, my love, see you later. Bye. <v Ben Mak>And that's literally what happens everywhere I go is that every. Oh, sorry. Everyone is in that situation. <v Ben Mak>They're upset, distressed, they're strained and they're just like, what's going on? It's so sad. <v Kajha Nainamohamed>Not sad. It's so sad. It's normal for us. I'm just joking, you know that I'm joking. <v Ben Mak>I'll joke. <v Kajha Nainamohamed>You don't give me the face.</div>
+                    
+                    <h4>Analysis</h4>
+                    <p class="analysis">This simple segment focuses on reflective topics with a concerned tone. The speaker uses 387 words across 52 sentences, averaging 7.4 words per sentence. This moment represents a significant insight that could be valuable for viewers interested in deep learning and understanding.</p>
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="moment-card">
+                <div class="card-header">
+                    <h3 class="card-title"><v Kajha Nainamohamed>Oh yeah</h3>
+                    <span class="timestamp">25:45 - 27:32</span>
+                </div>
+                <div class="card-body">
+                    <p class="description"><v Jenofar Nisha>So if it is a HTML file, I just need to show that page replications only, right.  <v Kajha Nainamohamed>Oh yeah</p>
+                    
+                    <h4>Transcript</h4>
+                    <div class="transcript"><v Jenofar Nisha>So if it is a HTML file, I just need to show that page replications only, right? <v Kajha Nainamohamed>Oh yeah. <v Jenofar Nisha>Then what about the TSX file? It has any components, any functions. <v Ben Mak>So just whatever it is, which is probably okay. <v Jenofar Nisha>I know. So basically, since if it is an HTML file, we can run it anywhere in the browser. <v Jenofar Nisha>So we can show the show the thing about the HTML page results. <v Jenofar Nisha>But in the TSX file it has any components, right? <v Jenofar Nisha>So we need to show that results also in the same page, right? <v Jenofar Nisha>If it is CS file to show this analysis data, otherwise we need to show the website those things. <v Jenofar Nisha>Am I right? <v Ben Mak>Yeah, but what I'm saying is, is like when I have a TSX file, it's everything is usually in the <v Ben Mak>one file, usually never one file. So this is what we were saying. <v Ben Mak>Like the CSV should be fine, the HTML should be fine because it should just load if we put it <v Ben Mak>in, it might be worth if there is three buttons. Maybe on the. <v Ben Mak>On the thing that you've made on the upload CSV. <v Ben Mak>Because then we can click if it's a tsx, HTML or CSV, which is quite useful because it means it <v Ben Mak>will tend it down a different rabbit hole depending on what it is. <v Ben Mak>Which means it'll get rendered correctly and just appear on the left and show on the. On the main screen. <v Ben Mak>Does that make sense?</div>
+                    
+                    <h4>Analysis</h4>
+                    <p class="analysis">This moderate segment focuses on learning topics with a neutral tone. The speaker uses 288 words across 21 sentences, averaging 13.7 words per sentence. This moment represents a significant insight that could be valuable for viewers interested in deep learning and understanding.</p>
+                    
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+        <footer>
+            <p>Generated on 5/27/2025 using the Grain API</p>
+        </footer>
+    </div>
+</body>
+</html>

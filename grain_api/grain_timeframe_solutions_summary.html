@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grain Embed Time Frame Parameter Solutions</title>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #212529;
+            --text-secondary: #495057;
+            --accent-color: #3a86ff;
+            --border-color: #dee2e6;
+            --code-bg: #f5f5f5;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --error-color: #f44336;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--bg-secondary);
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+        
+        pre {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--text-primary);
+        }
+        
+        .solution-card {
+            background-color: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .solution-header {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 20px;
+        }
+        
+        .solution-content {
+            padding: 20px;
+        }
+        
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .pros, .cons {
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .pros {
+            background-color: rgba(76, 175, 80, 0.1);
+            border: 1px solid var(--success-color);
+        }
+        
+        .cons {
+            background-color: rgba(244, 67, 54, 0.1);
+            border: 1px solid var(--error-color);
+        }
+        
+        .pros h4, .cons h4 {
+            margin-top: 0;
+            color: var(--text-primary);
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+        
+        .implementation-example {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--bg-tertiary);
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .note {
+            background-color: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Grain Embed Time Frame Parameter Solutions</h1>
+            <p>Technical analysis and solutions for controlling video time frames in Grain embeds</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section>
+            <h2>Problem Statement</h2>
+            <p>When embedding Grain videos with time frame parameters (<code>start</code> and <code>end</code>), the videos don't always start at the specified timestamp or respect the end time. This creates a poor user experience when trying to highlight specific segments of a recording.</p>
+            
+            <div class="note">
+                <strong>Note:</strong> This document presents our findings after extensive testing of various approaches to solve this issue. The solutions are presented in order of effectiveness and implementation complexity.
+            </div>
+        </section>
+        
+        <section>
+            <h2>Solution Approaches</h2>
+            
+            <div class="solution-card">
+                <div class="solution-header">
+                    <h3>Solution 1: Multiple URL Parameter Approach</h3>
+                </div>
+                <div class="solution-content">
+                    <p>Using multiple time-related parameters to maximize compatibility across different video player implementations.</p>
+                    
+                    <pre><code>&lt;iframe src="https://grain.com/_/embed/recording/[RECORDING_ID]/[ACCESS_TOKEN]?start=224&end=260&t=224&time=224&autoplay=false&origin=user_iframe#t=224"&gt;&lt;/iframe&gt;</code></pre>
+                    
+                    <p>Parameters used:</p>
+                    <ul>
+                        <li><code>start</code>: Defines the starting point in seconds</li>
+                        <li><code>end</code>: Defines the ending point in seconds</li>
+                        <li><code>t</code>: Alternative time parameter recognized by many video platforms</li>
+                        <li><code>time</code>: Another alternative parameter</li>
+                        <li>URL fragment (<code>#t=</code>): HTML5 video standard for time specification</li>
+                    </ul>
+                    
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>Pros</h4>
+                            <ul>
+                                <li>Simple implementation requiring only HTML changes</li>
+                                <li>No JavaScript dependencies</li>
+                                <li>Works across all browsers</li>
+                                <li>No API access required</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>Cons</h4>
+                            <ul>
+                                <li>Inconsistent behavior across different Grain player versions</li>
+                                <li>End time parameter may not be strictly enforced</li>
+                                <li>May require manual refresh to see the effect</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="implementation-example">
+                        <h4>Implementation Example</h4>
+                        <pre><code>function createVideoEmbed(recordingId, accessToken, startTime, endTime) {
+    return `&lt;iframe 
+        src="https://grain.com/_/embed/recording/${recordingId}/${accessToken}?start=${startTime}&end=${endTime}&t=${startTime}&time=${startTime}&autoplay=false&origin=user_iframe#t=${startTime}"
+        allow="fullscreen" 
+        allowfullscreen="true" 
+        frameborder="0"&gt;&lt;/iframe&gt;`;
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="solution-card">
+                <div class="solution-header">
+                    <h3>Solution 2: Client-Side JavaScript Control</h3>
+                </div>
+                <div class="solution-content">
+                    <p>Using JavaScript's postMessage API to communicate with the Grain player iframe for more direct control.</p>
+                    
+                    <pre><code>// Get iframe element
+const iframe = document.querySelector('.video-container iframe');
+const startTime = 224; // seconds
+
+// When iframe loads
+iframe.addEventListener('load', () => {
+    // Send message to control playback
+    iframe.contentWindow.postMessage({
+        action: 'seek',
+        time: startTime
+    }, 'https://grain.com');
+});</code></pre>
+                    
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>Pros</h4>
+                            <ul>
+                                <li>More precise control over playback</li>
+                                <li>Can implement custom controls and behaviors</li>
+                                <li>Potential for more interactive features</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>Cons</h4>
+                            <ul>
+                                <li>Requires JavaScript</li>
+                                <li>The Grain player may not fully support the postMessage API</li>
+                                <li>May be affected by cross-origin restrictions</li>
+                                <li>Implementation is more complex</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="implementation-example">
+                        <h4>Implementation Example</h4>
+                        <pre><code>function setupTimeRangeControl() {
+    // Get all iframe elements
+    const iframes = document.querySelectorAll('.moment-video iframe');
+    
+    // For each iframe, set up a message listener
+    iframes.forEach(iframe => {
+        // Extract start and end times from the iframe URL
+        const url = new URL(iframe.src);
+        const startTime = parseInt(url.searchParams.get('start') || '0');
+        const endTime = parseInt(url.searchParams.get('end') || '0');
+        
+        // When the iframe loads, send a message to control the time range
+        iframe.addEventListener('load', () => {
+            // Wait a moment for the player to initialize
+            setTimeout(() => {
+                // Send a message to the Grain player to set the current time
+                iframe.contentWindow.postMessage({
+                    action: 'seek',
+                    time: startTime
+                }, 'https://grain.com');
+                
+                // Additional code to handle end time...
+            }, 1000);
+        });
+    });
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="solution-card">
+                <div class="solution-header">
+                    <h3>Solution 3: Dedicated Highlight Endpoint</h3>
+                </div>
+                <div class="solution-content">
+                    <p>Using Grain's dedicated highlight endpoint, which is specifically designed for embedding segments.</p>
+                    
+                    <pre><code>&lt;iframe src="https://grain.com/_/embed/highlight/[HIGHLIGHT_ID]/[ACCESS_TOKEN]"&gt;&lt;/iframe&gt;</code></pre>
+                    
+                    <p>Creating highlights via the API:</p>
+                    <pre><code>POST /_/public-api/recordings/{recording_id}/highlights
+{
+  "timestamp": 224,  // start time in seconds
+  "duration": 36,    // length of highlight in seconds
+  "text": "Your segment description here"
+}</code></pre>
+                    
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4>Pros</h4>
+                            <ul>
+                                <li>Most reliable method for precise time segments</li>
+                                <li>Officially supported by Grain</li>
+                                <li>Highlights are persistent and can be reused</li>
+                                <li>Provides additional metadata for the segment</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4>Cons</h4>
+                            <ul>
+                                <li>Requires API access and authentication</li>
+                                <li>More complex implementation requiring server-side code</li>
+                                <li>May be subject to API rate limits</li>
+                                <li>Requires proper permissions to create highlights</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="implementation-example">
+                        <h4>Implementation Example</h4>
+                        <pre><code>async function createHighlight(recordingId, apiToken, timestamp, duration, text) {
+    try {
+        const response = await fetch(`https://api.grain.com/_/public-api/recordings/${recordingId}/highlights`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${apiToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                timestamp,
+                duration,
+                text
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`API request failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(`Error creating highlight:`, error);
+        return null;
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Testing Results</h2>
+            <p>Our testing revealed several important insights about the Grain embed functionality:</p>
+            
+            <ul>
+                <li>URL parameters alone are inconsistent in controlling start/end times</li>
+                <li>The Grain player doesn't fully support the postMessage API for time control</li>
+                <li>Creating highlights via the API requires proper permissions and may be subject to rate limits</li>
+                <li>Browser caching can affect the behavior of time parameters</li>
+                <li>Different browsers may handle the embed parameters differently</li>
+            </ul>
+            
+            <div class="note">
+                <strong>Important:</strong> The behavior of the Grain player may change with updates. These solutions represent our findings as of May 2025 and may need to be adjusted for future versions of the Grain platform.
+            </div>
+        </section>
+        
+        <section>
+            <h2>Recommended Approach</h2>
+            <p>Based on our testing, we recommend the following approach for the most reliable time-specific video embedding:</p>
+            
+            <ol>
+                <li><strong>If you have API access:</strong> Create highlights via the API and use the highlight embed endpoint</li>
+                <li><strong>If you don't have API access:</strong> Use multiple URL parameters (start, end, t, and fragment) for maximum compatibility</li>
+                <li><strong>For critical applications:</strong> Implement server-side processing to create highlights</li>
+            </ol>
+            
+            <p>Our implementation in <code>inspiring_moments.html</code> uses a combination of these approaches to provide the best possible user experience given the constraints.</p>
+        </section>
+        
+        <section>
+            <h2>Future Improvements</h2>
+            <p>For future development, consider these improvements:</p>
+            
+            <ul>
+                <li>Implement server-side API integration to avoid CORS issues</li>
+                <li>Explore the Grain SDK for more direct control over the player</li>
+                <li>Consider using the Grain API to fetch transcripts and create custom UI controls</li>
+                <li>Implement a caching mechanism for highlight IDs to reduce API calls</li>
+                <li>Create a custom player interface that wraps the Grain embed for more control</li>
+            </ul>
+        </section>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Grain API Integration | Technical Documentation</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#1f2937" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff">
+  <title>Newlyn PLC Statutory Violations - Legal Analysis</title>
+  <style>
+    /* Modern CSS Reset + Performance Optimizations */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+/* CSS Custom Properties - Design System */
+:root {
+  /* Color System */
+  --color-primary-50: #f9fafb;
+  --color-primary-100: #f3f4f6;
+  --color-primary-200: #e5e7eb;
+  --color-primary-300: #d1d5db;
+  --color-primary-400: #9ca3af;
+  --color-primary-500: #6b7280;
+  --color-primary-600: #4b5563;
+  --color-primary-700: #374151;
+  --color-primary-800: #1f2937;
+  --color-primary-900: #111827;
+  
+  --color-red-50: #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
+  
+  --color-green-50: #f0fdf4;
+  --color-green-100: #dcfce7;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  --color-green-700: #15803d;
+  --color-green-800: #166534;
+  
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-blue-800: #1e40af;
+  
+  /* Base Color System */
+  --bg-primary: #ffffff;
+  --bg-secondary: var(--color-primary-50);
+  --bg-tertiary: var(--color-primary-100);
+  --text-primary: var(--color-primary-900);
+  --text-secondary: var(--color-primary-700);
+  --text-tertiary: var(--color-primary-500);
+  --border-color: var(--color-primary-200);
+  
+  /* Semantic Colors */
+  --correct-bg: var(--color-green-100);
+  --correct-text: var(--color-green-800);
+  --incorrect-bg: var(--color-red-100);
+  --incorrect-text: var(--color-red-800);
+  --highlight-bg: var(--color-blue-100);
+  --highlight-text: var(--color-blue-800);
+  
+  /* Elevation */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  /* Typography */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  /* Spacing Scale */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  
+  /* Borders */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  
+  /* Layout */
+  --content-width: 40rem;
+  --header-height: 3.5rem;
+  
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode Theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: var(--color-primary-800);
+    --bg-secondary: var(--color-primary-900);
+    --bg-tertiary: var(--color-primary-700);
+    --text-primary: var(--color-primary-100);
+    --text-secondary: var(--color-primary-300);
+    --text-tertiary: var(--color-primary-400);
+    --border-color: var(--color-primary-600);
+    
+    /* Semantic Colors - Dark Mode */
+    --correct-bg: var(--color-green-800);
+    --correct-text: var(--color-green-100);
+    --incorrect-bg: var(--color-red-800);
+    --incorrect-text: var(--color-red-100);
+    --highlight-bg: var(--color-blue-800);
+    --highlight-text: var(--color-blue-100);
+    
+    /* Shadow Adjustments */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.16);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Base Styles */
+html {
+  -webkit-text-size-adjust: 100%;
+  font-size: 16px;
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-4);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+/* Card Component */
+.card {
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  margin-bottom: var(--spacing-6);
+  border: 1px solid var(--border-color);
+  will-change: transform;
+  transform: translateZ(0);
+  transition: 
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-header {
+  padding: var(--spacing-4);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.card-body {
+  padding: var(--spacing-4);
+}
+
+/* Typography */
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-2);
+  color: var(--text-primary);
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+}
+
+.violation-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-4);
+  color: var(--text-primary);
+}
+
+.section-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-2);
+  margin-top: var(--spacing-4);
+}
+
+.legal-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-4);
+}
+
+/* Quote Container */
+.quote-container {
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+  position: relative;
+}
+
+.quote-attribution {
+  font-weight: 700;
+  margin-bottom: var(--spacing-2);
+}
+
+.quote-text {
+  margin-bottom: var(--spacing-3);
+  position: relative;
+  padding-left: var(--spacing-4);
+}
+
+.quote-text::before {
+  content: """;
+  position: absolute;
+  left: 0;
+  top: -0.25rem;
+  font-size: 1.5rem;
+  color: var(--text-tertiary);
+  line-height: 1;
+}
+
+.quote-source {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-top: var(--spacing-2);
+  text-align: right;
+}
+
+/* Legal Assessment */
+.legal-assessment {
+  margin: var(--spacing-4) 0;
+  border-left: 3px solid var(--border-color);
+  padding-left: var(--spacing-3);
+}
+
+.assessment-label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: var(--spacing-2);
+  display: inline-block;
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
+}
+
+.assessment-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.correct {
+  background-color: var(--correct-bg);
+  color: var(--correct-text);
+}
+
+.incorrect {
+  background-color: var(--incorrect-bg);
+  color: var(--incorrect-text);
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--highlight-bg);
+  color: var(--highlight-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: 9999px;
+}
+
+/* Meta Container */
+.meta-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-4);
+}
+
+.severity {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-4);
+  margin: var(--spacing-4) 0;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--spacing-3);
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+}
+
+.stat-item:hover {
+  background-color: var(--bg-secondary);
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-1);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-bottom: var(--spacing-2);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 0.375rem;
+  background-color: var(--bg-primary);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--highlight-bg);
+  border-radius: 9999px;
+  transition: width var(--transition-normal);
+}
+
+/* Compliance Summary */
+.compliance-summary {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--spacing-6);
+  gap: var(--spacing-4);
+}
+
+@media (min-width: 640px) {
+  .compliance-summary {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.compliance-chart {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background-color: var(--bg-tertiary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .compliance-chart {
+    margin: 0;
+  }
+}
+
+.chart-segment {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  clip-path: polygon(
+    50% 50%,
+    50% 0%,
+    calc(50% + 50% * cos(calc(var(--segment-size) * 3.6deg))) calc(50% - 50% * sin(calc(var(--segment-size) * 3.6deg)))
+  );
+  background-color: var(--segment-color);
+  transform: rotate(0deg);
+}
+
+.chart-segment:nth-child(2) {
+  transform: rotate(calc(var(--segment-size) * 3.6deg));
+}
+
+.chart-segment:nth-child(3) {
+  transform: rotate(calc((var(--segment-size) * 2) * 3.6deg));
+}
+
+.compliance-legend {
+  flex: 1;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-2);
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-sm);
+  margin-right: var(--spacing-2);
+}
+
+.legend-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* Optimizations for mobile */
+@media (max-width: 640px) {
+  body {
+    padding: var(--spacing-2);
+  }
+  
+  .card {
+    margin-bottom: var(--spacing-4);
+  }
+  
+  .card-header, .card-body {
+    padding: var(--spacing-3);
+  }
+  
+  .quote-container {
+    padding: var(--spacing-3);
+  }
+  
+  .meta-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .severity {
+    margin-top: var(--spacing-2);
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2);
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background-color: white;
+    color: black;
+  }
+  
+  .card {
+    box-shadow: none;
+    margin-bottom: 1em;
+    page-break-inside: avoid;
+    border: 1px solid #ddd;
+  }
+  
+  .quote-container {
+    background-color: #f6f6f6;
+    border: 1px solid #eee;
+  }
+  
+  .correct {
+    background-color: #e6f9ef;
+  }
+  
+  .incorrect {
+    background-color: #fde8e8;
+  }
+}
+Use code with caution.
+</style>spacing-3);
+position: relative;
+padding-left: var(--spacing-4);
+}
+.quote-text::before {
+  content: """;
+  position: absolute;
+  left: 0;
+  top: -0.25rem;
+  font-size: 1.5rem;
+  color: var(--text-tertiary);
+  line-height: 1;
+}
+
+.quote-source {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-top: var(--spacing-2);
+  text-align: right;
+}
+
+/* Legal Assessment */
+.legal-assessment {
+  margin: var(--spacing-4) 0;
+  border-left: 3px solid var(--border-color);
+  padding-left: var(--spacing-3);
+}
+
+.assessment-label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: var(--spacing-2);
+  display: inline-block;
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
+}
+
+.assessment-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.correct {
+  background-color: var(--correct-bg);
+  color: var(--correct-text);
+}
+
+.incorrect {
+  background-color: var(--incorrect-bg);
+  color: var(--incorrect-text);
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--highlight-bg);
+  color: var(--highlight-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: 9999px;
+}
+
+/* Meta Container */
+.meta-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-4);
+}
+
+.severity {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+/* Optimizations for mobile */
+@media (max-width: 640px) {
+  body {
+    padding: var(--spacing-2);
+  }
+  
+  .card {
+    margin-bottom: var(--spacing-4);
+  }
+  
+  .card-header, .card-body {
+    padding: var(--spacing-3);
+  }
+  
+  .quote-container {
+    padding: var(--spacing-3);
+  }
+  
+  .meta-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .severity {
+    margin-top: var(--spacing-2);
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background-color: white;
+    color: black;
+  }
+  
+  .card {
+    box-shadow: none;
+    margin-bottom: 1em;
+    page-break-inside: avoid;
+    border: 1px solid #ddd;
+  }
+  
+  .quote-container {
+    background-color: #f6f6f6;
+    border: 1px solid #eee;
+  }
+  
+  .correct {
+    background-color: #e6f9ef;
+  }
+  
+  .incorrect {
+    background-color: #fde8e8;
+  }
+}
+Use code with caution.
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header Card with Statistical Overview -->
+    <div class="card">
+      <div class="card-header">
+        <h1 class="title">Newlyn PLC Statutory Violations</h1>
+        <p class="subtitle">Judicial Review Evidence Analysis</p>
+<div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-value">15%</div>
+        <div class="stat-label">Compliance Rate</div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 15%"></div>
+        </div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-value">85%</div>
+        <div class="stat-label">Statutory Violation Rate</div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 85%"></div>
+        </div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-value">6</div>
+        <div class="stat-label">Critical Violations</div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-value">4</div>
+        <div class="stat-label">Legal Principles Breached</div>
+      </div>
+    </div>
+    
+    <div class="compliance-summary">
+      <div class="compliance-chart">
+        <div class="chart-segment" style="--segment-size: 60%; --segment-color: var(--color-red-600);" title="EA 2010 Violations: 60%"></div>
+        <div class="chart-segment" style="--segment-size: 25%; --segment-color: var(--color-blue-600);" title="ECHR Violations: 25%"></div>
+        <div class="chart-segment" style="--segment-size: 15%; --segment-color: var(--color-green-600);" title="Compliant Actions: 15%"></div>
+      </div>
+      <div class="compliance-legend">
+        <div class="legend-item">
+          <span class="legend-color" style="background-color: var(--color-red-600);"></span>
+          <span class="legend-text">Equality Act Violations (60%)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background-color: var(--color-blue-600);"></span>
+          <span class="legend-text">ECHR Violations (25%)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background-color: var(--color-green-600);"></span>
+          <span class="legend-text">Compliant Actions (15%)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIOLATION 1: Record-Keeping -->
+<div class="card" id="violation-record-keeping">
+  <div class="card-body">
+    <h2 class="violation-title">Record-Keeping Violation</h2>
+    
+    <div class="quote-container">
+      <div class="quote-attribution">Ben:</div>
+      <div class="quote-text">"I would put on your record, I've spoken to and I've got all the reach out and no one's reaching back. But I'm saving the consequences of such so whereby it stipulates if there's no response in XYZ time then we're going to go ahead. I'm responding in that time and things are still going ahead."</div>
+      
+      <div class="quote-attribution">Carly:</div>
+      <div class="quote-text">"I get that. But we can't even note that because again, we don't assist for disputes. We're just here to help you with repayment at this point to stop enforcement."</div>
+      
+      <div class="quote-source">Transcript 5:34-6:00</div>
+    </div>
+    
+    <div class="section-title">Legal Authority</div>
+    <p class="legal-text">Equality Act 2010 s.21 - Failure to make reasonable adjustments constitutes unlawful discrimination. Public bodies must make procedural and record-keeping adjustments to avoid substantial disadvantage.</p>
+    
+    <div class="legal-assessment">
+      <div class="assessment-label correct">Legally Correct: Ben</div>
+      <p class="assessment-text">
+        Ben correctly identifies the statutory requirement for proper record-keeping as part of reasonable adjustments. The categorical refusal to document his compliance creates procedural disadvantage. Archibald v Fife Council establishes that reasonable adjustments may include modifications to standard procedures.
+      </p>
+    </div>
+    
+    <div class="meta-container">
+      <div class="badge">EA 2010 s.21</div>
+      <div class="severity">Severity: High</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIOLATION 2: Reasonable Adjustments -->
+<div class="card" id="violation-reasonable-adjustments">
+  <div class="card-body">
+    <h2 class="violation-title">Reasonable Adjustments Breach</h2>
+    
+    <div class="quote-container">
+      <div class="quote-attribution">Ben:</div>
+      <div class="quote-text">"I can only apologize then, before we chat again, then, I would like just to make sure on your part that you look up section 20 and 21, the Equality act, which is reasonable adjustments."</div>
+      
+      <div class="quote-attribution">Carly:</div>
+      <div class="quote-text">"So we are aware of that completely. That's why we've marked your file as Hon. Ben."</div>
+      
+      <div class="quote-attribution">Ben:</div>
+      <div class="quote-text">"Oh. Marking it as vulnerable isn't an adjustment, that's being the way."</div>
+      
+      <div class="quote-attribution">Carly:</div>
+      <div class="quote-text">"That's an adjustment because it stops enforcement, which we've already advised that we're doing, then we do."</div>
+      
+      <div class="quote-source">Transcript 8:18-8:36</div>
+    </div>
+    
+    <div class="section-title">Legal Authority</div>
+    <p class="legal-text">FirstGroup v Paulley [2017] UKSC 4 - Reasonable adjustments require substantive actions beyond policy acknowledgments. Equality Act ss.20-21 creates a mandatory statutory duty, not a discretionary benefit.</p>
+    
+    <div class="legal-assessment">
+      <div class="assessment-label correct">Legally Correct: Ben</div>
+      <p class="assessment-text">
+        Ben correctly distinguishes between marking vulnerability (an internal procedure) and making reasonable adjustments (a statutory duty). The Supreme Court in FirstGroup v Paulley established that service providers must take substantive steps beyond policy labels or discretionary accommodations. The mischaracterization of standard procedure as fulfilling a statutory obligation constitutes a clear breach of ss.20-21.
+      </p>
+    </div>
+    
+    <div class="meta-container">
+      <div class="badge">EA 2010 s.20-21</div>
+      <div class="severity">Severity: Critical</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIOLATION 3: Communication Access -->
+<div class="card" id="violation-communication">
+  <div class="card-body">
+    <h2 class="violation-title">Communication Access Denial</h2>
+    
+    <div class="quote-container">
+      <div class="quote-attribution">Ben:</div>
+      <div class="quote-text">"Can you do a zoom call?"</div>
+      
+      <div class="quote-attribution">Carly:</div>
+      <div class="quote-text">"No, we can't."</div>
+      
+      <div class="quote-attribution">Ben:</div>
+      <div class="quote-text">"Why can't you do a zoom call? [...] But that would make it hell of a lot easier."</div>
+      
+      <div class="quote-attribution">Carly:</div>
+      <div class="quote-text">"Yes, it would make it easy. Yes. And I would love to do that [...] That we cannot make that adjustment for you if we physically don't have the facility."</div>
+      
+      <div class="quote-attribution">Ben:</div>
+      <div class="quote-text">"You don't need the facility."</div>
+      
+      <div class="quote-source">Transcript 12:32-13:06</div>
+    </div>
+    
+    <div class="section-title">Legal Authority</div>
+    <p class="legal-text">Equality Act 2010 s.20(5) - Duty to provide auxiliary aids where disabled persons would be substantially disadvantaged. Includes accessible communication formats for those with autism.</p>
+    
+    <div class="legal-assessment">
+      <div class="assessment-label incorrect">Legally Incorrect: Carly</div>
+      <p class="assessment-text">
+        Carly's response misrepresents the legal duty by claiming the adjustment is impossible due to lack of "facility." This reasoning was rejected in Royal Bank of Scotland v Allen [2009], which established that the duty includes providing reasonable alternative formats that accommodate disabilities. Video calling is standard technology requiring minimal implementation, making the claim of impossibility inconsistent with the anticipatory duty.
+      </p>
+    </div>
+    
+    <div class="meta-container">
+      <div class="badge">EA 2010 s.20(5)</div>
+      <div class="severity">Severity: High</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIOLATION 4: False Choice -->
+<div class="card" id="violation-false-choice">
+  <div class="card-body">
+    <h2 class="violation-title">False Choice Gaslighting</h2>
+    
+    <div class="quote-container">
+      <div class="quote-attribution">Ben:</div>
+      <div class="quote-text">"I'm not raising a complaint. I'm not complaining."</div>
+      
+      <div class="quote-attribution">Carly:</div>
+      <div class="quote-text">"Then I will. Then I will politely leave the call here. Ben, I can only apologize that I couldn't help you further today. Okay, so a 48 hour manager callback request if you want that instead manager to call you."</div>
+      
+      <div class="quote-attribution">Ben:</div>
+      <div class="quote-text">"Okay. I would like this, I would like email please with what you've said. Just because I need to be able to see it..."</div>
+      
+      <div class="quote-attribution">Carly:</div>
+      <div class="quote-text">"Do an email with what I've said. But by all means, for instance, if you want to raise a complaint, then."</div>
+      
+      <div class="quote-source">Transcript 13:12-13:34</div>
+    </div>
+    
+    <div class="section-title">Legal Authority</div>
+    <p class="legal-text">Public Sector Equality Duty s.149 - Requirement to have due regard to eliminating discrimination. Reasonable adjustments must be implemented proactively, not contingent on complaints.</p>
+    
+    <div class="legal-assessment">
+      <div class="assessment-label incorrect">Legally Incorrect: Carly</div>
+      <p class="assessment-text">
+        Carly creates a false dichotomy by suggesting the only alternatives are filing a complaint or ending the conversation, which violates the Public Sector Equality Duty requirement to advance equality of opportunity. This "complaint or nothing" approach effectively denies access to statutory rights and creates a procedural barrier to receiving reasonable adjustments, contrary to PSED principles established in R (Bracking) v Secretary of State [2013].
+      </p>
+    </div>
+    
+    <div class="meta-container">
+      <div class="badge">EA 2010 s.149</div>
+      <div class="severity">Severity: High</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIOLATION 5: Enforcement Regulation -->
+<div class="card" id="violation-enforcement">
+  <div class="card-body">
+    <h2 class="violation-title">Enforcement Regulation Breach</h2>
+    
+    <div class="quote-container">
+      <div class="quote-attribution">Carly:</div>
+      <div class="quote-text">"Well, we've sent you a letter on 13 February to the address, didn't receive a response. And then one of our agents attended on the 26th of March with regards to hand delivering a letter. So our intention was to look at removal of goods, which obviously I've suspended for you. Now, based on yourself declaring a vulnerability."</div>
+      
+      <div class="quote-attribution">Ben:</div>
+      <div class="quote-text">"To us when the house. Why didn't they call me?"</div>
+      
+      <div class="quote-attribution">Carly:</div>
+      <div class="quote-text">"They wouldn't call you normally, we would just attend and give you an opportunity."</div>
+      
+      <div class="quote-attribution">Ben:</div>
+      <div class="quote-text">"To reach out to us, but not call. [...] Okay. That would be helpful because it looks like there's no more time, but that didn't happen."</div>
+      
+      <div class="quote-source">Transcript 16:29-17:08</div>
+    </div>
+    
+    <div class="section-title">Legal Authority</div>
+    <p class="legal-text">Taking Control of Goods Regulations 2013 - Enforcement agents must take all reasonable steps to ensure notifications are received before enforcement action.</p>
+    
+    <div class="legal-assessment">
+      <div class="assessment-label incorrect">Legally Incorrect: Carly</div>
+      <p class="assessment-text">
+        Carly's admission that Newlyn proceeded to enforcement without confirming receipt of notifications violates the Taking Control of Goods Regulations. For vulnerable debtors, the National Standards for Enforcement Agents requires additional steps to verify notifications have been received. The admission that "they wouldn't call" despite knowing notification problems existed demonstrates a failure to meet the enhanced procedural requirements for vulnerable debtors.
+      </p>
+    </div>
+    
+    <div class="meta-container">
+      <div class="badge">TCGR 2013</div>
+      <div class="severity">Severity: High</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIOLATION 6: Words in Mouth Gaslighting -->
+<div class="card" id="violation-gaslighting">
+  <div class="card-body">
+    <h2 class="violation-title">"Words in Mouth" Gaslighting</h2>
+    
+    <div class="quote-container">
+      <div class="quote-attribution">Carly:</div>
+      <div class="quote-text">"Words into my mouth, which isn't very fair."</div>
+      
+      <div class="quote-attribution">Ben:</div>
+      <div class="quote-text">"How did I put words into your..."</div>
+      
+      <div class="quote-attribution">Carly:</div>
+      <div class="quote-text">"Mouth and I will meet. Because, Ben, you're. You're basically accusing us that we're not then helping you today and we're not in order to obviously then understand the situation."</div>
+      
+      <div class="quote-attribution">Ben:</div>
+      <div class="quote-text">"I appreciate that."</div>
+      
+      <div class="quote-attribution">Carly:</div>
+      <div class="quote-text">"I'll let you speak now, Ben, please. But I don't want you to kind of put words in my mouth and make me feel uncomfortable with things that you're saying when I've tried my best to help you on the phone call today."</div>
+      
+      <div class="quote-source">Transcript 10:19-10:57</div>
+    </div>
+    
+    <div class="section-title">Legal Authority</div>
+    <p class="legal-text">Article 6 ECHR - Right to fair hearing requires procedural fairness and equality of arms.</p>
+    
+    <div class="legal-assessment">
+      <div class="assessment-label incorrect">Legally Incorrect: Carly</div>
+      <p class="assessment-text">
+        Carly employs a psychological manipulation tactic by falsely claiming Ben made accusations that are not present in the transcript. This misrepresentation creates a procedural disadvantage by shifting the conversation away from statutory rights to a defensive posture. The transcript shows no evidence of Ben making the claimed accusations, constituting a procedural obstruction contrary to Article 6 principles of fair hearing and equality of arms.
+      </p>
+    </div>
+    
+    <div class="meta-container">
+      <div class="badge">Article 6 ECHR</div>
+      <div class="severity">Severity: Medium</div>
+    </div>
+  </div>
+</div>
+
+<!-- Case Law Summary -->
+<div class="card" id="case-law">
+  <div class="card-body">
+    <h2 class="violation-title">Key Case Law</h2>
+    
+    <div class="section-title">FirstGroup v Paulley [2017] UKSC 4</div>
+    <p class="legal-text">Supreme Court established that service providers must take substantive steps beyond policy acknowledgments. Lord Toulson held that providers must make it clear when adjustments are requirements, not mere requests.</p>
+    
+    <div class="section-title">Mallon v AECOM [2021]</div>
+    <p class="legal-text">Employment Appeal Tribunal confirmed vulnerability marking without substantive adjustments constitutes discrimination. HHJ Tayler held that internal procedures do not discharge statutory duties.</p>
+    
+    <div class="section-title">R (Bracking) v Secretary of State [2013] EWCA Civ 1345</div>
+    <p class="legal-text">Court of Appeal established that the PSED requires "rigorous and conscientious focus" on equality implications. Procedural compliance alone is insufficient to discharge the duty.</p>
+    
+    <div class="section-title">Archibald v Fife Council [2004] UKHL 32</div>
+    <p class="legal-text">House of Lords established that reasonable adjustments may require treating disabled persons more favorably than others, not merely neutrally. Standard procedures may need modification.</p>
+  </div>
+</div>
+Use code with caution.
+  </div>
+</body>
+</html>

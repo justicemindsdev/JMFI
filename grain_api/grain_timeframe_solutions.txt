@@ -1,0 +1,187 @@
+GRAIN EMBED TIME FRAME PARAMETER SOLUTIONS
+===========================================
+
+PROBLEM
+-------
+The Grain embed player does not properly support time constraints through URL parameters.
+Despite using various approaches (query parameters like ?start=224&end=260 or fragment identifiers like #t=224),
+the player consistently starts from the beginning of the recording.
+
+ATTEMPTED SOLUTIONS THAT FAILED
+------------------------------
+- URL query parameters: ?start=224&end=260
+- Fragment identifiers: #t=224
+- Combined approaches: ?start=224&end=260&t=224
+- JavaScript postMessage API to control playback
+- Direct DOM manipulation (blocked by cross-origin policy)
+
+RECOMMENDED SOLUTION: USE THE GRAIN HIGHLIGHT API
+-----------------------------------------------
+The only reliable way to ensure videos play at specific timestamps is to use the Grain Highlight API
+to create proper segments.
+
+IMPLEMENTATION STEPS:
+
+1. Create highlights for each segment using the Grain API:
+   
+   POST /_/public-api/recordings/{recording_id}/highlights
+   {
+     "timestamp": 224,  // start time in seconds
+     "duration": 36,    // length of highlight in seconds
+     "text": "On Manifesting Abundance"
+   }
+   
+   Headers:
+   Authorization: Bearer YOUR_ACCESS_TOKEN
+   Content-Type: application/json
+
+2. Embed each highlight using the dedicated highlight endpoint:
+   
+   <iframe 
+     src="https://grain.com/_/embed/highlight/[HIGHLIGHT_ID]/[ACCESS_TOKEN]"
+     allow="fullscreen" 
+     allowfullscreen="true" 
+     frameborder="0">
+   </iframe>
+
+3. Replace all standard recording embeds with highlight embeds in your HTML.
+
+4. Remove custom player controls, segment overlays, loading messages, and any JavaScript code
+   that attempts to control the video playback.
+
+NODE.JS IMPLEMENTATION EXAMPLE
+----------------------------
+```javascript
+const axios = require('axios');
+require('dotenv').config();
+
+// Grain API configuration
+const GRAIN_API_TOKEN = process.env.GRAIN_API_TOKEN;
+const RECORDING_ID = '026973da-9ff2-493a-ab85-44a54170f43a';
+
+// Define segments (start time in seconds, duration in seconds, title)
+const segments = [
+  { start: 224, duration: 36, title: "On Manifesting Abundance" },
+  { start: 1674, duration: 73, title: "On Taking Initiative" },
+  { start: 1831, duration: 130, title: "On Breaking Free from Cultural Conditioning" },
+  { start: 2176, duration: 77, title: "On Recognizing Your Value" },
+  { start: 4448, duration: 82, title: "On Creative Potential" },
+  { start: 8347, duration: 50, title: "On Authentic Self-Expression" }
+];
+
+// Function to create a highlight
+async function createHighlight(segment) {
+  try {
+    const response = await axios({
+      method: 'post',
+      url: `https://grain.com/_/public-api/recordings/${RECORDING_ID}/highlights`,
+      headers: {
+        'Authorization': `Bearer ${GRAIN_API_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      data: {
+        timestamp: segment.start,
+        duration: segment.duration,
+        text: segment.title
+      }
+    });
+    
+    console.log(`Created highlight for "${segment.title}"`);
+    console.log(`ID: ${response.data.id}`);
+    console.log(`Embed URL: https://grain.com/_/embed/highlight/${response.data.id}/${response.data.accessToken}`);
+    
+    return {
+      title: segment.title,
+      highlightId: response.data.id,
+      accessToken: response.data.accessToken,
+      embedUrl: `https://grain.com/_/embed/highlight/${response.data.id}/${response.data.accessToken}`
+    };
+  } catch (error) {
+    console.error(`Error creating highlight for "${segment.title}":`, error.response?.data || error.message);
+    return null;
+  }
+}
+
+// Create all highlights
+async function createAllHighlights() {
+  console.log('Creating Grain highlights for all segments...');
+  
+  const results = [];
+  
+  for (const segment of segments) {
+    const result = await createHighlight(segment);
+    if (result) results.push(result);
+  }
+  
+  console.log('Summary of created highlights:');
+  console.table(results);
+  
+  console.log('HTML embed code for all highlights:');
+  results.forEach(highlight => {
+    console.log(`<!-- ${highlight.title} -->`);
+    console.log(`<iframe src="${highlight.embedUrl}" allow="fullscreen" allowfullscreen="true" frameborder="0"></iframe>`);
+  });
+}
+
+createAllHighlights().catch(console.error);
+```
+
+ALTERNATIVE CLIENT-SIDE SOLUTIONS (LESS RELIABLE)
+----------------------------------------------
+
+1. Custom Player Wrapper:
+```javascript
+const player = document.querySelector('iframe');
+const videoContainer = player.parentElement;
+let currentTime = 0;
+
+// Listen for messages from the iframe
+window.addEventListener('message', (event) => {
+  if (event.origin === 'https://grain.com' && event.data.type === 'timeupdate') {
+    currentTime = event.data.currentTime;
+    
+    // Hide video when outside desired range
+    if (currentTime < 224 || currentTime > 260) {
+      videoContainer.style.opacity = '0';
+    } else {
+      videoContainer.style.opacity = '1';
+    }
+  }
+});
+```
+
+2. Programmatic Control:
+```javascript
+// Send message to Grain player
+player.contentWindow.postMessage({
+  action: 'seek',
+  time: 224
+}, 'https://grain.com');
+
+// Set up interval to enforce time boundaries
+setInterval(() => {
+  if (currentTime < 224) {
+    player.contentWindow.postMessage({
+      action: 'seek',
+      time: 224
+    }, 'https://grain.com');
+  } else if (currentTime > 260) {
+    player.contentWindow.postMessage({
+      action: 'pause'
+    }, 'https://grain.com');
+  }
+}, 1000);
+```
+
+KEY GRAIN API ENDPOINTS
+---------------------
+- GET /_/public-api/recordings/{recording_id} - Get recording details
+- GET /_/public-api/recordings/{recording_id}/highlights - List all highlights for a recording
+- POST /_/public-api/recordings/{recording_id}/highlights - Create a new highlight
+- GET /_/public-api/highlights/{highlight_id} - Get highlight details
+- DELETE /_/public-api/highlights/{highlight_id} - Delete a highlight
+
+CONCLUSION
+---------
+The Grain Highlight API is the recommended solution for ensuring videos play at specific timestamps.
+This approach is more reliable and aligns with Grain's intended usage for segment extraction.

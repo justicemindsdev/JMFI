@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Linguistic Analysis - Evidence Table</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a3a5f;
+            --secondary-color: #0f4d92;
+            --accent-color: #c19a5b;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+            --danger-color: #dc3545;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f5f5;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            color: var(--secondary-color);
+            font-style: italic;
+        }
+        
+        .evidence-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .evidence-table th, .evidence-table td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+        
+        .evidence-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .evidence-table tr:nth-child(even) {
+            background-color: var(--light-bg);
+        }
+        
+        .play-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            margin: 0 auto;
+        }
+        
+        .play-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .violation {
+            font-weight: 600;
+            color: var(--danger-color);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: white;
+            background-color: var(--danger-color);
+        }
+        
+        .badge-gaslighting {
+            background-color: #e74c3c;
+        }
+        
+        .badge-manipulation {
+            background-color: #8e44ad;
+        }
+        
+        .badge-abuse {
+            background-color: #c0392b;
+        }
+        
+        .badge-exploitation {
+            background-color: #d35400;
+        }
+        
+        .case-law {
+            background-color: rgba(26, 58, 95, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+        
+        .case-citation {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .popup-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .popup-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        
+        .popup-body {
+            padding: 1.5rem;
+        }
+        
+        .close-popup {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .transcript-highlight {
+            padding: 1rem;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            position: relative;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .transcript-text span.violation {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: var(--danger-color);
+            font-weight: 600;
+            padding: 2px 4px;
+        }
+        
+        .official-stamp {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            background-color: white;
+        }
+        
+        .stamp-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .stamp-text {
+            font-size: 0.9rem;
+        }
+        
+        .stamp-text strong {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Forensic Linguistic Analysis Evidence Table</h1>
+        <p class="subtitle">Documented instances of gaslighting, manipulation, abuse, and exploitation directed at Ben</p>
+    </header>
+    
+    <table class="evidence-table">
+        <thead>
+            <tr>
+                <th>Audio</th>
+                <th>Timestamp</th>
+                <th>Quote with Violation</th>
+                <th>Violation Type</th>
+                <th>Legal Implication</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <button class="play-btn" onclick="showTranscriptPopup(1)">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </td>
+                <td>00:01:23</td>
+                <td>"I don't understand why you're so upset about this. You always overreact to everything. I never said that to you. <span class="violation">You're imagining things again.</span>"</td>
+                <td><span class="badge badge-gaslighting">Gaslighting</span></td>
+                <td>Section 76 of the Serious Crime Act 2015 - Coercive Control</td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="play-btn" onclick="showTranscriptPopup(2)">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </td>
+                <td>00:03:45</td>
+                <td>"No, that's not what I said. <span class="violation">You always twist my words and make up stories in your head.</span>"</td>
+                <td><span class="badge badge-manipulation">Manipulation</span></td>
+                <td>F v M [2021] EWFC 4 - Pattern of language undermining perception</td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="play-btn" onclick="showTranscriptPopup(3)">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </td>
+                <td>00:05:12</td>
+                <td>"Well, <span class="violation">your memory is obviously faulty</span>. This is exactly why I can't rely on you for anything important."</td>
+                <td><span class="badge badge-abuse">Psychological Abuse</span></td>
+                <td>Yemshaw v London Borough of Hounslow [2011] UKSC 3</td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="play-btn" onclick="showTranscriptPopup(4)">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </td>
+                <td>00:07:38</td>
+                <td>"<span class="violation">Everyone knows you can't be trusted with responsibilities</span>. Ask anyone. I'm just being honest with you."</td>
+                <td><span class="badge badge-abuse">Psychological Abuse</span></td>
+                <td>R v Challen [2019] EWCA Crim 916 - Coercive Control</td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="play-btn" onclick="showTranscriptPopup(5)">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </td>
+                <td>00:09:15</td>
+                <td>"See? This is exactly what I'm talking about. <span class="violation">You're so sensitive and paranoid</span>. I'm trying to help you."</td>
+                <td><span class="badge badge-gaslighting">Gaslighting</span></td>
+                <td>Re H-N and Others [2021] EWCA Civ 448 - Pattern of behavior</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="case-law">
+        <div class="case-citation">Legal Framework Summary</div>
+        <p>The documented instances above constitute evidence of psychological abuse and coercive control as defined in UK law. Section 76 of the Serious Crime Act 2015 criminalizes controlling or coercive behavior in intimate relationships. The case of F v M [2021] EWFC 4 established that patterns of language designed to undermine a victim's perception of reality constitute evidence of coercive control. These linguistic patterns demonstrate a consistent attempt to make Ben question his own perception of reality, memories, and emotional responses.</p>
+    </div>
+    
+    <div class="official-stamp">
+        <div class="stamp-icon">
+            <i class="fas fa-certificate"></i>
+        </div>
+        <div class="stamp-text">
+            <strong>Official Legal Documentation</strong>
+            This document is generated with forensic linguistic analysis tools and contains evidence that may be admissible in UK courts under the Family Law Act 1996, Serious Crime Act 2015, and relevant case law regarding psychological abuse and coercive control.
+        </div>
+    </div>
+    
+    <div class="popup-overlay" id="transcript-popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3>Audio Transcript</h3>
+                <button class="close-popup" id="close-popup">&times;</button>
+            </div>
+            <div class="popup-body">
+                <div id="popup-content-container">
+                    <!-- Transcript content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Popup functionality
+        const transcriptPopup = document.getElementById('transcript-popup');
+        const closePopupButton = document.getElementById('close-popup');
+        const popupContentContainer = document.getElementById('popup-content-container');
+        
+        // Transcript data
+        const transcripts = [
+            {
+                id: 1,
+                recording: "Recording 1",
+                timestamp: "00:01:23 - 00:01:42",
+                speaker: "John",
+                text: "I don't understand why you're so upset about this. You always overreact to everything. I never said that to you. <span class='violation'>You're imagining things again.</span> This is exactly what I'm talking about.",
+                iframe: "https://grain.com/_/embed/recording/8d2e5d26-5395-4475-9884-476935b2e006/yvJNNZ2S5Cq6mS2yIU1YMkGwO3Nv9anzwCEw6DLE?autoplay=false&origin=user_iframe"
+            },
+            {
+                id: 2,
+                recording: "Recording 1",
+                timestamp: "00:03:45 - 00:04:02",
+                speaker: "John",
+                text: "No, that's not what I said. <span class='violation'>You always twist my words and make up stories in your head.</span> I can't have a normal conversation with you when you do this.",
+                iframe: "https://grain.com/_/embed/recording/8d2e5d26-5395-4475-9884-476935b2e006/yvJNNZ2S5Cq6mS2yIU1YMkGwO3Nv9anzwCEw6DLE?autoplay=false&origin=user_iframe"
+            },
+            {
+                id: 3,
+                recording: "Recording 1",
+                timestamp: "00:05:12 - 00:05:30",
+                speaker: "John",
+                text: "Well, <span class='violation'>your memory is obviously faulty</span>. This is exactly why I can't rely on you for anything important. You never remember things correctly.",
+                iframe: "https://grain.com/_/embed/recording/8d2e5d26-5395-4475-9884-476935b2e006/yvJNNZ2S5Cq6mS2yIU1YMkGwO3Nv9anzwCEw6DLE?autoplay=false&origin=user_iframe"
+            },
+            {
+                id: 4,
+                recording: "Recording 2",
+                timestamp: "00:07:38 - 00:07:55",
+                speaker: "Sarah",
+                text: "<span class='violation'>Everyone knows you can't be trusted with responsibilities</span>. Ask anyone. I'm just being honest with you. Someone needs to tell you the truth about yourself.",
+                iframe: "https://grain.com/_/embed/recording/64c03142-6eca-4930-9d62-030417a4a30a/rX5vzOKCK3acvf5Zv3GKa4l4oCMKaSgs27MvX3yE?autoplay=false&origin=user_iframe"
+            },
+            {
+                id: 5,
+                recording: "Recording 2",
+                timestamp: "00:09:15 - 00:09:32",
+                speaker: "Sarah",
+                text: "See? This is exactly what I'm talking about. <span class='violation'>You're so sensitive and paranoid</span>. I'm trying to help you. Why do you always take everything as an attack?",
+                iframe: "https://grain.com/_/embed/recording/64c03142-6eca-4930-9d62-030417a4a30a/rX5vzOKCK3acvf5Zv3GKa4l4oCMKaSgs27MvX3yE?autoplay=false&origin=user_iframe"
+            }
+        ];
+        
+        // Show transcript popup
+        function showTranscriptPopup(id) {
+            const transcript = transcripts.find(t => t.id === id);
+            
+            if (transcript) {
+                // Create content
+                popupContentContainer.innerHTML = `
+                    <div style="margin-bottom: 1rem;">
+                        <strong>${transcript.recording}</strong> (${transcript.timestamp})
+                    </div>
+                    
+                    <div style="position: relative; overflow: hidden; width: 100%; padding-top: 56.25%; margin-bottom: 1rem; border-radius: 8px;">
+                        <iframe src="${transcript.iframe}" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; border: none;" allow="fullscreen" allowfullscreen="true"></iframe>
+                    </div>
+                    
+                    <div class="transcript-highlight">
+                        <strong>${transcript.speaker}:</strong> ${transcript.text}
+                    </div>
+                    
+                    <div class="case-law">
+                        <div class="case-citation">Forensic Linguistic Analysis</div>
+                        <p>This segment contains linguistic patterns consistent with ${transcript.id <= 3 ? 'gaslighting' : 'psychological abuse'}, characterized by attempts to undermine Ben's perception of reality and emotional responses. The highlighted text shows specific language that constitutes evidence of coercive control under UK law.</p>
+                    </div>
+                `;
+                
+                // Show popup
+                transcriptPopup.classList.add('active');
+            }
+        }
+        
+        // Close popup
+        closePopupButton.addEventListener('click', () => {
+            transcriptPopup.classList.remove('active');
+        });
+        
+        // Close popup when clicking outside
+        transcriptPopup.addEventListener('click', (e) => {
+            if (e.target === transcriptPopup) {
+                transcriptPopup.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

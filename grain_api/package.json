@@ -1,0 +1,27 @@
+{
+  "name": "grain-ai-moment-extractor",
+  "version": "1.0.0",
+  "description": "AI-powered moment extraction and code enhancement for Grain recordings",
+  "main": "ai_moment_extractor.js",
+  "scripts": {
+    "start": "node extract_aha_moments.js",
+    "save-to-supabase": "node save_to_supabase.js",
+    "load-from-supabase": "node load_from_supabase.js",
+    "extract-moments": "node ai_moment_extractor.js",
+    "update-interface": "node update_chat_interface.js",
+    "enhance-code": "node ai_code_enhancer.js enhance",
+    "generate-code": "node ai_code_enhancer.js generate",
+    "analyze-code": "node ai_code_enhancer.js analyze",
+    "generate-tests": "node ai_code_enhancer.js test"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "axios": "^1.9.0",
+    "dotenv": "^16.5.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "author": "",
+  "license": "MIT"
+}
