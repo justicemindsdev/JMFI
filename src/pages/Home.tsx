@@ -80,6 +80,23 @@ const sources = [
 ];
 
 export default function Home() {
+  // Function to scroll to a specific citation
+  const scrollToCitation = (id: string) => {
+    // Toggle the dropdown to make sure it's visible
+    const dropdown = document.getElementById('citations-dropdown');
+    if (dropdown?.classList.contains('hidden')) {
+      dropdown.classList.remove('hidden');
+    }
+    
+    // Scroll to the specific citation
+    const citation = document.getElementById(`citation-${id}`);
+    if (citation) {
+      citation.scrollIntoView({ behavior: 'smooth' });
+      // Add a highlight effect
+      citation.classList.add('bg-blue-900');
+      setTimeout(() => citation.classList.remove('bg-blue-900'), 2000);
+    }
+  };
   return (
     <ArticleLayout>
       <ArticleHero 
@@ -118,13 +135,13 @@ export default function Home() {
             <ul className="list-disc pl-8 mb-6 space-y-2">
               <li>
                 In 2023 alone, UK government departments received 206,515 pieces of correspondence from MPs and Peers 
-                representing constituent concerns<sup className="text-xs">[3]</sup>
+                representing constituent concerns<sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("3")}>[3]</sup>
               </li>
               <li>
-                The previous year (2022) saw an even higher volume of 286,660 cases<sup className="text-xs">[4]</sup>
+                The previous year (2022) saw an even higher volume of 286,660 cases<sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("4")}>[4]</sup>
               </li>
               <li>
-                Of these, only 79% received responses within the target timeframe in 2023, and just 53% in 2022<sup className="text-xs">[3][4]</sup>
+                Of these, only 79% received responses within the target timeframe in 2023, and just 53% in 2022<sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("3")}>[3]</sup><sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("4")}>[4]</sup>
               </li>
               <li>
                 Only a tiny fraction of these written inquiries progress to formal parliamentary action
@@ -138,19 +155,19 @@ export default function Home() {
             <ul className="list-disc pl-8 mb-6 space-y-2">
               <li>
                 MPs can ask oral questions during Question Time, submit written questions, secure adjournment debates, 
-                or introduce Private Members' Bills<sup className="text-xs">[20]</sup>
+                or introduce Private Members' Bills<sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("20")}>[20]</sup>
               </li>
               <li>
                 The 2022-23 parliamentary session witnessed a record high in the number of written parliamentary questions 
-                tabled per sitting day, representing a 4% increase over the previous session<sup className="text-xs">[1]</sup>
+                tabled per sitting day, representing a 4% increase over the previous session<sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("1")}>[1]</sup>
               </li>
               <li>
                 Parliamentary time is severely constrained, with Question Time limited to the first hour of business on 
-                sitting days Monday through Thursday<sup className="text-xs">[2][11]</sup>
+                sitting days Monday through Thursday<sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("2")}>[2]</sup><sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("11")}>[11]</sup>
               </li>
               <li>
                 For a 60-minute question period, only a select number of questions can be addressed, determined through a 
-                random ballot ("shuffle")<sup className="text-xs">[2]</sup>
+                random ballot ("shuffle")<sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("2")}>[2]</sup>
               </li>
             </ul>
             
@@ -207,21 +224,21 @@ export default function Home() {
               <li>
                 <strong>Written questions to oral debate conversion</strong>: Of all written parliamentary questions 
                 (approximately 77,255 in a typical long session), only 4,710 received an oral answer in the House 
-                (approximately 6.1%)<sup className="text-xs">[2][11]</sup>
+                (approximately 6.1%)<sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("2")}>[2]</sup><sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("11")}>[11]</sup>
               </li>
               <li>
                 <strong>Urgent questions rarity</strong>: Recent parliamentary sessions have seen only 73 urgent questions 
                 granted over a two-year period, with less than one urgent question per day of parliamentary business
-                <sup className="text-xs">[7]</sup>
+                <sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("7")}>[7]</sup>
               </li>
               <li>
                 <strong>Adjournment debate probability</strong>: The half-hour adjournment debate slots are highly 
                 competitive, requiring MPs to either win a ballot or be specially selected by the Speaker
-                <sup className="text-xs">[8]</sup>
+                <sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("8")}>[8]</sup>
               </li>
               <li>
                 <strong>Petition success rate</strong>: Of over 30,000 petitions created since the e-petition system 
-                launched, only 350 (1.2%) have been debated by MPs<sup className="text-xs">[9]</sup>
+                launched, only 350 (1.2%) have been debated by MPs<sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("9")}>[9]</sup>
               </li>
             </ul>
             
@@ -253,14 +270,14 @@ export default function Home() {
               </li>
               <li>
                 Parliament has allocated only 35 days per session for backbench business debates, with at least 27 days 
-                allocated to the main chamber floor rather than Westminster Hall<sup className="text-xs">[6]</sup>
+                allocated to the main chamber floor rather than Westminster Hall<sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("6")}>[6]</sup>
               </li>
               <li>
                 MPs must prioritize issues affecting multiple constituents over individual cases
               </li>
               <li>
                 The probability of securing meaningful MP engagement with an individual case is estimated at less than 
-                1 in 1,000 based on the ratio of MP correspondence to formal interventions<sup className="text-xs">[3][4]</sup>
+                1 in 1,000 based on the ratio of MP correspondence to formal interventions<sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("3")}>[3]</sup><sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("4")}>[4]</sup>
               </li>
             </ul>
             
@@ -327,19 +344,19 @@ export default function Home() {
             <ul className="list-disc pl-8 mb-6 space-y-2">
               <li>
                 Government departments have target response times of 7-20 days for MP correspondence, but actual 
-                performance varies significantly by department<sup className="text-xs">[3][4]</sup>
+                performance varies significantly by department<sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("3")}>[3]</sup><sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("4")}>[4]</sup>
               </li>
               <li>
                 In 2023, the Cabinet Office managed 84% on-time responses for 1,536 cases, indicating that approximately 
-                one in six cases still fails to receive timely response<sup className="text-xs">[3]</sup>
+                one in six cases still fails to receive timely response<sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("3")}>[3]</sup>
               </li>
               <li>
                 "Urgent questions" require special permission from the Speaker, with only 73 successful applications 
-                in a recent two-year session<sup className="text-xs">[7]</sup>
+                in a recent two-year session<sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("7")}>[7]</sup>
               </li>
               <li>
                 To be judged as 'urgent', a question must relate to "a very recent or imminent event or development, 
-                on which a minister may reasonably be expected to provide an answer that day"<sup className="text-xs">[7]</sup>
+                on which a minister may reasonably be expected to provide an answer that day"<sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("7")}>[7]</sup>
               </li>
             </ul>
             
@@ -355,14 +372,14 @@ export default function Home() {
             <ul className="list-disc pl-8 mb-6 space-y-2">
               <li>
                 Price was described as "a poor, illiterate woman who had signed her petition with an 'x'"
-                <sup className="text-xs">[9]</sup>
+                <sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("9")}>[9]</sup>
               </li>
               <li>
                 Her petition was presented by MP Thomas Duncombe and led to parliamentary attention
               </li>
               <li>
                 Such individual petition successes were rare enough to be historically notable
-                <sup className="text-xs">[9]</sup>
+                <sup className="text-xs cursor-pointer text-blue-400 hover:underline" onClick={() => scrollToCitation("9")}>[9]</sup>
               </li>
               <li>
                 Modern parliamentary systems have evolved to handle vastly larger volumes of citizen engagement while 
