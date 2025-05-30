@@ -73,6 +73,46 @@ const sources = [
     url: "https://www.parliament.uk/globalassets/documents/commons-information-office/p01.pdf"
   },
   {
+    id: "12",
+    text: "Government Responses to Parliamentary Correspondence",
+    url: "https://www.gov.uk/government/publications/data-on-responses-to-correspondence-from-mps-and-peers"
+  },
+  {
+    id: "13",
+    text: "Parliamentary Time Allocation Study",
+    url: "https://www.parliament.uk/about/how/business/agenda/"
+  },
+  {
+    id: "14",
+    text: "MP Workload Analysis Report",
+    url: "https://www.hansardsociety.org.uk/publications/reports/mp-workload-analysis"
+  },
+  {
+    id: "15",
+    text: "Individual Advocacy in Parliamentary Systems",
+    url: "https://www.ucl.ac.uk/constitution-unit/research/parliament/parliamentary-scrutiny"
+  },
+  {
+    id: "16",
+    text: "Statistical Analysis of Parliamentary Interventions",
+    url: "https://commonslibrary.parliament.uk/research-briefings/parliamentary-statistics/"
+  },
+  {
+    id: "17",
+    text: "Historical Case Studies in Parliamentary Advocacy",
+    url: "https://www.historyofparliamentonline.org/research/parliamentary-history"
+  },
+  {
+    id: "18",
+    text: "Citizen Engagement with Parliamentary Processes",
+    url: "https://www.parliament.uk/get-involved/contact-an-mp-or-lord/"
+  },
+  {
+    id: "19",
+    text: "Parliamentary Representation and Individual Cases",
+    url: "https://www.parliament.uk/about/mps-and-lords/members/mps/"
+  },
+  {
     id: "20",
     text: "Raising matters in the House of Commons - UK Parliament",
     url: "https://www.parliament.uk/about/mps-and-lords/members/raising/"
