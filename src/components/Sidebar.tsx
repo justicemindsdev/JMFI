@@ -16,17 +16,27 @@ export function Sidebar() {
     {
       title: "Understanding Parliamentary Petition Success Rates",
       description: "A statistical breakdown of citizen petition outcomes in Parliament",
-      url: "/articles/parliamentary-petition-success-rates"
+      url: "https://committees.parliament.uk/committee/326/petitions-committee/news/196636/what-happens-to-parliamentary-petitions/"
     },
     {
       title: "MP Correspondence: The Hidden Numbers",
       description: "How constituent issues are filtered through the parliamentary system",
-      url: "/articles/mp-correspondence-hidden-numbers"
+      url: "https://www.gov.uk/government/publications/data-on-responses-to-correspondence-from-mps-and-peers-2023/data-on-responses-to-correspondence-from-mps-and-peers-in-2023-html"
     },
     {
       title: "Historical Case Studies in Citizen Advocacy",
       description: "From Elizey Price to modern day success stories",
-      url: "/articles/historical-citizen-advocacy"
+      url: "https://www.liverpoolecho.co.uk/news/liverpool-news/how-being-scouser-saved-strangers-15590599"
+    },
+    {
+      title: "Ben Mak: Fashion Designer's Journey",
+      description: "Liverpool fashion designer Ben Mak's inspiring story",
+      url: "https://www.liverpoolecho.co.uk/news/real-lives/liverpool-fashion-designer-ben-maks-9671672"
+    },
+    {
+      title: "Dan Carden: Pride Advocacy",
+      description: "MP Dan Carden's work supporting LGBTQ+ rights",
+      url: "https://www.liverpoolecho.co.uk/news/liverpool-news/liverpool-mp-dan-carden-shares-18563599"
     }
   ];
   
