@@ -38,14 +38,15 @@ const Tcctv = () => {
     setUser(session.user);
 
     // Clean up the URL hash after login
-   const cleanUrl = window.location.origin + window.location.pathname;
-window.history.replaceState({}, document.title, cleanUrl);
+   if (window.location.hash) {
+  history.replaceState(null, "", window.location.pathname);
+}
 
     // Fetch file list
     const { data, error } = await supabase.storage
       .from(BUCKET_NAME)
       .list("", { limit: 100 });
-
+console.log("Fetched files:", data);
     if (error) {
       console.error("Storage list error:", error.message);
     } else {
