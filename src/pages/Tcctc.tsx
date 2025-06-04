@@ -11,7 +11,7 @@ const Dashboard: React.FC = () => {
   const [user, setUser] = useState<any>(null);
 
   const BUCKET_NAME = "user-uploads";
-  const redirect_url = import.meta.env.VITE_TCCTV_REDIRECT_URL || 'http://localhost:5173/tcctv';
+  const redirect_url = import.meta.env.VITE_TCCTV_REDIRECT_URL;
  useEffect(() => {
   const init = async () => {
     // Handle the URL hash if present (OAuth callback)
