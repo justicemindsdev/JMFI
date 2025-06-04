@@ -10,7 +10,7 @@ const Tcctv = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
 
-  const BUCKET_NAME = "user-uploads";
+  const BUCKET_NAME = "tcctv";
   const redirect_url ='https://www.justice-minds.com/tcctv';
  useEffect(() => {
   const init = async () => {
