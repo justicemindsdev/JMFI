@@ -72,8 +72,8 @@ const CSVViewer: React.FC<CSVViewerProps> = ({ fileContent }) => {
   return (
     <div className="min-h-screen bg-white dark:bg-dark p-4 text-sm sm:text-base">
       <header className="mb-6">
-        <h1 className="text-2xl font-bold text-primary">CSV Viewer</h1>
-        <p className="text-gray-600 dark:text-gray-400">Showing {headers.length} columns and {data.length} records</p>
+        <h1 className="text-2xl font-bold text-black">CSV Viewer</h1>
+        {/* <p className="text-gray-600 dark:text-gray-400">Showing {headers.length} columns and {data.length} records</p> */}
       </header>
 
       {data.length === 0 ? (
@@ -91,7 +91,7 @@ const CSVViewer: React.FC<CSVViewerProps> = ({ fileContent }) => {
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 dark:divide-gray-600 bg-white dark:bg-gray-900">
+              <tbody className="divide-y divide-gray-200 dark:divide-gray-600 bg-white text-black dark:bg-gray-900">
                 {getPageData().map((row, rowIndex) => (
                   <tr key={rowIndex}>
                     {headers.map((header) => (
