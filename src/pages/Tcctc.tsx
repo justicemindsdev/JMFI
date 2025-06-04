@@ -3,7 +3,7 @@ import { supabase } from "../utils/supabaseClient";
 import { Header } from "../components/Header";
 import EmailAnalytics from "../components/EmailAnalytics";
 
-const Dashboard: React.FC = () => {
+const Tcctv = () => {
   const [csvFiles, setCsvFiles] = useState<string[]>([]);
   const [csvData, setCsvData] = useState<string>("");
   const [selectedFile, setSelectedFile] = useState<string>("");
@@ -110,4 +110,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default Tcctv;
