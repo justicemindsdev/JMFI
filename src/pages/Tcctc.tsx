@@ -2,67 +2,68 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import { Header } from "../components/Header";
 import CSVViewer from "../components/CSVViewer";
+import HTMLViewer from "../components/HTMLViewer";
 
 const Tcctv = () => {
-  const [csvFiles, setCsvFiles] = useState<string[]>([]);
-  const [csvData, setCsvData] = useState<string>("");
+  const [fileList, setFileList] = useState<string[]>([]);
+  const [fileContent, setFileContent] = useState<string>("");
   const [selectedFile, setSelectedFile] = useState<string>("");
+  const [fileType, setFileType] = useState<"csv" | "html" | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
 
   const BUCKET_NAME = "tcctv";
-  const redirect_url ='https://www.justice-minds.com/tcctv';
- useEffect(() => {
-  const init = async () => {
-    // Handle the URL hash if present (OAuth callback)
-const {
-  data: { user },
-  error: userError,
-} = await supabase.auth.getUser();
-console.log("Fetched user:", { user, userError });
-if (userError) {
-  console.error("Error fetching user:", userError.message);
-}
+  const redirect_url = "https://www.justice-minds.com/tcctv";
 
-if (!user) {
-  console.warn("No active user, redirecting to GitHub login...");
-  await supabase.auth.signInWithOAuth({
-    provider: "github",
-    options: {
-      redirectTo: redirect_url,
-    },
-  });
-  return;
-}
+  useEffect(() => {
+    const init = async () => {
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
 
-setUser(user);
+      if (userError) {
+        console.error("Error fetching user:", userError.message);
+      }
 
-    // Clean up the URL hash after login
-   if (window.location.hash) {
-  history.replaceState(null, "", window.location.pathname);
-}
+      if (!user) {
+        await supabase.auth.signInWithOAuth({
+          provider: "github",
+          options: {
+            redirectTo: redirect_url,
+          },
+        });
+        return;
+      }
 
-    // Fetch file list
-    const { data, error } = await supabase.storage
-      .from(BUCKET_NAME)
-      .list("", { limit: 100 });
-console.log("Fetched files:", {data, error});
-    if (error) {
-      console.error("Storage list error:", error.message);
-    } else {
-      const files = data
-        .filter((file) => file.name.toLowerCase().endsWith(".csv"))
-        .map((file) => file.name);
-      setCsvFiles(files);
-    }
+      setUser(user);
 
-    setIsLoading(false);
-  };
+      if (window.location.hash) {
+        history.replaceState(null, "", window.location.pathname);
+      }
 
-  init();
-}, []);
+      const { data, error } = await supabase.storage
+        .from(BUCKET_NAME)
+        .list("", { limit: 100 });
 
-  const fetchCsvData = async (file: string) => {
+      if (error) {
+        console.error("Storage list error:", error.message);
+      } else {
+        const files = data
+          .filter((file) =>
+            file.name.toLowerCase().match(/\.(csv|html?)$/)
+          )
+          .map((file) => file.name);
+        setFileList(files);
+      }
+
+      setIsLoading(false);
+    };
+
+    init();
+  }, []);
+
+  const fetchFileData = async (file: string) => {
     const { data, error } = await supabase.storage
       .from(BUCKET_NAME)
       .download(file);
@@ -73,8 +74,16 @@ console.log("Fetched files:", {data, error});
     }
 
     const text = await data.text();
-    setCsvData(text);
+    setFileContent(text);
     setSelectedFile(file);
+
+    if (file.toLowerCase().endsWith(".csv")) {
+      setFileType("csv");
+    } else if (file.toLowerCase().match(/\.html?$/)) {
+      setFileType("html");
+    } else {
+      setFileType(null);
+    }
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -87,13 +96,13 @@ console.log("Fetched files:", {data, error});
         {/* Sidebar */}
         <div className="w-80 p-4 overflow-y-auto border-r border-gray-200 bg-gray-800 text-white">
           <ul>
-            {csvFiles.map((file) => (
+            {fileList.map((file) => (
               <li
                 key={file}
                 className={`cursor-pointer p-2 rounded hover:bg-gray-700 break-words whitespace-normal ${
                   selectedFile === file ? "bg-blue-600" : ""
                 }`}
-                onClick={() => fetchCsvData(file)}
+                onClick={() => fetchFileData(file)}
               >
                 {file}
               </li>
@@ -103,7 +112,11 @@ console.log("Fetched files:", {data, error});
 
         {/* Main Content */}
         <div className="flex-grow overflow-auto">
-          <CSVViewer fileContent={csvData} />
+          {fileType === "csv" && <CSVViewer fileContent={fileContent} />}
+          {fileType === "html" && <HTMLViewer fileContent={fileContent} />}
+          {!fileType && selectedFile && (
+            <div className="p-4 text-red-500">Unsupported file type.</div>
+          )}
         </div>
       </div>
     </div>
