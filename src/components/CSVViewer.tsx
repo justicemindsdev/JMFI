@@ -115,14 +115,14 @@ const CSVViewer: React.FC<CSVViewerProps> = ({ fileContent }) => {
               <button
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                 disabled={currentPage === 1}
-                className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded disabled:opacity-50"
+                className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-black rounded disabled:opacity-50"
               >
                 Prev
               </button>
               <button
                 onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded disabled:opacity-50"
+                className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-black rounded disabled:opacity-50"
               >
                 Next
               </button>
