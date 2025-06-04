@@ -15,27 +15,27 @@ const Tcctv = () => {
  useEffect(() => {
   const init = async () => {
     // Handle the URL hash if present (OAuth callback)
-    const {
-      data: { session },
-      error: sessionError,
-    } = await supabase.auth.getSession();
+const {
+  data: { user },
+  error: userError,
+} = await supabase.auth.getUser();
+console.log("Fetched user:", { user, userError });
+if (userError) {
+  console.error("Error fetching user:", userError.message);
+}
 
-    if (sessionError) {
-      console.error("Error getting session:", sessionError.message);
-    }
+if (!user) {
+  console.warn("No active user, redirecting to GitHub login...");
+  await supabase.auth.signInWithOAuth({
+    provider: "github",
+    options: {
+      redirectTo: redirect_url,
+    },
+  });
+  return;
+}
 
-    if (!session || !session.user) {
-      console.warn("No active session, redirecting to GitHub login...");
-      await supabase.auth.signInWithOAuth({
-        provider: "github",
-        options: {
-          redirectTo: redirect_url  , // or your actual route
-        },
-      });
-      return;
-    }
-
-    setUser(session.user);
+setUser(user);
 
     // Clean up the URL hash after login
    if (window.location.hash) {
