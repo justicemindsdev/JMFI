@@ -96,7 +96,9 @@ const Tcctv = () => {
         {/* Sidebar */}
         <div className="w-80 p-4 overflow-y-auto border-r border-gray-200 bg-gray-800 text-white">
           <ul>
-            {fileList.map((file) => (
+            {fileList.map((file) => {
+              const displayName = file.replace(/\.(csv|html)$/i, '');
+              return(
               <li
                 key={file}
                 className={`cursor-pointer p-2 rounded hover:bg-gray-700 break-words whitespace-normal ${
@@ -104,9 +106,9 @@ const Tcctv = () => {
                 }`}
                 onClick={() => fetchFileData(file)}
               >
-                {file}
+                {displayName}
               </li>
-            ))}
+            )})}
           </ul>
         </div>
 
