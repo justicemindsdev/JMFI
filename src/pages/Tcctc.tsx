@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import { Header } from "../components/Header";
-import EmailAnalytics from "../components/EmailAnalytics";
+import CSVViewer from "../components/CSVViewer";
 
 const Tcctv = () => {
   const [csvFiles, setCsvFiles] = useState<string[]>([]);
@@ -103,7 +103,7 @@ console.log("Fetched files:", {data, error});
 
         {/* Main Content */}
         <div className="flex-grow overflow-auto">
-          <EmailAnalytics fileContent={csvData} />
+          <CSVViewer fileContent={csvData} />
         </div>
       </div>
     </div>
