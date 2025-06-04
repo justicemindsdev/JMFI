@@ -107,7 +107,7 @@ const CSVViewer: React.FC<CSVViewerProps> = ({ fileContent }) => {
 
           {/* Pagination Controls */}
           <div className="flex justify-between items-center mt-4">
-            <span className="text-sm text-gray-600 dark:text-gray-400">
+            <span className="text-sm text-black dark:text-gray-400">
               Showing {(currentPage - 1) * pageSize + 1}–
               {Math.min(currentPage * pageSize, data.length)} of {data.length}
             </span>
