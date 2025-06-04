@@ -112,7 +112,7 @@ const Tcctv = () => {
 
         {/* Main Content */}
         <div className="flex-grow overflow-auto">
-          {fileType === "csv" && <CSVViewer fileContent={fileContent} />}
+          {fileType === "csv" && <CSVViewer fileContent={fileContent} fileName={selectedFile} />}
           {fileType === "html" && <HTMLViewer fileContent={fileContent} />}
           {!fileType && selectedFile && (
             <div className="p-4 text-red-500">Unsupported file type.</div>

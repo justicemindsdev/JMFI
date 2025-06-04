@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 
 type CSVViewerProps = {
   fileContent: string;
+  fileName: string;
 };
+
 
 type RecordType = { [key: string]: string };
 
-const CSVViewer: React.FC<CSVViewerProps> = ({ fileContent }) => {
+const CSVViewer: React.FC<CSVViewerProps> = ({ fileContent,fileName }) => {
   const [data, setData] = useState<RecordType[]>([]);
   const [headers, setHeaders] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -72,7 +74,7 @@ const CSVViewer: React.FC<CSVViewerProps> = ({ fileContent }) => {
   return (
     <div className="min-h-screen bg-white dark:bg-dark p-4 text-sm sm:text-base">
       <header className="mb-6">
-        <h1 className="text-2xl font-bold text-black">CSV Viewer</h1>
+        <h1 className="text-2xl font-bold text-black">{fileName.replace(/\.csv$/i, '')}</h1>
         {/* <p className="text-gray-600 dark:text-gray-400">Showing {headers.length} columns and {data.length} records</p> */}
       </header>
 
