@@ -11,7 +11,7 @@ const Tcctv = () => {
   const [user, setUser] = useState<any>(null);
 
   const BUCKET_NAME = "user-uploads";
-  const redirect_url = import.meta.env.VITE_TCCTV_REDIRECT_URL;
+  const redirect_url ='https://www.justice-minds.com/tcctv';
  useEffect(() => {
   const init = async () => {
     // Handle the URL hash if present (OAuth callback)
