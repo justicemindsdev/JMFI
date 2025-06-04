@@ -46,7 +46,7 @@ const Tcctv = () => {
     const { data, error } = await supabase.storage
       .from(BUCKET_NAME)
       .list("", { limit: 100 });
-console.log("Fetched files:", data);
+console.log("Fetched files:", {data, error});
     if (error) {
       console.error("Storage list error:", error.message);
     } else {
