@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitive Architecture Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'ping': 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
+                        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce': 'bounce 1s infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.7s ease-out forwards;
+        }
+        
+        .bg-grid-slate-900 {
+            background-image: radial-gradient(circle, #0f172a 1px, transparent 1px);
+        }
+        
+        .neural-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        .tilt-effect {
+            transition: transform 0.2s ease-out;
+        }
+        
+        /* Dark mode support */
+        .dark {
+            color-scheme: dark;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200">
+    <div id="app"></div>
+
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Global state
+        let activeTab = 'overview';
+        let parallaxOffset = 0;
+        let activeNeuralNodes = { ben: new Set(), jen: new Set() };
+        let cognitiveAnimations = {};
+
+        // Cognitive visualizations data
+        const cognitiveVisualizations = [
+            {
+                "visualizationTitle": "Holistic System Integration",
+                "cognitiveFunction": "Systems Thinking",
+                "description": "Visualizes the brain activity when an architect perceives the entire system at once--not as individual parts, but as a single, interconnected entity. It's the 'big picture' view.",
+                "metaphor": "Galaxy Formation",
+                "visualElements": {
+                    "primaryLobeActivity": [
+                        "Frontal Lobe (Executive Planning)",
+                        "Parietal Lobe (Spatial & Relational Mapping)"
+                    ],
+                    "neuralPathways": "Long, brilliant arcs of light connecting disparate, distant neural clusters across hemispheres. These pathways aren't firing in sequence, but are illuminated simultaneously, forming a stable, web-like structure.",
+                    "activityPattern": "A slow, constant, foundational 'hum' represented by a deep ambient glow. Specific high-traffic connections between major components pulse with a brighter, rhythmic light.",
+                    "colorPalette": {
+                        "baseSystem": "Deep Indigo",
+                        "majorComponents": "Pulsing White Nodes",
+                        "interconnections": "Electric Blue Arcs",
+                        "stressPoints": "Faint Red Hotspots"
+                    }
+                }
+            },
+            {
+                "visualizationTitle": "Conceptual Distillation",
+                "cognitiveFunction": "Abstraction",
+                "description": "Represents the mental process of filtering immense complexity down to its essential principles. This is the act of ignoring irrelevant details to find the core, elegant truth of a problem.",
+                "metaphor": "Refining Ore into Pure Metal",
+                "visualElements": {
+                    "primaryLobeActivity": [
+                        "Prefrontal Cortex (Filtering & Decision Making)",
+                        "Temporal Lobe (Semantic Memory & Naming)"
+                    ],
+                    "neuralPathways": "Starts as a chaotic, noisy storm of thousands of thin, frantic pathways. A powerful filtering wave propagates from the frontal lobe, causing most pathways to fade to black, leaving only a few thick, coherent, brightly lit beams.",
+                    "activityPattern": "A 'noise-canceling' wave. The initial state is visual static, which is progressively wiped clean, revealing a simple, stable pattern underneath. The process is one of reduction and clarification.",
+                    "colorPalette": {
+                        "initialComplexity": "A static-like mix of all colors",
+                        "filteringWave": "A translucent black sweep",
+                        "distilledConcept": "A single, crystalline white beam"
+                    }
+                }
+            },
+            {
+                "visualizationTitle": "Probabilistic Futures Simulation",
+                "cognitiveFunction": "Scenario Planning & Future-Proofing",
+                "description": "Visualizes the architect's ability to simulate multiple potential futures, weighing risks and opportunities. It's the 'what if' engine of the brain.",
+                "metaphor": "Branching Timelines",
+                "visualElements": {
+                    "primaryLobeActivity": [
+                        "Frontal Lobe (Prediction & Planning)",
+                        "Occipital Lobe (Visualizing Outcomes)"
+                    ],
+                    "neuralPathways": "A solid, primary pathway representing the 'current plan' moves forward. From this trunk, multiple translucent, shimmering 'ghost' pathways branch off, each representing a potential future scenario. These branches flicker and shift in intensity based on perceived probability.",
+                    "activityPattern": "A steady forward flow for the main plan, with speculative, rapid-fire simulations branching off and dissolving. It's a constant exploration of a possibility space.",
+                    "colorPalette": {
+                        "currentPlan": "Solid Emerald Green",
+                        "highProbabilityScenario": "Flickering Gold",
+                        "lowProbabilityScenario": "Faint, Ghostly Cyan",
+                        "riskScenario": "A transparent red overlay"
+                    }
+                }
+            },
+            {
+                "visualizationTitle": "Deconstruction & Reassembly",
+                "cognitiveFunction": "Analysis & Synthesis",
+                "description": "A two-phase visualization. First, the brain deconstructs a complex problem into its fundamental components (Analysis). Second, it reassembles those components in a new, more effective configuration (Synthesis).",
+                "metaphor": "Solving a 3D Puzzle in Reverse and Forward",
+                "visualElements": {
+                    "primaryLobeActivity": [
+                        "Parietal Lobe (Spatial Manipulation)",
+                        "Frontal Lobe (Strategic Planning)",
+                        "Hippocampus (Working Memory for Components)"
+                    ],
+                    "neuralPathways": "Phase 1 (Analysis): A central node explodes outward, sending distinct, color-coded pathways to separate storage areas. Phase 2 (Synthesis): The stored pathways are pulled back, not to the original point, but to a new focal point, snapping into a new, more stable geometric pattern.",
+                    "activityPattern": "A 'two-stroke' cycle. A sharp, outward 'bang' of deconstruction, followed by a slower, magnetic 'pull' of reconstruction. The cycle repeats for iterative design.",
+                    "colorPalette": {
+                        "originalProblem": "A single, murky brown node",
+                        "deconstructedParts": "Primary colors (Red, Yellow, Blue)",
+                        "reassembledSolution": "A new, complex, iridescent color formed from the combination of the parts"
+                    }
+                }
+            }
+        ];
+
+        // Utility functions
+        function createElement(tag, className = '', innerHTML = '') {
+            const element = document.createElement(tag);
+            if (className) element.className = className;
+            if (innerHTML) element.innerHTML = innerHTML;
+            return element;
+        }
+
+        function createSVG(viewBox, className = '') {
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('viewBox', viewBox);
+            if (className) svg.className = className;
+            return svg;
+        }
+
+        function createSVGElement(tag, attributes = {}) {
+            const element = document.createElementNS('http://www.w3.org/2000/svg', tag);
+            Object.keys(attributes).forEach(key => {
+                element.setAttribute(key, attributes[key]);
+            });
+            return element;
+        }
+
+        // Parallax effect
+        function initParallax() {
+            window.addEventListener('scroll', () => {
+                parallaxOffset = window.pageYOffset;
+                updateParallaxElements();
+            });
+        }
+
+        function updateParallaxElements() {
+            const neural1 = document.getElementById('neural-bg-1');
+            const neural2 = document.getElementById('neural-bg-2');
+            
+            if (neural1) {
+                neural1.style.transform = `translateY(${parallaxOffset * 0.2}px)`;
+            }
+            if (neural2) {
+                neural2.style.transform = `translateY(${-parallaxOffset * 0.1}px)`;
+            }
+        }
+
+        // Neural network animations
+        function initNeuralNetworks() {
+            // Ben's network animation
+            setInterval(() => {
+                const nodeCount = 12;
+                const newActiveNodes = new Set();
+                const activationCount = Math.floor(Math.random() * 5) + 4;
+                
+                for (let i = 0; i < activationCount; i++) {
+                    const nodeId = Math.floor(Math.random() * nodeCount);
+                    newActiveNodes.add(nodeId);
+                }
+                
+                activeNeuralNodes.ben = newActiveNodes;
+                updateNeuralNetwork('ben');
+            }, 1800);
+
+            // Jen's network animation
+            setInterval(() => {
+                const nodeCount = 8;
+                const newActiveNodes = new Set();
+                const activationCount = Math.floor(Math.random() * 3) + 2;
+                
+                for (let i = 0; i < activationCount; i++) {
+                    const nodeId = Math.floor(Math.random() * nodeCount);
+                    newActiveNodes.add(nodeId);
+                }
+                
+                activeNeuralNodes.jen = newActiveNodes;
+                updateNeuralNetwork('jen');
+            }, 1800);
+        }
+
+        function updateNeuralNetwork(type) {
+            const networkElement = document.getElementById(`neural-network-${type}`);
+            if (networkElement) {
+                networkElement.innerHTML = '';
+                networkElement.appendChild(createNeuralNetworkSVG(type));
+            }
+        }
+
+        function createNeuralNetworkSVG(type) {
+            const svg = createSVG('0 0 200 150', 'w-full h-48');
+            
+            if (type === 'ben') {
+                // Ben's complex network
+                const connections = [
+                    [40, 30, 100, 20], [100, 20, 160, 35], [40, 30, 30, 70],
+                    [100, 20, 80, 60], [160, 35, 130, 65], [80, 60, 130, 65],
+                    [30, 70, 50, 110], [130, 65, 150, 115], [50, 110, 100, 100],
+                    [100, 100, 120, 135], [40, 30, 80, 60], [80, 60, 100, 100],
+                    [160, 35, 100, 100]
+                ];
+
+                const nodes = [
+                    {id: 0, x: 40, y: 30}, {id: 1, x: 100, y: 20}, {id: 2, x: 160, y: 35},
+                    {id: 3, x: 30, y: 70}, {id: 4, x: 80, y: 60}, {id: 5, x: 130, y: 65}, {id: 6, x: 170, y: 75},
+                    {id: 7, x: 50, y: 110}, {id: 8, x: 100, y: 100}, {id: 9, x: 150, y: 115},
+                    {id: 10, x: 70, y: 140}, {id: 11, x: 120, y: 135}
+                ];
+
+                // Draw connections
+                connections.forEach(([x1, y1, x2, y2], i) => {
+                    const line = createSVGElement('line', {
+                        x1, y1, x2, y2,
+                        stroke: activeNeuralNodes.ben.size > 3 ? '#3b82f6' : '#1e293b',
+                        'stroke-width': '2',
+                        opacity: '0.4'
+                    });
+                    if (activeNeuralNodes.ben.has(i % 12)) {
+                        line.classList.add('animate-pulse');
+                    }
+                    svg.appendChild(line);
+                });
+
+                // Draw nodes
+                nodes.forEach(node => {
+                    const isActive = activeNeuralNodes.ben.has(node.id);
+                    
+                    const circle = createSVGElement('circle', {
+                        cx: node.x,
+                        cy: node.y,
+                        r: '10',
+                        fill: isActive ? '#3b82f6' : '#1e293b',
+                        stroke: isActive ? '#60a5fa' : '#3b82f6',
+                        'stroke-width': '3'
+                    });
+                    circle.style.transition = 'all 0.5s';
+                    svg.appendChild(circle);
+
+                    if (isActive) {
+                        // Ping effects
+                        [15, 20].forEach((r, i) => {
+                            const ping = createSVGElement('circle', {
+                                cx: node.x,
+                                cy: node.y,
+                                r: r.toString(),
+                                fill: 'none',
+                                stroke: i === 0 ? '#3b82f6' : '#60a5fa',
+                                'stroke-width': i === 0 ? '2' : '1',
+                                opacity: i === 0 ? '0.6' : '0.3'
+                            });
+                            ping.classList.add('animate-ping');
+                            if (i === 1) ping.style.animationDelay = '0.5s';
+                            svg.appendChild(ping);
+                        });
+                    }
+                });
+            } else {
+                // Jen's simpler network
+                const connections = [
+                    [50, 30, 50, 70], [50, 70, 50, 110], [150, 30, 150, 70],
+                    [150, 70, 150, 110], [50, 30, 100, 50], [100, 50, 150, 30],
+                    [50, 70, 100, 90], [100, 90, 150, 70], [100, 50, 100, 90]
+                ];
+
+                const nodes = [
+                    {id: 0, x: 50, y: 30}, {id: 1, x: 150, y: 30},
+                    {id: 2, x: 50, y: 70}, {id: 3, x: 150, y: 70},
+                    {id: 4, x: 50, y: 110}, {id: 5, x: 150, y: 110},
+                    {id: 6, x: 100, y: 50}, {id: 7, x: 100, y: 90}
+                ];
+
+                // Draw connections
+                connections.forEach(([x1, y1, x2, y2], i) => {
+                    const line = createSVGElement('line', {
+                        x1, y1, x2, y2,
+                        stroke: activeNeuralNodes.jen.size > 2 ? '#a855f7' : '#1e293b',
+                        'stroke-width': '2',
+                        opacity: '0.4'
+                    });
+                    if (activeNeuralNodes.jen.has(i % 8)) {
+                        line.classList.add('animate-pulse');
+                    }
+                    svg.appendChild(line);
+                });
+
+                // Draw nodes
+                nodes.forEach(node => {
+                    const isActive = activeNeuralNodes.jen.has(node.id);
+                    
+                    const circle = createSVGElement('circle', {
+                        cx: node.x,
+                        cy: node.y,
+                        r: '10',
+                        fill: isActive ? '#a855f7' : '#1e293b',
+                        stroke: isActive ? '#c084fc' : '#a855f7',
+                        'stroke-width': '3'
+                    });
+                    circle.style.transition = 'all 0.5s';
+                    svg.appendChild(circle);
+
+                    if (isActive) {
+                        // Ping effects
+                        [15, 20].forEach((r, i) => {
+                            const ping = createSVGElement('circle', {
+                                cx: node.x,
+                                cy: node.y,
+                                r: r.toString(),
+                                fill: 'none',
+                                stroke: i === 0 ? '#a855f7' : '#c084fc',
+                                'stroke-width': i === 0 ? '2' : '1',
+                                opacity: i === 0 ? '0.6' : '0.3'
+                            });
+                            ping.classList.add('animate-ping');
+                            if (i === 1) ping.style.animationDelay = '0.5s';
+                            svg.appendChild(ping);
+                        });
+                    }
+                });
+            }
+
+            return svg;
+        }
+
+        // Cognitive function visualizations
+        function createCognitiveVisualizationSVG(viz, isActive) {
+            const svg = createSVG('0 0 200 150', 'w-full h-32');
+            
+            switch (viz.cognitiveFunction) {
+                case "Systems Thinking":
+                    // Galaxy formation pattern
+                    const defs = createSVGElement('defs');
+                    const gradient = createSVGElement('radialGradient', {
+                        id: 'galaxyCore',
+                        cx: '50%',
+                        cy: '50%',
+                        r: '50%'
+                    });
+                    gradient.innerHTML = `
+                        <stop offset="0%" stop-color="#4338ca" stop-opacity="0.8"/>
+                        <stop offset="100%" stop-color="#1e1b4b" stop-opacity="0.3"/>
+                    `;
+                    defs.appendChild(gradient);
+                    svg.appendChild(defs);
+
+                    const core = createSVGElement('circle', {
+                        cx: '100',
+                        cy: '75',
+                        r: '40',
+                        fill: 'url(#galaxyCore)'
+                    });
+                    if (isActive) core.classList.add('animate-pulse');
+                    svg.appendChild(core);
+
+                    // Interconnected nodes
+                    const nodes = [
+                        {x: 60, y: 50}, {x: 140, y: 50}, {x: 180, y: 75}, {x: 140, y: 100},
+                        {x: 60, y: 100}, {x: 20, y: 75}, {x: 100, y: 30}, {x: 100, y: 120}
+                    ];
+
+                    nodes.forEach((node, i) => {
+                        const line = createSVGElement('line', {
+                            x1: '100', y1: '75',
+                            x2: node.x.toString(), y2: node.y.toString(),
+                            stroke: '#3b82f6',
+                            'stroke-width': '2',
+                            opacity: isActive ? '0.8' : '0.4'
+                        });
+                        if (isActive) line.classList.add('animate-pulse');
+                        svg.appendChild(line);
+
+                        const circle = createSVGElement('circle', {
+                            cx: node.x.toString(),
+                            cy: node.y.toString(),
+                            r: '6',
+                            fill: '#60a5fa'
+                        });
+                        if (isActive) {
+                            circle.classList.add('animate-ping');
+                            circle.style.animationDelay = `${i * 0.2}s`;
+                        }
+                        svg.appendChild(circle);
+                    });
+                    break;
+
+                case "Abstraction":
+                    // Ore refining process
+                    const refGradient = createSVGElement('defs');
+                    const linearGrad = createSVGElement('linearGradient', {
+                        id: 'refinement',
+                        x1: '0%', y1: '0%',
+                        x2: '100%', y2: '0%'
+                    });
+                    linearGrad.innerHTML = `
+                        <stop offset="0%" stop-color="#64748b" stop-opacity="0.8"/>
+                        <stop offset="50%" stop-color="#475569" stop-opacity="0.6"/>
+                        <stop offset="100%" stop-color="#f1f5f9" stop-opacity="0.9"/>
+                    `;
+                    refGradient.appendChild(linearGrad);
+                    svg.appendChild(refGradient);
+
+                    // Chaotic initial state
+                    for (let i = 0; i < 15; i++) {
+                        const rect = createSVGElement('rect', {
+                            x: (10 + (i % 5) * 15).toString(),
+                            y: (30 + Math.floor(i / 5) * 15).toString(),
+                            width: '8',
+                            height: '8',
+                            fill: '#64748b',
+                            opacity: isActive ? '0.3' : '0.7'
+                        });
+                        if (isActive) rect.classList.add('animate-pulse');
+                        svg.appendChild(rect);
+                    }
+
+                    // Filtering wave
+                    const wave = createSVGElement('rect', {
+                        x: '0', y: '0',
+                        width: isActive ? '200' : '80',
+                        height: '150',
+                        fill: 'url(#refinement)'
+                    });
+                    wave.style.transition = 'all 2s';
+                    svg.appendChild(wave);
+
+                    // Pure result
+                    const result = createSVGElement('rect', {
+                        x: '160', y: '60',
+                        width: '30', height: '30',
+                        fill: '#f1f5f9',
+                        opacity: isActive ? '1' : '0.5'
+                    });
+                    if (isActive) result.classList.add('animate-pulse');
+                    svg.appendChild(result);
+                    break;
+
+                case "Scenario Planning & Future-Proofing":
+                    // Main timeline
+                    const mainLine = createSVGElement('line', {
+                        x1: '20', y1: '75',
+                        x2: '80', y2: '75',
+                        stroke: '#10b981',
+                        'stroke-width': '4'
+                    });
+                    svg.appendChild(mainLine);
+
+                    // Scenario branches
+                    const branches = [
+                        {endX: 160, endY: 40, color: '#fbbf24', opacity: 0.8},
+                        {endX: 160, endY: 60, color: '#06b6d4', opacity: 0.6},
+                        {endX: 160, endY: 80, color: '#10b981', opacity: 0.9},
+                        {endX: 160, endY: 100, color: '#06b6d4', opacity: 0.4},
+                        {endX: 160, endY: 120, color: '#ef4444', opacity: 0.5}
+                    ];
+
+                    branches.forEach((branch, i) => {
+                        const line = createSVGElement('line', {
+                            x1: '80', y1: '75',
+                            x2: branch.endX.toString(), y2: branch.endY.toString(),
+                            stroke: branch.color,
+                            'stroke-width': '2',
+                            opacity: (isActive ? branch.opacity : branch.opacity * 0.5).toString()
+                        });
+                        if (i > 2) line.setAttribute('stroke-dasharray', '5,5');
+                        if (isActive) {
+                            line.classList.add('animate-pulse');
+                            line.style.animationDelay = `${i * 0.3}s`;
+                        }
+                        svg.appendChild(line);
+
+                        const circle = createSVGElement('circle', {
+                            cx: branch.endX.toString(),
+                            cy: branch.endY.toString(),
+                            r: '4',
+                            fill: branch.color,
+                            opacity: (isActive ? branch.opacity : branch.opacity * 0.5).toString()
+                        });
+                        if (isActive) {
+                            circle.classList.add('animate-ping');
+                            circle.style.animationDelay = `${i * 0.3}s`;
+                        }
+                        svg.appendChild(circle);
+                    });
+                    break;
+
+                case "Analysis & Synthesis":
+                    // Rainbow gradient for solution
+                    const rainbowDefs = createSVGElement('defs');
+                    const rainbowGrad = createSVGElement('radialGradient', {
+                        id: 'rainbow',
+                        cx: '50%', cy: '50%', r: '50%'
+                    });
+                    rainbowGrad.innerHTML = `
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="25%" stop-color="#3b82f6"/>
+                        <stop offset="50%" stop-color="#10b981"/>
+                        <stop offset="75%" stop-color="#eab308"/>
+                        <stop offset="100%" stop-color="#ef4444"/>
+                    `;
+                    rainbowDefs.appendChild(rainbowGrad);
+                    svg.appendChild(rainbowDefs);
+
+                    // Central problem node
+                    const problemNode = createSVGElement('circle', {
+                        cx: '100', cy: '75',
+                        r: isActive ? '8' : '12',
+                        fill: '#78716c'
+                    });
+                    problemNode.style.transition = 'all 1s';
+                    svg.appendChild(problemNode);
+
+                    // Deconstructed components
+                    const components = [
+                        {x: 50, y: 30, color: '#ef4444'},
+                        {x: 150, y: 30, color: '#eab308'},
+                        {x: 50, y: 120, color: '#3b82f6'},
+                        {x: 150, y: 120, color: '#10b981'}
+                    ];
+
+                    components.forEach((comp, i) => {
+                        const line = createSVGElement('line', {
+                            x1: '100', y1: '75',
+                            x2: comp.x.toString(), y2: comp.y.toString(),
+                            stroke: comp.color,
+                            'stroke-width': '2',
+                            opacity: isActive ? '0.8' : '0.4'
+                        });
+                        if (isActive) {
+                            line.classList.add('animate-pulse');
+                            line.style.animationDelay = `${i * 0.2}s`;
+                        }
+                        svg.appendChild(line);
+
+                        const circle = createSVGElement('circle', {
+                            cx: comp.x.toString(),
+                            cy: comp.y.toString(),
+                            r: '6',
+                            fill: comp.color,
+                            opacity: isActive ? '1' : '0.6'
+                        });
+                        if (isActive) {
+                            circle.classList.add('animate-bounce');
+                            circle.style.animationDelay = `${i * 0.2}s`;
+                        }
+                        svg.appendChild(circle);
+                    });
+
+                    // Reassembled solution
+                    const solution = createSVGElement('circle', {
+                        cx: '180', cy: '75', r: '10',
+                        fill: 'url(#rainbow)',
+                        opacity: isActive ? '1' : '0.5'
+                    });
+                    if (isActive) solution.classList.add('animate-pulse');
+                    svg.appendChild(solution);
+                    break;
+            }
+
+            return svg;
+        }
+
+        // Initialize cognitive animations
+        function initCognitiveAnimations() {
+            cognitiveVisualizations.forEach((viz, index) => {
+                const id = `cognitive-viz-${index}`;
+                cognitiveAnimations[id] = false;
+                
+                setInterval(() => {
+                    cognitiveAnimations[id] = true;
+                    updateCognitiveVisualization(id, index);
+                    setTimeout(() => {
+                        cognitiveAnimations[id] = false;
+                        updateCognitiveVisualization(id, index);
+                    }, 2000);
+                }, 4000);
+            });
+        }
+
+        function updateCognitiveVisualization(id, index) {
+            const container = document.getElementById(id);
+            if (container) {
+                const svg = container.querySelector('svg');
+                if (svg) {
+                    const newSvg = createCognitiveVisualizationSVG(
+                        cognitiveVisualizations[index], 
+                        cognitiveAnimations[id]
+                    );
+                    svg.replaceWith(newSvg);
+                }
+            }
+        }
+
+        // Tab management
+        function setActiveTab(tabName) {
+            activeTab = tabName;
+            updateTabDisplay();
+            renderContent();
+        }
+
+        function updateTabDisplay() {
+            const tabs = document.querySelectorAll('.tab-button');
+            tabs.forEach(tab => {
+                if (tab.dataset.tab === activeTab) {
+                    tab.className = 'tab-button px-6 py-3 mx-1 rounded-md font-medium transition-all duration-300 cursor-pointer relative z-10 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transform scale-105';
+                } else {
+                    tab.className = 'tab-button px-6 py-3 mx-1 rounded-md font-medium transition-all duration-300 cursor-pointer relative z-10 text-slate-400 hover:text-white hover:bg-slate-800 hover:scale-102';
+                }
+            });
+        }
+
+        // Progress bar animation
+        function animateProgressBars() {
+            setTimeout(() => {
+                document.querySelectorAll('.progress-bar').forEach(bar => {
+                    const width = bar.dataset.width;
+                    bar.style.width = width + '%';
+                });
+            }, 500);
+        }
+
+        // Content rendering functions
+        function createParallaxBackground() {
+            return `
+                <div class="absolute inset-0 pointer-events-none overflow-hidden">
+                    <div id="neural-bg-1" class="absolute top-20 right-10 w-64 h-64 opacity-10" style="transform: translateY(${parallaxOffset * 0.2}px)">
+                        <svg viewBox="0 0 100 100" class="w-full h-full text-blue-400">
+                            <circle cx="20" cy="20" r="3" fill="currentColor" opacity="0.6"/>
+                            <circle cx="50" cy="15" r="3" fill="currentColor" opacity="0.8"/>
+                            <circle cx="80" cy="25" r="3" fill="currentColor" opacity="0.7"/>
+                            <circle cx="35" cy="40" r="3" fill="currentColor" opacity="0.9"/>
+                            <circle cx="65" cy="45" r="3" fill="currentColor" opacity="0.5"/>
+                            <circle cx="25" cy="70" r="3" fill="currentColor" opacity="0.8"/>
+                            <circle cx="75" cy="75" r="3" fill="currentColor" opacity="0.6"/>
+                            <line x1="20" y1="20" x2="50" y2="15" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+                            <line x1="50" y1="15" x2="80" y2="25" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+                            <line x1="35" y1="40" x2="65" y2="45" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+                            <line x1="20" y1="20" x2="35" y2="40" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+                        </svg>
+                    </div>
+                    <div id="neural-bg-2" class="absolute bottom-40 left-10 w-72 h-72 opacity-10" style="transform: translateY(${-parallaxOffset * 0.1}px)">
+                        <svg viewBox="0 0 100 100" class="w-full h-full text-purple-400">
+                            <rect x="10" y="20" width="15" height="8" fill="currentColor" opacity="0.6"/>
+                            <rect x="10" y="35" width="15" height="8" fill="currentColor" opacity="0.8"/>
+                            <rect x="10" y="50" width="15" height="8" fill="currentColor" opacity="0.7"/>
+                            <rect x="10" y="65" width="15" height="8" fill="currentColor" opacity="0.9"/>
+                            <line x1="25" y1="24" x2="35" y2="24" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+                            <line x1="25" y1="39" x2="35" y2="39" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+                            <line x1="25" y1="54" x2="35" y2="54" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+                        </svg>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createPulsingBorder(content, type = 'ben', intensity = 'normal') {
+            const colors = {
+                ben: {
+                    normal: 'from-blue-500 via-cyan-400 to-blue-600',
+                    high: 'from-blue-400 via-cyan-300 to-blue-500'
+                },
+                jen: {
+                    normal: 'from-purple-500 via-pink-400 to-purple-600',
+                    high: 'from-purple-400 via-pink-300 to-purple-500'
+                }
+            };
+
+            return `
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r ${colors[type][intensity]} rounded-xl blur-sm opacity-25 group-hover:opacity-75 transition duration-1000 animate-pulse"></div>
+                    <div class="absolute -inset-0.5 bg-gradient-to-r ${colors[type].normal} rounded-xl opacity-50"></div>
+                    <div class="absolute -inset-0.5 bg-gradient-to-r ${colors[type].high} rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
+                    </div>
+                    ${content}
+                </div>
+            `;
+        }
+
+        function createOverviewContent() {
+            return `
+                <div class="space-y-12">
+                    <!-- Main Profiles - Side by Side -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        ${createPulsingBorder(`
+                            <div class="relative bg-gradient-to-b from-blue-900/20 via-slate-900 to-slate-950 border border-slate-800 rounded-xl p-8 h-full shadow-2xl backdrop-blur-sm">
+                                <div class="h-full flex flex-col">
+                                    <div class="flex items-center mb-6">
+                                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center mr-4 shadow-lg">
+                                            <span class="text-white text-2xl">🧠</span>
+                                        </div>
+                                        <div>
+                                            <h2 class="text-2xl font-medium text-white">Ben</h2>
+                                            <p class="text-blue-400 text-sm">Analogical Systems Architect</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="space-y-4 mb-6">
+                                        <div class="bg-slate-800/50 rounded-lg p-4 border border-blue-700/30">
+                                            <h3 class="text-blue-400 font-medium mb-3">Cognitive Profile</h3>
+                                            <ul class="text-slate-300 text-sm space-y-2">
+                                                <li>• <strong class="text-blue-300">Processing:</strong> Metaphorical scaffolding</li>
+                                                <li>• <strong class="text-blue-300">Memory:</strong> Associative clustering</li>
+                                                <li>• <strong class="text-blue-300">Problem-Solving:</strong> Analogical reasoning</li>
+                                                <li>• <strong class="text-blue-300">Attention:</strong> Distributed monitoring</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-blue-900/20 border border-blue-700/50 rounded-lg p-4">
+                                            <h4 class="text-blue-300 font-medium mb-2">Example Quote:</h4>
+                                            <p class="text-slate-200 text-sm italic mb-2">
+                                                "So a bucket is Google Drive, a table is Google sheets, and you use Google sheets to become surgical on what is in the bucket"
+                                            </p>
+                                            <p class="text-blue-400 text-xs">→ Complex technical mapping onto familiar structures</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-auto pt-6 border-t border-blue-700/30">
+                                        <p class="text-sm text-blue-400 font-medium">
+                                            🎯 Neural Architecture: Divergent pattern synthesizer
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        `, 'ben')}
+                        
+                        ${createPulsingBorder(`
+                            <div class="relative bg-gradient-to-b from-purple-900/20 via-slate-900 to-slate-950 border border-slate-800 rounded-xl p-8 h-full shadow-2xl backdrop-blur-sm">
+                                <div class="h-full flex flex-col">
+                                    <div class="flex items-center mb-6">
+                                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-400 rounded-full flex items-center justify-center mr-4 shadow-lg">
+                                            <span class="text-white text-2xl">💻</span>
+                                        </div>
+                                        <div>
+                                            <h2 class="text-2xl font-medium text-white">Jen</h2>
+                                            <p class="text-purple-400 text-sm">Procedural Implementation Specialist</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="space-y-4 mb-6">
+                                        <div class="bg-slate-800/50 rounded-lg p-4 border border-purple-700/30">
+                                            <h3 class="text-purple-400 font-medium mb-3">Cognitive Profile</h3>
+                                            <ul class="text-slate-300 text-sm space-y-2">
+                                                <li>• <strong class="text-purple-300">Processing:</strong> Linear decomposition</li>
+                                                <li>• <strong class="text-purple-300">Memory:</strong> Procedural optimization</li>
+                                                <li>• <strong class="text-purple-300">Problem-Solving:</strong> Systematic methodology</li>
+                                                <li>• <strong class="text-purple-300">Attention:</strong> Focused execution</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-purple-900/20 border border-purple-700/50 rounded-lg p-4">
+                                            <h4 class="text-purple-300 font-medium mb-2">Example Quote:</h4>
+                                            <p class="text-slate-200 text-sm italic mb-2">
+                                                "Currently what I have now is... it creates a segment, but it's like a full video link only it's a pure raw GRAIN videos"
+                                            </p>
+                                            <p class="text-purple-400 text-xs">→ Implementation focus with constraint-based thinking</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-auto pt-6 border-t border-purple-700/30">
+                                        <p class="text-sm text-purple-400 font-medium">
+                                            🎯 Neural Architecture: Sequential logic processor
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        `, 'jen')}
+                    </div>
+
+                    <!-- Quick Comparison Stats -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        ${createPulsingBorder(`
+                            <div class="bg-gradient-to-br from-blue-900/30 to-slate-900 rounded-lg p-6 text-center">
+                                <div class="text-3xl font-bold text-blue-400 mb-2">95%</div>
+                                <div class="text-sm text-blue-300">Systems Thinking</div>
+                                <div class="text-xs text-slate-400 mt-1">Ben's Strength</div>
+                            </div>
+                        `, 'ben', 'high')}
+                        
+                        <div class="bg-slate-900/50 rounded-lg p-6 text-center border border-slate-700">
+                            <div class="text-2xl font-bold text-slate-400 mb-2">VS</div>
+                            <div class="text-sm text-slate-300">Cognitive Comparison</div>
+                            <div class="text-xs text-slate-400 mt-1">Different Strengths</div>
+                        </div>
+                        
+                        ${createPulsingBorder(`
+                            <div class="bg-gradient-to-br from-purple-900/30 to-slate-900 rounded-lg p-6 text-center">
+                                <div class="text-3xl font-bold text-purple-400 mb-2">95%</div>
+                                <div class="text-sm text-purple-300">Implementation Precision</div>
+                                <div class="text-xs text-slate-400 mt-1">Jen's Strength</div>
+                            </div>
+                        `, 'jen', 'high')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function createFlowchartsContent() {
+            return `
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    ${createPulsingBorder(`
+                        <div class="relative bg-gradient-to-b from-blue-900/20 via-slate-900 to-slate-950 border border-slate-800 rounded-xl p-8 h-full shadow-2xl backdrop-blur-sm">
+                            <h3 class="text-xl font-medium text-white mb-6 text-center flex items-center justify-center">
+                                <span class="mr-2">🔄</span> Ben's Problem-Solving Flow
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="fade-in-up" style="animation-delay: 0s">
+                                    ${createPulsingBorder(`
+                                        <div class="border-2 border-blue-500 bg-blue-500/20 text-blue-100 shadow-blue-500/20 rounded-lg p-4 text-center text-sm font-medium shadow-xl">
+                                            Problem Recognition
+                                        </div>
+                                    `, 'ben', 'high')}
+                                </div>
+                                <div class="text-center text-blue-400 text-2xl animate-bounce">↓</div>
+                                <div class="fade-in-up" style="animation-delay: 0.4s">
+                                    ${createPulsingBorder(`
+                                        <div class="border-2 border-blue-500 bg-blue-500/20 text-blue-100 shadow-blue-500/20 rounded-lg p-4 text-center text-sm font-medium shadow-xl">
+                                            Analogical Mapping ('What is this like?')
+                                        </div>
+                                    `, 'ben', 'high')}
+                                </div>
+                                <div class="text-center text-blue-400 text-2xl animate-bounce" style="animation-delay: 0.4s">↓</div>
+                                <div class="fade-in-up" style="animation-delay: 0.8s">
+                                    ${createPulsingBorder(`
+                                        <div class="border-2 border-blue-500 bg-blue-500/20 text-blue-100 shadow-blue-500/20 rounded-lg p-4 text-center text-sm font-medium shadow-xl">
+                                            System-Level Abstraction
+                                        </div>
+                                    `, 'ben', 'high')}
+                                </div>
+                                <div class="text-center text-blue-400 text-2xl animate-bounce" style="animation-delay: 0.8s">↓</div>
+                                <div class="fade-in-up" style="animation-delay: 1.2s">
+                                    ${createPulsingBorder(`
+                                        <div class="border-2 border-blue-500 bg-blue-500/20 text-blue-100 shadow-blue-500/20 rounded-lg p-4 text-center text-sm font-medium shadow-xl">
+                                            Multiple Solution Pathways
+                                        </div>
+                                    `, 'ben', 'high')}
+                                </div>
+                                <div class="text-center text-blue-400 text-2xl animate-bounce" style="animation-delay: 1.2s">↓</div>
+                                <div class="fade-in-up" style="animation-delay: 1.6s">
+                                    ${createPulsingBorder(`
+                                        <div class="border-2 border-blue-500 bg-blue-500/20 text-blue-100 shadow-blue-500/20 rounded-lg p-4 text-center text-sm font-medium shadow-xl">
+                                            Integration Strategy
+                                        </div>
+                                    `, 'ben', 'high')}
+                                </div>
+                                <div class="text-center text-blue-400 text-2xl animate-bounce" style="animation-delay: 1.6s">↓</div>
+                                <div class="fade-in-up" style="animation-delay: 2s">
+                                    ${createPulsingBorder(`
+                                        <div class="border-2 border-blue-500 bg-blue-500/20 text-blue-100 shadow-blue-500/20 rounded-lg p-4 text-center text-sm font-medium shadow-xl">
+                                            Future-Proof Implementation
+                                        </div>
+                                    `, 'ben', 'high')}
+                                </div>
+                            </div>
+                        </div>
+                    `, 'ben')}
+                    
+                    ${createPulsingBorder(`
+                        <div class="relative bg-gradient-to-b from-purple-900/20 via-slate-900 to-slate-950 border border-slate-800 rounded-xl p-8 h-full shadow-2xl backdrop-blur-sm">
+                            <h3 class="text-xl font-medium text-white mb-6 text-center flex items-center justify-center">
+                                <span class="mr-2">⚡</span> Jen's Problem-Solving Flow
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="fade-in-up" style="animation-delay: 0s">
+                                    ${createPulsingBorder(`
+                                        <div class="border-2 border-purple-500 bg-purple-500/20 text-purple-100 shadow-purple-500/20 rounded-lg p-4 text-center text-sm font-medium shadow-xl">
+                                            Problem Identification
+                                        </div>
+                                    `, 'jen', 'high')}
+                                </div>
+                                <div class="text-center text-purple-400 text-2xl animate-bounce">↓</div>
+                                <div class="fade-in-up" style="animation-delay: 0.4s">
+                                    ${createPulsingBorder(`
+                                        <div class="border-2 border-purple-500 bg-purple-500/20 text-purple-100 shadow-purple-500/20 rounded-lg p-4 text-center text-sm font-medium shadow-xl">
+                                            Requirement Analysis
+                                        </div>
+                                    `, 'jen', 'high')}
+                                </div>
+                                <div class="text-center text-purple-400 text-2xl animate-bounce" style="animation-delay: 0.4s">↓</div>
+                                <div class="fade-in-up" style="animation-delay: 0.8s">
+                                    ${createPulsingBorder(`
+                                        <div class="border-2 border-purple-500 bg-purple-500/20 text-purple-100 shadow-purple-500/20 rounded-lg p-4 text-center text-sm font-medium shadow-xl">
+                                            Technical Decomposition
+                                        </div>
+                                    `, 'jen', 'high')}
+                                </div>
+                                <div class="text-center text-purple-400 text-2xl animate-bounce" style="animation-delay: 0.8s">↓</div>
+                                <div class="fade-in-up" style="animation-delay: 1.2s">
+                                    ${createPulsingBorder(`
+                                        <div class="border-2 border-purple-500 bg-purple-500/20 text-purple-100 shadow-purple-500/20 rounded-lg p-4 text-center text-sm font-medium shadow-xl">
+                                            Methodical Implementation
+                                        </div>
+                                    `, 'jen', 'high')}
+                                </div>
+                                <div class="text-center text-purple-400 text-2xl animate-bounce" style="animation-delay: 1.2s">↓</div>
+                                <div class="fade-in-up" style="animation-delay: 1.6s">
+                                    ${createPulsingBorder(`
+                                        <div class="border-2 border-purple-500 bg-purple-500/20 text-purple-100 shadow-purple-500/20 rounded-lg p-4 text-center text-sm font-medium shadow-xl">
+                                            Testing & Validation
+                                        </div>
+                                    `, 'jen', 'high')}
+                                </div>
+                                <div class="text-center text-purple-400 text-2xl animate-bounce" style="animation-delay: 1.6s">↓</div>
+                                <div class="fade-in-up" style="animation-delay: 2s">
+                                    ${createPulsingBorder(`
+                                        <div class="border-2 border-purple-500 bg-purple-500/20 text-purple-100 shadow-purple-500/20 rounded-lg p-4 text-center text-sm font-medium shadow-xl">
+                                            Documentation & Delivery
+                                        </div>
+                                    `, 'jen', 'high')}
+                                </div>
+                            </div>
+                        </div>
+                    `, 'jen')}
+                </div>
+            `;
+        }
+
+        function createNeuralContent() {
+            return `
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    ${createPulsingBorder(`
+                        <div class="relative bg-gradient-to-b from-blue-900/20 via-slate-900 to-slate-950 border border-slate-800 rounded-xl p-8 h-full shadow-2xl backdrop-blur-sm">
+                            <h3 class="text-xl font-medium text-white mb-6 text-center flex items-center justify-center">
+                                <span class="mr-2">🧠</span> Ben's Neural Network
+                            </h3>
+                            <div class="mb-6" id="neural-network-ben">
+                                <!-- Neural network will be inserted here -->
+                            </div>
+                            <div class="bg-slate-800/50 rounded-lg p-4 border border-blue-700/30">
+                                <h4 class="text-blue-400 font-medium mb-3">Network Characteristics:</h4>
+                                <ul class="text-slate-300 text-sm space-y-2">
+                                    <li>• <strong class="text-blue-300">High interconnectivity</strong> between regions</li>
+                                    <li>• <strong class="text-blue-300">Cross-domain activation</strong> patterns</li>
+                                    <li>• <strong class="text-blue-300">Rapid pattern synthesis</strong> capability</li>
+                                    <li>• <strong class="text-blue-300">Distributed processing</strong> architecture</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `, 'ben')}
+                    
+                    ${createPulsingBorder(`
+                        <div class="relative bg-gradient-to-b from-purple-900/20 via-slate-900 to-slate-950 border border-slate-800 rounded-xl p-8 h-full shadow-2xl backdrop-blur-sm">
+                            <h3 class="text-xl font-medium text-white mb-6 text-center flex items-center justify-center">
+                                <span class="mr-2">💻</span> Jen's Neural Network
+                            </h3>
+                            <div class="mb-6" id="neural-network-jen">
+                                <!-- Neural network will be inserted here -->
+                            </div>
+                            <div class="bg-slate-800/50 rounded-lg p-4 border border-purple-700/30">
+                                <h4 class="text-purple-400 font-medium mb-3">Network Characteristics:</h4>
+                                <ul class="text-slate-300 text-sm space-y-2">
+                                    <li>• <strong class="text-purple-300">Linear pathway optimization</strong></li>
+                                    <li>• <strong class="text-purple-300">Domain-specific specialization</strong></li>
+                                    <li>• <strong class="text-purple-300">Procedural memory dominance</strong></li>
+                                    <li>• <strong class="text-purple-300">Sequential processing</strong> efficiency</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `, 'jen')}
+                </div>
+            `;
+        }
+
+        function createCognitiveContent() {
+            let content = `
+                <div class="space-y-12">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-light text-white mb-4">Advanced Cognitive Function Visualizations</h3>
+                        <p class="text-slate-400">Interactive brain activity patterns for complex cognitive processes</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            `;
+
+            cognitiveVisualizations.forEach((viz, index) => {
+                const type = index % 2 === 0 ? 'ben' : 'jen';
+                content += createPulsingBorder(`
+                    <div class="relative bg-gradient-to-b from-${type === 'ben' ? 'blue' : 'purple'}-900/20 via-slate-900 to-slate-950 border border-slate-800 rounded-xl p-8 h-full shadow-2xl backdrop-blur-sm">
+                        <div class="h-full">
+                            <h4 class="text-lg font-medium text-${type === 'ben' ? 'blue' : 'purple'}-400 mb-3">
+                                ${viz.visualizationTitle}
+                            </h4>
+                            
+                            <div class="mb-4" id="cognitive-viz-${index}">
+                                <!-- Cognitive visualization will be inserted here -->
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="bg-${type === 'ben' ? 'blue' : 'purple'}-900/20 rounded-lg p-3">
+                                    <p class="text-xs text-slate-300 mb-2">
+                                        <strong class="text-${type === 'ben' ? 'blue' : 'purple'}-300">Metaphor:</strong> ${viz.metaphor}
+                                    </p>
+                                    <p class="text-xs text-slate-400">${viz.description}</p>
+                                </div>
+                                
+                                <div class="bg-slate-800/50 rounded-lg p-3 border border-${type === 'ben' ? 'blue' : 'purple'}-700/30">
+                                    <p class="text-xs text-slate-300 mb-2">
+                                        <strong class="text-${type === 'ben' ? 'blue' : 'purple'}-300">Primary Lobes:</strong>
+                                    </p>
+                                    <ul class="text-xs text-slate-400 space-y-1">
+                                        ${viz.visualElements.primaryLobeActivity.map(lobe => `<li>• ${lobe}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `, type);
+            });
+
+            content += `
+                    </div>
+
+                    <!-- Summary Section -->
+                    <div class="mt-16">
+                        ${createPulsingBorder(`
+                            <div class="bg-slate-900/80 border border-slate-700 rounded-xl p-8">
+                                <h3 class="text-xl font-light text-white mb-4 text-center">Cognitive Function Analysis Summary</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h4 class="text-blue-400 font-medium mb-3">🧠 Ben's Dominant Functions</h4>
+                                        <ul class="text-slate-300 text-sm space-y-2">
+                                            <li>• <strong>Holistic System Integration:</strong> Galaxy-like neural patterns</li>
+                                            <li>• <strong>Probabilistic Futures:</strong> Branching timeline simulation</li>
+                                            <li>• <strong>Conceptual Distillation:</strong> Ore-refining cognitive process</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-purple-400 font-medium mb-3">💻 Jen's Dominant Functions</h4>
+                                        <ul class="text-slate-300 text-sm space-y-2">
+                                            <li>• <strong>Deconstruction & Reassembly:</strong> Puzzle-solving methodology</li>
+                                            <li>• <strong>Sequential Processing:</strong> Linear pathway optimization</li>
+                                            <li>• <strong>Systematic Analysis:</strong> Component-based problem solving</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        `, 'ben', 'high')}
+                    </div>
+                </div>
+            `;
+
+            return content;
+        }
+
+        function createMetricsContent() {
+            const metrics = [
+                { label: "Systems Thinking", benValue: 95, jenValue: 65, description: "Holistic perspective and architectural vision" },
+                { label: "Analogical Reasoning", benValue: 90, jenValue: 60, description: "Cross-domain pattern matching ability" },
+                { label: "Strategic Planning", benValue: 92, jenValue: 68, description: "Long-term architectural thinking" },
+                { label: "Implementation Precision", benValue: 70, jenValue: 95, description: "Execution accuracy and reliability" },
+                { label: "Cross-Domain Transfer", benValue: 88, jenValue: 55, description: "Knowledge application flexibility" },
+                { label: "Procedural Efficiency", benValue: 75, jenValue: 92, description: "Systematic methodology execution" }
+            ];
+
+            let content = `
+                <div class="space-y-8">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-light text-white mb-4">Cognitive Performance Comparison</h3>
+                        <p class="text-slate-400">Side-by-side analysis of different cognitive capabilities</p>
+                    </div>
+                    
+                    <div class="space-y-6">
+            `;
+
+            metrics.forEach(metric => {
+                content += `
+                    <div class="grid grid-cols-2 gap-6 mb-6">
+                        <!-- Ben's Side -->
+                        ${createPulsingBorder(`
+                            <div class="bg-gradient-to-br from-blue-900/30 via-slate-900 to-slate-950 border border-blue-700/30 rounded-lg p-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm font-medium text-blue-300">Ben: ${metric.label}</span>
+                                    <span class="text-xs text-blue-500">${metric.benValue}%</span>
+                                </div>
+                                <div class="bg-slate-800 rounded-full h-4 overflow-hidden">
+                                    <div class="progress-bar h-full bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-400 rounded-full transition-all duration-1500 ease-out shadow-lg" 
+                                         style="width: 0%" data-width="${metric.benValue}"></div>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-2">${metric.description}</p>
+                            </div>
+                        `, 'ben')}
+                        
+                        <!-- Jen's Side -->
+                        ${createPulsingBorder(`
+                            <div class="bg-gradient-to-br from-purple-900/30 via-slate-900 to-slate-950 border border-purple-700/30 rounded-lg p-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm font-medium text-purple-300">Jen: ${metric.label}</span>
+                                    <span class="text-xs text-purple-500">${metric.jenValue}%</span>
+                                </div>
+                                <div class="bg-slate-800 rounded-full h-4 overflow-hidden">
+                                    <div class="progress-bar h-full bg-gradient-to-r from-purple-500 via-pink-400 to-purple-400 rounded-full transition-all duration-1500 ease-out shadow-lg" 
+                                         style="width: 0%" data-width="${metric.jenValue}"></div>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-2">${metric.description}</p>
+                            </div>
+                        `, 'jen')}
+                    </div>
+                `;
+            });
+
+            content += `
+                    </div>
+
+                    <!-- Neurological Comparison -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+                        ${createPulsingBorder(`
+                            <div class="relative bg-gradient-to-b from-blue-900/20 via-slate-900 to-slate-950 border border-slate-800 rounded-xl p-8 h-full shadow-2xl backdrop-blur-sm">
+                                <h4 class="text-blue-400 font-medium mb-4">🧠 Ben's Neural Pathways</h4>
+                                <div class="space-y-3">
+                                    <div class="bg-blue-900/20 rounded-lg p-3">
+                                        <strong class="text-blue-300">Prefrontal Cortex:</strong>
+                                        <span class="text-slate-300 text-sm ml-2">Hyperactive executive function</span>
+                                    </div>
+                                    <div class="bg-blue-900/20 rounded-lg p-3">
+                                        <strong class="text-blue-300">Temporal Lobe:</strong>
+                                        <span class="text-slate-300 text-sm ml-2">Enhanced cross-modal association</span>
+                                    </div>
+                                    <div class="bg-blue-900/20 rounded-lg p-3">
+                                        <strong class="text-blue-300">Default Mode Network:</strong>
+                                        <span class="text-slate-300 text-sm ml-2">Constant background processing</span>
+                                    </div>
+                                    <div class="bg-blue-900/20 rounded-lg p-3">
+                                        <strong class="text-blue-300">Right Hemisphere:</strong>
+                                        <span class="text-slate-300 text-sm ml-2">Dominant holistic processing</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `, 'ben')}
+                        
+                        ${createPulsingBorder(`
+                            <div class="relative bg-gradient-to-b from-purple-900/20 via-slate-900 to-slate-950 border border-slate-800 rounded-xl p-8 h-full shadow-2xl backdrop-blur-sm">
+                                <h4 class="text-purple-400 font-medium mb-4">💻 Jen's Neural Pathways</h4>
+                                <div class="space-y-3">
+                                    <div class="bg-purple-900/20 rounded-lg p-3">
+                                        <strong class="text-purple-300">Motor Cortex:</strong>
+                                        <span class="text-slate-300 text-sm ml-2">Optimized procedural memory</span>
+                                    </div>
+                                    <div class="bg-purple-900/20 rounded-lg p-3">
+                                        <strong class="text-purple-300">Broca's Area:</strong>
+                                        <span class="text-slate-300 text-sm ml-2">Sequential language processing</span>
+                                    </div>
+                                    <div class="bg-purple-900/20 rounded-lg p-3">
+                                        <strong class="text-purple-300">Basal Ganglia:</strong>
+                                        <span class="text-slate-300 text-sm ml-2">Automated skill execution</span>
+                                    </div>
+                                    <div class="bg-purple-900/20 rounded-lg p-3">
+                                        <strong class="text-purple-300">Left Hemisphere:</strong>
+                                        <span class="text-slate-300 text-sm ml-2">Dominant analytical processing</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `, 'jen')}
+                    </div>
+                </div>
+            `;
+
+            return content;
+        }
+
+        function renderContent() {
+            let content = '';
+            
+            switch (activeTab) {
+                case 'overview':
+                    content = createOverviewContent();
+                    break;
+                case 'flowcharts':
+                    content = createFlowchartsContent();
+                    break;
+                case 'neural':
+                    content = createNeuralContent();
+                    break;
+                case 'cognitive':
+                    content = createCognitiveContent();
+                    break;
+                case 'metrics':
+                    content = createMetricsContent();
+                    break;
+            }
+
+            document.getElementById('content-container').innerHTML = content;
+
+            // Initialize tab-specific functionality
+            if (activeTab === 'neural') {
+                // Add neural networks
+                setTimeout(() => {
+                    const benNetwork = document.getElementById('neural-network-ben');
+                    const jenNetwork = document.getElementById('neural-network-jen');
+                    if (benNetwork) benNetwork.appendChild(createNeuralNetworkSVG('ben'));
+                    if (jenNetwork) jenNetwork.appendChild(createNeuralNetworkSVG('jen'));
+                }, 100);
+            }
+
+            if (activeTab === 'cognitive') {
+                // Add cognitive visualizations
+                setTimeout(() => {
+                    cognitiveVisualizations.forEach((viz, index) => {
+                        const container = document.getElementById(`cognitive-viz-${index}`);
+                        if (container) {
+                            const svg = createCognitiveVisualizationSVG(viz, cognitiveAnimations[`cognitive-viz-${index}`]);
+                            container.appendChild(svg);
+                        }
+                    });
+                }, 100);
+            }
+
+            if (activeTab === 'metrics') {
+                animateProgressBars();
+            }
+        }
+
+        function render() {
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                <div class="relative min-h-screen bg-slate-950 text-slate-200 overflow-hidden">
+                    <!-- Background -->
+                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black opacity-80"></div>
+                    <div class="absolute inset-0 bg-grid-slate-900 bg-[length:40px_40px] opacity-[0.03]"></div>
+                    ${createParallaxBackground()}
+                    
+                    <!-- Content -->
+                    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+                        <div class="max-w-4xl mx-auto text-center mb-20">
+                            <h1 class="text-5xl font-light tracking-tight bg-gradient-to-r from-slate-100 to-white bg-clip-text text-transparent mb-6">
+                                COGNITIVE ARCHITECTURE
+                            </h1>
+                            <p class="text-2xl text-blue-400 font-light mb-8">
+                                Side-by-Side Neurological Analysis: Ben vs Jen's Thinking Processes
+                            </p>
+                            <div class="h-1 w-32 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mx-auto animate-pulse"></div>
+                        </div>
+
+                        <!-- Tab Navigation -->
+                        <div class="flex justify-center mb-12">
+                            <div class="relative">
+                                <!-- Pulsing border effect -->
+                                <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-600 rounded-lg blur-sm opacity-25 animate-pulse"></div>
+                                <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-600 rounded-lg opacity-50"></div>
+                                
+                                <!-- Navigation content -->
+                                <div class="relative bg-slate-900/90 rounded-lg p-2 border border-slate-700 backdrop-blur-sm">
+                                    <button data-tab="overview" class="tab-button px-6 py-3 mx-1 rounded-md font-medium transition-all duration-300 cursor-pointer relative z-10 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transform scale-105">Overview</button>
+                                    <button data-tab="flowcharts" class="tab-button px-6 py-3 mx-1 rounded-md font-medium transition-all duration-300 cursor-pointer relative z-10 text-slate-400 hover:text-white hover:bg-slate-800 hover:scale-102">Flowcharts</button>
+                                    <button data-tab="neural" class="tab-button px-6 py-3 mx-1 rounded-md font-medium transition-all duration-300 cursor-pointer relative z-10 text-slate-400 hover:text-white hover:bg-slate-800 hover:scale-102">Neural</button>
+                                    <button data-tab="cognitive" class="tab-button px-6 py-3 mx-1 rounded-md font-medium transition-all duration-300 cursor-pointer relative z-10 text-slate-400 hover:text-white hover:bg-slate-800 hover:scale-102">Cognitive Functions</button>
+                                    <button data-tab="metrics" class="tab-button px-6 py-3 mx-1 rounded-md font-medium transition-all duration-300 cursor-pointer relative z-10 text-slate-400 hover:text-white hover:bg-slate-800 hover:scale-102">Metrics</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Content Container -->
+                        <div id="content-container"></div>
+                        
+                        <div class="text-center mt-16">
+                            ${createPulsingBorder(`
+                                <div class="bg-slate-900/80 border border-slate-700 rounded-xl p-8 max-w-4xl mx-auto">
+                                    <h2 class="text-2xl font-light text-white mb-4">The Cognitive Paradox Revealed</h2>
+                                    <p class="text-slate-300 leading-relaxed mb-4">
+                                        This side-by-side analysis demonstrates that technical expertise exists on a multidimensional cognitive landscape. 
+                                        Ben's brain has evolved into a <span class="text-blue-400 font-medium">distributed cognitive architecture</span> optimized for pattern synthesis and systems integration, 
+                                        while Jen's operates as a <span class="text-purple-400 font-medium">sequential processing engine</span> optimized for reliable implementation.
+                                    </p>
+                                    <p class="text-slate-400 text-sm">
+                                        Neither cognitive architecture is inherently superior--they represent different evolutionary solutions to complex technical challenges.
+                                    </p>
+                                </div>
+                            `, 'ben', 'high')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Add event listeners for tabs
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setActiveTab(button.dataset.tab);
+                });
+            });
+
+            // Render initial content
+            renderContent();
+        }
+
+        // Initialize the application
+        function init() {
+            render();
+            initParallax();
+            initNeuralNetworks();
+            initCognitiveAnimations();
+        }
+
+        // Start the application when DOM is loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>
