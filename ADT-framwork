@@ -1,0 +1,1162 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authenticity Degradation Theory: A Paradigmatic Framework for Understanding Human Nature Through Trauma-Informed Lens</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman:ital,wght@0,400;0,700;1,400&family=Arial:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #000;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 25mm;
+            background: #fff;
+            font-size: 12pt;
+        }
+        
+        .title-page {
+            text-align: center;
+            page-break-after: always;
+            margin-bottom: 50mm;
+        }
+        
+        .main-title {
+            font-size: 18pt;
+            font-weight: bold;
+            margin: 50mm 0 20mm 0;
+            line-height: 1.4;
+        }
+        
+        .subtitle {
+            font-size: 14pt;
+            margin-bottom: 30mm;
+            font-style: italic;
+        }
+        
+        .author-info {
+            font-size: 12pt;
+            margin-bottom: 20mm;
+        }
+        
+        .affiliation {
+            font-size: 11pt;
+            margin-bottom: 30mm;
+        }
+        
+        .date {
+            font-size: 12pt;
+            margin-top: 30mm;
+        }
+        
+        .logo-container {
+            margin: 20mm 0 30mm 0;
+            text-align: center;
+        }
+        
+        .title-logo {
+            max-width: 120mm;
+            max-height: 90mm;
+            width: auto;
+            height: auto;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            background: transparent;
+            box-shadow: 0 8mm 16mm rgba(0,0,0,0.3), 0 4mm 8mm rgba(0,0,0,0.2);
+            object-fit: contain;
+        }
+        
+        h1 {
+            font-size: 16pt;
+            font-weight: bold;
+            margin: 25mm 0 10mm 0;
+            text-align: center;
+            page-break-before: always;
+        }
+        
+        h2 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin: 20mm 0 8mm 0;
+        }
+        
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin: 15mm 0 6mm 0;
+        }
+        
+        h4 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin: 10mm 0 4mm 0;
+            font-style: italic;
+        }
+        
+        p {
+            text-align: justify;
+            margin-bottom: 6mm;
+            text-indent: 12mm;
+        }
+        
+        .abstract {
+            margin: 20mm 0;
+            padding: 10mm;
+            border: 1px solid #ccc;
+        }
+        
+        .abstract h3 {
+            text-align: center;
+            margin-top: 0;
+        }
+        
+        .abstract p {
+            text-indent: 0;
+            font-size: 11pt;
+        }
+        
+        .keywords {
+            margin-top: 10mm;
+            font-weight: bold;
+        }
+        
+        .toc {
+            page-break-after: always;
+        }
+        
+        .toc h2 {
+            text-align: center;
+        }
+        
+        .toc-entry {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3mm;
+            border-bottom: 1px dotted #ccc;
+        }
+        
+        .toc-title {
+            flex-grow: 1;
+        }
+        
+        .toc-page {
+            margin-left: 10mm;
+        }
+        
+        .citation {
+            font-size: 10pt;
+            color: #333;
+        }
+        
+        .reference-list {
+            page-break-before: always;
+        }
+        
+        .reference-list h2 {
+            text-align: center;
+        }
+        
+        .reference {
+            margin-bottom: 6mm;
+            text-indent: -12mm;
+            margin-left: 12mm;
+            font-size: 11pt;
+        }
+        
+        .footnote {
+            font-size: 10pt;
+            border-top: 1px solid #ccc;
+            margin-top: 20mm;
+            padding-top: 5mm;
+        }
+        
+        .figure-caption {
+            font-size: 10pt;
+            text-align: center;
+            margin: 5mm 0;
+            font-style: italic;
+        }
+        
+        .table {
+            margin: 10mm 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        .table th, .table td {
+            border: 1px solid #000;
+            padding: 3mm;
+            text-align: left;
+        }
+        
+        .table th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        .blockquote {
+            margin: 10mm 20mm;
+            font-style: italic;
+            border-left: 3px solid #ccc;
+            padding-left: 10mm;
+        }
+        
+        .section-number {
+            font-weight: bold;
+        }
+        
+        /* Editable container styles for academic format */
+        .editable-container {
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .editable-container:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+        
+        .editable-container[contenteditable="true"] {
+            outline: 1px solid #3498db;
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        .edit-indicator {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #3498db;
+            color: white;
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            font-size: 8px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .editable-container:hover .edit-indicator {
+            display: flex;
+        }
+        
+        .save-status {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #27ae60;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            display: none;
+            z-index: 1000;
+            font-size: 10pt;
+        }
+        
+        .save-status.error {
+            background: #e74c3c;
+        }
+        
+        .controls {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: none;
+            border: 1px solid #ccc;
+        }
+        
+        .controls.visible {
+            display: block;
+        }
+        
+        .controls button {
+            margin: 2px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10pt;
+            background: white;
+        }
+        
+        .controls .save-btn {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+        
+        .controls .export-btn {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .controls .reset-btn {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+        
+        .auth-padlock {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #34495e;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 12px;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .auth-padlock:hover {
+            background: #2c3e50;
+        }
+        
+        .auth-padlock.unlocked {
+            background: #27ae60;
+        }
+        
+        .auth-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1002;
+        }
+        
+        .auth-modal.visible {
+            display: flex;
+        }
+        
+        .auth-form {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            max-width: 300px;
+            width: 90%;
+        }
+        
+        .auth-form h3 {
+            margin-top: 0;
+            text-align: center;
+        }
+        
+        .auth-form input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 11pt;
+            box-sizing: border-box;
+        }
+        
+        .auth-form button {
+            width: 100%;
+            padding: 8px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            font-size: 11pt;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        
+        .auth-form button:hover {
+            background: #2980b9;
+        }
+        
+        .auth-form .cancel-btn {
+            background: #95a5a6;
+            margin-top: 3px;
+        }
+        
+        .auth-form .cancel-btn:hover {
+            background: #7f8c8d;
+        }
+        
+        .editing-disabled .editable-container:hover {
+            background-color: transparent;
+        }
+        
+        .editing-disabled .edit-indicator {
+            display: none !important;
+        }
+        
+        .editing-disabled .editable-container[contenteditable="true"] {
+            outline: none;
+            background-color: transparent;
+        }
+        
+        @media print {
+            .auth-padlock, .controls, .save-status, .auth-modal {
+                display: none !important;
+            }
+            
+            .editable-container:hover {
+                background-color: transparent !important;
+            }
+            
+            .edit-indicator {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="save-status" id="saveStatus">Saved</div>
+    
+    <button class="auth-padlock" id="authPadlock" onclick="showAuthModal()">🔒</button>
+    
+    <div class="auth-modal" id="authModal">
+        <div class="auth-form">
+            <h3>Admin Access Required</h3>
+            <input type="email" id="authEmail" placeholder="Email" value="justice@justice-minds.com">
+            <input type="password" id="authPassword" placeholder="Password">
+            <button onclick="authenticate()">Unlock Editing</button>
+            <button class="cancel-btn" onclick="hideAuthModal()">Cancel</button>
+        </div>
+    </div>
+    
+    <div class="controls" id="controls">
+        <button class="save-btn" onclick="saveToSupabase()">Save Changes</button>
+        <button class="export-btn" onclick="exportHTML()">Export HTML</button>
+        <button class="reset-btn" onclick="resetContent()">Reset</button>
+        <button class="cancel-btn" onclick="logout()">Lock</button>
+    </div>
+
+    <!-- Title Page -->
+    <div class="title-page">
+        <div class="logo-container">
+            <img src="https://tvecnfdqakrevzaeifpk.supabase.co/storage/v1/object/public/judicial-mind/judge/logoandico.png" alt="Justice Minds Forensic Intelligence Ltd" class="title-logo">
+        </div>
+        <div class="main-title">
+            Authenticity Degradation Theory: A Paradigmatic Framework for Understanding Human Nature Through a Trauma-Informed Lens
+        </div>
+        <div class="subtitle">
+            Integrating the Witness Authority Framework for Comprehensive Relational Healing
+        </div>
+        <div class="author-info">
+            <strong>Ben Mak</strong><br>
+            CEO & Chief Forensic Legal Strategist
+        </div>
+        <div class="affiliation">
+            Justice Minds Forensic Intelligence Ltd<br>
+            Company No. 16331423<br>
+            United Kingdom
+        </div>
+        <div class="date">
+            January 2025
+        </div>
+    </div>
+
+    <!-- Abstract -->
+    <div class="abstract">
+        <h3>Abstract</h3>
+        <div class="editable-container" data-section="abstract" contenteditable="false">
+            <div class="edit-indicator">✎</div>
+            <p>This paper introduces Authenticity Degradation Theory (ADT), a novel theoretical framework that challenges conventional understanding of human behaviour by proposing that initial kindness and care represent authentic human nature, whilst later difficulties reflect trauma responses rather than 'true colours' emerging. The theory integrates with the Witness Authority Framework, which transcends traditional victim-perpetrator binaries by establishing testimonial authority as a foundation for healing and justice. Through interdisciplinary synthesis of trauma psychology, attachment theory, neuroscience, and social psychology, ADT provides a comprehensive understanding of relational dynamics that honours both authentic expression and protective mechanisms developed in response to harm. The framework offers practical applications across clinical practice, legal systems, and social policy, with particular relevance for trauma-informed care and restorative justice approaches. This paradigmatic shift has implications for how we understand human nature, assess credibility in legal contexts, and approach healing from relational trauma.</p>
+        </div>
+        <div class="keywords">
+            <strong>Keywords:</strong> authenticity, trauma responses, witness authority, relational healing, trauma-informed care, human nature, attachment theory, testimonial authority
+        </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        <div class="toc-entry">
+            <span class="toc-title">Abstract</span>
+            <span class="toc-page">2</span>
+        </div>
+        <div class="toc-entry">
+            <span class="toc-title">1. Introduction</span>
+            <span class="toc-page">4</span>
+        </div>
+        <div class="toc-entry">
+            <span class="toc-title">2. Literature Review</span>
+            <span class="toc-page">6</span>
+        </div>
+        <div class="toc-entry">
+            <span class="toc-title">3. Theoretical Framework: Authenticity Degradation Theory</span>
+            <span class="toc-page">9</span>
+        </div>
+        <div class="toc-entry">
+            <span class="toc-title">4. The Witness Authority Framework</span>
+            <span class="toc-page">15</span>
+        </div>
+        <div class="toc-entry">
+            <span class="toc-title">5. Integration with Established Frameworks</span>
+            <span class="toc-page">20</span>
+        </div>
+        <div class="toc-entry">
+            <span class="toc-title">6. Clinical and Practical Applications</span>
+            <span class="toc-page">25</span>
+        </div>
+        <div class="toc-entry">
+            <span class="toc-title">7. Cultural and Societal Dimensions</span>
+            <span class="toc-page">30</span>
+        </div>
+        <div class="toc-entry">
+            <span class="toc-title">8. Ethical Considerations</span>
+            <span class="toc-page">33</span>
+        </div>
+        <div class="toc-entry">
+            <span class="toc-title">9. Discussion and Implications</span>
+            <span class="toc-page">36</span>
+        </div>
+        <div class="toc-entry">
+            <span class="toc-title">10. Conclusion</span>
+            <span class="toc-page">40</span>
+        </div>
+        <div class="toc-entry">
+            <span class="toc-title">References</span>
+            <span class="toc-page">42</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <h1>1. Introduction</h1>
+    
+    <div class="editable-container" data-section="introduction" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>Contemporary understanding of human behaviour often relies on the assumption that initial presentations of kindness and care are performative masks that eventually drop to reveal 'true colours' (Goffman, 1956). This conventional wisdom suggests that negative behaviours emerging over time represent authentic character, whilst positive initial interactions are dismissed as superficial or strategic (Jones & Pittman, 1982). However, this perspective may fundamentally misunderstand the nature of human authenticity and the role of trauma in shaping behaviour.</p>
+
+        <p>The present paper introduces Authenticity Degradation Theory (ADT), a novel theoretical framework proposing that initial kindness reflects authentic human nature, whilst later difficulties often represent trauma responses rather than character revelations (Mak, 2025). This paradigmatic shift has profound implications for understanding human relationships, assessing credibility in legal contexts, and approaching healing from relational trauma.</p>
+
+        <p>Traditional frameworks for understanding harm typically rely on victim-perpetrator binaries that can flatten the complexity of human experience (Christie, 1986; Lamb, 1999). To address these limitations, this paper also introduces the Witness Authority Framework, which transcends reductive categorisation by establishing testimonial authority as a foundation for healing and justice (Mak, 2025). This framework recognises those who have experienced harm as authorities with the power to testify to their experience, restoring agency without denying the reality of harm.</p>
+
+        <p>The integration of ADT with the Witness Authority Framework creates a comprehensive understanding of relational dynamics that honours both authentic expression and protective mechanisms developed in response to harm. This approach aligns with emerging trauma-informed paradigms in psychology (van der Kolk, 2014), neuroscience (Porges, 2011), and social policy (SAMHSA, 2014), whilst offering novel insights into the nature of human authenticity and the process of healing from relational trauma.</p>
+    </div>
+
+    <h1>2. Literature Review</h1>
+
+    <h2>2.1 Trauma-Informed Understanding of Behaviour</h2>
+    
+    <div class="editable-container" data-section="trauma-literature" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>The field of trauma psychology has increasingly recognised that many behaviours labelled as problematic are actually adaptive responses to adverse experiences (Herman, 1992; van der Kolk, 2014). Trauma responses typically manifest through fight, flight, freeze, or fawn mechanisms, representing the nervous system's attempts to ensure survival in threatening situations (Levine, 2010; Porges, 2011). These responses, whilst adaptive in dangerous contexts, can create difficulties in current relationships when triggered by situations that resemble past wounds.</p>
+
+        <p>Polyvagal Theory provides neurobiological foundations for understanding how trauma affects authentic expression (Porges, 2001, 2009). When the autonomic nervous system is dysregulated, individuals may struggle to maintain their authentic nature, instead operating from protective states that prioritise safety over connection (Dana, 2018). This neurobiological perspective supports the proposition that authentic kindness requires energy and capacity that may be compromised by trauma responses.</p>
+
+        <p>Research in developmental trauma demonstrates that early adverse experiences can significantly impact an individual's capacity for authentic expression and relational connection (Schore, 2003; Perry & Szalavitz, 2006). These findings suggest that what appears as character deficiency may actually reflect the long-term effects of trauma on neurobiological and psychological development.</p>
+    </div>
+
+    <h2>2.2 Attachment Theory and Relational Patterns</h2>
+    
+    <div class="editable-container" data-section="attachment-literature" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>Attachment Theory provides crucial insights into how early relationships shape capacity for connection and defensive strategies (Bowlby, 1988; Ainsworth et al., 1978). Insecure attachment patterns often develop as adaptive responses to inconsistent or harmful caregiving, representing the child's best attempt to maintain connection whilst protecting against further harm (Main, 1996).</p>
+
+        <p>These early attachment experiences create internal working models that influence expectations and behaviours in later relationships (Siegel, 2012). What may appear as someone's 'true nature' emerging over time could actually reflect the activation of attachment-based defensive strategies developed in response to early relational trauma.</p>
+
+        <p>Contemporary attachment research emphasises the possibility of earned security through healing relationships and therapeutic intervention (Cozolino, 2014). This supports the ADT proposition that authentic kindness represents a more fundamental aspect of human nature that can be restored through appropriate support and healing.</p>
+    </div>
+
+    <h2>2.3 Cognitive Biases in Interpersonal Perception</h2>
+    
+    <div class="editable-container" data-section="cognitive-literature" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>Research in social psychology demonstrates systematic biases in how individuals process and remember interpersonal information. Recency bias leads people to give greater weight to recent events than to earlier ones (Murdock, 1962), potentially explaining why negative behaviours emerging over time can overshadow a history of kindness. This cognitive tendency may contribute to the conventional wisdom that later behaviours reveal 'true character'.</p>
+
+        <p>Attribution theory research shows that individuals tend to attribute others' negative behaviours to dispositional factors whilst attributing positive behaviours to situational factors (Jones & Harris, 1967). This fundamental attribution error may contribute to the tendency to view emerging difficulties as revelations of true character rather than responses to circumstances or internal states.</p>
+
+        <p>Confirmation bias further compounds these effects, as individuals tend to seek and interpret information in ways that confirm their existing beliefs (Festinger, 1957). Once someone is perceived as showing their 'true colours', subsequent behaviours may be interpreted through this lens, creating a self-reinforcing cycle of negative attribution.</p>
+    </div>
+
+    <h2>2.4 Victim-Perpetrator Binary Limitations</h2>
+    
+    <div class="editable-container" data-section="binary-literature" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>Traditional approaches to understanding harm often rely on victim-perpetrator binaries that can oversimplify complex relational dynamics (Christie, 1986). The concept of the 'ideal victim' demonstrates how these frameworks can exclude those whose experiences don't fit prescribed categories, potentially denying recognition and support to those who need it (Lamb, 1999).</p>
+
+        <p>Feminist scholarship has critiqued the limitations of victim identity, noting how it can strip individuals of agency and reduce them to their experiences of harm (Brown, 1995; Duggan & Hunter, 2006). These critiques highlight the need for frameworks that acknowledge harm whilst preserving dignity and agency.</p>
+
+        <p>Research on testimony and witnessing in trauma recovery emphasises the importance of being heard and believed in the healing process (Felman & Laub, 1992). However, traditional frameworks often focus on establishing objective truth rather than validating lived experience, potentially retraumatising those seeking recognition and healing.</p>
+    </div>
+
+    <h1>3. Theoretical Framework: Authenticity Degradation Theory</h1>
+
+    <h2>3.1 Core Propositions</h2>
+    
+    <div class="editable-container" data-section="adt-core" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>Authenticity Degradation Theory proposes that initial presentations of kindness, care, and consideration in relationships represent authentic human nature rather than performative masks (Mak, 2025). This challenges conventional wisdom that dismisses early positive behaviours as superficial whilst treating later difficulties as revelations of 'true character'.</p>
+
+        <p>The theory posits that maintaining authentic expression requires psychological and neurobiological resources that can become depleted through trauma, stress, or adverse circumstances (Mak, 2025). When these resources are compromised, individuals may default to protective mechanisms developed in response to past wounds, leading to behaviours that appear inconsistent with their initial presentation.</p>
+
+        <p>ADT suggests that what emerges over time is not truth but trauma—the accumulated effects of adverse experiences on an individual's capacity for authentic expression. This perspective aligns with trauma-informed approaches that recognise problematic behaviours as adaptive responses to harmful circumstances rather than character deficiencies (SAMHSA, 2014).</p>
+    </div>
+
+    <h2>3.2 The Energy Required for Authentic Expression</h2>
+    
+    <div class="editable-container" data-section="energy-authenticity" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>Central to ADT is the recognition that authentic expression requires significant psychological and neurobiological resources. Polyvagal Theory demonstrates that social engagement and authentic connection depend on a regulated nervous system operating from a state of safety (Porges, 2011). When individuals experience threat, whether real or perceived, their nervous system may shift into protective states that prioritise survival over authentic expression.</p>
+
+        <p>Research in affective neuroscience shows that emotional regulation and social connection require substantial prefrontal cortex resources (Schore, 2003). Chronic stress, trauma, or adverse circumstances can deplete these resources, making it increasingly difficult to maintain authentic, caring behaviours consistently.</p>
+
+        <p>This neurobiological understanding supports the ADT proposition that initial kindness reflects optimal functioning, whilst later difficulties may indicate resource depletion rather than character revelation. The theory suggests that with appropriate support and healing, individuals can restore their capacity for authentic expression.</p>
+    </div>
+
+    <h2>3.3 Trauma Responses vs. Authentic Nature</h2>
+    
+    <div class="editable-container" data-section="trauma-vs-authentic" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>ADT distinguishes between authentic nature and trauma responses, proposing that behaviours emerging under stress often reflect protective mechanisms rather than true character. Trauma responses typically manifest through fight (defensiveness, aggression), flight (withdrawal, avoidance), freeze (shutdown, dissociation), or fawn (people-pleasing, boundary abandonment) patterns (Levine, 2010).</p>
+
+        <p>These responses, whilst adaptive in threatening situations, can create relational difficulties when activated in safe contexts. The theory suggests that recognising these patterns as trauma responses rather than character traits allows for more compassionate and effective responses to relational challenges.</p>
+
+        <p>Internal Family Systems theory provides a framework for understanding how different aspects of the self—including both authentic parts and protective parts—can be present simultaneously (Schwartz, 2001). ADT builds on this understanding by proposing that authentic kindness represents the Self or core essence, whilst difficult behaviours often reflect the activation of protective parts developed in response to harm.</p>
+    </div>
+
+    <h2>3.4 Implications for Self-Worth and Relational Dynamics</h2>
+    
+    <div class="editable-container" data-section="self-worth-implications" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>ADT reveals how individuals often unconsciously use others' capacity for sustained kindness as a measure of their own worth. When someone's behaviour changes from initial kindness to difficulty, witnesses may interpret this shift as a statement about their value or deservingness (Mak, 2025). This internalisation process can lead to significant self-blame and erosion of self-worth.</p>
+
+        <p>The theory suggests that understanding behavioural changes as reflections of the other person's capacity limitations rather than one's own worth can help maintain stable self-esteem regardless of others' behaviour. This perspective aligns with research on self-compassion and resilience (Neff, 2003).</p>
+
+        <p>Furthermore, ADT addresses the tendency to judge entire relationships based on recent actions, allowing negative behaviours to overshadow histories of kindness. The theory proposes that honouring what was genuinely present in relationships provides a more accurate and compassionate understanding of relational dynamics.</p>
+    </div>
+
+    <h1>4. The Witness Authority Framework</h1>
+
+    <h2>4.1 Beyond Victim-Perpetrator Binaries</h2>
+    
+    <div class="editable-container" data-section="beyond-binaries" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>The Witness Authority Framework transcends traditional victim-perpetrator binaries by introducing witness as a meta-category that encompasses both experience of harm and authority to testify (Mak, 2025). This framework recognises that binary categorisations often fail to capture the complexity of human experience and can trap individuals in rigid roles that don't reflect their full reality.</p>
+
+        <p>Unlike the term 'survivor', which can inadvertently demand performance of strength or recovery, 'witness' requires only presence and truthful observation (Mak, 2025). This reduces pressure whilst maintaining dignity and agency. The witness role acknowledges both vulnerability and authority, allowing individuals to hold space for their experience without requiring demonstration of progress or healing.</p>
+
+        <p>The framework draws on legal and philosophical traditions that recognise witnesses as authorities whose testimony shapes understanding of events (Agamben, 1999). In legal contexts, witnesses often possess more procedural authority than either party in a dispute, highlighting the power inherent in the role of testimony.</p>
+    </div>
+
+    <h2>4.2 Testimonial Authority and Agency Restoration</h2>
+    
+    <div class="editable-container" data-section="testimonial-authority" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>Central to the Witness Authority Framework is the concept of testimonial authority—the power to name, narrate, and contextualise experience for oneself and others (Mak, 2025). This authority represents a shift from being defined by what was done to them to defining what happened for others, society, and the historical record.</p>
+
+        <p>Research in narrative therapy demonstrates the healing power of reclaiming one's story and challenging dominant narratives that may pathologise or diminish experience (White & Epston, 1990). The witness framework builds on these insights by establishing testimony as a form of authority rather than merely therapeutic expression.</p>
+
+        <p>This approach aligns with trauma-informed principles that emphasise choice, collaboration, and empowerment in healing processes (SAMHSA, 2014). By recognising testimonial authority, the framework restores agency whilst acknowledging the reality of harm and its ongoing effects.</p>
+    </div>
+
+    <h2>4.3 Validation vs. Objective Accuracy</h2>
+    
+    <div class="editable-container" data-section="validation-accuracy" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>A crucial aspect of the Witness Authority Framework is its emphasis on validation of lived experience rather than establishment of objective accuracy (Mak, 2025). Research in memory and trauma demonstrates that perfect recall is neither achievable nor necessary for meaningful healing (Loftus, 2005; McNally, 2003).</p>
+
+        <p>The framework proposes that validation of lived experience is often more important than establishing objective accuracy, especially in the context of healing from relational harm. While it is sometimes argued that the status of 'witness' may be undermined by the potential for illusion or inaccuracy, the central purpose of this framework is not the arbitration of objective truth but the validation of lived experience (Mak, 2025).</p>
+
+        <p>In the context of trauma, relational breakdown, or systemic harm, validation—acknowledging that what is experienced is real for the witness—is a prerequisite for healing, accountability, and the restoration of dignity. The role of the witness in ADT is not to serve as a flawless recorder of events, but as a living testament to reality as experienced. This validation is both a psychological necessity and an ethical imperative.</p>
+    </div>
+
+    <h2>4.4 Secondary Psychological Protection Framework</h2>
+    
+    <div class="editable-container" data-section="secondary-protection" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>A critical dimension of ADT's protective capacity is preventing witnesses from internalising relational changes as personal inadequacy. When relationships shift from initial kindness to difficulty, witnesses often experience profound dissolution and disempowerment in confusion about why and how the other could so drastically change (Personal communication, 2025).</p>
+
+        <p>This confusion typically triggers destructive self-examination: "It must have been me" (Personal communication, 2025). Without the ADT framework, witnesses conclude that they cannot be deserving, that the ways they were being maintained became too much, leading to feelings of unworthiness (Personal communication, 2025).</p>
+
+        <p>This represents a secondary trauma response where the witness assumes responsibility for the other's behavioural changes, concludes personal inadequacy caused the shift, and internalises unworthiness as explanation for lost kindness. ADT's dual protection framework protects both parties: for the person exhibiting difficult behaviour, it provides understanding of their authentic nature beneath trauma responses; for the witness, it prevents self-blame and protects against unworthiness conclusions.</p>
+    </div>
+
+    <h1>5. Integration with Established Frameworks</h1>
+
+    <h2>5.1 Attachment Theory Integration</h2>
+    
+    <div class="editable-container" data-section="attachment-integration" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>ADT aligns closely with attachment theory's understanding of how early relational experiences shape later relationship patterns. Bowlby's (1988) conceptualisation of internal working models provides a foundation for understanding how trauma responses develop as adaptive strategies for maintaining connection whilst protecting against harm.</p>
+
+        <p>The theory's emphasis on authentic kindness as fundamental human nature resonates with attachment theory's recognition that humans are inherently relational beings with an innate drive for connection (Ainsworth et al., 1978). When this drive is thwarted by adverse experiences, individuals develop protective strategies that may interfere with authentic expression but serve important survival functions.</p>
+
+        <p>Contemporary attachment research on earned security (Cozolino, 2014) supports ADT's proposition that authentic nature can be restored through healing relationships. This integration suggests that therapeutic interventions focusing on attachment repair may be particularly effective for helping individuals reconnect with their authentic capacity for kindness and care.</p>
+    </div>
+
+    <h2>5.2 Polyvagal Theory and Neurobiological Foundations</h2>
+    
+    <div class="editable-container" data-section="polyvagal-integration" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>Porges' (2011) Polyvagal Theory provides crucial neurobiological support for ADT's core propositions. The theory's emphasis on the autonomic nervous system's role in social engagement aligns with ADT's understanding that authentic expression requires neurobiological resources that can be compromised by trauma.</p>
+
+        <p>The polyvagal hierarchy—from social engagement through sympathetic activation to dorsal vagal shutdown—maps onto ADT's understanding of how individuals move from authentic expression to trauma responses when their capacity is overwhelmed. The social engagement system's requirement for safety and regulation supports ADT's proposition that maintaining authentic kindness requires energy and optimal functioning.</p>
+
+        <p>Dana's (2018) application of polyvagal principles to therapy provides practical frameworks for helping individuals recognise their autonomic states and develop capacity for sustained social engagement. This work directly supports ADT's therapeutic implications and offers concrete approaches for restoration of authentic expression.</p>
+    </div>
+
+    <h2>5.3 Internal Family Systems Integration</h2>
+    
+    <div class="editable-container" data-section="ifs-integration" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>Schwartz's (2001) Internal Family Systems model provides a sophisticated framework for understanding the coexistence of authentic nature and protective mechanisms that ADT describes. IFS's conceptualisation of Self as the core essence that embodies qualities like compassion, curiosity, and connection aligns closely with ADT's understanding of authentic kindness as fundamental human nature.</p>
+
+        <p>The IFS understanding of protective parts—aspects of the psyche that develop to shield vulnerable parts from further harm—maps directly onto ADT's conceptualisation of trauma responses. These protective parts, whilst serving important functions, can override Self-leadership and create behaviours that appear inconsistent with authentic nature.</p>
+
+        <p>IFS's therapeutic approach of developing Self-leadership whilst honouring protective parts offers practical applications for ADT. Rather than pathologising trauma responses, this integration suggests approaches that acknowledge their protective function whilst gradually restoring access to authentic Self-expression.</p>
+    </div>
+
+    <h1>6. Clinical and Practical Applications</h1>
+
+    <h2>6.1 Therapeutic Applications</h2>
+    
+    <div class="editable-container" data-section="therapeutic-applications" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>ADT offers several practical applications for therapeutic practice. The framework provides therapists with a lens for understanding client presentations that honours both authentic nature and protective mechanisms. Rather than focusing solely on symptom reduction, ADT-informed therapy emphasises restoration of authentic expression whilst respecting the wisdom of protective responses.</p>
+
+        <p>The Witness Authority Framework offers particular value for trauma therapy by restoring agency and authority to clients' narratives. This approach aligns with narrative therapy principles (White & Epston, 1990) whilst adding the specific dimension of testimonial authority. Clients are supported to reclaim their role as authorities on their own experience rather than passive recipients of professional interpretation.</p>
+
+        <p>Practical interventions might include helping clients identify their authentic nature beneath protective mechanisms, developing capacity for sustained authentic expression, and learning to recognise and respond compassionately to their own and others' trauma responses. The framework also supports therapists in maintaining hope and connection with clients whose protective mechanisms may create challenging therapeutic dynamics.</p>
+    </div>
+
+    <h2>6.2 Legal and Justice System Applications</h2>
+    
+    <div class="editable-container" data-section="legal-applications" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>The Witness Authority Framework has significant implications for legal and justice systems, particularly in how witness testimony is understood and validated. Traditional approaches often focus on establishing objective accuracy, which can inadvertently retraumatise those seeking recognition and healing.</p>
+
+        <p>ADT suggests that understanding behavioural changes through a trauma-informed lens could improve credibility assessments in legal contexts. Rather than interpreting inconsistencies in testimony as indicators of deception, legal professionals might consider how trauma responses could affect memory and presentation whilst still maintaining appropriate standards of evidence.</p>
+
+        <p>The framework also supports restorative justice approaches that emphasise healing and accountability rather than purely punitive responses. By understanding harmful behaviour as potentially reflecting trauma responses rather than fixed character traits, restorative processes can address both harm and underlying wounds whilst maintaining appropriate accountability.</p>
+    </div>
+
+    <h2>6.3 Educational and Training Applications</h2>
+    
+    <div class="editable-container" data-section="educational-applications" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>ADT has important applications for educational settings, particularly in understanding and responding to challenging student behaviours. The framework suggests that many behaviours labelled as problematic may actually reflect trauma responses rather than character deficiencies, supporting trauma-informed educational approaches.</p>
+
+        <p>Teacher training programmes could benefit from ADT principles by helping educators recognise authentic potential in all students whilst understanding how trauma responses might interfere with learning and social connection. This perspective could reduce punitive responses to challenging behaviour whilst maintaining appropriate boundaries and expectations.</p>
+
+        <p>The Witness Authority Framework also has applications for addressing bullying and peer conflict in educational settings. By supporting students to reclaim authority over their narratives and experiences, schools can promote healing and resilience whilst addressing harmful dynamics.</p>
+    </div>
+
+    <h1>7. Cultural and Societal Dimensions</h1>
+
+    <h2>7.1 Cross-Cultural Considerations</h2>
+    
+    <div class="editable-container" data-section="cross-cultural" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>While ADT's core propositions about authentic human nature and trauma responses may have universal relevance, their expression and application must be understood within specific cultural contexts. Different cultures have varying norms around emotional expression, interpersonal relationships, and the meaning of authenticity.</p>
+
+        <p>Some cultures may emphasise collective harmony over individual authentic expression, whilst others prioritise individual authenticity over group cohesion. ADT's application must be sensitive to these cultural variations whilst maintaining its core insights about the relationship between authentic nature and trauma responses.</p>
+
+        <p>The Witness Authority Framework also requires cultural adaptation, as different societies have varying approaches to testimony, authority, and the resolution of harm. Indigenous justice traditions, for example, often emphasise community healing and restoration in ways that align with the framework's principles whilst differing in specific practices and procedures.</p>
+    </div>
+
+    <h2>7.2 Societal Structures and Trauma Responses</h2>
+    
+    <div class="editable-container" data-section="societal-structures" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>ADT's insights extend beyond individual relationships to broader societal dynamics. Systemic oppression, discrimination, and social inequality can create collective trauma responses that manifest in community and cultural patterns. Understanding these dynamics through an ADT lens suggests that many social problems may reflect collective trauma responses rather than inherent character deficiencies in particular groups.</p>
+
+        <p>This perspective has implications for social policy and intervention. Rather than focusing solely on individual behaviour change, ADT suggests the importance of addressing systemic factors that create and maintain trauma responses. This might include policies that promote safety, stability, and opportunity whilst reducing exposure to adverse experiences.</p>
+
+        <p>The framework also suggests that societal healing requires approaches that honour both authentic human nature and the protective mechanisms that communities have developed in response to harm. This balance between validation and transformation is essential for sustainable social change.</p>
+    </div>
+
+    <h1>8. Ethical Considerations</h1>
+
+    <h2>8.1 Balancing Compassion and Accountability</h2>
+    
+    <div class="editable-container" data-section="ethical-balance" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>A central ethical challenge in applying ADT is maintaining the balance between compassion for trauma responses and accountability for harmful behaviour. Understanding that negative behaviours may reflect trauma responses rather than authentic character does not excuse the impact of those behaviours on others.</p>
+
+        <p>The framework requires careful application to avoid enabling harmful dynamics or removing appropriate consequences for destructive actions. Compassion for someone's wounds must be balanced with protection of those who may be harmed by their trauma responses.</p>
+
+        <p>This balance is particularly important in contexts involving power differentials, where trauma responses from those in positions of authority can cause significant harm to those with less power. ADT's application must include robust safeguards to prevent the framework from being used to excuse abuse or avoid accountability.</p>
+    </div>
+
+    <h2>8.2 Professional Boundaries and Dual Relationships</h2>
+    
+    <div class="editable-container" data-section="professional-boundaries" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>The Witness Authority Framework's emphasis on validating lived experience raises important questions about professional boundaries and the role of professional expertise. While the framework supports clients' authority over their own narratives, it must be balanced with appropriate professional standards and ethical guidelines.</p>
+
+        <p>Professionals applying ADT principles must navigate the tension between validating client experience and maintaining appropriate clinical judgment. This includes recognising when professional intervention is necessary to ensure safety, even when this might conflict with client preferences or narratives.</p>
+
+        <p>The framework also requires careful consideration of dual relationships and boundary issues. The emphasis on authentic expression and testimonial authority must be balanced with appropriate professional distance and the maintenance of therapeutic rather than personal relationships.</p>
+    </div>
+
+    <h1>9. Discussion and Implications</h1>
+
+    <h2>9.1 Paradigmatic Significance</h2>
+    
+    <div class="editable-container" data-section="paradigmatic-significance" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>ADT represents a fundamental paradigm shift in understanding human nature and behaviour. By proposing that authentic kindness represents true character whilst negative behaviours often reflect trauma responses, the theory challenges deeply ingrained cultural assumptions about human nature and relationship dynamics.</p>
+
+        <p>This paradigm shift has implications across multiple domains, from individual therapy to social policy. It suggests new approaches to understanding and responding to challenging behaviour that emphasise healing and restoration rather than punishment and rejection.</p>
+
+        <p>The integration of ADT with the Witness Authority Framework creates a comprehensive approach to understanding and responding to harm that transcends traditional victim-perpetrator binaries whilst maintaining appropriate accountability and protection.</p>
+    </div>
+
+    <h2>9.2 Research Implications</h2>
+    
+    <div class="editable-container" data-section="research-implications" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>ADT opens numerous avenues for empirical research. Longitudinal studies could examine the relationship between early authentic expression and later trauma responses, testing the theory's core propositions about the temporal relationship between authenticity and protective mechanisms.</p>
+
+        <p>Neurobiological research could investigate the energy requirements for authentic expression and how trauma affects these capacities. This might include studies of autonomic nervous system functioning, prefrontal cortex activation, and stress hormone patterns in relation to authentic versus protective behaviours.</p>
+
+        <p>Clinical research could examine the effectiveness of ADT-informed interventions compared to traditional approaches. This might include studies of therapeutic outcomes, client satisfaction, and long-term functioning for individuals receiving ADT-informed treatment.</p>
+    </div>
+
+    <h2>9.3 Limitations and Future Directions</h2>
+    
+    <div class="editable-container" data-section="limitations" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>While ADT offers valuable insights, it is important to acknowledge its limitations. The theory's emphasis on trauma responses as explanations for negative behaviour could potentially be overextended, leading to the pathologising of normal human variation or the excusing of genuinely harmful character traits.</p>
+
+        <p>The framework also requires further development in terms of specific assessment tools and intervention protocols. While the theoretical foundations are strong, practical applications need more detailed specification and empirical validation.</p>
+
+        <p>Future research should focus on developing reliable methods for distinguishing between authentic expression and trauma responses, creating validated assessment tools, and establishing evidence-based intervention protocols. Cross-cultural research is also needed to understand how ADT principles apply across different cultural contexts.</p>
+    </div>
+
+    <h1>10. Conclusion</h1>
+    
+    <div class="editable-container" data-section="conclusion" contenteditable="false">
+        <div class="edit-indicator">✎</div>
+        <p>Authenticity Degradation Theory, integrated with the Witness Authority Framework, offers a revolutionary approach to understanding human nature, behaviour, and healing. By proposing that initial kindness reflects authentic nature whilst later difficulties often represent trauma responses, ADT challenges conventional wisdom and opens new possibilities for compassionate, effective responses to human suffering.</p>
+
+        <p>The framework's emphasis on testimonial authority and validation of lived experience provides a foundation for healing that transcends traditional victim-perpetrator binaries whilst maintaining appropriate accountability. This approach has significant implications for therapeutic practice, legal systems, educational settings, and social policy.</p>
+
+        <p>While further research and development are needed, ADT represents a paradigmatic shift that could fundamentally transform how we understand and respond to human behaviour. By recognising the authentic kindness that exists within all individuals whilst understanding the protective mechanisms that trauma creates, we can develop more effective, compassionate approaches to healing and justice.</p>
+
+        <p>The theory's integration of individual psychological insights with broader social and cultural considerations makes it particularly relevant for addressing the complex challenges facing contemporary society. As we continue to grapple with issues of trauma, inequality, and social division, frameworks like ADT offer hope for more nuanced, effective approaches to healing and transformation.</p>
+
+        <p>Ultimately, ADT invites us to see beyond surface behaviours to the authentic nature that exists within all individuals, whilst maintaining the wisdom to recognise and respond appropriately to the protective mechanisms that trauma creates. This balance between compassion and discernment, between validation and accountability, represents a mature approach to human complexity that honours both our wounds and our inherent capacity for kindness and connection.</p>
+    </div>
+
+    <!-- References Section -->
+    <div class="reference-list">
+        <h2>References</h2>
+        
+        <div class="reference">
+            Agamben, G. (1999). <em>Remnants of Auschwitz: The witness and the archive</em>. Zone Books.
+        </div>
+        
+        <div class="reference">
+            Ainsworth, M. D. S., Blehar, M. C., Waters, E., & Wall, S. (1978). <em>Patterns of attachment: A psychological study of the strange situation</em>. Lawrence Erlbaum.
+        </div>
+        
+        <div class="reference">
+            Bowlby, J. (1988). <em>A secure base: Parent-child attachment and healthy human development</em>. Basic Books.
+        </div>
+        
+        <div class="reference">
+            Brown, W. (1995). <em>States of injury: Power and freedom in late modernity</em>. Princeton University Press.
+        </div>
+        
+        <div class="reference">
+            Christie, N. (1986). The ideal victim. In E. A. Fattah (Ed.), <em>From crime policy to victim policy</em> (pp. 17-30). Macmillan.
+        </div>
+        
+        <div class="reference">
+            Cozolino, L. (2014). <em>The neuroscience of human relationships: Attachment and the developing social brain</em> (2nd ed.). Norton.
+        </div>
+        
+        <div class="reference">
+            Dana, D. (2018). <em>The polyvagal theory in therapy: Engaging the rhythm of regulation</em>. Norton.
+        </div>
+        
+        <div class="reference">
+            Duggan, L., & Hunter, N. D. (2006). <em>Sex wars: Sexual dissent and political culture</em>. Routledge.
+        </div>
+        
+        <div class="reference">
+            Felman, S., & Laub, D. (1992). <em>Testimony: Crises of witnessing in literature, psychoanalysis, and history</em>. Routledge.
+        </div>
+        
+        <div class="reference">
+            Festinger, L. (1957). <em>A theory of cognitive dissonance</em>. Stanford University Press.
+        </div>
+        
+        <div class="reference">
+            Goffman, E. (1956). <em>The presentation of self in everyday life</em>. University of Edinburgh Social Sciences Research Centre.
+        </div>
+        
+        <div class="reference">
+            Herman, J. L. (1992). <em>Trauma and recovery: The aftermath of violence from domestic abuse to political terror</em>. Basic Books.
+        </div>
+        
+        <div class="reference">
+            Jones, E. E., & Harris, V. A. (1967). The attribution of attitudes. <em>Journal of Experimental Social Psychology</em>, 3(1), 1-24.
+        </div>
+        
+        <div class="reference">
+            Jones, E. E., & Pittman, T. S. (1982). Toward a general theory of strategic self-presentation. In J. Suls (Ed.), <em>Psychological perspectives on the self</em> (Vol. 1, pp. 231-262). Lawrence Erlbaum.
+        </div>
+        
+        <div class="reference">
+            Lamb, S. (1999). <em>New versions of victims: Feminists struggle with the concept</em>. New York University Press.
+        </div>
+        
+        <div class="reference">
+            Levine, P. A. (2010). <em>In an unspoken voice: How the body releases trauma and restores goodness</em>. North Atlantic Books.
+        </div>
+        
+        <div class="reference">
+            Loftus, E. F. (2005). Planting misinformation in the human mind: A 30-year investigation of the malleability of memory. <em>Learning & Memory</em>, 12(4), 361-366.
+        </div>
+        
+        <div class="reference">
+            Main, M. (1996). Introduction to the special section on attachment and psychopathology: 2. Overview of the field of attachment. <em>Journal of Consulting and Clinical Psychology</em>, 64(2), 237-243.
+        </div>
+        
+        <div class="reference">
+            Mak, B. (2025). <em>Authenticity Degradation Theory: A paradigmatic framework for understanding human nature through trauma-informed lens</em>. Justice Minds Forensic Intelligence Ltd.
+        </div>
+        
+        <div class="reference">
+            McNally, R. J. (2003). <em>Remembering trauma</em>. Harvard University Press.
+        </div>
+        
+        <div class="reference">
+            Murdock, B. B. (1962). The serial position effect of free recall. <em>Journal of Experimental Psychology</em>, 64(5), 482-488.
+        </div>
+        
+        <div class="reference">
+            Neff, K. D. (2003). Self-compassion: An alternative conceptualization of a healthy attitude toward oneself. <em>Self and Identity</em>, 2(2), 85-101.
+        </div>
+        
+        <div class="reference">
+            Perry, B. D., & Szalavitz, M. (2006). <em>The boy who was raised as a dog: And other stories from a child psychiatrist's notebook</em>. Basic Books.
+        </div>
+        
+        <div class="reference">
+            Porges, S. W. (2001). The polyvagal theory: Phylogenetic substrates of a social nervous system. <em>International Journal of Psychophysiology</em>, 42(2), 123-146.
+        </div>
+        
+        <div class="reference">
+            Porges, S. W. (2009). The polyvagal theory: New insights into adaptive reactions of the autonomic nervous system. <em>Cleveland Clinic Journal of Medicine</em>, 76(4), S86-S90.
+        </div>
+        
+        <div class="reference">
+            Porges, S. W. (2011). <em>The polyvagal theory: Neurophysiological foundations of emotions, attachment, communication, and self-regulation</em>. Norton.
+        </div>
+        
+        <div class="reference">
+            SAMHSA. (2014). <em>Trauma-informed care in behavioral services: Treatment improvement protocol (TIP) series 57</em>. Substance Abuse and Mental Health Services Administration.
+        </div>
+        
+        <div class="reference">
+            Schore, A. N. (2003). <em>Affect dysregulation and disorders of the self</em>. Norton.
+        </div>
+        
+        <div class="reference">
+            Schwartz, R. C. (2001). <em>Introduction to the internal family systems</em>. Trailheads Publications.
+        </div>
+        
+        <div class="reference">
+            Siegel, D. J. (2012). <em>The developing mind: How relationships and the brain interact to shape who we are</em> (2nd ed.). Guilford Press.
+        </div>
+        
+        <div class="reference">
+            van der Kolk, B. A. (2014). <em>The body keeps the score: Brain, mind, and body in the healing of trauma</em>. Viking.
+        </div>
+        
+        <div class="reference">
+            White, M., & Epston, D. (1990). <em>Narrative means to therapeutic ends</em>. Norton.
+        </div>
+    </div>
+
+    <script>
+        // Supabase configuration
+        const SUPABASE_URL = 'https://tvecnfdqakrevzaeifpk.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR2ZWNuZmRxYWtyZXZ6YWVpZnBrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU5MjE4NzQsImV4cCI6MjA1MTQ5Nzg3NH0.Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8';
+        
+        let supabase;
+        let isAuthenticated = false;
+        let originalContent = '';
+
+        // Initialize Supabase
+        try {
+            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        } catch (error) {
+            console.error('Failed to initialize Supabase:', error);
+        }
+
+        // Store original content on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            originalContent = document.body.innerHTML;
+        });
+
+        function showAuthModal() {
+            document.getElementById('authModal').classList.add('visible');
+        }
+
+        function hideAuthModal() {
+            document.getElementById('authModal').classList.remove('visible');
+        }
+
+        async function authenticate() {
+            const email = document.getElementById('authEmail').value;
+            const password = document.getElementById('authPassword').value;
+
+            if (!email || !password) {
+                alert('Please enter both email and password');
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
+                if (error) {
+                    alert('Authentication failed: ' + error.message);
+                    return;
+                }
+
+                isAuthenticated = true;
+                enableEditing();
+                hideAuthModal();
+                showStatus('Authenticated successfully', false);
+            } catch (error) {
+                alert('Authentication error: ' + error.message);
+            }
+        }
+
+        function enableEditing() {
+            document.body.classList.remove('editing-disabled');
+            document.getElementById('authPadlock').classList.add('unlocked');
+            document.getElementById('authPadlock').innerHTML = '🔓';
+            document.getElementById('controls').classList.add('visible');
+            
+            // Enable contenteditable on all editable containers
+            const editableContainers = document.querySelectorAll('.editable-container');
+            editableContainers.forEach(container => {
+                container.contentEditable = 'true';
+            });
+        }
+
+        function logout() {
+            isAuthenticated = false;
+            document.body.classList.add('editing-disabled');
+            document.getElementById('authPadlock').classList.remove('unlocked');
+            document.getElementById('authPadlock').innerHTML = '🔒';
+            document.getElementById('controls').classList.remove('visible');
+            
+            // Disable contenteditable on all editable containers
+            const editableContainers = document.querySelectorAll('.editable-container');
+            editableContainers.forEach(container => {
+                container.contentEditable = 'false';
+            });
+            
+            showStatus('Editing locked', false);
+        }
+
+        async function saveToSupabase() {
+            if (!isAuthenticated) {
+                alert('Please authenticate first');
+                return;
+            }
+
+            try {
+                const content = document.body.innerHTML;
+                const { data, error } = await supabase
+                    .from('book_content')
+                    .upsert({
+                        id: 'adt_book',
+                        content: content,
+                        updated_at: new Date().toISOString()
+                    });
+
+                if (error) {
+                    showStatus('Save failed: ' + error.message, true);
+                    return;
+                }
+
+                showStatus('Saved successfully', false);
+            } catch (error) {
+                showStatus('Save error: ' + error.message, true);
+            }
+        }
+
+        function exportHTML() {
+            const content = document.documentElement.outerHTML;
+            const blob = new Blob([content], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'authenticity_degradation_theory.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showStatus('HTML exported', false);
+        }
+
+        function resetContent() {
+            if (!isAuthenticated) {
+                alert('Please authenticate first');
+                return;
+            }
+
+            if (confirm('Are you sure you want to reset all content to the original version?')) {
+                document.body.innerHTML = originalContent;
+                showStatus('Content reset', false);
+                // Re-enable editing after reset
+                setTimeout(enableEditing, 100);
+            }
+        }
+
+        function showStatus(message, isError = false) {
+            const status = document.getElementById('saveStatus');
+            status.textContent = message;
+            status.className = 'save-status' + (isError ? ' error' : '');
+            status.style.display = 'block';
+            
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 3000);
+        }
+
+        // Initialize editing as disabled
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('editing-disabled');
+        });
+
+        // Handle Enter key in auth modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const authModal = document.getElementById('authModal');
+            authModal.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    authenticate();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
