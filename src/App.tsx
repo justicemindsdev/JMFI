@@ -16,6 +16,7 @@ import Substantiation from "./pages/Substantiation";
 import AppPage from "./pages/AppPage";
 import JudgeErrorsInLaw from "./pages/Judge_ErrorsInLaw";
 import ContactPage from "./pages/Contact";
+import About from "./pages/About";
 function Router() {
   return (
     <Switch>
@@ -30,6 +31,7 @@ function Router() {
       <Route path="/investigations/social-worker-engagement" component={SocialWorkerEngagement} />
       <Route path="/judge-errors-in-law" component={JudgeErrorsInLaw} />
       <Route path="/contact" component={ContactPage} />
+      <Route path="/about" component={About} />
       <Route component={NotFound} />
     </Switch>
   );
