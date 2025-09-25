@@ -112,7 +112,8 @@ const About = () => {
                 "Ben is a kind, trustworthy and generous individual. He puts the needs of others before his own and is forever finding ways to improve lives in new and creative ways. He works very hard and applies himself 100% to all his endeavours but can always make time for anyone in need who comes across his path, whether he knows them or not. Ben is open and approachable and will always find a solution to a problem, even if it is a cost to him personally. He has always been an optimist who speaks positivity and I value our friendship immensely."
               </p>
               <p className="text-sm text-gray-600 font-medium">
-                — Holly Barton, Adult Social Worker, 6 years' experience, known Ben for 30 years
+                — Holly Barton, Adult Social Worker, 6 years' experience, known Ben for 30 years<br />
+                <span className="text-xs">21st February 2022</span>
               </p>
             </CardContent>
           </Card>
@@ -134,7 +135,8 @@ const About = () => {
                 "Ben is a dear friend and support to me for over 20 years. It's been a pleasure to watch Ben have incredible success within the industry which we share a great passion. Ben has been a positive, compassionate, and consistent influence on his family... He has shown great passion and dedication to support his sister and nephew sacrificing his own commitments and life in London. Ben has been a positive, compassionate, and consistent influence on his family. I trust the information provided will be of assistance in reference to Ben's character and mindset around his family."
               </p>
               <p className="text-sm text-gray-600 font-medium">
-                — Natalie Parr, Former Early Years SEN Worker (14 years), known Ben for 20 years
+                — Natalie Parr, Former Early Years SEN Worker (14 years), known Ben for 20 years<br />
+                <span className="text-xs">20th February 2022</span>
               </p>
             </CardContent>
           </Card>
@@ -156,7 +158,8 @@ const About = () => {
                 "Ben is a kind and generous person who is dedicated to his family and friends. Ben works really hard and he always does his very best for people. I understand Ben has been out of his normal working and day to day living to be able to provide care for his nephew and sister starting in March 2020. I trust the information provided will be of assistance in reference to Ben's character and mindset around his family."
               </p>
               <p className="text-sm text-gray-600 font-medium">
-                — Luciana Amorim, Children's Social Worker (6 years), known Ben for 10 years
+                — Luciana Amorim, Children's Social Worker (6 years), known Ben for 10 years<br />
+                <span className="text-xs">28th February 2022</span>
               </p>
             </CardContent>
           </Card>
