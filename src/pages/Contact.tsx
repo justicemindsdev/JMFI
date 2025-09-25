@@ -38,26 +38,57 @@ const Contact: React.FC = () => {
 
           <div className="space-y-3 text-lg">
             <div>
+              <strong>Company:</strong>
+              <p>JUSTICE MINDS FORENSIC INTELLIGENCE Ltd</p>
+              <p className="text-sm">ICO DATA HANDLER OFFICER CERTIFICATE HOLDER</p>
+            </div>
+
+            <div>
               <strong>Address:</strong>
-              <p>123 Legal Lane, London, EC4A 1AB, United Kingdom</p>
+              <p>161-165 Borough High Street, London, England, SE1 1HR</p>
             </div>
 
             <div>
               <strong>Email:</strong>
-              <p>info@justice-minds.com</p>
+              <p>authority@legaldueprocess.com</p>
+            </div>
+
+            <div>
+              <strong>ICO Registration:</strong>
+              <p>
+                <a 
+                  href="https://ico.org.uk/ESDWebPages/Entry/ZB896365" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-blue-300 hover:text-blue-100 underline"
+                >
+                  ZB896365 - View ICO Registration
+                </a>
+              </p>
+            </div>
+
+            <div>
+              <strong>Company House:</strong>
+              <p>
+                <a 
+                  href="https://find-and-update.company-information.service.gov.uk/company/16331423/filing-history" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-blue-300 hover:text-blue-100 underline"
+                >
+                  Company No. 16331423 - View Filing History
+                </a>
+              </p>
             </div>
           </div>
 
           <div className="pt-4">
             <h2 className="text-xl font-semibold mb-2">Follow Us</h2>
             <div className="flex space-x-4 text-2xl">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <a href="https://www.instagram.com/benmaklondon/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-white hover:text-pink-400 transition-colors">
                 <FaInstagram />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                <FaTwitter />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/itsbenmak/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-white hover:text-blue-400 transition-colors">
                 <FaLinkedin />
               </a>
             </div>

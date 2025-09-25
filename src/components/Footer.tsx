@@ -16,16 +16,10 @@ export function Footer() {
                 Illuminating the pathways of justice through data-driven analysis and informed reporting.
               </p>
               <div className="flex space-x-4">
-                <a href="https://twitter.com" className="text-gray-400 hover:text-primary transition-colors" aria-label="Twitter">
-                  <FaTwitter className="h-5 w-5" />
-                </a>
-                {/* <a href="https://facebook.com" className="text-gray-400 hover:text-primary transition-colors" aria-label="Facebook">
-                  <FaFacebookF className="h-5 w-5" />
-                </a> */}
-                <a href="https://linkedin.com" className="text-gray-400 hover:text-primary transition-colors" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/itsbenmak/" className="text-gray-400 hover:text-primary transition-colors" aria-label="LinkedIn">
                   <FaLinkedinIn className="h-5 w-5" />
                 </a>
-                <a href="https://instagram.com" className="text-gray-400 hover:text-primary transition-colors" aria-label="Instagram">
+                <a href="https://www.instagram.com/benmaklondon/?hl=en" className="text-gray-400 hover:text-primary transition-colors" aria-label="Instagram">
                   <FaInstagram className="h-5 w-5" />
                 </a>
               </div>
@@ -65,16 +59,29 @@ export function Footer() {
             <div>
               <h4 className="text-lg font-heading font-bold mb-4">Contact</h4>
               <address className="not-italic text-gray-400">
-                <p className="mb-2">Justice Minds Ltd.</p>
-                <p className="mb-2">123 Legal Lane</p>
-                <p className="mb-2">London, EC4A 1AB</p>
+                <p className="mb-2">JUSTICE MINDS FORENSIC INTELLIGENCE Ltd</p>
+                <p className="mb-1 text-sm">ICO DATA HANDLER OFFICER CERTIFICATE HOLDER</p>
+                <p className="mb-2">161-165 Borough High Street</p>
+                <p className="mb-2">London, England, SE1 1HR</p>
                 <p className="mb-2">United Kingdom</p>
               </address>
               <p className="text-gray-400 mt-4">
-                <a href="mailto:info@justice-minds.com" className="hover:text-primary transition-colors">
-                  info@justice-minds.com
+                <a href="mailto:authority@legaldueprocess.com" className="hover:text-primary transition-colors">
+                  authority@legaldueprocess.com
                 </a>
               </p>
+              <div className="mt-4 space-y-2 text-sm">
+                <p className="text-gray-400">
+                  <a href="https://ico.org.uk/ESDWebPages/Entry/ZB896365" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                    ICO Registration: ZB896365
+                  </a>
+                </p>
+                <p className="text-gray-400">
+                  <a href="https://find-and-update.company-information.service.gov.uk/company/16331423/filing-history" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                    Company No: 16331423
+                  </a>
+                </p>
+              </div>
             </div>
           </div>
           

@@ -17,6 +17,7 @@ import AppPage from "./pages/AppPage";
 import JudgeErrorsInLaw from "./pages/Judge_ErrorsInLaw";
 import ContactPage from "./pages/Contact";
 import About from "./pages/About";
+import Investigations from "./pages/Investigations";
 function Router() {
   return (
     <Switch>
@@ -27,6 +28,7 @@ function Router() {
       <Route path="/tcctv" component={Tcctv} />
       <Route path="/app" component={AppPage} />
       <Route path="/substantiation-fixed" component={Substantiation} />
+      <Route path="/investigations" component={Investigations} />
       <Route path="/investigations/newlyn-plc" component={NewlynPlc} />
       <Route path="/investigations/social-worker-engagement" component={SocialWorkerEngagement} />
       <Route path="/judge-errors-in-law" component={JudgeErrorsInLaw} />

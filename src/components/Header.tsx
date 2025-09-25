@@ -96,7 +96,7 @@ export function Header() {
             Portfolio
           </Link>
             <Link
-            href="/portfolio"
+            href="/investigations"
             className="text-gray-300 hover:text-primary transition-colors py-2"
           >
             Investigations
@@ -216,7 +216,7 @@ export function Header() {
               Portfolio
             </Link>
             <Link
-              href="/portfolio"
+              href="/investigations"
               className="text-gray-300 hover:text-primary transition-colors py-2"
               onClick={() => setIsMenuOpen(false)}
             >
