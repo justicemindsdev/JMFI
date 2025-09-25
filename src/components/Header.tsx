@@ -40,14 +40,7 @@ export function Header() {
     <header className="border-b border-gray-800 sticky top-0 bg-gray-950 z-50 shadow-md">
       <div className="container mx-auto px-4 py-2 flex items-center relative">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-3">
-          <div className="h-12 w-12 relative hidden md:block">
-            <img
-              src={logo}
-              alt="Justice Minds Logo"
-              className="h-12 w-auto"
-            />
-          </div>
+        <Link href="/" className="flex items-center">
           <div className="text-white font-bold text-xl">
             <span className="text-blue-400">Justice </span>Minds Forensic
             Intelligence
